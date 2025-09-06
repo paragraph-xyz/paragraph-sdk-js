@@ -11,7 +11,11 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
-    "generate": "orval --config orval.config.ts"
+    "generate": "orval --config orval.config.ts",
+    "prepublishOnly": "yarn generate && yarn build",
+    "release:patch": "npm version patch && git push && git push --tags",
+    "release:minor": "npm version minor && git push && git push --tags",
+    "release:major": "npm version major && git push && git push --tags"
   },
   "dependencies": {
     "axios": "^1.7.7"
