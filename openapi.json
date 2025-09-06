@@ -71,9 +71,7 @@
                     "id",
                     "name",
                     "ownerUserId",
-                    "slug",
-                    "summary",
-                    "logo_url"
+                    "slug"
                   ],
                   "description": "Publication details retrieved successfully"
                 }
@@ -218,9 +216,7 @@
                     "id",
                     "name",
                     "ownerUserId",
-                    "slug",
-                    "summary",
-                    "logo_url"
+                    "slug"
                   ],
                   "description": "Publication details retrieved successfully"
                 }
@@ -364,9 +360,7 @@
                     "id",
                     "name",
                     "ownerUserId",
-                    "slug",
-                    "summary",
-                    "logo_url"
+                    "slug"
                   ],
                   "description": "Publication details retrieved successfully"
                 }
