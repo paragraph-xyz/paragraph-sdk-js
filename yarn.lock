@@ -541,9 +541,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@paragraph/sdk@workspace:.":
+"@paragraph_xyz/sdk@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@paragraph/sdk@workspace:."
+  resolution: "@paragraph_xyz/sdk@workspace:."
   dependencies:
     "@types/node": ^20.0.0
     axios: ^1.7.7
