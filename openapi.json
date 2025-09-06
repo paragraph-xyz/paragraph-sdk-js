@@ -1,8 +1,10 @@
 {
-  "openapi": "3.0.2",
+  "openapi": "3.1.0",
   "paths": {
     "/v1/publications/{publicationId}": {
       "get": {
+        "description": "Retrieve detailed information about a specific publication",
+        "summary": "Get publication by ID",
         "tags": [
           "publications"
         ],
@@ -13,44 +15,56 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Unique identifier of the publication"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "Publication details retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Unique identifier for the publication"
                     },
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Display name of the publication"
                     },
                     "ownerUserId": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "ID of the user who owns this publication"
                     },
                     "slug": {
-                      "type": "string"
+                      "type": "string",
+                      "pattern": "^[a-z0-9-]+$",
+                      "description": "URL-friendly identifier for the publication"
                     },
                     "custom_domain": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Custom domain configured for this publication"
                     },
                     "summary": {
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 500,
+                      "description": "Brief description of the publication (max 500 characters)"
                     },
                     "logo_url": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL to the publication's logo image"
                     }
                   },
                   "required": [
@@ -60,13 +74,14 @@
                     "slug",
                     "summary",
                     "logo_url"
-                  ]
+                  ],
+                  "description": "Publication details retrieved successfully"
                 }
               }
             }
           },
           "404": {
-            "description": "404",
+            "description": "Publication not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -76,25 +91,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Publication not found"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -104,19 +123,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -126,6 +149,8 @@
     },
     "/v1/publications/slug/{slug}": {
       "get": {
+        "description": "Retrieve publication details using its URL-friendly slug",
+        "summary": "Get publication by slug",
         "tags": [
           "publications"
         ],
@@ -135,45 +160,58 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "pattern": "^[a-z0-9-]+$"
+            },
+            "description": "URL-friendly identifier of the publication"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "Publication details retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Unique identifier for the publication"
                     },
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Display name of the publication"
                     },
                     "ownerUserId": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "ID of the user who owns this publication"
                     },
                     "slug": {
-                      "type": "string"
+                      "type": "string",
+                      "pattern": "^[a-z0-9-]+$",
+                      "description": "URL-friendly identifier for the publication"
                     },
                     "custom_domain": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Custom domain configured for this publication"
                     },
                     "summary": {
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 500,
+                      "description": "Brief description of the publication (max 500 characters)"
                     },
                     "logo_url": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL to the publication's logo image"
                     }
                   },
                   "required": [
@@ -183,13 +221,14 @@
                     "slug",
                     "summary",
                     "logo_url"
-                  ]
+                  ],
+                  "description": "Publication details retrieved successfully"
                 }
               }
             }
           },
           "404": {
-            "description": "404",
+            "description": "Publication not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -199,25 +238,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Publication not found"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -227,19 +270,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -249,6 +296,8 @@
     },
     "/v1/publications/domain/{domain}": {
       "get": {
+        "description": "Retrieve publication details using its custom domain",
+        "summary": "Get publication by custom domain",
         "tags": [
           "publications"
         ],
@@ -259,44 +308,56 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Custom domain of the publication"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "Publication details retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Unique identifier for the publication"
                     },
                     "name": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Display name of the publication"
                     },
                     "ownerUserId": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "ID of the user who owns this publication"
                     },
                     "slug": {
-                      "type": "string"
+                      "type": "string",
+                      "pattern": "^[a-z0-9-]+$",
+                      "description": "URL-friendly identifier for the publication"
                     },
                     "custom_domain": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Custom domain configured for this publication"
                     },
                     "summary": {
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 500,
+                      "description": "Brief description of the publication (max 500 characters)"
                     },
                     "logo_url": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL to the publication's logo image"
                     }
                   },
                   "required": [
@@ -306,13 +367,14 @@
                     "slug",
                     "summary",
                     "logo_url"
-                  ]
+                  ],
+                  "description": "Publication details retrieved successfully"
                 }
               }
             }
           },
           "404": {
-            "description": "404",
+            "description": "Publication not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -322,25 +384,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Publication not found"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -350,19 +416,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -372,6 +442,8 @@
     },
     "/v1/publications/{publicationId}/authors": {
       "get": {
+        "description": "Retrieve all authors associated with a publication",
+        "summary": "List publication authors",
         "tags": [
           "publications"
         ],
@@ -382,19 +454,21 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Unique identifier of the publication"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "Authors retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -403,16 +477,22 @@
                     "type": "object",
                     "properties": {
                       "id": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Unique identifier for the user"
                       },
                       "walletAddress": {
-                        "type": "string"
+                        "type": "string",
+                        "pattern": "^0x[a-fA-F0-9]{40}$",
+                        "description": "Ethereum wallet address of the user"
                       },
                       "avatar_url": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uri",
+                        "description": "URL to the user's avatar image"
                       },
                       "publicationId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "ID of the publication this user belongs to"
                       }
                     },
                     "required": [
@@ -421,13 +501,14 @@
                       "avatar_url",
                       "publicationId"
                     ]
-                  }
+                  },
+                  "description": "Authors retrieved successfully"
                 }
               }
             }
           },
           "404": {
-            "description": "404",
+            "description": "Publication not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -437,25 +518,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Publication not found"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -465,19 +550,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -487,6 +576,8 @@
     },
     "/v1/publications/{publicationId}/subscribers/count": {
       "get": {
+        "description": "Retrieve the total number of subscribers for a publication",
+        "summary": "Get subscriber count",
         "tags": [
           "publications"
         ],
@@ -497,37 +588,41 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Unique identifier of the publication"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "Subscriber count retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "count": {
-                      "type": "number"
+                      "type": "number",
+                      "description": "Total number of subscribers"
                     }
                   },
                   "required": [
                     "count"
-                  ]
+                  ],
+                  "description": "Subscriber count retrieved successfully"
                 }
               }
             }
           },
           "404": {
-            "description": "404",
+            "description": "Publication not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -537,25 +632,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Publication not found"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -565,19 +664,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -587,6 +690,8 @@
     },
     "/v1/publications/{publicationId}/posts": {
       "get": {
+        "description": "Retrieve a paginated list of posts from a publication",
+        "summary": "List publication posts",
         "tags": [
           "posts"
         ],
@@ -597,18 +702,21 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Unique identifier of the publication"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           },
           {
             "name": "cursor",
             "in": "query",
+            "description": "Cursor for pagination",
             "schema": {
               "type": "string"
             }
@@ -616,6 +724,7 @@
           {
             "name": "limit",
             "in": "query",
+            "description": "Maximum number of items to return (1-100, default: 20)",
             "schema": {
               "default": 20,
               "type": "integer",
@@ -626,7 +735,7 @@
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "Posts retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -638,28 +747,39 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Unique identifier for the post"
                           },
                           "title": {
-                            "type": "string"
+                            "type": "string",
+                            "maxLength": 200,
+                            "description": "Title of the post (max 200 characters)"
                           },
                           "subtitle": {
-                            "type": "string"
+                            "type": "string",
+                            "maxLength": 300,
+                            "description": "Subtitle or brief summary (max 300 characters)"
                           },
                           "slug": {
-                            "type": "string"
+                            "type": "string",
+                            "pattern": "^[a-z0-9-]+$",
+                            "description": "URL-friendly identifier for the post"
                           },
                           "staticHtml": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Rendered HTML content of the post"
                           },
                           "json": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "JSON representation of the post content structure"
                           },
                           "markdown": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "Markdown source of the post content"
                           },
                           "coinId": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "ID of the associated token/coin if post is tokenized"
                           }
                         },
                         "required": [
@@ -670,19 +790,23 @@
                           "json",
                           "markdown"
                         ]
-                      }
+                      },
+                      "description": "Array of items in this page"
                     },
                     "pagination": {
                       "type": "object",
                       "properties": {
                         "cursor": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Cursor for fetching the next page of results"
                         },
                         "hasMore": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Whether more results are available"
                         },
                         "total": {
-                          "type": "number"
+                          "type": "number",
+                          "description": "Total number of items available"
                         }
                       },
                       "required": [
@@ -693,13 +817,14 @@
                   "required": [
                     "items",
                     "pagination"
-                  ]
+                  ],
+                  "description": "Posts retrieved successfully"
                 }
               }
             }
           },
           "400": {
-            "description": "400",
+            "description": "Invalid request parameters",
             "content": {
               "application/json": {
                 "schema": {
@@ -709,25 +834,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Invalid request parameters"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -737,19 +866,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -759,6 +892,8 @@
     },
     "/v1/posts/{postId}": {
       "get": {
+        "description": "Retrieve detailed information about a specific post",
+        "summary": "Get post by ID",
         "tags": [
           "posts"
         ],
@@ -769,47 +904,60 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Unique identifier of the post"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "Post details retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Unique identifier for the post"
                     },
                     "title": {
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 200,
+                      "description": "Title of the post (max 200 characters)"
                     },
                     "subtitle": {
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 300,
+                      "description": "Subtitle or brief summary (max 300 characters)"
                     },
                     "slug": {
-                      "type": "string"
+                      "type": "string",
+                      "pattern": "^[a-z0-9-]+$",
+                      "description": "URL-friendly identifier for the post"
                     },
                     "staticHtml": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Rendered HTML content of the post"
                     },
                     "json": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "JSON representation of the post content structure"
                     },
                     "markdown": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Markdown source of the post content"
                     },
                     "coinId": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "ID of the associated token/coin if post is tokenized"
                     }
                   },
                   "required": [
@@ -819,13 +967,14 @@
                     "staticHtml",
                     "json",
                     "markdown"
-                  ]
+                  ],
+                  "description": "Post details retrieved successfully"
                 }
               }
             }
           },
           "404": {
-            "description": "404",
+            "description": "Post not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -835,25 +984,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Post not found"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -863,19 +1016,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -885,6 +1042,8 @@
     },
     "/v1/publications/{publicationId}/posts/slug/{slug}": {
       "get": {
+        "description": "Retrieve a post using its publication ID and slug",
+        "summary": "Get post by slug",
         "tags": [
           "posts"
         ],
@@ -895,55 +1054,70 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Unique identifier of the publication"
           },
           {
             "name": "slug",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "pattern": "^[a-z0-9-]+$"
+            },
+            "description": "URL-friendly identifier of the post"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "Post details retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Unique identifier for the post"
                     },
                     "title": {
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 200,
+                      "description": "Title of the post (max 200 characters)"
                     },
                     "subtitle": {
-                      "type": "string"
+                      "type": "string",
+                      "maxLength": 300,
+                      "description": "Subtitle or brief summary (max 300 characters)"
                     },
                     "slug": {
-                      "type": "string"
+                      "type": "string",
+                      "pattern": "^[a-z0-9-]+$",
+                      "description": "URL-friendly identifier for the post"
                     },
                     "staticHtml": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Rendered HTML content of the post"
                     },
                     "json": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "JSON representation of the post content structure"
                     },
                     "markdown": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Markdown source of the post content"
                     },
                     "coinId": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "ID of the associated token/coin if post is tokenized"
                     }
                   },
                   "required": [
@@ -953,13 +1127,14 @@
                     "staticHtml",
                     "json",
                     "markdown"
-                  ]
+                  ],
+                  "description": "Post details retrieved successfully"
                 }
               }
             }
           },
           "404": {
-            "description": "404",
+            "description": "Post not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -969,25 +1144,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Post not found"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -997,19 +1176,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -1019,6 +1202,8 @@
     },
     "/v1/users/{userId}": {
       "get": {
+        "description": "Retrieve detailed information about a specific user",
+        "summary": "Get user by ID",
         "tags": [
           "users"
         ],
@@ -1029,35 +1214,43 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Unique identifier of the user"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "User details retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Unique identifier for the user"
                     },
                     "walletAddress": {
-                      "type": "string"
+                      "type": "string",
+                      "pattern": "^0x[a-fA-F0-9]{40}$",
+                      "description": "Ethereum wallet address of the user"
                     },
                     "avatar_url": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL to the user's avatar image"
                     },
                     "publicationId": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "ID of the publication this user belongs to"
                     }
                   },
                   "required": [
@@ -1065,13 +1258,14 @@
                     "walletAddress",
                     "avatar_url",
                     "publicationId"
-                  ]
+                  ],
+                  "description": "User details retrieved successfully"
                 }
               }
             }
           },
           "404": {
-            "description": "404",
+            "description": "User not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -1081,25 +1275,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "User not found"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1109,19 +1307,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -1131,6 +1333,8 @@
     },
     "/v1/users/wallet/{walletAddress}": {
       "get": {
+        "description": "Retrieve user details using their Ethereum wallet address",
+        "summary": "Get user by wallet address",
         "tags": [
           "users"
         ],
@@ -1140,36 +1344,45 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "description": "Ethereum wallet address"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "User details retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Unique identifier for the user"
                     },
                     "walletAddress": {
-                      "type": "string"
+                      "type": "string",
+                      "pattern": "^0x[a-fA-F0-9]{40}$",
+                      "description": "Ethereum wallet address of the user"
                     },
                     "avatar_url": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL to the user's avatar image"
                     },
                     "publicationId": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "ID of the publication this user belongs to"
                     }
                   },
                   "required": [
@@ -1177,13 +1390,14 @@
                     "walletAddress",
                     "avatar_url",
                     "publicationId"
-                  ]
+                  ],
+                  "description": "User details retrieved successfully"
                 }
               }
             }
           },
           "404": {
-            "description": "404",
+            "description": "User not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -1193,25 +1407,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "User not found"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1221,19 +1439,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -1243,6 +1465,8 @@
     },
     "/v1/coins/{contractAddress}": {
       "get": {
+        "description": "Retrieve information about a tokenized post using its contract address",
+        "summary": "Get coin by contract address",
         "tags": [
           "coins"
         ],
@@ -1252,36 +1476,45 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "description": "Ethereum smart contract address"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "Coin details retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Unique identifier for the coin"
                     },
                     "contractAddress": {
-                      "type": "string"
+                      "type": "string",
+                      "pattern": "^0x[a-fA-F0-9]{40}$",
+                      "description": "Ethereum smart contract address for this token"
                     },
                     "symbol": {
-                      "type": "string"
+                      "type": "string",
+                      "pattern": "^[A-Z]{3,6}$",
+                      "description": "Token symbol (3-6 uppercase letters)"
                     },
                     "postId": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "ID of the post this token represents"
                     }
                   },
                   "required": [
@@ -1289,13 +1522,14 @@
                     "contractAddress",
                     "symbol",
                     "postId"
-                  ]
+                  ],
+                  "description": "Coin details retrieved successfully"
                 }
               }
             }
           },
           "404": {
-            "description": "404",
+            "description": "Coin not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -1305,25 +1539,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Coin not found"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1333,19 +1571,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -1355,6 +1597,8 @@
     },
     "/v1/coins/{contractAddress}/holders": {
       "get": {
+        "description": "Retrieve a paginated list of holders for a tokenized post",
+        "summary": "List coin holders",
         "tags": [
           "coins"
         ],
@@ -1364,19 +1608,23 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "description": "Ethereum smart contract address"
           },
           {
             "name": "x-api-key",
             "in": "header",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "API key for authenticating requests"
             }
           },
           {
             "name": "cursor",
             "in": "query",
+            "description": "Cursor for pagination",
             "schema": {
               "type": "string"
             }
@@ -1384,6 +1632,7 @@
           {
             "name": "limit",
             "in": "query",
+            "description": "Maximum number of items to return (1-100, default: 20)",
             "schema": {
               "default": 20,
               "type": "integer",
@@ -1394,7 +1643,7 @@
         ],
         "responses": {
           "200": {
-            "description": "200",
+            "description": "Holders retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -1406,16 +1655,23 @@
                         "type": "object",
                         "properties": {
                           "walletAddress": {
-                            "type": "string"
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "Ethereum wallet address of the holder"
                           },
                           "userId": {
-                            "type": "string"
+                            "type": "string",
+                            "description": "User ID if holder has a Paragraph account"
                           },
                           "balance": {
-                            "type": "string"
+                            "type": "string",
+                            "pattern": "^[0-9]+$",
+                            "description": "Token balance held (in wei)"
                           },
                           "supportedAt": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "ISO 8601 timestamp when user first supported"
                           }
                         },
                         "required": [
@@ -1423,19 +1679,23 @@
                           "balance",
                           "supportedAt"
                         ]
-                      }
+                      },
+                      "description": "Array of items in this page"
                     },
                     "pagination": {
                       "type": "object",
                       "properties": {
                         "cursor": {
-                          "type": "string"
+                          "type": "string",
+                          "description": "Cursor for fetching the next page of results"
                         },
                         "hasMore": {
-                          "type": "boolean"
+                          "type": "boolean",
+                          "description": "Whether more results are available"
                         },
                         "total": {
-                          "type": "number"
+                          "type": "number",
+                          "description": "Total number of items available"
                         }
                       },
                       "required": [
@@ -1446,13 +1706,14 @@
                   "required": [
                     "items",
                     "pagination"
-                  ]
+                  ],
+                  "description": "Holders retrieved successfully"
                 }
               }
             }
           },
           "404": {
-            "description": "404",
+            "description": "Coin not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -1462,25 +1723,29 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Coin not found"
                 }
               }
             }
           },
           "500": {
-            "description": "500",
+            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
@@ -1490,19 +1755,23 @@
                       "type": "boolean",
                       "enum": [
                         false
-                      ]
+                      ],
+                      "description": "Always false for error responses"
                     },
                     "msg": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Human-readable error message"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
                     "success",
                     "msg"
-                  ]
+                  ],
+                  "description": "Internal server error"
                 }
               }
             }
@@ -1514,7 +1783,16 @@
   "info": {
     "title": "Paragraph API",
     "version": "1.0.0",
-    "description": "Public API for interacting with Paragraph publications, posts, users, and coins"
+    "description": "Public API for interacting with Paragraph publications, posts, users, and tokenized content.\n\n## Authentication\nAll endpoints require an API key passed in the `x-api-key` header.\n\n## Rate Limiting\nAPI requests are rate-limited to ensure fair usage. Contact support for higher limits.\n\n## Pagination\nList endpoints support cursor-based pagination using `cursor` and `limit` parameters.",
+    "contact": {
+      "name": "Paragraph Support",
+      "email": "support@paragraph.com",
+      "url": "https://paragraph.com/support"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
   },
   "servers": [
     {
@@ -1525,5 +1803,38 @@
       "url": "http://localhost:3001/api",
       "description": "Local development server"
     }
-  ]
+  ],
+  "tags": [
+    {
+      "name": "publications",
+      "description": "Operations related to publications"
+    },
+    {
+      "name": "posts",
+      "description": "Operations related to posts and content"
+    },
+    {
+      "name": "users",
+      "description": "Operations related to users and authors"
+    },
+    {
+      "name": "coins",
+      "description": "Operations related to tokenized content"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key",
+        "description": "API key for authenticating requests"
+      }
+    }
+  }
 }
