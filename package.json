@@ -1,6 +1,6 @@
 {
   "name": "@paragraph_xyz/sdk",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "TypeScript SDK for Paragraph API",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
