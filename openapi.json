@@ -462,12 +462,19 @@
                       "publicationId": {
                         "type": "string",
                         "description": "ID of the publication this user belongs to"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Display name of the user"
+                      },
+                      "bio": {
+                        "type": "string",
+                        "maxLength": 500,
+                        "description": "Brief biography of the user (max 500 characters)"
                       }
                     },
                     "required": [
                       "id",
-                      "walletAddress",
-                      "avatarUrl",
                       "publicationId"
                     ]
                   },
@@ -1229,12 +1236,19 @@
                     "publicationId": {
                       "type": "string",
                       "description": "ID of the publication this user belongs to"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Display name of the user"
+                    },
+                    "bio": {
+                      "type": "string",
+                      "maxLength": 500,
+                      "description": "Brief biography of the user (max 500 characters)"
                     }
                   },
                   "required": [
                     "id",
-                    "walletAddress",
-                    "avatarUrl",
                     "publicationId"
                   ],
                   "description": "User details retrieved successfully"
@@ -1353,12 +1367,19 @@
                     "publicationId": {
                       "type": "string",
                       "description": "ID of the publication this user belongs to"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Display name of the user"
+                    },
+                    "bio": {
+                      "type": "string",
+                      "maxLength": 500,
+                      "description": "Brief biography of the user (max 500 characters)"
                     }
                   },
                   "required": [
                     "id",
-                    "walletAddress",
-                    "avatarUrl",
                     "publicationId"
                   ],
                   "description": "User details retrieved successfully"
@@ -1737,7 +1758,7 @@
   "info": {
     "title": "Paragraph API",
     "version": "1.0.0",
-    "description": "Public API for interacting with Paragraph publications, posts, users, and tokenized content.\n\n## Authentication\nAll endpoints require an API key passed in the `x-api-key` header.\n\n## Rate Limiting\nAPI requests are rate-limited to ensure fair usage. Contact support for higher limits.\n\n## Pagination\nList endpoints support cursor-based pagination using `cursor` and `limit` parameters.",
+    "description": "Public API for interacting with Paragraph publications, posts, users, and coined writing.\n\n## Rate Limiting\nAPI requests are rate-limited to ensure fair usage. Contact support@paragraph.com for higher limits.\n\n## Pagination\nList endpoints support cursor-based pagination using `cursor` and `limit` parameters.",
     "contact": {
       "name": "Paragraph Support",
       "email": "support@paragraph.com",
@@ -1773,18 +1794,7 @@
     }
   ],
   "security": [
-    {
-      "ApiKeyAuth": []
-    }
+    {}
   ],
-  "components": {
-    "securitySchemes": {
-      "ApiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "x-api-key",
-        "description": "API key for authenticating requests"
-      }
-    }
-  }
+  "components": {}
 }
