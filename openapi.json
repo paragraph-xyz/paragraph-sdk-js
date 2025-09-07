@@ -50,10 +50,11 @@
                     "slug": {
                       "type": "string",
                       "pattern": "^[a-z0-9-]+$",
-                      "description": "URL-friendly identifier for the publication"
+                      "description": "URL-friendly identifier for the publication; accessible at paragraph.com/@[slug]"
                     },
                     "custom_domain": {
                       "type": "string",
+                      "format": "uri",
                       "description": "Custom domain configured for this publication"
                     },
                     "summary": {
@@ -147,7 +148,7 @@
     },
     "/v1/publications/slug/{slug}": {
       "get": {
-        "description": "Retrieve publication details using its URL-friendly slug",
+        "description": "Retrieve publication details using its URL-friendly slug. Optionally include an @ before the slug.",
         "summary": "Get publication by slug",
         "tags": [
           "publications"
@@ -195,10 +196,11 @@
                     "slug": {
                       "type": "string",
                       "pattern": "^[a-z0-9-]+$",
-                      "description": "URL-friendly identifier for the publication"
+                      "description": "URL-friendly identifier for the publication; accessible at paragraph.com/@[slug]"
                     },
                     "custom_domain": {
                       "type": "string",
+                      "format": "uri",
                       "description": "Custom domain configured for this publication"
                     },
                     "summary": {
@@ -339,10 +341,11 @@
                     "slug": {
                       "type": "string",
                       "pattern": "^[a-z0-9-]+$",
-                      "description": "URL-friendly identifier for the publication"
+                      "description": "URL-friendly identifier for the publication; accessible at paragraph.com/@[slug]"
                     },
                     "custom_domain": {
                       "type": "string",
+                      "format": "uri",
                       "description": "Custom domain configured for this publication"
                     },
                     "summary": {
@@ -477,7 +480,7 @@
                       "walletAddress": {
                         "type": "string",
                         "pattern": "^0x[a-fA-F0-9]{40}$",
-                        "description": "Ethereum wallet address of the user"
+                        "description": "Wallet address of the user"
                       },
                       "avatar_url": {
                         "type": "string",
@@ -747,17 +750,17 @@
                           "title": {
                             "type": "string",
                             "maxLength": 200,
-                            "description": "Title of the post (max 200 characters)"
+                            "description": "Title of the post"
                           },
                           "subtitle": {
                             "type": "string",
                             "maxLength": 300,
-                            "description": "Subtitle or brief summary (max 300 characters)"
+                            "description": "Optional subtitle or brief summary"
                           },
                           "slug": {
                             "type": "string",
                             "pattern": "^[a-z0-9-]+$",
-                            "description": "URL-friendly identifier for the post"
+                            "description": "URL-friendly identifier for the post; accessible at paragraph.com/@[publicationSlug]/[slug]"
                           },
                           "staticHtml": {
                             "type": "string",
@@ -765,7 +768,7 @@
                           },
                           "json": {
                             "type": "string",
-                            "description": "JSON representation of the post content structure"
+                            "description": "TipTap JSON representation of the post content structure. This is the source of truth that the staticHtml and markdown is generated from"
                           },
                           "markdown": {
                             "type": "string",
@@ -773,7 +776,7 @@
                           },
                           "coinId": {
                             "type": "string",
-                            "description": "ID of the associated token/coin if post is tokenized"
+                            "description": "ID of the associated coin, if the post is coined"
                           }
                         },
                         "required": [
@@ -925,17 +928,17 @@
                     "title": {
                       "type": "string",
                       "maxLength": 200,
-                      "description": "Title of the post (max 200 characters)"
+                      "description": "Title of the post"
                     },
                     "subtitle": {
                       "type": "string",
                       "maxLength": 300,
-                      "description": "Subtitle or brief summary (max 300 characters)"
+                      "description": "Optional subtitle or brief summary"
                     },
                     "slug": {
                       "type": "string",
                       "pattern": "^[a-z0-9-]+$",
-                      "description": "URL-friendly identifier for the post"
+                      "description": "URL-friendly identifier for the post; accessible at paragraph.com/@[publicationSlug]/[slug]"
                     },
                     "staticHtml": {
                       "type": "string",
@@ -943,7 +946,7 @@
                     },
                     "json": {
                       "type": "string",
-                      "description": "JSON representation of the post content structure"
+                      "description": "TipTap JSON representation of the post content structure. This is the source of truth that the staticHtml and markdown is generated from"
                     },
                     "markdown": {
                       "type": "string",
@@ -951,7 +954,7 @@
                     },
                     "coinId": {
                       "type": "string",
-                      "description": "ID of the associated token/coin if post is tokenized"
+                      "description": "ID of the associated coin, if the post is coined"
                     }
                   },
                   "required": [
@@ -1085,17 +1088,17 @@
                     "title": {
                       "type": "string",
                       "maxLength": 200,
-                      "description": "Title of the post (max 200 characters)"
+                      "description": "Title of the post"
                     },
                     "subtitle": {
                       "type": "string",
                       "maxLength": 300,
-                      "description": "Subtitle or brief summary (max 300 characters)"
+                      "description": "Optional subtitle or brief summary"
                     },
                     "slug": {
                       "type": "string",
                       "pattern": "^[a-z0-9-]+$",
-                      "description": "URL-friendly identifier for the post"
+                      "description": "URL-friendly identifier for the post; accessible at paragraph.com/@[publicationSlug]/[slug]"
                     },
                     "staticHtml": {
                       "type": "string",
@@ -1103,7 +1106,7 @@
                     },
                     "json": {
                       "type": "string",
-                      "description": "JSON representation of the post content structure"
+                      "description": "TipTap JSON representation of the post content structure. This is the source of truth that the staticHtml and markdown is generated from"
                     },
                     "markdown": {
                       "type": "string",
@@ -1111,7 +1114,7 @@
                     },
                     "coinId": {
                       "type": "string",
-                      "description": "ID of the associated token/coin if post is tokenized"
+                      "description": "ID of the associated coin, if the post is coined"
                     }
                   },
                   "required": [
@@ -1235,7 +1238,7 @@
                     "walletAddress": {
                       "type": "string",
                       "pattern": "^0x[a-fA-F0-9]{40}$",
-                      "description": "Ethereum wallet address of the user"
+                      "description": "Wallet address of the user"
                     },
                     "avatar_url": {
                       "type": "string",
@@ -1367,7 +1370,7 @@
                     "walletAddress": {
                       "type": "string",
                       "pattern": "^0x[a-fA-F0-9]{40}$",
-                      "description": "Ethereum wallet address of the user"
+                      "description": "Wallet address of the user"
                     },
                     "avatar_url": {
                       "type": "string",
@@ -1499,16 +1502,16 @@
                     "contractAddress": {
                       "type": "string",
                       "pattern": "^0x[a-fA-F0-9]{40}$",
-                      "description": "Ethereum smart contract address for this token"
+                      "description": "Base contract address for the coin"
                     },
                     "symbol": {
                       "type": "string",
                       "pattern": "^[A-Z]{3,6}$",
-                      "description": "Token symbol (3-6 uppercase letters)"
+                      "description": "Token symbol"
                     },
                     "postId": {
                       "type": "string",
-                      "description": "ID of the post this token represents"
+                      "description": "ID of the post this token is associated with"
                     }
                   },
                   "required": [
@@ -1651,11 +1654,11 @@
                           "walletAddress": {
                             "type": "string",
                             "pattern": "^0x[a-fA-F0-9]{40}$",
-                            "description": "Ethereum wallet address of the holder"
+                            "description": "Wallet address of the holder"
                           },
                           "userId": {
                             "type": "string",
-                            "description": "User ID if holder has a Paragraph account"
+                            "description": "Paragraph user ID if the holder is a registered user"
                           },
                           "balance": {
                             "type": "string",
@@ -1790,12 +1793,8 @@
   },
   "servers": [
     {
-      "url": "https://api.paragraph.com/api",
+      "url": "https://dev.api.paragraph.com/api",
       "description": "Production server"
-    },
-    {
-      "url": "http://localhost:3001/api",
-      "description": "Local development server"
     }
   ],
   "tags": [
