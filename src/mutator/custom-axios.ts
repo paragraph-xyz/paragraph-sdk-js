@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios"
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios"
 
 export const AXIOS_INSTANCE = axios.create({
   baseURL: "https://public.api.paragraph.com/api",
@@ -18,3 +18,5 @@ export const customAxios = <T>(config: AxiosRequestConfig): Promise<T> => {
 
   return promise
 }
+
+export type ErrorType<Error> = AxiosError<Error>;
