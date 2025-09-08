@@ -12,6 +12,7 @@
     "dist"
   ],
   "scripts": {
+    "build": "tsup",
     "generate": "orval --config orval.config.ts && typedoc",
     "prepublishOnly": "yarn generate && yarn build",
     "release:patch": "npm version patch && git push && git push --tags",
