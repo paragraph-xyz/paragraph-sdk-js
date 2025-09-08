@@ -137,7 +137,14 @@
             }
           }
         },
-        "operationId": "getPublication"
+        "operationId": "getPublication",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get publication by ID",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublication(\"pub-123\")"
+          }
+        ]
       }
     },
     "/v1/publications/slug/{slug}": {
@@ -278,7 +285,14 @@
             }
           }
         },
-        "operationId": "getPublicationBySlug"
+        "operationId": "getPublicationBySlug",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get publication by slug",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublicationBySlug(\"my-publication\")"
+          }
+        ]
       }
     },
     "/v1/publications/domain/{domain}": {
@@ -417,7 +431,14 @@
             }
           }
         },
-        "operationId": "getPublicationByDomain"
+        "operationId": "getPublicationByDomain",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get publication by domain",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublicationByDomain(\"blog.example.com\")"
+          }
+        ]
       }
     },
     "/v1/publications/{publicationId}/authors": {
@@ -551,7 +572,14 @@
             }
           }
         },
-        "operationId": "getPublicationAuthors"
+        "operationId": "getPublicationAuthors",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get publication authors",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\n// Note: getPublicationAuthors method not currently available in SDK"
+          }
+        ]
       }
     },
     "/v1/publications/{publicationId}/subscribers/count": {
@@ -658,7 +686,14 @@
             }
           }
         },
-        "operationId": "getSubscriberCount"
+        "operationId": "getSubscriberCount",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get subscriber count",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\n// Note: getSubscriberCount method not currently available in SDK"
+          }
+        ]
       }
     },
     "/v1/publications/{publicationId}/posts": {
@@ -869,7 +904,14 @@
             }
           }
         },
-        "operationId": "getPosts"
+        "operationId": "getPosts",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "List posts with pagination",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst posts = await api.getPosts(\"pub-123\", {\n  limit: 20,\n  cursor: \"next-cursor\"\n})"
+          }
+        ]
       }
     },
     "/v1/posts/{postId}": {
@@ -1028,7 +1070,14 @@
             }
           }
         },
-        "operationId": "getPost"
+        "operationId": "getPost",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get post by ID",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost(\"post-123\")"
+          }
+        ]
       }
     },
     "/v1/publications/{publicationId}/posts/slug/{slug}": {
@@ -1198,7 +1247,14 @@
             }
           }
         },
-        "operationId": "getPostBySlug"
+        "operationId": "getPostBySlug",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get post by slug",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPostBySlug(\"my-post-slug\", \"pub-123\")"
+          }
+        ]
       }
     },
     "/v1/users/{userId}": {
@@ -1329,7 +1385,14 @@
             }
           }
         },
-        "operationId": "getUser"
+        "operationId": "getUser",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get user by ID",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.getUser(\"user-123\")"
+          }
+        ]
       }
     },
     "/v1/users/wallet/{walletAddress}": {
@@ -1461,7 +1524,14 @@
             }
           }
         },
-        "operationId": "getUserByWallet"
+        "operationId": "getUserByWallet",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get user by wallet address",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.getUserByWallet(\"0x123...abc\")"
+          }
+        ]
       }
     },
     "/v1/coins/{contractAddress}": {
@@ -1586,7 +1656,14 @@
             }
           }
         },
-        "operationId": "getCoin"
+        "operationId": "getCoin",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get coin by contract address",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getCoin(\"0x123...abc\")"
+          }
+        ]
       }
     },
     "/v1/coins/{contractAddress}/holders": {
@@ -1768,7 +1845,14 @@
             }
           }
         },
-        "operationId": "getCoinHolders"
+        "operationId": "getCoinHolders",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "List coin holders with pagination",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst holders = await api.getCoinHolders(\"0x123...abc\", {\n  limit: 50,\n  cursor: \"next-cursor\"\n})"
+          }
+        ]
       }
     }
   },
