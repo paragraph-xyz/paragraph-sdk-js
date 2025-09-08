@@ -137,6 +137,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getPublication",
         "x-codeSamples": [
           {
@@ -145,6 +146,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublication(\"pub-123\")"
           }
         ]
+=======
+        "operationId": "getPublication"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     },
     "/v1/publications/slug/{slug}": {
@@ -285,6 +289,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getPublicationBySlug",
         "x-codeSamples": [
           {
@@ -293,6 +298,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublicationBySlug(\"my-publication\")"
           }
         ]
+=======
+        "operationId": "getPublicationBySlug"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     },
     "/v1/publications/domain/{domain}": {
@@ -431,6 +439,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getPublicationByDomain",
         "x-codeSamples": [
           {
@@ -439,6 +448,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublicationByDomain(\"blog.example.com\")"
           }
         ]
+=======
+        "operationId": "getPublicationByDomain"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     },
     "/v1/publications/{publicationId}/authors": {
@@ -572,6 +584,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getPublicationAuthors",
         "x-codeSamples": [
           {
@@ -580,6 +593,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\n// Note: getPublicationAuthors method not currently available in SDK"
           }
         ]
+=======
+        "operationId": "getPublicationAuthors"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     },
     "/v1/publications/{publicationId}/subscribers/count": {
@@ -686,6 +702,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getSubscriberCount",
         "x-codeSamples": [
           {
@@ -694,6 +711,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\n// Note: getSubscriberCount method not currently available in SDK"
           }
         ]
+=======
+        "operationId": "getSubscriberCount"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     },
     "/v1/publications/{publicationId}/posts": {
@@ -904,6 +924,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getPosts",
         "x-codeSamples": [
           {
@@ -912,6 +933,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst posts = await api.getPosts(\"pub-123\", {\n  limit: 20,\n  cursor: \"next-cursor\"\n})"
           }
         ]
+=======
+        "operationId": "getPosts"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     },
     "/v1/posts/{postId}": {
@@ -1070,6 +1094,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getPost",
         "x-codeSamples": [
           {
@@ -1078,6 +1103,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost(\"post-123\")"
           }
         ]
+=======
+        "operationId": "getPost"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     },
     "/v1/publications/{publicationId}/posts/slug/{slug}": {
@@ -1247,6 +1275,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getPostBySlug",
         "x-codeSamples": [
           {
@@ -1255,6 +1284,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPostBySlug(\"my-post-slug\", \"pub-123\")"
           }
         ]
+=======
+        "operationId": "getPostBySlug"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     },
     "/v1/users/{userId}": {
@@ -1385,6 +1417,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getUser",
         "x-codeSamples": [
           {
@@ -1393,6 +1426,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.getUser(\"user-123\")"
           }
         ]
+=======
+        "operationId": "getUser"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     },
     "/v1/users/wallet/{walletAddress}": {
@@ -1524,6 +1560,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getUserByWallet",
         "x-codeSamples": [
           {
@@ -1532,6 +1569,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.getUserByWallet(\"0x123...abc\")"
           }
         ]
+=======
+        "operationId": "getUserByWallet"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     },
     "/v1/coins/{contractAddress}": {
@@ -1656,6 +1696,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getCoin",
         "x-codeSamples": [
           {
@@ -1664,6 +1705,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getCoin(\"0x123...abc\")"
           }
         ]
+=======
+        "operationId": "getCoin"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     },
     "/v1/coins/{contractAddress}/holders": {
@@ -1845,6 +1889,7 @@
             }
           }
         },
+<<<<<<< HEAD
         "operationId": "getCoinHolders",
         "x-codeSamples": [
           {
@@ -1853,6 +1898,9 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst holders = await api.getCoinHolders(\"0x123...abc\", {\n  limit: 50,\n  cursor: \"next-cursor\"\n})"
           }
         ]
+=======
+        "operationId": "getCoinHolders"
+>>>>>>> d6d13c6 (fix: Improve SDK and add docs)
       }
     }
   },

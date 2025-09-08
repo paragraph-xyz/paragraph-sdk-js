@@ -1,21 +1,112 @@
-// Main SDK entry point
-// Generated files will be created by Orval
+// src/index.ts - public entry
+import { getParagraphAPI } from './generated/api';
 
-// Convenience wrapper class
-export class ParagraphSDK {
-  private apiKey?: string
-  private baseURL: string
+export type ParagraphAPIConfig = {
+  /**
+    * Optional default publicationID so users can emit it on list/get-by-slug calls.
+    */
+  publicationId?: string;
+};
 
-  constructor(config?: { apiKey?: string; baseURL?: string }) {
-    this.apiKey = config?.apiKey
-    this.baseURL = config?.baseURL || "https://api.paragraph.com/api"
+/**
+  * Paragraph API class wrapper.
+  *
+  * Entrypoint into all Paragraph API functiohnality.
+  */
+export class ParagraphAPI {
+  private api = getParagraphAPI();
+  private publicationId?: string;
+
+  constructor(cfg: ParagraphAPIConfig = {}) {
+    this.publicationId = cfg.publicationId;
   }
 
-  // Add convenience methods that use the generated functions
-  // This will be populated after Orval generates the client
+  /**
+    * Get metadata about a Paragraph publication by it's ID.
+    */
+  getPublication(publicationId: string) {
+    return this.api.getPublication(publicationId);
+  }
+
+
+  /**
+    * Get metadata about a Paragraph publication by it's slug.
+    *
+    * Can optionally include an "@" before the slug.
+    */
+  getPublicationBySlug(slug: string) {
+    return this.api.getPublicationBySlug(slug);
+  }
+
+
+  /**
+    * Get metadata about a Paragraph publication by it's custom domain.
+    *
+    * This should be the domain only (e.g. "blog.mydomain.com"), without "https://"
+    * or "www" or any path/querystring.
+    */
+  getPublicationByDomain(domain: string) {
+    return this.api.getPublicationByDomain(domain);
+  }
+
+
+  /**
+    * Get a list of posts for a given publication.
+    */
+  getPosts(publicationId = this.publicationId!, params?: Parameters<ReturnType<typeof getParagraphAPI>['getPosts']>[1]) {
+    if (!publicationId) throw new Error('publicationId is required (pass in constructor or as first arg).');
+    return this.api.getPosts(publicationId, params);
+  }
+
+  /**
+    * Get a single post by its ID.
+    */
+  getPost(postId: string) {
+    return this.api.getPost(postId);
+  }
+
+
+  /**
+    * Get a single post by its slug within a given publication.
+    */
+  getPostBySlug(slug: string, publicationId = this.publicationId!) {
+    if (!publicationId) throw new Error('publicationId is required (pass in constructor or as second arg).');
+    return this.api.getPostBySlug(publicationId, slug);
+  }
+
+  /**
+    * Get metadata about a user by their user ID.
+    */
+  getUser(userId: string) {
+    return this.api.getUser(userId);
+  }
+  /**
+    * Get metadata about a user by their wallet address.
+    */
+  getUserByWallet(wallet: string) {
+    return this.api.getUserByWallet(wallet);
+  }
+
+  /**
+    * Get metadata about a coin by its contract address.
+    */
+  getCoin(contractAddress: string) {
+    return this.api.getCoin(contractAddress);
+  }
+  /**
+    * Get a list of holders for a given coin contract address.
+    */
+  getCoinHolders(contractAddress: string, params?: Parameters<ReturnType<typeof getParagraphAPI>['getCoinHolders']>[1]) {
+    return this.api.getCoinHolders(contractAddress, params);
+  }
 }
 
-// Re-export generated types when available
-// Run 'yarn generate' to create these files
-export * from "./generated/api"
-export * from "./generated/models"
+/**
+  * Optional factory function to create an instance of the API client.
+  *
+  * Tree-shakeable.
+  */
+export const createParagraphAPI = (cfg?: ParagraphAPIConfig) => new ParagraphAPI(cfg);
+
+// Re-export generated types for consumers
+export * from './generated/models';

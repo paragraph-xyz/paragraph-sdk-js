@@ -12,9 +12,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "generate": "orval --config orval.config.ts",
+    "generate": "orval --config orval.config.ts && typedoc",
     "prepublishOnly": "yarn generate && yarn build",
     "release:patch": "npm version patch && git push && git push --tags",
     "release:minor": "npm version minor && git push && git push --tags",
@@ -27,6 +25,8 @@
     "@types/node": "^20.0.0",
     "orval": "^7.11.2",
     "tsup": "^8.3.5",
+    "typedoc": "^0.28.12",
+    "typedoc-plugin-markdown": "^4.8.1",
     "typescript": "^5.0.0"
   },
   "publishConfig": {

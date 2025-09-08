@@ -7,10 +7,14 @@ export default defineConfig({
     },
     output: {
       mode: "split",
+      docs:false,
+      //docs: { configPath: './typedoc.config.mjs' },
       target: "./src/generated/api.ts",
       schemas: "./src/generated/models",
+      clean: true,
       client: "axios",
       mock: false,
+      indexFiles: true,
       prettier: true,
       override: {
         mutator: {

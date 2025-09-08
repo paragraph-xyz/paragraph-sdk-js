@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios"
 
 export const AXIOS_INSTANCE = axios.create({
-  baseURL: "https://api.paragraph.com/api",
+  baseURL: "https://dev.api.paragraph.com/api",
 })
 
 export const customAxios = <T>(config: AxiosRequestConfig): Promise<T> => {

@@ -549,6 +549,8 @@ __metadata:
     axios: ^1.7.7
     orval: ^7.11.2
     tsup: ^8.3.5
+    typedoc: ^0.28.12
+    typedoc-plugin-markdown: ^4.8.1
     typescript: ^5.0.0
   languageName: unknown
   linkType: soft
@@ -4392,7 +4394,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-markdown@npm:^4.8.0":
+"typedoc-plugin-markdown@npm:^4.8.0, typedoc-plugin-markdown@npm:^4.8.1":
   version: 4.8.1
   resolution: "typedoc-plugin-markdown@npm:4.8.1"
   peerDependencies:
@@ -4401,7 +4403,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.28.7":
+"typedoc@npm:^0.28.12, typedoc@npm:^0.28.7":
   version: 0.28.12
   resolution: "typedoc@npm:0.28.12"
   dependencies:
