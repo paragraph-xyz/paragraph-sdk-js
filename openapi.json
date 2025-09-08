@@ -1731,7 +1731,7 @@
   },
   "servers": [
     {
-      "url": "https://dev.api.paragraph.com/api",
+      "url": "https://public.api.paragraph.com/api",
       "description": "Production server"
     }
   ],
