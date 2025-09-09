@@ -91,10 +91,17 @@ export class ParagraphAPI {
   }
 
   /**
+    * Get metadata about a coin by its ID.
+    */
+  getCoin(id: string) {
+    return this.api.getCoin(id);
+  }
+
+  /**
     * Get metadata about a coin by its contract address.
     */
-  getCoin(contractAddress: string) {
-    return this.api.getCoin(contractAddress);
+  getCoinByContract(contractAddress: string) {
+    return this.api.getCoinByContract(contractAddress);
   }
   /**
     * Get a list of holders for a given coin contract address.
