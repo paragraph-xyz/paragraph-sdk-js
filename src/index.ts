@@ -99,8 +99,16 @@ export class ParagraphAPI {
   /**
     * Get a list of holders for a given coin contract address.
     */
-  getCoinHolders(contractAddress: string, params?: Parameters<ReturnType<typeof getParagraphAPI>['getCoinHolders']>[1]) {
-    return this.api.getCoinHolders(contractAddress, params);
+  getCoinHolders(id: string, params?: Parameters<ReturnType<typeof getParagraphAPI>['getCoinHoldersById']>[1]) {
+    return this.api.getCoinHoldersById(id, params);
+  }
+
+
+  /**
+    * Get a list of holders for a given coin contract address.
+    */
+  getCoinHoldersByContract(contractAddress: string, params?: Parameters<ReturnType<typeof getParagraphAPI>['getCoinHoldersByContract']>[1]) {
+    return this.api.getCoinHoldersByContract(contractAddress, params);
   }
 }
 
