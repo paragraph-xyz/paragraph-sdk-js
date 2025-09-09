@@ -293,6 +293,13 @@
           }
         },
         "operationId": "getPublicationBySlug",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-publication-by-slug",
+            "description": "Get a publication by its URL-friendly slug (for example, for URL paragraph.com/@blog, the slug would be 'blog'"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -439,6 +446,13 @@
           }
         },
         "operationId": "getPublicationByDomain",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-publication-by-domain",
+            "description": "Get a publication by its custom domain"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -553,6 +567,13 @@
           }
         },
         "operationId": "getSubscriberCount",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-subscriber-count",
+            "description": "Get the total number of subscribers for a publication"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -771,6 +792,13 @@
           }
         },
         "operationId": "getPosts",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "list-publication-posts",
+            "description": "List posts from a publication with pagination"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -937,6 +965,13 @@
           }
         },
         "operationId": "getPost",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-post-by-id",
+            "description": "Get detailed information about a specific post"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -1114,6 +1149,13 @@
           }
         },
         "operationId": "getPostBySlug",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-post-by-slug",
+            "description": "Get a post using its publication ID and slug"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -1275,6 +1317,13 @@
           }
         },
         "operationId": "getUser",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-user-by-id",
+            "description": "Get detailed information about a specific user"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -1437,6 +1486,13 @@
           }
         },
         "operationId": "getUserByWallet",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-user-by-wallet",
+            "description": "Get user details using their Ethereum wallet address"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -1568,6 +1624,13 @@
           }
         },
         "operationId": "getCoin",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-coin-by-id",
+            "description": "Get information about a tokenized post by its ID"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -1700,6 +1763,13 @@
           }
         },
         "operationId": "getCoinByContract",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-coin-by-contract",
+            "description": "Get information about a tokenized post by contract address"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -1888,6 +1958,13 @@
           }
         },
         "operationId": "getCoinHoldersById",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "list-coin-holders-by-id",
+            "description": "List holders of a coined post by coin ID"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -2077,6 +2154,13 @@
           }
         },
         "operationId": "getCoinHoldersByContract",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "list-coin-holders-by-contract",
+            "description": "List holders of a coined post by contract address"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
