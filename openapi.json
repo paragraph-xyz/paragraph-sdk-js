@@ -1839,7 +1839,7 @@
           {
             "lang": "typescript",
             "label": "List coin holders (with pagination)",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst holders = await api.getCoinHolders(\"S2AlaNG5Hw0NdNptmLTw\", {\n  limit: 50,\n  cursor: \"next-cursor\"\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst holders = await api.getCoinHolders(\"S2AlaNG5Hw0NdNptmLTw\", {\n  limit: 25,\n  cursor: \"next-cursor\"\n})"
           }
         ]
       }
