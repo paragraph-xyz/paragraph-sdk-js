@@ -142,7 +142,7 @@
           {
             "lang": "typescript",
             "label": "Get publication by ID",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublication(\"pub-123\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublication(\"BMV6abfvCSUl51ErCVzd\")"
           }
         ]
       }
@@ -290,7 +290,7 @@
           {
             "lang": "typescript",
             "label": "Get publication by slug",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublicationBySlug(\"my-publication\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublicationBySlug(\"blog\")"
           }
         ]
       }
@@ -436,7 +436,7 @@
           {
             "lang": "typescript",
             "label": "Get publication by domain",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublicationByDomain(\"blog.example.com\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublicationByDomain(\"avc.xyz\")"
           }
         ]
       }
@@ -550,7 +550,7 @@
           {
             "lang": "typescript",
             "label": "Get subscriber count",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\n// Note: getSubscriberCount method not currently available in SDK"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst count = await api.getSubscriberCount(\"BMV6abfvCSUl51ErCVzd\")"
           }
         ]
       }
@@ -768,7 +768,7 @@
           {
             "lang": "typescript",
             "label": "List posts with pagination",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst posts = await api.getPosts(\"pub-123\", {\n  limit: 20,\n  cursor: \"next-cursor\"\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst posts = await api.getPosts(\"BMV6abfvCSUl51ErCVzd\", {\n  limit: 20,\n  cursor: \"next-cursor\"\n})"
           }
         ]
       }
@@ -934,7 +934,7 @@
           {
             "lang": "typescript",
             "label": "Get post by ID",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost(\"post-123\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost(\"3T2PQZlsdQtigUp4fhlb\")"
           }
         ]
       }
@@ -1111,7 +1111,7 @@
           {
             "lang": "typescript",
             "label": "Get post by slug",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPostBySlug(\"my-post-slug\", \"pub-123\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPostBySlug(\"BMV6abfvCSUl51ErCVzd\", \"coins\")"
           }
         ]
       }
@@ -1249,7 +1249,7 @@
           {
             "lang": "typescript",
             "label": "Get user by ID",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.getUser(\"user-123\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.getUser(\"AeAOtR8TqKWyzG5apA1R\")"
           }
         ]
       }
@@ -1388,7 +1388,7 @@
           {
             "lang": "typescript",
             "label": "Get user by wallet address",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.getUserByWallet(\"0x123...abc\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.getUserByWallet(\"0xc9ddb5E37165827BBBFf15b582E232C06862C4E8\")"
           }
         ]
       }
@@ -1519,7 +1519,7 @@
           {
             "lang": "typescript",
             "label": "Get coin by ID",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getCoin(\"123\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getCoin(\"S2AlaNG5Hw0NdNptmLTw\")"
           }
         ]
       }
@@ -1651,12 +1651,208 @@
           {
             "lang": "typescript",
             "label": "Get coin by contract address",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getCoinByContract(\"0x123...abc\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getCoinByContract(\"0xe9bb3166ff5f96381e257d509a801303b68e5d34\")"
           }
         ]
       }
     },
-    "/v1/coins/{contractAddress}/holders": {
+    "/v1/coins/{id}/holders": {
+      "get": {
+        "description": "Retrieve a paginated list of holders for a coined post",
+        "summary": "List coin holders",
+        "tags": [
+          "coins"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "contractAddress",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the coin"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Cursor for pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of items to return (1-100, default: 10)",
+            "schema": {
+              "default": 10,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Holders retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "walletAddress": {
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "Wallet address of the holder"
+                          },
+                          "userId": {
+                            "type": "string",
+                            "description": "Paragraph user ID if the holder is a registered user"
+                          },
+                          "balance": {
+                            "type": "string",
+                            "pattern": "^[0-9]+$",
+                            "description": "Token balance held (in wei)"
+                          },
+                          "avatarUrl": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "URL to the user's avatar image, if available"
+                          },
+                          "supportedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "ISO 8601 timestamp when user first supported"
+                          }
+                        },
+                        "required": [
+                          "walletAddress",
+                          "balance",
+                          "supportedAt"
+                        ]
+                      },
+                      "description": "Array of items in this page"
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "cursor": {
+                          "type": "string",
+                          "description": "Cursor for fetching the next page of results"
+                        },
+                        "hasMore": {
+                          "type": "boolean",
+                          "description": "Whether more results are available"
+                        },
+                        "total": {
+                          "type": "number",
+                          "description": "Total number of items available"
+                        }
+                      },
+                      "required": [
+                        "hasMore"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "items",
+                    "pagination"
+                  ],
+                  "description": "Holders retrieved successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Coin not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Coin not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getCoinHoldersById",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "List coin holders (with pagination)",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst holders = await api.getCoinHolders(\"S2AlaNG5Hw0NdNptmLTw\", {\n  limit: 50,\n  cursor: \"next-cursor\"\n})"
+          }
+        ]
+      }
+    },
+    "/v1/coins/contract/{contractAddress}/holders": {
       "get": {
         "description": "Retrieve a paginated list of holders for a tokenized post",
         "summary": "List coin holders",
@@ -1835,12 +2031,12 @@
             }
           }
         },
-        "operationId": "getCoinHolders",
+        "operationId": "getCoinHoldersByContract",
         "x-codeSamples": [
           {
             "lang": "typescript",
             "label": "List coin holders (with pagination)",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst holders = await api.getCoinHolders(\"0x123...abc\", {\n  limit: 50,\n  cursor: \"next-cursor\"\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst holders = await api.getCoinHoldersByContract(\"0xe9bb3166ff5f96381e257d509a801303b68e5d34\", {\n  limit: 50,\n  cursor: \"next-cursor\"\n})"
           }
         ]
       }
