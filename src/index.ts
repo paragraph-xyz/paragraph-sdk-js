@@ -47,6 +47,13 @@ export class ParagraphAPI {
     return this.api.getPublicationByDomain(domain);
   }
 
+  /**
+    * Gets a total count of subscribers for a given publication ID.
+    */
+  getSubscriberCount(publicationId: string) {
+    return this.api.getSubscriberCount(publicationId)
+  }
+
 
   /**
     * Get a list of posts for a given publication.
