@@ -6,7 +6,7 @@ export default defineConfig({
       target: "./openapi.json",
     },
     output: {
-      mode: "split",
+      mode: "single",
       docs:false,
       //docs: { configPath: './typedoc.config.mjs' },
       target: "./src/generated/api.ts",

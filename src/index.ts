@@ -15,10 +15,8 @@ export type ParagraphAPIConfig = {
   */
 export class ParagraphAPI {
   private api = getParagraphAPI();
-  private publicationId?: string;
 
-  constructor(cfg: ParagraphAPIConfig = {}) {
-    this.publicationId = cfg.publicationId;
+  constructor() {
   }
 
   /**
@@ -53,8 +51,7 @@ export class ParagraphAPI {
   /**
     * Get a list of posts for a given publication.
     */
-  getPosts(publicationId = this.publicationId!, params?: Parameters<ReturnType<typeof getParagraphAPI>['getPosts']>[1]) {
-    if (!publicationId) throw new Error('publicationId is required (pass in constructor or as first arg).');
+  getPosts(publicationId: string, params?: Parameters<ReturnType<typeof getParagraphAPI>['getPosts']>[1]) {
     return this.api.getPosts(publicationId, params);
   }
 
@@ -69,8 +66,7 @@ export class ParagraphAPI {
   /**
     * Get a single post by its slug within a given publication.
     */
-  getPostBySlug(slug: string, publicationId = this.publicationId!) {
-    if (!publicationId) throw new Error('publicationId is required (pass in constructor or as second arg).');
+  getPostBySlug(publicationId: string, slug: string) {
     return this.api.getPostBySlug(publicationId, slug);
   }
 
@@ -106,7 +102,7 @@ export class ParagraphAPI {
   *
   * Tree-shakeable.
   */
-export const createParagraphAPI = (cfg?: ParagraphAPIConfig) => new ParagraphAPI(cfg);
+export const createParagraphAPI = () => new ParagraphAPI();
 
 // Re-export generated types for consumers
 export * from './generated/models';
