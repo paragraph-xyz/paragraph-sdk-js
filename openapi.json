@@ -138,6 +138,13 @@
           }
         },
         "operationId": "getPublication",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-publication-by-id",
+            "description": "Get a publication by its unique ID"
+          }
+        },
         "x-codeSamples": [
           {
             "lang": "typescript",
@@ -2121,5 +2128,10 @@
   "security": [
     {}
   ],
-  "components": {}
+  "components": {},
+  "x-mint": {
+    "mcp": {
+      "enabled": true
+    }
+  }
 }
