@@ -1659,21 +1659,13 @@
     "/v1/coins/{id}/holders": {
       "get": {
         "description": "Retrieve a paginated list of holders for a coined post",
-        "summary": "List coin holders",
+        "summary": "List coin holders by ID",
         "tags": [
           "coins"
         ],
         "parameters": [
           {
             "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "contractAddress",
             "in": "path",
             "required": true,
             "schema": {
@@ -1855,7 +1847,7 @@
     "/v1/coins/contract/{contractAddress}/holders": {
       "get": {
         "description": "Retrieve a paginated list of holders for a tokenized post",
-        "summary": "List coin holders",
+        "summary": "List coin holders by contract address",
         "tags": [
           "coins"
         ],
