@@ -1393,23 +1393,22 @@
         ]
       }
     },
-    "/v1/coins/{contractAddress}": {
+    "/v1/coins/{id}": {
       "get": {
-        "description": "Retrieve information about a tokenized post using its contract address",
-        "summary": "Get coin by contract address",
+        "description": "Retrieve information about a tokenized post using its unique ID",
+        "summary": "Get coin by ID",
         "tags": [
           "coins"
         ],
         "parameters": [
           {
-            "name": "contractAddress",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "pattern": "^0x[a-fA-F0-9]{40}$"
+              "type": "string"
             },
-            "description": "Ethereum smart contract address"
+            "description": "Paragraph-internal unique identifier for the coin"
           }
         ],
         "responses": {
@@ -1519,8 +1518,140 @@
         "x-codeSamples": [
           {
             "lang": "typescript",
+            "label": "Get coin by ID",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getCoin(\"123\")"
+          }
+        ]
+      }
+    },
+    "/v1/coins/contract/{contractAddress}": {
+      "get": {
+        "description": "Retrieve information about a tokenized post using its contract address",
+        "summary": "Get coin by contract address",
+        "tags": [
+          "coins"
+        ],
+        "parameters": [
+          {
+            "name": "contractAddress",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "description": "Contract address"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coin details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for the coin"
+                    },
+                    "contractAddress": {
+                      "type": "string",
+                      "pattern": "^0x[a-fA-F0-9]{40}$",
+                      "description": "Base contract address for the coin"
+                    },
+                    "symbol": {
+                      "type": "string",
+                      "pattern": "^[A-Z0-9]{3,6}$",
+                      "description": "Token symbol"
+                    },
+                    "postId": {
+                      "type": "string",
+                      "description": "ID of the post this token is associated with"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "contractAddress",
+                    "symbol",
+                    "postId"
+                  ],
+                  "description": "Coin details retrieved successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Coin not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Coin not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getCoinByContract",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
             "label": "Get coin by contract address",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getCoin(\"0x123...abc\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getCoinByContract(\"0x123...abc\")"
           }
         ]
       }
@@ -1541,7 +1672,7 @@
               "type": "string",
               "pattern": "^0x[a-fA-F0-9]{40}$"
             },
-            "description": "Ethereum smart contract address"
+            "description": "Contract address"
           },
           {
             "name": "cursor",
