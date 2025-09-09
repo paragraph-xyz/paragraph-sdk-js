@@ -1168,6 +1168,29 @@
                       "type": "string",
                       "maxLength": 500,
                       "description": "Brief biography of the user (max 500 characters)"
+                    },
+                    "farcaster": {
+                      "type": "object",
+                      "properties": {
+                        "username": {
+                          "type": "string",
+                          "description": "Farcaster username"
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "description": "Farcaster display name"
+                        },
+                        "fid": {
+                          "type": "number",
+                          "description": "Farcaster fid"
+                        }
+                      },
+                      "required": [
+                        "username",
+                        "displayName",
+                        "fid"
+                      ],
+                      "description": "Farcaster profile information, if linked"
                     }
                   },
                   "required": [
@@ -1307,6 +1330,29 @@
                       "type": "string",
                       "maxLength": 500,
                       "description": "Brief biography of the user (max 500 characters)"
+                    },
+                    "farcaster": {
+                      "type": "object",
+                      "properties": {
+                        "username": {
+                          "type": "string",
+                          "description": "Farcaster username"
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "description": "Farcaster display name"
+                        },
+                        "fid": {
+                          "type": "number",
+                          "description": "Farcaster fid"
+                        }
+                      },
+                      "required": [
+                        "username",
+                        "displayName",
+                        "fid"
+                      ],
+                      "description": "Farcaster profile information, if linked"
                     }
                   },
                   "required": [
