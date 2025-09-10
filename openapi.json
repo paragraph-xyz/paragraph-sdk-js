@@ -618,6 +618,14 @@
               "minimum": 1,
               "maximum": 100
             }
+          },
+          {
+            "name": "includeContent",
+            "in": "query",
+            "description": "Include full content fields (markdown, json, staticHtml). Default: false",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -688,10 +696,7 @@
                         "required": [
                           "id",
                           "title",
-                          "slug",
-                          "staticHtml",
-                          "json",
-                          "markdown"
+                          "slug"
                         ]
                       },
                       "description": "Array of items in this page"
@@ -824,6 +829,14 @@
               "type": "string"
             },
             "description": "Unique identifier of the post"
+          },
+          {
+            "name": "includeContent",
+            "in": "query",
+            "description": "Include full content fields (markdown, json, staticHtml). Default: false",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -889,10 +902,7 @@
                   "required": [
                     "id",
                     "title",
-                    "slug",
-                    "staticHtml",
-                    "json",
-                    "markdown"
+                    "slug"
                   ],
                   "description": "Post details retrieved successfully"
                 }
@@ -1008,6 +1018,14 @@
               "maxLength": 256
             },
             "description": "URL-friendly identifier of the post"
+          },
+          {
+            "name": "includeContent",
+            "in": "query",
+            "description": "Include full content fields (markdown, json, staticHtml). Default: false",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1073,10 +1091,7 @@
                   "required": [
                     "id",
                     "title",
-                    "slug",
-                    "staticHtml",
-                    "json",
-                    "markdown"
+                    "slug"
                   ],
                   "description": "Post details retrieved successfully"
                 }
@@ -1194,6 +1209,14 @@
               "maxLength": 256
             },
             "description": "Slug of the post, e.g. 'coins'"
+          },
+          {
+            "name": "includeContent",
+            "in": "query",
+            "description": "Include full content fields (markdown, json, staticHtml). Default: false",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1259,10 +1282,7 @@
                   "required": [
                     "id",
                     "title",
-                    "slug",
-                    "staticHtml",
-                    "json",
-                    "markdown"
+                    "slug"
                   ],
                   "description": "Post details retrieved successfully"
                 }
