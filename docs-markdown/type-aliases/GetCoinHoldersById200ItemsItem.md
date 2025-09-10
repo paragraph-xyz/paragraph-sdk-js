@@ -48,16 +48,6 @@ Token balance held (in wei)
 
 ***
 
-### supportedAt
-
-> **supportedAt**: `string`
-
-Defined in: generated/models/getCoinHoldersById200ItemsItem.ts:31
-
-ISO 8601 timestamp when user first supported
-
-***
-
 ### userId?
 
 > `optional` **userId**: `string`

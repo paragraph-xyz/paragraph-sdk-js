@@ -137,7 +137,7 @@
             }
           }
         },
-        "operationId": "getPublication",
+        "operationId": "getPublicationById",
         "x-mint": {
           "mcp": {
             "enabled": true,
@@ -624,7 +624,8 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": "string"
+              "type": "boolean",
+              "nullable": true
             }
           }
         ],
@@ -835,7 +836,8 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": "string"
+              "type": "boolean",
+              "nullable": true
             }
           }
         ],
@@ -974,27 +976,27 @@
             }
           }
         },
-        "operationId": "getPost",
+        "operationId": "getPostById",
         "x-mint": {
           "mcp": {
             "enabled": true,
             "name": "get-post-by-id",
-            "description": "Get detailed information about a specific post"
+            "description": "Get detailed information about a specific post by its ID"
           }
         },
         "x-codeSamples": [
           {
             "lang": "typescript",
             "label": "Get post by ID",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost(\"3T2PQZlsdQtigUp4fhlb\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost({ id: \"3T2PQZlsdQtigUp4fhlb\" })"
           }
         ]
       }
     },
-    "/v1/publications/{publicationId}/posts/slug/{slug}": {
+    "/v1/publications/{publicationId}/posts/slug/{postSlug}": {
       "get": {
-        "description": "Retrieve a post using its publication ID and slug",
-        "summary": "Get post by slug",
+        "description": "Retrieve a post using its publication ID and its URL-friendly slug",
+        "summary": "Get post by publication ID and post slug",
         "tags": [
           "posts"
         ],
@@ -1009,7 +1011,7 @@
             "description": "Unique identifier of the publication"
           },
           {
-            "name": "slug",
+            "name": "postSlug",
             "in": "path",
             "required": true,
             "schema": {
@@ -1024,7 +1026,8 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": "string"
+              "type": "boolean",
+              "nullable": true
             }
           }
         ],
@@ -1163,27 +1166,27 @@
             }
           }
         },
-        "operationId": "getPostBySlug",
+        "operationId": "getPostByPublicationIdAndPostSlug",
         "x-mint": {
           "mcp": {
             "enabled": true,
-            "name": "get-post-by-slug",
+            "name": "get-post-by-publication-id-and-slug",
             "description": "Get a post using its publication ID and slug"
           }
         },
         "x-codeSamples": [
           {
             "lang": "typescript",
-            "label": "Get post by slug",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPostBySlug(\"BMV6abfvCSUl51ErCVzd\", \"coins\")"
+            "label": "Get post by publication ID and slug",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost({ \n  publicationId: \"BMV6abfvCSUl51ErCVzd\", \n  postSlug: \"my-first-post\" \n})"
           }
         ]
       }
     },
     "/v1/publications/slug/{publicationSlug}/posts/slug/{postSlug}": {
       "get": {
-        "description": "Retrieve a post using its publication slug and post slug",
-        "summary": "Get post by both a publication slug and a post slug.",
+        "description": "Retrieve a post using its publication's slug and the post's slug. This is useful for building user-facing URLs.",
+        "summary": "Get post by publication slug and post slug",
         "tags": [
           "posts"
         ],
@@ -1197,7 +1200,7 @@
               "minLength": 1,
               "maxLength": 256
             },
-            "description": "Slug of the publication, e.g. 'blog'"
+            "description": "URL-friendly identifier of the publication, e.g. 'blog'"
           },
           {
             "name": "postSlug",
@@ -1208,14 +1211,15 @@
               "minLength": 1,
               "maxLength": 256
             },
-            "description": "Slug of the post, e.g. 'coins'"
+            "description": "URL-friendly identifier of the post, e.g. 'my-first-post'"
           },
           {
             "name": "includeContent",
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": "string"
+              "type": "boolean",
+              "nullable": true
             }
           }
         ],
@@ -1354,7 +1358,7 @@
             }
           }
         },
-        "operationId": "getPostByPublicationAndPostSlug",
+        "operationId": "getPostByPublicationSlugAndPostSlug",
         "x-mint": {
           "mcp": {
             "enabled": true,
@@ -1366,7 +1370,7 @@
           {
             "lang": "typescript",
             "label": "Get post by publication & post slug",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPostBySlug(\"blog\", \"coins\")"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost({ \n  publicationSlug: \"blog\",\n  postSlug: \"my-first-post\" \n})"
           }
         ]
       }
