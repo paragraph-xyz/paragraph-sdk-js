@@ -1165,6 +1165,192 @@
         ]
       }
     },
+    "/v1/publications/slug/{publicationSlug}/posts/slug/{postSlug}": {
+      "get": {
+        "description": "Retrieve a post using its publication slug and post slug",
+        "summary": "Get post by both a publication slug and a post slug.",
+        "tags": [
+          "posts"
+        ],
+        "parameters": [
+          {
+            "name": "publicationSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "description": "Slug of the publication, e.g. 'blog'"
+          },
+          {
+            "name": "postSlug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "description": "Slug of the post, e.g. 'coins'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for the post"
+                    },
+                    "title": {
+                      "type": "string",
+                      "maxLength": 200,
+                      "description": "Title of the post"
+                    },
+                    "imageUrl": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "Optional URL to the post's main image"
+                    },
+                    "publishedAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp when the post was published"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "ISO 8601 timestamp when the post was last updated"
+                    },
+                    "subtitle": {
+                      "type": "string",
+                      "maxLength": 300,
+                      "description": "Optional subtitle or brief summary"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 256,
+                      "description": "URL-friendly identifier for the post; accessible at paragraph.com/@[publicationSlug]/[slug]"
+                    },
+                    "staticHtml": {
+                      "type": "string",
+                      "description": "Rendered HTML content of the post"
+                    },
+                    "json": {
+                      "type": "string",
+                      "description": "TipTap JSON representation of the post content structure. This is the source of truth that the staticHtml and markdown is generated from"
+                    },
+                    "markdown": {
+                      "type": "string",
+                      "description": "Markdown source of the post content"
+                    },
+                    "coinId": {
+                      "type": "string",
+                      "description": "ID of the associated coin, if the post is coined"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "title",
+                    "slug",
+                    "staticHtml",
+                    "json",
+                    "markdown"
+                  ],
+                  "description": "Post details retrieved successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Post not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getPostByPublicationAndPostSlug",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-post-by-publication-and-post-slug",
+            "description": "Get a post using its publication slug and post slug"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get post by publication & post slug",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPostBySlug(\"blog\", \"coins\")"
+          }
+        ]
+      }
+    },
     "/v1/users/{userId}": {
       "get": {
         "description": "Retrieve detailed information about a specific user",
@@ -1847,17 +2033,11 @@
                             "type": "string",
                             "format": "uri",
                             "description": "URL to the user's avatar image, if available"
-                          },
-                          "supportedAt": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "ISO 8601 timestamp when user first supported"
                           }
                         },
                         "required": [
                           "walletAddress",
-                          "balance",
-                          "supportedAt"
+                          "balance"
                         ]
                       },
                       "description": "Array of items in this page"
@@ -2043,17 +2223,11 @@
                             "type": "string",
                             "format": "uri",
                             "description": "URL to the user's avatar image, if available"
-                          },
-                          "supportedAt": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "ISO 8601 timestamp when user first supported"
                           }
                         },
                         "required": [
                           "walletAddress",
-                          "balance",
-                          "supportedAt"
+                          "balance"
                         ]
                       },
                       "description": "Array of items in this page"
