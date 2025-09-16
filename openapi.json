@@ -658,13 +658,11 @@
                           },
                           "publishedAt": {
                             "type": "string",
-                            "format": "date-time",
-                            "description": "ISO 8601 timestamp when the post was published"
+                            "description": "Epoch timestamp when the post was published"
                           },
                           "updatedAt": {
                             "type": "string",
-                            "format": "date-time",
-                            "description": "ISO 8601 timestamp when the post was last updated"
+                            "description": "Epoch timestamp when the post was last updated"
                           },
                           "subtitle": {
                             "type": "string",
@@ -865,13 +863,11 @@
                     },
                     "publishedAt": {
                       "type": "string",
-                      "format": "date-time",
-                      "description": "ISO 8601 timestamp when the post was published"
+                      "description": "Epoch timestamp when the post was published"
                     },
                     "updatedAt": {
                       "type": "string",
-                      "format": "date-time",
-                      "description": "ISO 8601 timestamp when the post was last updated"
+                      "description": "Epoch timestamp when the post was last updated"
                     },
                     "subtitle": {
                       "type": "string",
@@ -1055,13 +1051,11 @@
                     },
                     "publishedAt": {
                       "type": "string",
-                      "format": "date-time",
-                      "description": "ISO 8601 timestamp when the post was published"
+                      "description": "Epoch timestamp when the post was published"
                     },
                     "updatedAt": {
                       "type": "string",
-                      "format": "date-time",
-                      "description": "ISO 8601 timestamp when the post was last updated"
+                      "description": "Epoch timestamp when the post was last updated"
                     },
                     "subtitle": {
                       "type": "string",
@@ -1247,13 +1241,11 @@
                     },
                     "publishedAt": {
                       "type": "string",
-                      "format": "date-time",
-                      "description": "ISO 8601 timestamp when the post was published"
+                      "description": "Epoch timestamp when the post was published"
                     },
                     "updatedAt": {
                       "type": "string",
-                      "format": "date-time",
-                      "description": "ISO 8601 timestamp when the post was last updated"
+                      "description": "Epoch timestamp when the post was last updated"
                     },
                     "subtitle": {
                       "type": "string",
