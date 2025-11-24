@@ -1746,14 +1746,27 @@
                     },
                     "postId": {
                       "type": "string",
-                      "description": "ID of the post this token is associated with"
+                      "description": "ID of the post this coin is associated with"
+                    },
+                    "blogId": {
+                      "type": "string",
+                      "description": "ID of the blog this coin is associated with"
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "post",
+                        "writer"
+                      ],
+                      "description": "The type of the coin, either a post coin or a writer coin"
                     }
                   },
                   "required": [
                     "id",
                     "contractAddress",
                     "symbol",
-                    "postId"
+                    "blogId",
+                    "type"
                   ],
                   "description": "Coin details retrieved successfully"
                 }
@@ -1885,14 +1898,27 @@
                     },
                     "postId": {
                       "type": "string",
-                      "description": "ID of the post this token is associated with"
+                      "description": "ID of the post this coin is associated with"
+                    },
+                    "blogId": {
+                      "type": "string",
+                      "description": "ID of the blog this coin is associated with"
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "post",
+                        "writer"
+                      ],
+                      "description": "The type of the coin, either a post coin or a writer coin"
                     }
                   },
                   "required": [
                     "id",
                     "contractAddress",
                     "symbol",
-                    "postId"
+                    "blogId",
+                    "type"
                   ],
                   "description": "Coin details retrieved successfully"
                 }
