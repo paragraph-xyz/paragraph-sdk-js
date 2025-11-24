@@ -6,7 +6,7 @@
 
 # Class: ParagraphAPI
 
-Defined in: [index.ts:30](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L30)
+Defined in: [index.ts:30](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L30)
 
 Paragraph API class wrapper.
 
@@ -18,7 +18,7 @@ Entrypoint into all Paragraph API functionality.
 
 > **new ParagraphAPI**(): `ParagraphAPI`
 
-Defined in: [index.ts:36](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L36)
+Defined in: [index.ts:36](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L36)
 
 Initializes a new instance of the Paragraph API client.
 
@@ -32,7 +32,7 @@ Initializes a new instance of the Paragraph API client.
 
 > **getCoin**(`id`): `Promise`\<[`GetCoin200`](../type-aliases/GetCoin200.md)\>
 
-Defined in: [index.ts:192](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L192)
+Defined in: [index.ts:192](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L192)
 
 Retrieves metadata about a coin by its Paragraph-internal ID.
 
@@ -56,7 +56,7 @@ A promise that resolves to the coin's data.
 
 > **getCoinByContract**(`contractAddress`): `Promise`\<[`GetCoinByContract200`](../type-aliases/GetCoinByContract200.md)\>
 
-Defined in: [index.ts:202](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L202)
+Defined in: [index.ts:202](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L202)
 
 Retrieves metadata about a coin by its on-chain contract address.
 
@@ -80,7 +80,7 @@ A promise that resolves to the coin's data.
 
 > **getCoinHolders**(`id`, `params?`): `Promise`\<[`GetCoinHoldersById200`](../type-aliases/GetCoinHoldersById200.md)\>
 
-Defined in: [index.ts:213](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L213)
+Defined in: [index.ts:213](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L213)
 
 Retrieves a paginated list of holders for a given coin ID.
 
@@ -110,7 +110,7 @@ A promise that resolves to a paginated list of coin holders.
 
 > **getCoinHoldersByContract**(`contractAddress`, `params?`): `Promise`\<[`GetCoinHoldersByContract200`](../type-aliases/GetCoinHoldersByContract200.md)\>
 
-Defined in: [index.ts:227](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L227)
+Defined in: [index.ts:227](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L227)
 
 Retrieves a paginated list of holders for a given coin contract address.
 
@@ -140,7 +140,7 @@ A promise that resolves to a paginated list of coin holders.
 
 > **getPost**(`identifier`, `options?`): `Promise`\<[`GetPostById200`](../type-aliases/GetPostById200.md)\>
 
-Defined in: [index.ts:140](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L140)
+Defined in: [index.ts:140](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L140)
 
 Retrieves a single post using one of several unique identifiers.
 This method allows fetching a post by its ID, or by a combination of
@@ -199,7 +199,7 @@ const postWithContent = await api.getPost(
 
 > **getPosts**(`publicationId`, `params?`): `Promise`\<[`GetPosts200`](../type-aliases/GetPosts200.md)\>
 
-Defined in: [index.ts:98](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L98)
+Defined in: [index.ts:98](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L98)
 
 Retrieves a paginated list of posts for a given publication.
 
@@ -229,7 +229,7 @@ A promise that resolves to a paginated list of posts.
 
 > **getPublication**(`publicationId`): `Promise`\<[`GetPublicationById200`](../type-aliases/GetPublicationById200.md)\>
 
-Defined in: [index.ts:44](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L44)
+Defined in: [index.ts:44](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L44)
 
 Retrieves metadata about a Paragraph publication by its unique ID.
 
@@ -253,7 +253,7 @@ A promise that resolves to the publication's data.
 
 > **getPublicationByDomain**(`domain`): `Promise`\<[`GetPublicationByDomain200`](../type-aliases/GetPublicationByDomain200.md)\>
 
-Defined in: [index.ts:77](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L77)
+Defined in: [index.ts:77](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L77)
 
 Retrieves metadata about a Paragraph publication by its custom domain.
 
@@ -282,7 +282,7 @@ or any path/querystring.
 
 > **getPublicationBySlug**(`slug`): `Promise`\<[`GetPublicationBySlug200`](../type-aliases/GetPublicationBySlug200.md)\>
 
-Defined in: [index.ts:63](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L63)
+Defined in: [index.ts:63](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L63)
 
 Retrieves metadata about a Paragraph publication by its URL-friendly slug.
 
@@ -317,7 +317,7 @@ const publication2 = await api.getPublicationBySlug("@blog");
 
 > **getSubscriberCount**(`publicationId`): `Promise`\<[`GetSubscriberCount200`](../type-aliases/GetSubscriberCount200.md)\>
 
-Defined in: [index.ts:87](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L87)
+Defined in: [index.ts:87](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L87)
 
 Gets a total count of subscribers for a given publication ID.
 
@@ -341,7 +341,7 @@ A promise that resolves to an object containing the subscriber count.
 
 > **getUser**(`userId`): `Promise`\<[`GetUser200`](../type-aliases/GetUser200.md)\>
 
-Defined in: [index.ts:173](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L173)
+Defined in: [index.ts:173](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L173)
 
 Retrieves metadata about a user by their unique user ID.
 
@@ -365,7 +365,7 @@ A promise that resolves to the user's data.
 
 > **getUserByWallet**(`wallet`): `Promise`\<[`GetUserByWallet200`](../type-aliases/GetUserByWallet200.md)\>
 
-Defined in: [index.ts:182](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/086f3a8b7dcd4b61aade984e95936df9babd9141/src/index.ts#L182)
+Defined in: [index.ts:182](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/01f7e47f83875ab66014e688e76308c24a25b9e7/src/index.ts#L182)
 
 Retrieves metadata about a user by their wallet address.
 
