@@ -70,7 +70,7 @@ Markdown source of the post content
 
 Defined in: generated/models/getPostById200.ts:29
 
-ISO 8601 timestamp when the post was published
+Epoch timestamp when the post was published
 
 ***
 
@@ -136,4 +136,4 @@ Title of the post
 
 Defined in: generated/models/getPostById200.ts:31
 
-ISO 8601 timestamp when the post was last updated
+Epoch timestamp when the post was last updated
