@@ -1,5 +1,8 @@
 // src/index.ts - public entry
+import { Account, Client, WalletClient } from "viem";
 import { getParagraphAPI } from "./generated/api";
+import { base } from "viem/chains";
+import { ADDRESSES } from "@whetstone-research/doppler-sdk";
 
 /**
  * A discriminated union of identifiers for retrieving a single post.
@@ -12,6 +15,19 @@ export type PostIdentifier =
   | { id: string }
   | { publicationId: string; postSlug: string }
   | { publicationSlug: string; postSlug: string };
+
+const executeAbi = [
+  {
+    type: "function",
+    name: "execute",
+    inputs: [
+      { name: "commands", type: "bytes", internalType: "bytes" },
+      { name: "inputs", type: "bytes[]", internalType: "bytes[]" },
+    ],
+    outputs: [],
+    stateMutability: "payable",
+  },
+] as const;
 
 /**
  * Type helper to extract the query options for getting a post.
@@ -229,6 +245,66 @@ export class ParagraphAPI {
     params?: Parameters<typeof this.api.getCoinHoldersByContract>[1]
   ) {
     return this.api.getCoinHoldersByContract(contractAddress, params);
+  }
+
+  async buyCoin({
+    coinId,
+    client,
+    account,
+    amount,
+  }: {
+    coinId: string;
+    client: WalletClient;
+    account: Account;
+    amount: bigint;
+  }) {
+    const walletAddress = account.address;
+    const { args } = (await this.api.getBuyArgsById(coinId, {
+      walletAddress,
+      amount: amount.toString(),
+    })) as { args: [`0x${string}`, `0x${string}`[]] };
+
+    const txHash = await client.writeContract({
+      account,
+      address: ADDRESSES[base.id].universalRouter,
+      abi: executeAbi,
+      functionName: "execute",
+      args: args,
+      value: amount,
+      chain: base,
+    });
+
+    return txHash;
+  }
+
+  async buyCoinByContract({
+    coinAddress,
+    client,
+    account,
+    amount,
+  }: {
+    coinAddress: string;
+    client: WalletClient;
+    account: Account;
+    amount: bigint;
+  }) {
+    const walletAddress = account.address;
+    const { args } = (await this.api.getBuyArgsByContract(coinAddress, {
+      walletAddress,
+      amount: amount.toString(),
+    })) as { args: [`0x${string}`, `0x${string}`[]] };
+
+    const txHash = await client.writeContract({
+      account,
+      address: ADDRESSES[base.id].universalRouter,
+      abi: executeAbi,
+      functionName: "execute",
+      args: args,
+      value: amount,
+      chain: base,
+    });
+
+    return txHash;
   }
 }
 
