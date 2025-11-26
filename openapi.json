@@ -1843,7 +1843,7 @@
           "mcp": {
             "enabled": true,
             "name": "get-coin-by-id",
-            "description": "Get information about a tokenized post by its ID"
+            "description": "Get information about a coin by its ID"
           }
         },
         "x-codeSamples": [
@@ -1995,7 +1995,7 @@
           "mcp": {
             "enabled": true,
             "name": "get-coin-by-contract",
-            "description": "Get information about a tokenized post by contract address"
+            "description": "Get information about a coin by contract address"
           }
         },
         "x-codeSamples": [
@@ -2384,6 +2384,540 @@
             "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst holders = await api.getCoinHoldersByContract(\"0xe9bb3166ff5f96381e257d509a801303b68e5d34\", {\n  limit: 50,\n  cursor: \"next-cursor\"\n})"
           }
         ]
+      }
+    },
+    "/v1/coins/buy/{id}": {
+      "get": {
+        "description": "Retrieve the args needed to buy a coin using a wallet",
+        "summary": "Get coin's buy args by coin id",
+        "tags": [
+          "coins"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Id of the coin"
+          },
+          {
+            "name": "walletAddress",
+            "in": "query",
+            "description": "Address of the wallet that is going to buy the coin",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "Amount of Base ETH in wei that is going to be swapped for the coin",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "[0-9]+"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Buy args retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "args": {
+                      "description": "Arguments needed to do a coin swap"
+                    }
+                  },
+                  "required": [
+                    "args"
+                  ],
+                  "description": "Buy args retrieved successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Buy args not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Buy args not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getBuyArgsById",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-buy-args-by-id",
+            "description": "Get the args needed to buy a coin by its id"
+          }
+        }
+      }
+    },
+    "/v1/coins/buy/contract/{contractAddress}": {
+      "get": {
+        "description": "Retrieve the args needed to buy a coin using a wallet",
+        "summary": "Get coin's buy args by contract address",
+        "tags": [
+          "coins"
+        ],
+        "parameters": [
+          {
+            "name": "contractAddress",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "description": "Contract address of the coin"
+          },
+          {
+            "name": "walletAddress",
+            "in": "query",
+            "description": "Address of the wallet that is going to buy the coin",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "Amount of Base ETH in wei that is going to be swapped for the coin",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "[0-9]+"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Buy args retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "args": {
+                      "description": "Arguments needed to do a coin swap"
+                    }
+                  },
+                  "required": [
+                    "args"
+                  ],
+                  "description": "Buy args retrieved successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Buy args not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Buy args not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getBuyArgsByContract",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-buy-args-by-contract",
+            "description": "Get the args needed to buy a coin by its contract address"
+          }
+        }
+      }
+    },
+    "/v1/coins/sell/{id}": {
+      "get": {
+        "description": "Retrieve the args needed to sell a coin using a wallet that has it",
+        "summary": "Get coin's sell args by coin id",
+        "tags": [
+          "coins"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Id of the coin"
+          },
+          {
+            "name": "walletAddress",
+            "in": "query",
+            "description": "Address of the wallet that is going to sell the coin",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "Amount of coin in wei that is going to be swapped to WETH",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "[0-9]+"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sell args retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "args": {
+                      "description": "Arguments needed to do a coin swap"
+                    }
+                  },
+                  "required": [
+                    "args"
+                  ],
+                  "description": "Sell args retrieved successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sell args not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Sell args not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getSellArgsById",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-sell-args-by-id",
+            "description": "Get the args needed to sell a coin by its id"
+          }
+        }
+      }
+    },
+    "/v1/coins/sell/contract/{contractAddress}": {
+      "get": {
+        "description": "Retrieve the args needed to sell a coin using a wallet that has it",
+        "summary": "Get coin's sell args by contract address",
+        "tags": [
+          "coins"
+        ],
+        "parameters": [
+          {
+            "name": "contractAddress",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            },
+            "description": "Contract address of the coin"
+          },
+          {
+            "name": "walletAddress",
+            "in": "query",
+            "description": "Address of the wallet that is going to sell the coin",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[a-fA-F0-9]{40}$"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "Amount of coin in wei that is going to be swapped to WETH",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "[0-9]+"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sell args retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "args": {
+                      "description": "Arguments needed to do a coin swap"
+                    }
+                  },
+                  "required": [
+                    "args"
+                  ],
+                  "description": "Sell args retrieved successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sell args not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Sell args not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getSellArgsByContract",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-sell-args-by-contract",
+            "description": "Get the args needed to sell a coin by its contract address"
+          }
+        }
       }
     }
   },
