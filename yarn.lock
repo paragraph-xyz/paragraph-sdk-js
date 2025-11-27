@@ -587,6 +587,7 @@ __metadata:
     "@types/node": ^20.0.0
     "@whetstone-research/doppler-sdk": ^0.0.1-alpha.62
     axios: ^1.7.7
+    doppler-router: ^1.0.15
     orval: ^7.11.2
     tsup: ^8.3.5
     typedoc: ^0.28.12
@@ -1678,6 +1679,15 @@ __metadata:
   dependencies:
     path-type: ^4.0.0
   checksum: fa05e18324510d7283f55862f3161c6759a3f2f8dbce491a2fc14c8324c498286c54282c1f0e933cb930da8419b30679389499b919122952a4f8592362ef4615
+  languageName: node
+  linkType: hard
+
+"doppler-router@npm:^1.0.15":
+  version: 1.0.15
+  resolution: "doppler-router@npm:1.0.15"
+  peerDependencies:
+    viem: ^2.22.15
+  checksum: 3041659325c271ab317d661a422cccf83f7cef45708295d24df184ff400d1b012fc0a82736a1130aac6a70a1fd5584856b029f105aa4024bf5d225a5e57d2562
   languageName: node
   linkType: hard
 
