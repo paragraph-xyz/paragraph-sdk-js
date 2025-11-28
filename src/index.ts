@@ -286,12 +286,14 @@ export class ParagraphAPI {
       amount: amount.toString(),
     })) as { args: [`0x${string}`, `0x${string}`[]] };
 
+    if (!args) throw new Error("API error: Missing args");
+
     const txHash = await client.writeContract({
       account,
       address: ADDRESSES[base.id].universalRouter,
       abi: executeAbi,
       functionName: "execute",
-      args: args,
+      args,
       value: amount,
       chain: base,
     });
@@ -326,12 +328,14 @@ export class ParagraphAPI {
       amount: amount.toString(),
     })) as { args: [`0x${string}`, `0x${string}`[]] };
 
+    if (!args) throw new Error("API error: Missing args");
+
     const txHash = await client.writeContract({
       account,
       address: ADDRESSES[base.id].universalRouter,
       abi: executeAbi,
       functionName: "execute",
-      args: args,
+      args,
       value: amount,
       chain: base,
     });
@@ -378,6 +382,8 @@ export class ParagraphAPI {
         ],
       }),
     ]);
+    if (!block || !allowance)
+      throw new Error("API error: Missing block or allowance");
     const permit = {
       details: {
         token: coin.contractAddress as Address,
@@ -395,6 +401,7 @@ export class ParagraphAPI {
       base.id,
       ADDRESSES[base.id].permit2
     );
+    if (!signature) throw new Error("API error: Missing signature");
     const commandBuilder = new CommandBuilder();
     commandBuilder.addPermit2Permit(permit, signature);
     const [signCommands, signInputs] = commandBuilder.build();
@@ -402,6 +409,7 @@ export class ParagraphAPI {
       walletAddress: account.address,
       amount: amount.toString(),
     })) as { args: [`0x${string}`, `0x${string}`[]] };
+    if (!args) throw new Error("API error: Missing args");
     const commands = `${signCommands}${args[0].substring(2)}` as `0x${string}`;
     const inputs = [...signInputs, ...args[1]];
     const txHash = await client.writeContract({
