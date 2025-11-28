@@ -20,7 +20,10 @@
     "release:major": "npm version major && git push && git push --tags"
   },
   "dependencies": {
-    "axios": "^1.7.7"
+    "@whetstone-research/doppler-sdk": "^0.0.1-alpha.62",
+    "axios": "^1.7.7",
+    "doppler-router": "^1.0.15",
+    "viem": "^2.40.3"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
