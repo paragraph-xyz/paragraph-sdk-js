@@ -317,7 +317,7 @@ export class ParagraphAPI {
     account,
     amount,
   }: {
-    coinAddress: string;
+    coinAddress: Address;
     client: WalletClient;
     account: Account;
     amount: bigint;
@@ -439,7 +439,7 @@ export class ParagraphAPI {
     account,
     amount,
   }: {
-    coinContract: string;
+    coinContract: Address;
     client: WalletClient;
     account: Account;
     amount: bigint;
