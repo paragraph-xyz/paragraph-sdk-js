@@ -8,6 +8,6 @@
 
 > **GetCoinByContract200Type** = *typeof* [`GetCoinByContract200Type`](../variables/GetCoinByContract200Type.md)\[keyof *typeof* [`GetCoinByContract200Type`](../variables/GetCoinByContract200Type.md)\]
 
-Defined in: generated/models/getCoinByContract200Type.ts:18
+Defined in: src/generated/models/getCoinByContract200Type.ts:18
 
 The type of the coin, either a post coin or a writer coin

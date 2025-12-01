@@ -8,7 +8,7 @@
 
 > **GetCoinByContract200Type**: `object`
 
-Defined in: generated/models/getCoinByContract200Type.ts:18
+Defined in: src/generated/models/getCoinByContract200Type.ts:18
 
 ## Type Declaration
 

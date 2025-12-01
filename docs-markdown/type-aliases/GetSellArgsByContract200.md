@@ -8,16 +8,30 @@
 
 > **GetSellArgsByContract200** = `object`
 
-Defined in: generated/models/getSellArgsByContract200.ts:18
+Defined in: src/generated/models/getSellArgsByContract200.ts:18
 
 Sell args retrieved successfully
 
 ## Properties
 
-### args
+### commands
 
-> **args**: `unknown`
+> **commands**: `string`
 
-Defined in: generated/models/getSellArgsByContract200.ts:20
+Defined in: src/generated/models/getSellArgsByContract200.ts:23
 
-Arguments needed to do a coin swap
+Commands needed to do a token swap
+
+#### Pattern
+
+^0x[a-fA-F0-9]*
+
+***
+
+### inputs
+
+> **inputs**: `string`[]
+
+Defined in: src/generated/models/getSellArgsByContract200.ts:25
+
+Inputs needed to do a token swap

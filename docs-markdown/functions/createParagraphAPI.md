@@ -8,7 +8,7 @@
 
 > **createParagraphAPI**(): [`ParagraphAPI`](../classes/ParagraphAPI.md)
 
-Defined in: [index.ts:243](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/630e4b3f95d35285a6f0a9c1cd2307197bae1aa8/src/index.ts#L243)
+Defined in: [src/index.ts:523](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L523)
 
 Optional factory function to create an instance of the API client.
 

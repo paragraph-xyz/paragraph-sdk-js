@@ -8,7 +8,7 @@
 
 > **GetBuyArgsByContract404** = `object`
 
-Defined in: generated/models/getBuyArgsByContract404.ts:18
+Defined in: src/generated/models/getBuyArgsByContract404.ts:18
 
 Buy args not found
 
@@ -18,7 +18,7 @@ Buy args not found
 
 > `optional` **error**: `string`
 
-Defined in: generated/models/getBuyArgsByContract404.ts:24
+Defined in: src/generated/models/getBuyArgsByContract404.ts:24
 
 Technical error details or error code
 
@@ -28,7 +28,7 @@ Technical error details or error code
 
 > **msg**: `string`
 
-Defined in: generated/models/getBuyArgsByContract404.ts:22
+Defined in: src/generated/models/getBuyArgsByContract404.ts:22
 
 Human-readable error message
 
@@ -38,6 +38,6 @@ Human-readable error message
 
 > **success**: `boolean`
 
-Defined in: generated/models/getBuyArgsByContract404.ts:20
+Defined in: src/generated/models/getBuyArgsByContract404.ts:20
 
 Always false for error responses
