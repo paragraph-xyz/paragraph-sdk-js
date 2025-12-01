@@ -1,5 +1,33 @@
 // src/index.ts - public entry
+import {
+  Account,
+  Address,
+  createPublicClient,
+  http,
+  parseAbi,
+  WalletClient,
+} from "viem";
 import { getParagraphAPI } from "./generated/api";
+import { base } from "viem/chains";
+import { ADDRESSES } from "@whetstone-research/doppler-sdk";
+import { signPermit } from "doppler-router/dist/Permit2";
+import { CommandBuilder } from "doppler-router";
+
+const executeAbi = [
+  {
+    type: "function",
+    name: "execute",
+    inputs: [
+      { name: "commands", type: "bytes", internalType: "bytes" },
+      { name: "inputs", type: "bytes[]", internalType: "bytes[]" },
+    ],
+    outputs: [],
+    stateMutability: "payable",
+  },
+] as const;
+const permit2Abi = parseAbi([
+  "function allowance(address user, address token, address spender) external view returns (uint160 amount, uint48 expiration, uint48 nonce)",
+]);
 
 /**
  * A discriminated union of identifiers for retrieving a single post.
@@ -229,6 +257,246 @@ export class ParagraphAPI {
     params?: Parameters<typeof this.api.getCoinHoldersByContract>[1]
   ) {
     return this.api.getCoinHoldersByContract(contractAddress, params);
+  }
+
+  /**
+   * Allows the user to buy a Pargraph coin
+   *
+   * @param
+   *  - coinId: ID of the coin to buy
+   *  - client: the Client object that is going to make the transaction
+   *  - account: the Account of the buyer
+   *  - amount: the amount of ETH in wei that is going to be swapped for the coin
+   * @returns
+   */
+  async buyCoin({
+    coinId,
+    client,
+    account,
+    amount,
+  }: {
+    coinId: string;
+    client: WalletClient;
+    account: Account;
+    amount: bigint;
+  }) {
+    const walletAddress = account.address;
+    const { args } = (await this.api.getBuyArgsById(coinId, {
+      walletAddress,
+      amount: amount.toString(),
+    })) as { args: [`0x${string}`, `0x${string}`[]] };
+
+    if (!args) throw new Error("API error: Missing args");
+
+    const txHash = await client.writeContract({
+      account,
+      address: ADDRESSES[base.id].universalRouter,
+      abi: executeAbi,
+      functionName: "execute",
+      args,
+      value: amount,
+      chain: base,
+    });
+
+    return txHash;
+  }
+
+  /**
+   * Allows the user to buy a Pargraph coin using the coin's contract
+   *
+   * @param
+   *  - coinAddress: address of the coin to buy
+   *  - client: the Client object that is going to make the transaction
+   *  - account: the Account of the buyer
+   *  - amount: the amount of ETH in wei that is going to be swapped for the coin
+   * @returns
+   */
+  async buyCoinByContract({
+    coinAddress,
+    client,
+    account,
+    amount,
+  }: {
+    coinAddress: Address;
+    client: WalletClient;
+    account: Account;
+    amount: bigint;
+  }) {
+    const walletAddress = account.address;
+    const { args } = (await this.api.getBuyArgsByContract(coinAddress, {
+      walletAddress,
+      amount: amount.toString(),
+    })) as { args: [`0x${string}`, `0x${string}`[]] };
+
+    if (!args) throw new Error("API error: Missing args");
+
+    const txHash = await client.writeContract({
+      account,
+      address: ADDRESSES[base.id].universalRouter,
+      abi: executeAbi,
+      functionName: "execute",
+      args,
+      value: amount,
+      chain: base,
+    });
+
+    return txHash;
+  }
+
+  /**
+   * Allows the user to sell a Pargraph coin
+   *
+   * @param
+   *  - coinId: ID of the coin to sell
+   *  - client: the Client object that is going to make the transaction
+   *  - account: the Account of the seller
+   *  - amount: the amount of coin in wei that is going to be swapped for WETH
+   * @returns
+   */
+  async sellCoin({
+    coinId,
+    client,
+    account,
+    amount,
+  }: {
+    coinId: string;
+    client: WalletClient;
+    account: Account;
+    amount: bigint;
+  }) {
+    const coin = await this.api.getCoin(coinId);
+    const publicClient = createPublicClient({
+      chain: base,
+      transport: http(),
+    });
+    const [block, allowance] = await Promise.all([
+      publicClient.getBlock(),
+      publicClient.readContract({
+        address: ADDRESSES[base.id].permit2,
+        abi: permit2Abi,
+        functionName: "allowance",
+        args: [
+          account.address,
+          coin.contractAddress as Address,
+          ADDRESSES[base.id].universalRouter,
+        ],
+      }),
+    ]);
+    if (!block || !allowance)
+      throw new Error("API error: Missing block or allowance");
+    const permit = {
+      details: {
+        token: coin.contractAddress as Address,
+        amount,
+        expiration: block.timestamp + 3600n,
+        nonce: BigInt(allowance[2]),
+      },
+      spender: ADDRESSES[base.id].universalRouter,
+      sigDeadline: block.timestamp + 3600n,
+    };
+    client.account = account;
+    const signature = await signPermit(
+      permit,
+      client,
+      base.id,
+      ADDRESSES[base.id].permit2
+    );
+    if (!signature) throw new Error("API error: Missing signature");
+    const commandBuilder = new CommandBuilder();
+    commandBuilder.addPermit2Permit(permit, signature);
+    const [signCommands, signInputs] = commandBuilder.build();
+    const { args } = (await this.api.getSellArgsById(coinId, {
+      walletAddress: account.address,
+      amount: amount.toString(),
+    })) as { args: [`0x${string}`, `0x${string}`[]] };
+    if (!args) throw new Error("API error: Missing args");
+    const commands = `${signCommands}${args[0].substring(2)}` as `0x${string}`;
+    const inputs = [...signInputs, ...args[1]];
+    const txHash = await client.writeContract({
+      account,
+      address: ADDRESSES[base.id].universalRouter,
+      abi: executeAbi,
+      functionName: "execute",
+      args: [commands, inputs],
+      chain: base,
+    });
+    return txHash;
+  }
+
+  /**
+   * Allows the user to sell a Pargraph coin
+   *
+   * @param
+   *  - coinContract: contract address of the coin to sell
+   *  - client: the Client object that is going to make the transaction
+   *  - account: the Account of the seller
+   *  - amount: the amount of coin in wei that is going to be swapped for WETH
+   * @returns
+   */
+  async sellCoinByContract({
+    coinContract,
+    client,
+    account,
+    amount,
+  }: {
+    coinContract: Address;
+    client: WalletClient;
+    account: Account;
+    amount: bigint;
+  }) {
+    const coin = await this.api.getCoinByContract(coinContract);
+    const publicClient = createPublicClient({
+      chain: base,
+      transport: http(),
+    });
+    const [block, allowance] = await Promise.all([
+      publicClient.getBlock(),
+      publicClient.readContract({
+        address: ADDRESSES[base.id].permit2,
+        abi: permit2Abi,
+        functionName: "allowance",
+        args: [
+          account.address,
+          coin.contractAddress as Address,
+          ADDRESSES[base.id].universalRouter,
+        ],
+      }),
+    ]);
+    const permit = {
+      details: {
+        token: coin.contractAddress as Address,
+        amount,
+        expiration: block.timestamp + 3600n,
+        nonce: BigInt(allowance[2]),
+      },
+      spender: ADDRESSES[base.id].universalRouter,
+      sigDeadline: block.timestamp + 3600n,
+    };
+    client.account = account;
+    const signature = await signPermit(
+      permit,
+      client,
+      base.id,
+      ADDRESSES[base.id].permit2
+    );
+    const commandBuilder = new CommandBuilder();
+    commandBuilder.addPermit2Permit(permit, signature);
+    const [signCommands, signInputs] = commandBuilder.build();
+    const { args } = (await this.api.getSellArgsByContract(coinContract, {
+      walletAddress: account.address,
+      amount: amount.toString(),
+    })) as { args: [`0x${string}`, `0x${string}`[]] };
+    const commands = `${signCommands}${args[0].substring(2)}` as `0x${string}`;
+    const inputs = [...signInputs, ...args[1]];
+    const txHash = await client.writeContract({
+      account,
+      address: ADDRESSES[base.id].universalRouter,
+      abi: executeAbi,
+      functionName: "execute",
+      args: [commands, inputs],
+      chain: base,
+    });
+    return txHash;
   }
 }
 
