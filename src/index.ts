@@ -201,6 +201,7 @@ export class ParagraphAPI {
   getUser(userId: string) {
     return this.api.getUser(userId);
   }
+
   /**
    * Retrieves metadata about a user by their wallet address.
    *
@@ -509,6 +510,30 @@ export class ParagraphAPI {
       chain: base,
     });
     return txHash;
+  }
+
+  /**
+   * Retrieves the amount of coin with coinId you would get in exchange of the amount of ETH in wei.
+   *
+   * @param coinId The id of the coin
+   * @param amount The amount of ETH in wei to be quoted
+   * @returns The amount of coin you would receive in exchange
+   */
+  getQuote(coinId: string, amount: bigint) {
+    return this.api.getQuoteById(coinId, { amount: amount.toString() });
+  }
+
+  /**
+   * Retrieves the amount of coin with coinId you would get in exchange of the amount of ETH in wei.
+   *
+   * @param coinContract The contract address of the coin
+   * @param amount The amount of ETH in wei to be quoted
+   * @returns The amount of coin you would receive in exchange
+   */
+  getQuoteByContract(coinContract: string, amount: bigint) {
+    return this.api.getQuoteByContract(coinContract, {
+      amount: amount.toString(),
+    });
   }
 }
 
