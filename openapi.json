@@ -2919,6 +2919,137 @@
           }
         }
       }
+    },
+    "/v1/coins/quote/{id}": {
+      "get": {
+        "description": "Retrieve a quote for the price of the coin in ETH",
+        "summary": "Get coin quote by ID",
+        "tags": [
+          "coins"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Paragraph-internal unique identifier for the coin"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "Amount of Base ETH in wei that is going to be swapped for the coin",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "[0-9]+"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coin quote retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string",
+                      "description": "Approximate number of coins that could be received in exchange of the amount of ETH entered"
+                    }
+                  },
+                  "required": [
+                    "quote"
+                  ],
+                  "description": "Coin quote retrieved successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Coin quote not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Coin quote not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getQuoteById",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-quote-by-id",
+            "description": "Get a quote of a coin by its ID"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get coin quote by ID",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getQuoteById(\"S2AlaNG5Hw0NdNptmLTw\", \"1000000000000000000\")"
+          }
+        ]
+      }
     }
   },
   "info": {
