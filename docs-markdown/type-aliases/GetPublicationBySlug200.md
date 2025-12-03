@@ -8,7 +8,7 @@
 
 > **GetPublicationBySlug200** = `object`
 
-Defined in: generated/models/getPublicationBySlug200.ts:18
+Defined in: src/generated/models/getPublicationBySlug200.ts:18
 
 Publication details retrieved successfully
 
@@ -18,7 +18,7 @@ Publication details retrieved successfully
 
 > `optional` **customDomain**: `string`
 
-Defined in: generated/models/getPublicationBySlug200.ts:32
+Defined in: src/generated/models/getPublicationBySlug200.ts:32
 
 Custom domain configured for this publication
 
@@ -28,7 +28,7 @@ Custom domain configured for this publication
 
 > **id**: `string`
 
-Defined in: generated/models/getPublicationBySlug200.ts:20
+Defined in: src/generated/models/getPublicationBySlug200.ts:20
 
 Unique identifier for the publication
 
@@ -38,7 +38,7 @@ Unique identifier for the publication
 
 > `optional` **logoUrl**: `string`
 
-Defined in: generated/models/getPublicationBySlug200.ts:39
+Defined in: src/generated/models/getPublicationBySlug200.ts:39
 
 URL to the publication's logo image
 
@@ -48,7 +48,7 @@ URL to the publication's logo image
 
 > **name**: `string`
 
-Defined in: generated/models/getPublicationBySlug200.ts:22
+Defined in: src/generated/models/getPublicationBySlug200.ts:22
 
 Display name of the publication
 
@@ -58,7 +58,7 @@ Display name of the publication
 
 > **ownerUserId**: `string`
 
-Defined in: generated/models/getPublicationBySlug200.ts:24
+Defined in: src/generated/models/getPublicationBySlug200.ts:24
 
 ID of the user who owns this publication
 
@@ -68,7 +68,7 @@ ID of the user who owns this publication
 
 > **slug**: `string`
 
-Defined in: generated/models/getPublicationBySlug200.ts:30
+Defined in: src/generated/models/getPublicationBySlug200.ts:30
 
 URL-friendly identifier for the publication; accessible at paragraph.com/@[slug]
 
@@ -86,7 +86,7 @@ URL-friendly identifier for the publication; accessible at paragraph.com/@[slug]
 
 > `optional` **summary**: `string`
 
-Defined in: generated/models/getPublicationBySlug200.ts:37
+Defined in: src/generated/models/getPublicationBySlug200.ts:37
 
 Brief description of the publication (max 500 characters)
 

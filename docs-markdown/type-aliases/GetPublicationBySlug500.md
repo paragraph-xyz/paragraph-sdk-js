@@ -8,7 +8,7 @@
 
 > **GetPublicationBySlug500** = `object`
 
-Defined in: generated/models/getPublicationBySlug500.ts:18
+Defined in: src/generated/models/getPublicationBySlug500.ts:18
 
 Internal server error
 
@@ -18,7 +18,7 @@ Internal server error
 
 > `optional` **error**: `string`
 
-Defined in: generated/models/getPublicationBySlug500.ts:24
+Defined in: src/generated/models/getPublicationBySlug500.ts:24
 
 Technical error details or error code
 
@@ -28,7 +28,7 @@ Technical error details or error code
 
 > **msg**: `string`
 
-Defined in: generated/models/getPublicationBySlug500.ts:22
+Defined in: src/generated/models/getPublicationBySlug500.ts:22
 
 Human-readable error message
 
@@ -38,6 +38,6 @@ Human-readable error message
 
 > **success**: `boolean`
 
-Defined in: generated/models/getPublicationBySlug500.ts:20
+Defined in: src/generated/models/getPublicationBySlug500.ts:20
 
 Always false for error responses

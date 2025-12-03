@@ -201,6 +201,7 @@ export class ParagraphAPI {
   getUser(userId: string) {
     return this.api.getUser(userId);
   }
+
   /**
    * Retrieves metadata about a user by their wallet address.
    *
@@ -281,19 +282,19 @@ export class ParagraphAPI {
     amount: bigint;
   }) {
     const walletAddress = account.address;
-    const { args } = (await this.api.getBuyArgsById(coinId, {
+    const { commands, inputs } = await this.api.getBuyArgsById(coinId, {
       walletAddress,
       amount: amount.toString(),
-    })) as { args: [`0x${string}`, `0x${string}`[]] };
+    });
 
-    if (!args) throw new Error("API error: Missing args");
+    if (!commands || !inputs) throw new Error("API error: Missing args");
 
     const txHash = await client.writeContract({
       account,
       address: ADDRESSES[base.id].universalRouter,
       abi: executeAbi,
       functionName: "execute",
-      args,
+      args: [commands as `0x${string}`, inputs as `0x${string}`[]],
       value: amount,
       chain: base,
     });
@@ -323,19 +324,22 @@ export class ParagraphAPI {
     amount: bigint;
   }) {
     const walletAddress = account.address;
-    const { args } = (await this.api.getBuyArgsByContract(coinAddress, {
-      walletAddress,
-      amount: amount.toString(),
-    })) as { args: [`0x${string}`, `0x${string}`[]] };
+    const { commands, inputs } = await this.api.getBuyArgsByContract(
+      coinAddress,
+      {
+        walletAddress,
+        amount: amount.toString(),
+      }
+    );
 
-    if (!args) throw new Error("API error: Missing args");
+    if (!commands || !inputs) throw new Error("API error: Missing args");
 
     const txHash = await client.writeContract({
       account,
       address: ADDRESSES[base.id].universalRouter,
       abi: executeAbi,
       functionName: "execute",
-      args,
+      args: [commands as `0x${string}`, inputs as `0x${string}`[]],
       value: amount,
       chain: base,
     });
@@ -405,13 +409,17 @@ export class ParagraphAPI {
     const commandBuilder = new CommandBuilder();
     commandBuilder.addPermit2Permit(permit, signature);
     const [signCommands, signInputs] = commandBuilder.build();
-    const { args } = (await this.api.getSellArgsById(coinId, {
-      walletAddress: account.address,
-      amount: amount.toString(),
-    })) as { args: [`0x${string}`, `0x${string}`[]] };
-    if (!args) throw new Error("API error: Missing args");
-    const commands = `${signCommands}${args[0].substring(2)}` as `0x${string}`;
-    const inputs = [...signInputs, ...args[1]];
+    const { commands: sellCommands, inputs: sellInputs } =
+      await this.api.getSellArgsById(coinId, {
+        walletAddress: account.address,
+        amount: amount.toString(),
+      });
+    if (!sellCommands || !sellInputs)
+      throw new Error("API error: Missing args");
+    const commands = `${signCommands}${sellCommands.substring(
+      2
+    )}` as `0x${string}`;
+    const inputs = [...signInputs, ...sellInputs] as `0x${string}`[];
     const txHash = await client.writeContract({
       account,
       address: ADDRESSES[base.id].universalRouter,
@@ -482,12 +490,17 @@ export class ParagraphAPI {
     const commandBuilder = new CommandBuilder();
     commandBuilder.addPermit2Permit(permit, signature);
     const [signCommands, signInputs] = commandBuilder.build();
-    const { args } = (await this.api.getSellArgsByContract(coinContract, {
-      walletAddress: account.address,
-      amount: amount.toString(),
-    })) as { args: [`0x${string}`, `0x${string}`[]] };
-    const commands = `${signCommands}${args[0].substring(2)}` as `0x${string}`;
-    const inputs = [...signInputs, ...args[1]];
+    const { commands: sellCommands, inputs: sellInputs } =
+      await this.api.getSellArgsByContract(coinContract, {
+        walletAddress: account.address,
+        amount: amount.toString(),
+      });
+    if (!sellCommands || !sellInputs)
+      throw new Error("API error: Missing args");
+    const commands = `${signCommands}${sellCommands.substring(
+      2
+    )}` as `0x${string}`;
+    const inputs = [...signInputs, ...sellInputs] as `0x${string}`[];
     const txHash = await client.writeContract({
       account,
       address: ADDRESSES[base.id].universalRouter,
@@ -497,6 +510,30 @@ export class ParagraphAPI {
       chain: base,
     });
     return txHash;
+  }
+
+  /**
+   * Retrieves the amount of coin with coinId you would get in exchange of the amount of ETH in wei.
+   *
+   * @param coinId The id of the coin
+   * @param amount The amount of ETH in wei to be quoted
+   * @returns The amount of coin you would receive in exchange
+   */
+  getQuote(coinId: string, amount: bigint) {
+    return this.api.getQuoteById(coinId, { amount: amount.toString() });
+  }
+
+  /**
+   * Retrieves the amount of coin with coinId you would get in exchange of the amount of ETH in wei.
+   *
+   * @param coinContract The contract address of the coin
+   * @param amount The amount of ETH in wei to be quoted
+   * @returns The amount of coin you would receive in exchange
+   */
+  getQuoteByContract(coinContract: string, amount: bigint) {
+    return this.api.getQuoteByContract(coinContract, {
+      amount: amount.toString(),
+    });
   }
 }
 

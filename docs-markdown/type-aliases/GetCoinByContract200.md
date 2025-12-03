@@ -8,7 +8,7 @@
 
 > **GetCoinByContract200** = `object`
 
-Defined in: generated/models/getCoinByContract200.ts:19
+Defined in: src/generated/models/getCoinByContract200.ts:19
 
 Coin details retrieved successfully
 
@@ -18,7 +18,7 @@ Coin details retrieved successfully
 
 > **blogId**: `string`
 
-Defined in: generated/models/getCoinByContract200.ts:35
+Defined in: src/generated/models/getCoinByContract200.ts:35
 
 ID of the blog this coin is associated with
 
@@ -28,7 +28,7 @@ ID of the blog this coin is associated with
 
 > **contractAddress**: `string`
 
-Defined in: generated/models/getCoinByContract200.ts:26
+Defined in: src/generated/models/getCoinByContract200.ts:26
 
 Base contract address for the coin
 
@@ -42,7 +42,7 @@ Base contract address for the coin
 
 > **id**: `string`
 
-Defined in: generated/models/getCoinByContract200.ts:21
+Defined in: src/generated/models/getCoinByContract200.ts:21
 
 Unique identifier for the coin
 
@@ -52,7 +52,7 @@ Unique identifier for the coin
 
 > `optional` **postId**: `string`
 
-Defined in: generated/models/getCoinByContract200.ts:33
+Defined in: src/generated/models/getCoinByContract200.ts:33
 
 ID of the post this coin is associated with
 
@@ -62,7 +62,7 @@ ID of the post this coin is associated with
 
 > **symbol**: `string`
 
-Defined in: generated/models/getCoinByContract200.ts:31
+Defined in: src/generated/models/getCoinByContract200.ts:31
 
 Token symbol
 
@@ -76,6 +76,6 @@ Token symbol
 
 > **type**: [`GetCoinByContract200Type`](GetCoinByContract200Type.md)
 
-Defined in: generated/models/getCoinByContract200.ts:37
+Defined in: src/generated/models/getCoinByContract200.ts:37
 
 The type of the coin, either a post coin or a writer coin
