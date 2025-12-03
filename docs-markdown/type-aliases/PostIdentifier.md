@@ -8,7 +8,7 @@
 
 > **PostIdentifier** = \{ `id`: `string`; \} \| \{ `postSlug`: `string`; `publicationId`: `string`; \} \| \{ `postSlug`: `string`; `publicationSlug`: `string`; \}
 
-Defined in: [src/index.ts:39](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L39)
+Defined in: [src/index.ts:39](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L39)
 
 A discriminated union of identifiers for retrieving a single post.
 Use one of the following shapes:
