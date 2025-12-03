@@ -3451,6 +3451,271 @@
           }
         ]
       }
+    },
+    "/v1/coins/list/popular": {
+      "get": {
+        "description": "Retrieve popular coins",
+        "summary": "Get popular coins",
+        "tags": [
+          "coins"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Popular coins retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "coins": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique identifier for the coin"
+                          },
+                          "contractAddress": {
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "Base contract address for the coin"
+                          },
+                          "metadata": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "description": "Name of the coin"
+                              },
+                              "symbol": {
+                                "type": "string",
+                                "description": "Symbol of the coin"
+                              },
+                              "decimals": {
+                                "type": "number",
+                                "description": "Number of decimals of the coin"
+                              },
+                              "description": {
+                                "type": "string",
+                                "description": "Description of the coin"
+                              },
+                              "image": {
+                                "type": "string",
+                                "description": "Image url of the logo associated with the coin"
+                              },
+                              "logoURI": {
+                                "type": "string",
+                                "description": "Image url of the logo associated with the coin"
+                              },
+                              "chainId": {
+                                "type": "number",
+                                "description": "Chain id number of the coin"
+                              },
+                              "external_url": {
+                                "type": "string",
+                                "description": "External url associated with the coin"
+                              },
+                              "links": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {
+                                      "type": "string",
+                                      "description": "Name of the link"
+                                    },
+                                    "url": {
+                                      "type": "string",
+                                      "description": "URL of the link"
+                                    }
+                                  },
+                                  "required": [
+                                    "name",
+                                    "url"
+                                  ]
+                                }
+                              },
+                              "tags": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "Tags associated with the coin"
+                              },
+                              "extensions": {
+                                "type": "object",
+                                "properties": {
+                                  "coinType": {
+                                    "type": "string",
+                                    "description": "Type of the coin"
+                                  },
+                                  "paragraph": {
+                                    "type": "object",
+                                    "properties": {
+                                      "blogId": {
+                                        "type": "string",
+                                        "description": "ID of the blog associated with this coin"
+                                      },
+                                      "blogUrl": {
+                                        "type": "string",
+                                        "description": "URL of the blog associated with this coin"
+                                      },
+                                      "authorName": {
+                                        "type": "string",
+                                        "description": "Name of the author associated with this coin"
+                                      },
+                                      "noteId": {
+                                        "type": "string",
+                                        "description": "ID of the note associated with this coin"
+                                      },
+                                      "postSlug": {
+                                        "type": "string",
+                                        "description": "Slug of the post associated with this coin"
+                                      }
+                                    },
+                                    "required": [
+                                      "blogId",
+                                      "blogUrl"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "coinType",
+                                  "paragraph"
+                                ]
+                              },
+                              "attributes": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "trait_type": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "trait_type",
+                                    "value"
+                                  ]
+                                }
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "symbol",
+                              "decimals",
+                              "description",
+                              "chainId",
+                              "external_url",
+                              "links",
+                              "tags",
+                              "extensions",
+                              "attributes"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "contractAddress",
+                          "metadata"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "coins"
+                  ],
+                  "description": "Popular coins retrieved successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Popular coins not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Popular coins not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getPopularCoins",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-popular-coins",
+            "description": "Get popular coins"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get popular coins",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coins = await api.getPopularCoins()"
+          }
+        ]
+      }
     }
   },
   "info": {
