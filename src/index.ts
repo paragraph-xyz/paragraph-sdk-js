@@ -535,6 +535,15 @@ export class ParagraphAPI {
       amount: amount.toString(),
     });
   }
+
+  /**
+   * Retrieves the 50 most popular coins.
+   *
+   * @returns An array of coin objects
+   */
+  getPopularCoins() {
+    return this.api.getPopularCoins();
+  }
 }
 
 /**

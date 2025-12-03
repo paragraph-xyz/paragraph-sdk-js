@@ -6,7 +6,7 @@
 
 # Class: ParagraphAPI
 
-Defined in: [src/index.ts:58](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L58)
+Defined in: [src/index.ts:58](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L58)
 
 Paragraph API class wrapper.
 
@@ -18,7 +18,7 @@ Entrypoint into all Paragraph API functionality.
 
 > **new ParagraphAPI**(): `ParagraphAPI`
 
-Defined in: [src/index.ts:64](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L64)
+Defined in: [src/index.ts:64](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L64)
 
 Initializes a new instance of the Paragraph API client.
 
@@ -32,7 +32,7 @@ Initializes a new instance of the Paragraph API client.
 
 > **buyCoin**(`-`): `Promise`\<`` `0x${string}` ``\>
 
-Defined in: [src/index.ts:272](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L272)
+Defined in: [src/index.ts:273](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L273)
 
 Allows the user to buy a Pargraph coin
 
@@ -1120,7 +1120,7 @@ const receipt = await client.writeContractSync({
 
 > **buyCoinByContract**(`-`): `Promise`\<`` `0x${string}` ``\>
 
-Defined in: [src/index.ts:314](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L314)
+Defined in: [src/index.ts:315](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L315)
 
 Allows the user to buy a Pargraph coin using the coin's contract
 
@@ -2208,7 +2208,7 @@ const receipt = await client.writeContractSync({
 
 > **getCoin**(`id`): `Promise`\<[`GetCoin200`](../type-aliases/GetCoin200.md)\>
 
-Defined in: [src/index.ts:220](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L220)
+Defined in: [src/index.ts:221](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L221)
 
 Retrieves metadata about a coin by its Paragraph-internal ID.
 
@@ -2232,7 +2232,7 @@ A promise that resolves to the coin's data.
 
 > **getCoinByContract**(`contractAddress`): `Promise`\<[`GetCoinByContract200`](../type-aliases/GetCoinByContract200.md)\>
 
-Defined in: [src/index.ts:230](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L230)
+Defined in: [src/index.ts:231](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L231)
 
 Retrieves metadata about a coin by its on-chain contract address.
 
@@ -2256,7 +2256,7 @@ A promise that resolves to the coin's data.
 
 > **getCoinHolders**(`id`, `params?`): `Promise`\<[`GetCoinHoldersById200`](../type-aliases/GetCoinHoldersById200.md)\>
 
-Defined in: [src/index.ts:241](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L241)
+Defined in: [src/index.ts:242](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L242)
 
 Retrieves a paginated list of holders for a given coin ID.
 
@@ -2286,7 +2286,7 @@ A promise that resolves to a paginated list of coin holders.
 
 > **getCoinHoldersByContract**(`contractAddress`, `params?`): `Promise`\<[`GetCoinHoldersByContract200`](../type-aliases/GetCoinHoldersByContract200.md)\>
 
-Defined in: [src/index.ts:255](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L255)
+Defined in: [src/index.ts:256](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L256)
 
 Retrieves a paginated list of holders for a given coin contract address.
 
@@ -2316,7 +2316,7 @@ A promise that resolves to a paginated list of coin holders.
 
 > **getPost**(`identifier`, `options?`): `Promise`\<[`GetPostById200`](../type-aliases/GetPostById200.md)\>
 
-Defined in: [src/index.ts:168](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L168)
+Defined in: [src/index.ts:168](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L168)
 
 Retrieves a single post using one of several unique identifiers.
 This method allows fetching a post by its ID, or by a combination of
@@ -2375,7 +2375,7 @@ const postWithContent = await api.getPost(
 
 > **getPosts**(`publicationId`, `params?`): `Promise`\<[`GetPosts200`](../type-aliases/GetPosts200.md)\>
 
-Defined in: [src/index.ts:126](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L126)
+Defined in: [src/index.ts:126](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L126)
 
 Retrieves a paginated list of posts for a given publication.
 
@@ -2405,7 +2405,7 @@ A promise that resolves to a paginated list of posts.
 
 > **getPublication**(`publicationId`): `Promise`\<[`GetPublicationById200`](../type-aliases/GetPublicationById200.md)\>
 
-Defined in: [src/index.ts:72](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L72)
+Defined in: [src/index.ts:72](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L72)
 
 Retrieves metadata about a Paragraph publication by its unique ID.
 
@@ -2429,7 +2429,7 @@ A promise that resolves to the publication's data.
 
 > **getPublicationByDomain**(`domain`): `Promise`\<[`GetPublicationByDomain200`](../type-aliases/GetPublicationByDomain200.md)\>
 
-Defined in: [src/index.ts:105](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L105)
+Defined in: [src/index.ts:105](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L105)
 
 Retrieves metadata about a Paragraph publication by its custom domain.
 
@@ -2458,7 +2458,7 @@ or any path/querystring.
 
 > **getPublicationBySlug**(`slug`): `Promise`\<[`GetPublicationBySlug200`](../type-aliases/GetPublicationBySlug200.md)\>
 
-Defined in: [src/index.ts:91](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L91)
+Defined in: [src/index.ts:91](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L91)
 
 Retrieves metadata about a Paragraph publication by its URL-friendly slug.
 
@@ -2489,11 +2489,71 @@ const publication2 = await api.getPublicationBySlug("@blog");
 
 ***
 
+### getQuote()
+
+> **getQuote**(`coinId`, `amount`): `Promise`\<[`GetQuoteById200`](../type-aliases/GetQuoteById200.md)\>
+
+Defined in: [src/index.ts:522](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L522)
+
+Retrieves the amount of coin with coinId you would get in exchange of the amount of ETH in wei.
+
+#### Parameters
+
+##### coinId
+
+`string`
+
+The id of the coin
+
+##### amount
+
+`bigint`
+
+The amount of ETH in wei to be quoted
+
+#### Returns
+
+`Promise`\<[`GetQuoteById200`](../type-aliases/GetQuoteById200.md)\>
+
+The amount of coin you would receive in exchange
+
+***
+
+### getQuoteByContract()
+
+> **getQuoteByContract**(`coinContract`, `amount`): `Promise`\<[`GetQuoteByContract200`](../type-aliases/GetQuoteByContract200.md)\>
+
+Defined in: [src/index.ts:533](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L533)
+
+Retrieves the amount of coin with coinId you would get in exchange of the amount of ETH in wei.
+
+#### Parameters
+
+##### coinContract
+
+`string`
+
+The contract address of the coin
+
+##### amount
+
+`bigint`
+
+The amount of ETH in wei to be quoted
+
+#### Returns
+
+`Promise`\<[`GetQuoteByContract200`](../type-aliases/GetQuoteByContract200.md)\>
+
+The amount of coin you would receive in exchange
+
+***
+
 ### getSubscriberCount()
 
 > **getSubscriberCount**(`publicationId`): `Promise`\<[`GetSubscriberCount200`](../type-aliases/GetSubscriberCount200.md)\>
 
-Defined in: [src/index.ts:115](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L115)
+Defined in: [src/index.ts:115](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L115)
 
 Gets a total count of subscribers for a given publication ID.
 
@@ -2517,7 +2577,7 @@ A promise that resolves to an object containing the subscriber count.
 
 > **getUser**(`userId`): `Promise`\<[`GetUser200`](../type-aliases/GetUser200.md)\>
 
-Defined in: [src/index.ts:201](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L201)
+Defined in: [src/index.ts:201](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L201)
 
 Retrieves metadata about a user by their unique user ID.
 
@@ -2541,7 +2601,7 @@ A promise that resolves to the user's data.
 
 > **getUserByWallet**(`wallet`): `Promise`\<[`GetUserByWallet200`](../type-aliases/GetUserByWallet200.md)\>
 
-Defined in: [src/index.ts:210](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L210)
+Defined in: [src/index.ts:211](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L211)
 
 Retrieves metadata about a user by their wallet address.
 
@@ -2565,7 +2625,7 @@ A promise that resolves to the user's data.
 
 > **sellCoin**(`-`): `Promise`\<`` `0x${string}` ``\>
 
-Defined in: [src/index.ts:359](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L359)
+Defined in: [src/index.ts:360](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L360)
 
 Allows the user to sell a Pargraph coin
 
@@ -3653,7 +3713,7 @@ const receipt = await client.writeContractSync({
 
 > **sellCoinByContract**(`-`): `Promise`\<`` `0x${string}` ``\>
 
-Defined in: [src/index.ts:443](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/fd5fe7cabad7f03f42683ab1800fc5e29d4af516/src/index.ts#L443)
+Defined in: [src/index.ts:444](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6ee8760fca9880dc4faee73d40c558f3dab439d/src/index.ts#L444)
 
 Allows the user to sell a Pargraph coin
 
