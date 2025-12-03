@@ -1739,34 +1739,147 @@
                       "pattern": "^0x[a-fA-F0-9]{40}$",
                       "description": "Base contract address for the coin"
                     },
-                    "symbol": {
-                      "type": "string",
-                      "pattern": "^[A-Z0-9]{3,6}$",
-                      "description": "Token symbol"
-                    },
-                    "postId": {
-                      "type": "string",
-                      "description": "ID of the post this coin is associated with"
-                    },
-                    "blogId": {
-                      "type": "string",
-                      "description": "ID of the blog this coin is associated with"
-                    },
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "post",
-                        "writer"
-                      ],
-                      "description": "The type of the coin, either a post coin or a writer coin"
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Name of the coin"
+                        },
+                        "symbol": {
+                          "type": "string",
+                          "description": "Symbol of the coin"
+                        },
+                        "decimals": {
+                          "type": "number",
+                          "description": "Number of decimals of the coin"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the coin"
+                        },
+                        "image": {
+                          "type": "string",
+                          "description": "Image url of the logo associated with the coin"
+                        },
+                        "logoURI": {
+                          "type": "string",
+                          "description": "Image url of the logo associated with the coin"
+                        },
+                        "chainId": {
+                          "type": "number",
+                          "description": "Chain id number of the coin"
+                        },
+                        "external_url": {
+                          "type": "string",
+                          "description": "External url associated with the coin"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "description": "Name of the link"
+                              },
+                              "url": {
+                                "type": "string",
+                                "description": "URL of the link"
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "url"
+                            ]
+                          }
+                        },
+                        "tags": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "Tags associated with the coin"
+                        },
+                        "extensions": {
+                          "type": "object",
+                          "properties": {
+                            "coinType": {
+                              "type": "string",
+                              "description": "Type of the coin"
+                            },
+                            "paragraph": {
+                              "type": "object",
+                              "properties": {
+                                "blogId": {
+                                  "type": "string",
+                                  "description": "ID of the blog associated with this coin"
+                                },
+                                "blogUrl": {
+                                  "type": "string",
+                                  "description": "URL of the blog associated with this coin"
+                                },
+                                "authorName": {
+                                  "type": "string",
+                                  "description": "Name of the author associated with this coin"
+                                },
+                                "noteId": {
+                                  "type": "string",
+                                  "description": "ID of the note associated with this coin"
+                                },
+                                "postSlug": {
+                                  "type": "string",
+                                  "description": "Slug of the post associated with this coin"
+                                }
+                              },
+                              "required": [
+                                "blogId",
+                                "blogUrl"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "coinType",
+                            "paragraph"
+                          ]
+                        },
+                        "attributes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "trait_type": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "trait_type",
+                              "value"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "symbol",
+                        "decimals",
+                        "description",
+                        "chainId",
+                        "external_url",
+                        "links",
+                        "tags",
+                        "extensions",
+                        "attributes"
+                      ]
                     }
                   },
                   "required": [
                     "id",
                     "contractAddress",
-                    "symbol",
-                    "blogId",
-                    "type"
+                    "metadata"
                   ],
                   "description": "Coin details retrieved successfully"
                 }
@@ -1891,34 +2004,147 @@
                       "pattern": "^0x[a-fA-F0-9]{40}$",
                       "description": "Base contract address for the coin"
                     },
-                    "symbol": {
-                      "type": "string",
-                      "pattern": "^[A-Z0-9]{3,6}$",
-                      "description": "Token symbol"
-                    },
-                    "postId": {
-                      "type": "string",
-                      "description": "ID of the post this coin is associated with"
-                    },
-                    "blogId": {
-                      "type": "string",
-                      "description": "ID of the blog this coin is associated with"
-                    },
-                    "type": {
-                      "type": "string",
-                      "enum": [
-                        "post",
-                        "writer"
-                      ],
-                      "description": "The type of the coin, either a post coin or a writer coin"
+                    "metadata": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Name of the coin"
+                        },
+                        "symbol": {
+                          "type": "string",
+                          "description": "Symbol of the coin"
+                        },
+                        "decimals": {
+                          "type": "number",
+                          "description": "Number of decimals of the coin"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "Description of the coin"
+                        },
+                        "image": {
+                          "type": "string",
+                          "description": "Image url of the logo associated with the coin"
+                        },
+                        "logoURI": {
+                          "type": "string",
+                          "description": "Image url of the logo associated with the coin"
+                        },
+                        "chainId": {
+                          "type": "number",
+                          "description": "Chain id number of the coin"
+                        },
+                        "external_url": {
+                          "type": "string",
+                          "description": "External url associated with the coin"
+                        },
+                        "links": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "description": "Name of the link"
+                              },
+                              "url": {
+                                "type": "string",
+                                "description": "URL of the link"
+                              }
+                            },
+                            "required": [
+                              "name",
+                              "url"
+                            ]
+                          }
+                        },
+                        "tags": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "Tags associated with the coin"
+                        },
+                        "extensions": {
+                          "type": "object",
+                          "properties": {
+                            "coinType": {
+                              "type": "string",
+                              "description": "Type of the coin"
+                            },
+                            "paragraph": {
+                              "type": "object",
+                              "properties": {
+                                "blogId": {
+                                  "type": "string",
+                                  "description": "ID of the blog associated with this coin"
+                                },
+                                "blogUrl": {
+                                  "type": "string",
+                                  "description": "URL of the blog associated with this coin"
+                                },
+                                "authorName": {
+                                  "type": "string",
+                                  "description": "Name of the author associated with this coin"
+                                },
+                                "noteId": {
+                                  "type": "string",
+                                  "description": "ID of the note associated with this coin"
+                                },
+                                "postSlug": {
+                                  "type": "string",
+                                  "description": "Slug of the post associated with this coin"
+                                }
+                              },
+                              "required": [
+                                "blogId",
+                                "blogUrl"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "coinType",
+                            "paragraph"
+                          ]
+                        },
+                        "attributes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "trait_type": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "trait_type",
+                              "value"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "symbol",
+                        "decimals",
+                        "description",
+                        "chainId",
+                        "external_url",
+                        "links",
+                        "tags",
+                        "extensions",
+                        "attributes"
+                      ]
                     }
                   },
                   "required": [
                     "id",
                     "contractAddress",
-                    "symbol",
-                    "blogId",
-                    "type"
+                    "metadata"
                   ],
                   "description": "Coin details retrieved successfully"
                 }
@@ -2389,7 +2615,7 @@
     "/v1/coins/buy/{id}": {
       "get": {
         "description": "Retrieve the args needed to buy a coin using a wallet",
-        "summary": "Get coin's buy args by coin id",
+        "summary": "Get coin's buy args by ID",
         "tags": [
           "coins"
         ],
@@ -2678,7 +2904,7 @@
     "/v1/coins/sell/{id}": {
       "get": {
         "description": "Retrieve the args needed to sell a coin using a wallet that has it",
-        "summary": "Get coin's sell args by coin id",
+        "summary": "Get coin's sell args by ID",
         "tags": [
           "coins"
         ],
