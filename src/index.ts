@@ -117,6 +117,15 @@ export class ParagraphAPI {
   }
 
   /**
+   * Retrieves the top 10 posts information
+   *
+   * @returns An array of leaderboard entry objects
+   */
+  getLeaderboard() {
+    return this.api.getLeaderboard();
+  }
+
+  /**
    * Retrieves a paginated list of posts for a given publication.
    *
    * @param publicationId - The unique identifier of the publication.
