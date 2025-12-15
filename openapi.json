@@ -3716,6 +3716,421 @@
           }
         ]
       }
+    },
+    "/v1/subscribers/import": {
+      "post": {
+        "description": "Import subscribers from a CSV file into your publication. The publication is identified by the API key provided in the Authorization header.\n\n**File Requirements:**\n- Maximum file size: 10MB\n- Content type: text/csv\n\n**Supported CSV Columns:**\n- Email: `email` or `subscriberEmail` (case-insensitive)\n- Wallet: `wallet_address` (case-insensitive)\n- Created date: `created_at`, `subscription date`, `created`, or `createdAt` (case-insensitive, optional)\n\nAt least one of email or wallet_address must be present for each row. Rows with neither valid email nor valid wallet address will be skipped.",
+        "summary": "Import subscribers from CSV",
+        "tags": [
+          "subscribers"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "description": "CSV file containing subscriber data (max 10MB)",
+                    "nullable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Import started successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "description": "Whether the import was started"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ],
+                  "description": "Import started successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request or CSV format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Invalid request or CSV format"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Invalid or missing API key"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Publication not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Publication not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "importSubscribers",
+        "requiresApiKey": true,
+        "x-mint": {
+          "mcp": {
+            "enabled": false,
+            "name": "import-subscribers",
+            "description": "Import subscribers from a CSV file into a publication"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Import subscribers from CSV",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.importSubscribers(csvFile)"
+          },
+          {
+            "lang": "bash",
+            "label": "Import subscribers using curl",
+            "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/subscribers/import\" \\\n  -H \"Authorization: Bearer your-api-key\" \\\n  -F \"file=@subscribers.csv;type=text/csv\""
+          }
+        ]
+      }
+    },
+    "/v1/subscribers": {
+      "post": {
+        "description": "Add a new subscriber to your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Requirements:**\n- At least one of `email` or `wallet` must be provided\n- If both are provided, the subscriber will be associated with both credentials\n\n**Behavior:**\n- If the subscriber already exists (by email or wallet), they will not be duplicated",
+        "summary": "Add a new subscriber",
+        "tags": [
+          "subscribers"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Email address of the subscriber"
+                  },
+                  "wallet": {
+                    "type": "string",
+                    "pattern": "^0x[a-fA-F0-9]{40}$",
+                    "description": "Wallet address of the subscriber (0x format)"
+                  },
+                  "createdAt": {
+                    "type": "number",
+                    "description": "Timestamp (in milliseconds) when the subscription was created. Defaults to current time."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscriber added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "description": "Whether the subscriber was added"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ],
+                  "description": "Subscriber added successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request - must provide email or wallet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Invalid request - must provide email or wallet"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Invalid or missing API key"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Publication not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Publication not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ],
+                  "description": "Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "addSubscriber",
+        "requiresApiKey": true,
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "add-subscriber",
+            "description": "Add a new subscriber to a publication"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Add subscriber with email",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.addSubscriber({ email: \"reader@example.com\" })"
+          },
+          {
+            "lang": "typescript",
+            "label": "Add subscriber with wallet",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.addSubscriber({ wallet: \"0x1234...abcd\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "Add subscriber using curl",
+            "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/subscribers\" \\\n  -H \"Authorization: Bearer your-api-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"email\": \"reader@example.com\"}'"
+          }
+        ]
+      }
     }
   },
   "info": {
@@ -3754,12 +4169,24 @@
     {
       "name": "coins",
       "description": "Operations related to tokenized content"
+    },
+    {
+      "name": "subscribers",
+      "description": "Operations related to subscriber management (requires API key)"
     }
   ],
   "security": [
     {}
   ],
-  "components": {},
+  "components": {
+    "securitySchemes": {
+      "apiKey": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "API key for authenticating protected endpoints. Pass as Bearer token in Authorization header."
+      }
+    }
+  },
   "x-mint": {
     "mcp": {
       "enabled": true
