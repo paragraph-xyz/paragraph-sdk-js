@@ -8,9 +8,7 @@
 
 > **GetCoinHoldersByContract200** = `object`
 
-Defined in: generated/models/getCoinHoldersByContract200.ts:20
-
-Holders retrieved successfully
+Defined in: generated/models/getCoinHoldersByContract200.ts:17
 
 ## Properties
 
@@ -18,7 +16,7 @@ Holders retrieved successfully
 
 > **items**: [`GetCoinHoldersByContract200ItemsItem`](GetCoinHoldersByContract200ItemsItem.md)[]
 
-Defined in: generated/models/getCoinHoldersByContract200.ts:22
+Defined in: generated/models/getCoinHoldersByContract200.ts:19
 
 Array of items in this page
 
@@ -28,4 +26,4 @@ Array of items in this page
 
 > **pagination**: [`GetCoinHoldersByContract200Pagination`](GetCoinHoldersByContract200Pagination.md)
 
-Defined in: generated/models/getCoinHoldersByContract200.ts:23
+Defined in: generated/models/getCoinHoldersByContract200.ts:20

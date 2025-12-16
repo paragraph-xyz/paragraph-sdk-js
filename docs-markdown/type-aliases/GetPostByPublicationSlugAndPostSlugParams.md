@@ -28,8 +28,6 @@ OpenAPI spec version: 1.0.0
 
 > `optional` **includeContent**: `boolean` \| `null`
 
-Defined in: generated/models/getPostByPublicationSlugAndPostSlugParams.ts:20
+Defined in: generated/models/getPostByPublicationSlugAndPostSlugParams.ts:19
 
 Include full content fields (markdown, json, staticHtml). Default: false
-
-#### Nullable

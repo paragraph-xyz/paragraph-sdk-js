@@ -8,7 +8,7 @@
 
 > **PublicationIdentifier** = \{ `id`: `string`; \} \| \{ `slug`: `string`; \} \| \{ `domain`: `string`; \}
 
-Defined in: [index.ts:39](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/19159302f21740c44dbd814879a33877efafec25/src/index.ts#L39)
+Defined in: [index.ts:52](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/b91f24ea96a32150e998e0acff37668c5305f9d3/src/index.ts#L52)
 
 A discriminated union of identifiers for retrieving a single publication.
 Use one of the following shapes:

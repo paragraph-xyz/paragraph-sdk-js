@@ -8,7 +8,7 @@
 
 > **UserIdentifier** = \{ `id`: `string`; \} \| \{ `wallet`: `string`; \}
 
-Defined in: [index.ts:62](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/19159302f21740c44dbd814879a33877efafec25/src/index.ts#L62)
+Defined in: [index.ts:75](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/b91f24ea96a32150e998e0acff37668c5305f9d3/src/index.ts#L75)
 
 A discriminated union of identifiers for retrieving a single user.
 Use one of the following shapes:

@@ -38,11 +38,9 @@ Cursor for pagination
 
 > `optional` **includeContent**: `boolean` \| `null`
 
-Defined in: generated/models/getPostsFeedParams.ts:30
+Defined in: generated/models/getPostsFeedParams.ts:29
 
 Include full content fields (json, staticHtml, markdown) in the post. Default: false
-
-#### Nullable
 
 ***
 

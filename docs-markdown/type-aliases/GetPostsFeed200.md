@@ -8,9 +8,7 @@
 
 > **GetPostsFeed200** = `object`
 
-Defined in: generated/models/getPostsFeed200.ts:20
-
-Feed items retrieved successfully
+Defined in: generated/models/getPostsFeed200.ts:17
 
 ## Properties
 
@@ -18,7 +16,7 @@ Feed items retrieved successfully
 
 > **items**: [`GetPostsFeed200ItemsItem`](GetPostsFeed200ItemsItem.md)[]
 
-Defined in: generated/models/getPostsFeed200.ts:22
+Defined in: generated/models/getPostsFeed200.ts:19
 
 Array of items in this page
 
@@ -28,4 +26,4 @@ Array of items in this page
 
 > **pagination**: [`GetPostsFeed200Pagination`](GetPostsFeed200Pagination.md)
 
-Defined in: generated/models/getPostsFeed200.ts:23
+Defined in: generated/models/getPostsFeed200.ts:20

@@ -13,7 +13,7 @@ export const setApiKey = (apiKey: string | undefined) => {
 export const customAxios = <T>(config: AxiosRequestConfig): Promise<T> => {
   const source = axios.CancelToken.source()
 
-  const headers = { ...config.headers };
+  const headers: Record<string, string> = { ...config.headers } as Record<string, string>;
   if (globalApiKey) {
     headers.Authorization = `Bearer ${globalApiKey}`;
   }
