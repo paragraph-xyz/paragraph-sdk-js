@@ -8,7 +8,13 @@ import {
   WalletClient,
 } from "viem";
 import { getParagraphAPI } from "./generated/api";
-import { setApiKey } from "./mutator/custom-axios";
+import type {
+  GetPosts200,
+  GetPostsFeed200,
+  GetPostsParams,
+  GetPostsFeedParams,
+} from "./generated/models";
+import { setCurrentApiKey } from "./mutator/custom-axios";
 import { base } from "viem/chains";
 import { ADDRESSES } from "@whetstone-research/doppler-sdk";
 import { signPermit } from "doppler-router/dist/Permit2";
@@ -83,14 +89,28 @@ export type UserIdentifier = { id: string } | { wallet: string };
 export type CoinIdentifier = { id: string } | { contractAddress: string };
 
 /**
+ * Identifier for listing posts from a specific publication.
+ * Returns posts with basic post data.
+ */
+export type PublicationPostsIdentifier = { type: "publication"; publicationId: string };
+
+/**
+ * Identifier for getting the curated feed from across the platform.
+ * Returns posts with additional publication and user data.
+ */
+export type FeedPostsIdentifier = { type: "feed" };
+
+/**
  * A discriminated union of identifiers for listing posts.
  * Use one of the following shapes:
  * - `{ type: "publication", publicationId: string }` to list posts from a specific publication.
  * - `{ type: "feed" }` to get the curated feed from across the platform.
+ *
+ * Note: The return type differs based on the identifier:
+ * - Publication posts return `GetPosts200` with items containing post data directly.
+ * - Feed posts return `GetPostsFeed200` with items containing `{ post, publication, user }`.
  */
-export type PostListIdentifier =
-  | { type: "publication"; publicationId: string }
-  | { type: "feed" };
+export type PostListIdentifier = PublicationPostsIdentifier | FeedPostsIdentifier;
 
 /**
  * A discriminated union of identifiers for listing coins.
@@ -237,42 +257,67 @@ class PostsResource {
   constructor(private api: ReturnType<typeof getParagraphAPI>) {}
 
   /**
-   * Retrieves a paginated list of posts using one of several sources.
+   * Retrieves a paginated list of posts from a specific publication.
+   * Each item in the response contains post data directly.
    *
    * @example
    * ```ts
    * const api = new ParagraphAPI();
    *
-   * // List posts from a specific publication
-   * const posts = await api.posts.list({
+   * const { items, pagination } = await api.posts.list({
    *   type: "publication",
    *   publicationId: "BMV6abfvCSUl51ErCVzd"
    * });
    *
-   * // Get the curated feed from across the platform
-   * const feed = await api.posts.list({ type: "feed" });
-   *
-   * // With pagination
-   * const postsWithPagination = await api.posts.list(
-   *   { type: "publication", publicationId: "BMV6abfvCSUl51ErCVzd" },
-   *   { limit: 50, cursor: "abc123" }
-   * );
-   *
-   * // Include full content
-   * const postsWithContent = await api.posts.list(
-   *   { type: "feed" },
-   *   { includeContent: true }
-   * );
+   * // Each item is a post object
+   * items.forEach(post => {
+   *   console.log(post.title, post.slug);
+   * });
    * ```
    *
-   * @param identifier - A {@link PostListIdentifier} object to specify the source of posts.
+   * @param identifier - A {@link PublicationPostsIdentifier} specifying the publication.
    * @param options - Optional parameters for pagination and content inclusion.
    * @returns A promise that resolves to a paginated list of posts.
    */
   list(
+    identifier: PublicationPostsIdentifier,
+    options?: GetPostsParams
+  ): Promise<GetPosts200>;
+
+  /**
+   * Retrieves the curated feed of posts from across the platform.
+   * Each item in the response contains post data along with publication and user information.
+   *
+   * @example
+   * ```ts
+   * const api = new ParagraphAPI();
+   *
+   * const { items, pagination } = await api.posts.list({ type: "feed" });
+   *
+   * // Each item contains post, publication, and user data
+   * items.forEach(item => {
+   *   console.log(item.post.title);
+   *   console.log(item.publication.name);
+   *   console.log(item.user.displayName);
+   * });
+   * ```
+   *
+   * @param identifier - A {@link FeedPostsIdentifier} to get the platform feed.
+   * @param options - Optional parameters for pagination and content inclusion.
+   * @returns A promise that resolves to a paginated list of feed items.
+   */
+  list(
+    identifier: FeedPostsIdentifier,
+    options?: GetPostsFeedParams
+  ): Promise<GetPostsFeed200>;
+
+  /**
+   * Implementation of list method.
+   */
+  list(
     identifier: PostListIdentifier,
-    options?: Parameters<ReturnType<typeof getParagraphAPI>["getPosts"]>[1]
-  ) {
+    options?: GetPostsParams | GetPostsFeedParams
+  ): Promise<GetPosts200 | GetPostsFeed200> {
     switch (identifier.type) {
       case "publication":
         return this.api.getPosts(identifier.publicationId, options);
@@ -787,8 +832,28 @@ class CoinsResource {
  * const popular = await api.coins.list({ type: "popular" });
  * ```
  */
+/**
+ * Wraps an API object to set the current API key context before each method call.
+ * This ensures instance isolation when multiple ParagraphAPI instances exist.
+ */
+function wrapAPIWithAuth<T>(api: T, apiKey: string | undefined): T {
+  const wrapped: Record<string, unknown> = {};
+  for (const [key, method] of Object.entries(api as Record<string, unknown>)) {
+    if (typeof method === "function") {
+      wrapped[key] = (...args: unknown[]) => {
+        setCurrentApiKey(apiKey);
+        return (method as Function)(...args);
+      };
+    }
+  }
+  return wrapped as T;
+}
+
 export class ParagraphAPI {
-  private api = getParagraphAPI();
+  private api: ReturnType<typeof getParagraphAPI>;
+
+  /** The API key for this instance */
+  private apiKey: string | undefined;
 
   /** Publications resource */
   public readonly publications: PublicationsResource;
@@ -807,14 +872,17 @@ export class ParagraphAPI {
 
   /**
    * Initializes a new instance of the Paragraph API client.
+   * Each instance has its own isolated authentication context, allowing
+   * multiple instances with different API keys to coexist.
    *
    * @param options - Optional configuration options.
    * @param options.apiKey - API key for authenticating protected endpoints.
    */
   constructor(options?: ParagraphAPIOptions) {
-    if (options?.apiKey) {
-      setApiKey(options.apiKey);
-    }
+    this.apiKey = options?.apiKey;
+    // Wrap the API to set the current API key context before each call
+    this.api = wrapAPIWithAuth(getParagraphAPI(), this.apiKey);
+
     this.publications = new PublicationsResource(this.api);
     this.subscribers = new SubscribersResource(this.api);
     this.posts = new PostsResource(this.api);
