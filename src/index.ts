@@ -8,10 +8,23 @@ import {
   WalletClient,
 } from "viem";
 import { getParagraphAPI } from "./generated/api";
+import { setApiKey } from "./mutator/custom-axios";
 import { base } from "viem/chains";
 import { ADDRESSES } from "@whetstone-research/doppler-sdk";
 import { signPermit } from "doppler-router/dist/Permit2";
 import { CommandBuilder } from "doppler-router";
+
+/**
+ * Configuration options for the Paragraph API client.
+ */
+export interface ParagraphAPIOptions {
+  /**
+   * API key for authenticating protected endpoints.
+   * Required for creating posts, adding subscribers, and importing subscribers.
+   * Obtain an API key from your Paragraph publication settings.
+   */
+  apiKey?: string;
+}
 
 const executeAbi = [
   {
@@ -160,10 +173,11 @@ class SubscribersResource {
 
   /**
    * Creates a new subscriber in the publication associated with the API key.
+   * Requires an API key.
    *
    * @example
    * ```ts
-   * const api = new ParagraphAPI();
+   * const api = new ParagraphAPI({ apiKey: "your-api-key" });
    *
    * // Create subscriber by email
    * await api.subscribers.create({ email: "user@example.com" });
@@ -187,10 +201,11 @@ class SubscribersResource {
 
   /**
    * Imports subscribers from a CSV file into the publication associated with the API key.
+   * Requires an API key.
    *
    * @example
    * ```ts
-   * const api = new ParagraphAPI();
+   * const api = new ParagraphAPI({ apiKey: "your-api-key" });
    *
    * // Import from CSV file
    * const file = new File([csvContent], "subscribers.csv", { type: "text/csv" });
@@ -320,10 +335,11 @@ class PostsResource {
 
   /**
    * Creates a new post in the publication associated with the API key.
+   * Requires an API key.
    *
    * @example
    * ```ts
-   * const api = new ParagraphAPI();
+   * const api = new ParagraphAPI({ apiKey: "your-api-key" });
    *
    * // Create a basic post
    * const post = await api.posts.create({
@@ -732,7 +748,11 @@ class CoinsResource {
  *
  * @example
  * ```ts
+ * // For public endpoints (no API key required)
  * const api = new ParagraphAPI();
+ *
+ * // For protected endpoints (API key required)
+ * const apiWithAuth = new ParagraphAPI({ apiKey: "your-api-key" });
  *
  * // Publications
  * const pub = await api.publications.get({ id: "publicationId" });
@@ -743,15 +763,16 @@ class CoinsResource {
  * const posts = await api.posts.list({ type: "publication", publicationId: "publicationId" });
  * const feed = await api.posts.list({ type: "feed" });
  * const post = await api.posts.get({ id: "postId" });
- * const newPost = await api.posts.create({ title: "My Post", markdown: "# Hello" });
+ * // Creating posts requires an API key
+ * const newPost = await apiWithAuth.posts.create({ title: "My Post", markdown: "# Hello" });
  *
  * // Users
  * const user = await api.users.get({ id: "userId" });
  * const userByWallet = await api.users.get({ wallet: "0x1234..." });
  *
- * // Subscribers
+ * // Subscribers (mutations require an API key)
  * const count = await api.subscribers.getCount({ id: "publicationId" });
- * await api.subscribers.create({ email: "user@example.com" });
+ * await apiWithAuth.subscribers.create({ email: "user@example.com" });
  *
  * // Coins
  * const coin = await api.coins.get({ id: "coinId" });
@@ -779,8 +800,14 @@ export class ParagraphAPI {
 
   /**
    * Initializes a new instance of the Paragraph API client.
+   *
+   * @param options - Optional configuration options.
+   * @param options.apiKey - API key for authenticating protected endpoints.
    */
-  constructor() {
+  constructor(options?: ParagraphAPIOptions) {
+    if (options?.apiKey) {
+      setApiKey(options.apiKey);
+    }
     this.publications = new PublicationsResource(this.api);
     this.subscribers = new SubscribersResource(this.api);
     this.posts = new PostsResource(this.api);
@@ -795,9 +822,11 @@ export class ParagraphAPI {
  * @remarks
  * This function is tree-shakeable.
  *
+ * @param options - Optional configuration options.
  * @returns A new instance of the {@link ParagraphAPI}.
  */
-export const createParagraphAPI = () => new ParagraphAPI();
+export const createParagraphAPI = (options?: ParagraphAPIOptions) =>
+  new ParagraphAPI(options);
 
 // Re-export generated types for consumers
 export * from "./generated/models";
