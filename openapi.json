@@ -66,8 +66,7 @@
                     "name",
                     "ownerUserId",
                     "slug"
-                  ],
-                  "description": "Publication details retrieved successfully"
+                  ]
                 }
               }
             }
@@ -98,8 +97,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Publication not found"
+                  ]
                 }
               }
             }
@@ -130,8 +128,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -221,8 +218,7 @@
                     "name",
                     "ownerUserId",
                     "slug"
-                  ],
-                  "description": "Publication details retrieved successfully"
+                  ]
                 }
               }
             }
@@ -253,8 +249,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Publication not found"
+                  ]
                 }
               }
             }
@@ -285,8 +280,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -374,8 +368,7 @@
                     "name",
                     "ownerUserId",
                     "slug"
-                  ],
-                  "description": "Publication details retrieved successfully"
+                  ]
                 }
               }
             }
@@ -406,8 +399,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Publication not found"
+                  ]
                 }
               }
             }
@@ -438,8 +430,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -495,8 +486,7 @@
                   },
                   "required": [
                     "count"
-                  ],
-                  "description": "Subscriber count retrieved successfully"
+                  ]
                 }
               }
             }
@@ -527,8 +517,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Publication not found"
+                  ]
                 }
               }
             }
@@ -559,8 +548,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -615,8 +603,10 @@
             "in": "query",
             "description": "Include full content fields (json, staticHtml, markdown) in the post. Default: false",
             "schema": {
-              "type": "boolean",
-              "nullable": true
+              "type": [
+                "boolean",
+                "null"
+              ]
             }
           }
         ],
@@ -831,8 +821,7 @@
                   "required": [
                     "items",
                     "pagination"
-                  ],
-                  "description": "Feed items retrieved successfully"
+                  ]
                 }
               }
             }
@@ -863,8 +852,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Invalid request parameters"
+                  ]
                 }
               }
             }
@@ -895,8 +883,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -960,8 +947,10 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": "boolean",
-              "nullable": true
+              "type": [
+                "boolean",
+                "null"
+              ]
             }
           }
         ],
@@ -1060,8 +1049,7 @@
                   "required": [
                     "items",
                     "pagination"
-                  ],
-                  "description": "Posts retrieved successfully"
+                  ]
                 }
               }
             }
@@ -1092,8 +1080,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Invalid request parameters"
+                  ]
                 }
               }
             }
@@ -1124,8 +1111,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -1170,8 +1156,10 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": "boolean",
-              "nullable": true
+              "type": [
+                "boolean",
+                "null"
+              ]
             }
           }
         ],
@@ -1237,8 +1225,7 @@
                     "id",
                     "title",
                     "slug"
-                  ],
-                  "description": "Post details retrieved successfully"
+                  ]
                 }
               }
             }
@@ -1269,8 +1256,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Post not found"
+                  ]
                 }
               }
             }
@@ -1301,8 +1287,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -1358,8 +1343,10 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": "boolean",
-              "nullable": true
+              "type": [
+                "boolean",
+                "null"
+              ]
             }
           }
         ],
@@ -1425,8 +1412,7 @@
                     "id",
                     "title",
                     "slug"
-                  ],
-                  "description": "Post details retrieved successfully"
+                  ]
                 }
               }
             }
@@ -1457,8 +1443,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Post not found"
+                  ]
                 }
               }
             }
@@ -1489,8 +1474,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -1548,8 +1532,10 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": "boolean",
-              "nullable": true
+              "type": [
+                "boolean",
+                "null"
+              ]
             }
           }
         ],
@@ -1615,8 +1601,7 @@
                     "id",
                     "title",
                     "slug"
-                  ],
-                  "description": "Post details retrieved successfully"
+                  ]
                 }
               }
             }
@@ -1647,8 +1632,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Post not found"
+                  ]
                 }
               }
             }
@@ -1679,8 +1663,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -1698,7 +1681,244 @@
           {
             "lang": "typescript",
             "label": "Get post by publication & post slug",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost({ \n  publicationSlug: \"blog\",\n  postSlug: \"my-first-post\" \n})"
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost({\n  publicationSlug: \"blog\",\n  postSlug: \"my-first-post\"\n})"
+          }
+        ]
+      }
+    },
+    "/v1/posts": {
+      "post": {
+        "description": "Create a new post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Requirements:**\n- `markdown` field is required and will be converted to TipTap JSON format\n- `title` field is required\n\n**Behavior:**\n- The post will be created as published by default\n- If `sendNewsletter` is true, an email will be sent to all subscribers",
+        "summary": "Create a new post",
+        "tags": [
+          "posts"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "markdown": {
+                    "type": "string",
+                    "description": "Post content in Markdown format"
+                  },
+                  "title": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "description": "Title of the post"
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "maxLength": 300,
+                    "description": "Optional subtitle or brief summary"
+                  },
+                  "imageUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "Optional URL to the post's cover image"
+                  },
+                  "sendNewsletter": {
+                    "type": "boolean",
+                    "description": "Whether to send an email newsletter to subscribers. Default: false"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256,
+                    "description": "Optional URL-friendly identifier for the post. If not provided, will be generated from title"
+                  },
+                  "postPreview": {
+                    "type": "string",
+                    "maxLength": 500,
+                    "description": "Optional preview text for the post. If not provided, will be generated from content"
+                  },
+                  "categories": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Optional array of category tags for the post"
+                  }
+                },
+                "required": [
+                  "markdown",
+                  "title"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Post created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The ID of the created post"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request - check required fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Publication not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createPost",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "create-post",
+            "description": "Create a new post in a publication"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Create a post with markdown",
+            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.createPost({\n  title: \"My First Post\",\n  markdown: \"# Hello World\\n\\nThis is my first post!\",\n  sendNewsletter: true\n})"
+          },
+          {
+            "lang": "bash",
+            "label": "Create post using curl",
+            "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/posts\" \\\n  -H \"Authorization: Bearer your-api-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"title\": \"My First Post\", \"markdown\": \"# Hello World\"}'"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
           }
         ]
       }
@@ -1783,8 +2003,7 @@
                   "required": [
                     "id",
                     "publicationId"
-                  ],
-                  "description": "User details retrieved successfully"
+                  ]
                 }
               }
             }
@@ -1815,8 +2034,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "User not found"
+                  ]
                 }
               }
             }
@@ -1847,8 +2065,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -1952,8 +2169,7 @@
                   "required": [
                     "id",
                     "publicationId"
-                  ],
-                  "description": "User details retrieved successfully"
+                  ]
                 }
               }
             }
@@ -1984,8 +2200,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "User not found"
+                  ]
                 }
               }
             }
@@ -2016,8 +2231,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -2216,8 +2430,7 @@
                     "id",
                     "contractAddress",
                     "metadata"
-                  ],
-                  "description": "Coin details retrieved successfully"
+                  ]
                 }
               }
             }
@@ -2248,8 +2461,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Coin not found"
+                  ]
                 }
               }
             }
@@ -2280,8 +2492,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -2481,8 +2692,7 @@
                     "id",
                     "contractAddress",
                     "metadata"
-                  ],
-                  "description": "Coin details retrieved successfully"
+                  ]
                 }
               }
             }
@@ -2513,8 +2723,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Coin not found"
+                  ]
                 }
               }
             }
@@ -2545,8 +2754,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -2670,8 +2878,7 @@
                   "required": [
                     "items",
                     "pagination"
-                  ],
-                  "description": "Holders retrieved successfully"
+                  ]
                 }
               }
             }
@@ -2702,8 +2909,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Coin not found"
+                  ]
                 }
               }
             }
@@ -2734,8 +2940,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -2860,8 +3065,7 @@
                   "required": [
                     "items",
                     "pagination"
-                  ],
-                  "description": "Holders retrieved successfully"
+                  ]
                 }
               }
             }
@@ -2892,8 +3096,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Coin not found"
+                  ]
                 }
               }
             }
@@ -2924,8 +3127,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -3011,8 +3213,7 @@
                   "required": [
                     "commands",
                     "inputs"
-                  ],
-                  "description": "Buy args retrieved successfully"
+                  ]
                 }
               }
             }
@@ -3043,8 +3244,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Buy args not found"
+                  ]
                 }
               }
             }
@@ -3075,8 +3275,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -3156,8 +3355,7 @@
                   "required": [
                     "commands",
                     "inputs"
-                  ],
-                  "description": "Buy args retrieved successfully"
+                  ]
                 }
               }
             }
@@ -3188,8 +3386,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Buy args not found"
+                  ]
                 }
               }
             }
@@ -3220,8 +3417,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -3300,8 +3496,7 @@
                   "required": [
                     "commands",
                     "inputs"
-                  ],
-                  "description": "Sell args retrieved successfully"
+                  ]
                 }
               }
             }
@@ -3332,8 +3527,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Sell args not found"
+                  ]
                 }
               }
             }
@@ -3364,8 +3558,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -3445,8 +3638,7 @@
                   "required": [
                     "commands",
                     "inputs"
-                  ],
-                  "description": "Sell args retrieved successfully"
+                  ]
                 }
               }
             }
@@ -3477,8 +3669,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Sell args not found"
+                  ]
                 }
               }
             }
@@ -3509,8 +3700,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -3569,8 +3759,7 @@
                   },
                   "required": [
                     "quote"
-                  ],
-                  "description": "Coin quote retrieved successfully"
+                  ]
                 }
               }
             }
@@ -3601,8 +3790,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Coin quote not found"
+                  ]
                 }
               }
             }
@@ -3633,8 +3821,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -3700,8 +3887,7 @@
                   },
                   "required": [
                     "quote"
-                  ],
-                  "description": "Coin quote retrieved successfully"
+                  ]
                 }
               }
             }
@@ -3732,8 +3918,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Coin quote not found"
+                  ]
                 }
               }
             }
@@ -3764,8 +3949,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -3965,8 +4149,7 @@
                   },
                   "required": [
                     "coins"
-                  ],
-                  "description": "Popular coins retrieved successfully"
+                  ]
                 }
               }
             }
@@ -3997,8 +4180,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Popular coins not found"
+                  ]
                 }
               }
             }
@@ -4029,8 +4211,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -4053,248 +4234,6 @@
         ]
       }
     },
-    "/v1/post": {
-      "post": {
-        "description": "Create a new post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Requirements:**\n- `markdown` field is required and will be converted to TipTap JSON format\n- `title` field is required\n\n**Behavior:**\n- The post will be created as published by default\n- If `sendNewsletter` is true, an email will be sent to all subscribers",
-        "summary": "Create a new post",
-        "tags": [
-          "post"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "description": "Body",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "markdown": {
-                    "type": "string",
-                    "description": "Post content in Markdown format"
-                  },
-                  "title": {
-                    "type": "string",
-                    "maxLength": 200,
-                    "description": "Title of the post"
-                  },
-                  "subtitle": {
-                    "type": "string",
-                    "maxLength": 300,
-                    "description": "Optional subtitle or brief summary"
-                  },
-                  "imageUrl": {
-                    "type": "string",
-                    "format": "uri",
-                    "description": "Optional URL to the post's cover image"
-                  },
-                  "sendNewsletter": {
-                    "type": "boolean",
-                    "description": "Whether to send an email newsletter to subscribers. Default: false"
-                  },
-                  "slug": {
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 256,
-                    "description": "Optional URL-friendly identifier for the post. If not provided, will be generated from title"
-                  },
-                  "postPreview": {
-                    "type": "string",
-                    "maxLength": 500,
-                    "description": "Optional preview text for the post. If not provided, will be generated from content"
-                  },
-                  "categories": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "Optional array of category tags for the post"
-                  }
-                },
-                "required": [
-                  "markdown",
-                  "title"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Post created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "The ID of the created post"
-                    }
-                  },
-                  "required": [
-                    "id"
-                  ],
-                  "description": "Post created successfully"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request - check required fields",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "enum": [
-                        false
-                      ],
-                      "description": "Always false for error responses"
-                    },
-                    "msg": {
-                      "type": "string",
-                      "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "msg"
-                  ],
-                  "description": "Invalid request - check required fields"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Invalid or missing API key",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "enum": [
-                        false
-                      ],
-                      "description": "Always false for error responses"
-                    },
-                    "msg": {
-                      "type": "string",
-                      "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "msg"
-                  ],
-                  "description": "Invalid or missing API key"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Publication not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "enum": [
-                        false
-                      ],
-                      "description": "Always false for error responses"
-                    },
-                    "msg": {
-                      "type": "string",
-                      "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "msg"
-                  ],
-                  "description": "Publication not found"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "enum": [
-                        false
-                      ],
-                      "description": "Always false for error responses"
-                    },
-                    "msg": {
-                      "type": "string",
-                      "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
-                    }
-                  },
-                  "required": [
-                    "success",
-                    "msg"
-                  ],
-                  "description": "Internal server error"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "createPost",
-        "x-mint": {
-          "mcp": {
-            "enabled": true,
-            "name": "create-post",
-            "description": "Create a new post in a publication"
-          }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "typescript",
-            "label": "Create a post with markdown",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.createPost({\n  title: \"My First Post\",\n  markdown: \"# Hello World\\n\\nThis is my first post!\",\n  sendNewsletter: true\n})"
-          },
-          {
-            "lang": "bash",
-            "label": "Create post using curl",
-            "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/post\" \\\n  -H \"Authorization: Bearer your-api-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"title\": \"My First Post\", \"markdown\": \"# Hello World\"}'"
-          }
-        ],
-        "security": [
-          {
-            "apiKey": []
-          }
-        ]
-      }
-    },
     "/v1/subscribers/import": {
       "post": {
         "description": "Import subscribers from a CSV file into your publication. The publication is identified by the API key provided in the Authorization header.\n\n**File Requirements:**\n- Maximum file size: 10MB\n- Content type: text/csv\n\n**Supported CSV Columns:**\n- Email: `email` or `subscriberEmail` (case-insensitive)\n- Wallet: `wallet_address` (case-insensitive)\n- Created date: `created_at`, `subscription date`, `created`, or `createdAt` (case-insensitive, optional)\n\nAt least one of email or wallet_address must be present for each row. Rows with neither valid email nor valid wallet address will be skipped.",
@@ -4311,8 +4250,7 @@
                 "type": "object",
                 "properties": {
                   "file": {
-                    "description": "CSV file containing subscriber data (max 10MB)",
-                    "nullable": true
+                    "description": "CSV file containing subscriber data (max 10MB)"
                   }
                 }
               }
@@ -4337,8 +4275,7 @@
                   },
                   "required": [
                     "success"
-                  ],
-                  "description": "Import started successfully"
+                  ]
                 }
               }
             }
@@ -4369,8 +4306,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Invalid request or CSV format"
+                  ]
                 }
               }
             }
@@ -4401,8 +4337,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Invalid or missing API key"
+                  ]
                 }
               }
             }
@@ -4433,8 +4368,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Publication not found"
+                  ]
                 }
               }
             }
@@ -4465,8 +4399,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
@@ -4551,8 +4484,7 @@
                   },
                   "required": [
                     "success"
-                  ],
-                  "description": "Subscriber added successfully"
+                  ]
                 }
               }
             }
@@ -4583,8 +4515,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Invalid request - must provide email or wallet"
+                  ]
                 }
               }
             }
@@ -4615,8 +4546,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Invalid or missing API key"
+                  ]
                 }
               }
             }
@@ -4647,8 +4577,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Publication not found"
+                  ]
                 }
               }
             }
@@ -4679,8 +4608,7 @@
                   "required": [
                     "success",
                     "msg"
-                  ],
-                  "description": "Internal server error"
+                  ]
                 }
               }
             }
