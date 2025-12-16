@@ -163,6 +163,15 @@ class SubscribersResource {
   /**
    * Gets a total count of subscribers for a given publication ID.
    *
+   * @example
+   * ```ts
+   * const api = new ParagraphAPI();
+   *
+   * // Get subscriber count for a publication
+   * const result = await api.subscribers.getCount({ id: "publicationId" });
+   * console.log(result.count);
+   * ```
+   *
    * @param options - An object containing the publication ID.
    * @param options.id - The unique identifier of the publication.
    * @returns A promise that resolves to an object containing the subscriber count.
@@ -522,29 +531,12 @@ class CoinsResource {
     account: Account;
     amount: bigint;
   }) {
-    const walletAddress = account.address;
+    const buyArgs = await this.getBuyArgs(coin, {
+      walletAddress: account.address,
+      amount: amount.toString(),
+    });
 
-    let commands: string | undefined;
-    let inputs: string[] | undefined;
-
-    if ("id" in coin) {
-      const result = await this.api.getBuyArgsById(coin.id, {
-        walletAddress,
-        amount: amount.toString(),
-      });
-      commands = result.commands;
-      inputs = result.inputs;
-    } else if ("contractAddress" in coin) {
-      const result = await this.api.getBuyArgsByContract(coin.contractAddress, {
-        walletAddress,
-        amount: amount.toString(),
-      });
-      commands = result.commands;
-      inputs = result.inputs;
-    } else {
-      throw new Error("Invalid identifier provided to buy.");
-    }
-
+    const { commands, inputs } = buyArgs;
     if (!commands || !inputs) throw new Error("API error: Missing args");
 
     const txHash = await client.writeContract({
@@ -558,6 +550,21 @@ class CoinsResource {
     });
 
     return txHash;
+  }
+
+  private getBuyArgs(
+    identifier: CoinIdentifier,
+    params: Parameters<ReturnType<typeof getParagraphAPI>["getBuyArgsById"]>[1]
+  ) {
+    if ("id" in identifier) {
+      return this.api.getBuyArgsById(identifier.id, params);
+    }
+
+    if ("contractAddress" in identifier) {
+      return this.api.getBuyArgsByContract(identifier.contractAddress, params);
+    }
+
+    throw new Error("Invalid identifier provided to getBuyArgs.");
   }
 
   /**
