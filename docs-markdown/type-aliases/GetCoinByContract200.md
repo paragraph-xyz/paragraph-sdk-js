@@ -8,7 +8,7 @@
 
 > **GetCoinByContract200** = `object`
 
-Defined in: src/generated/models/getCoinByContract200.ts:19
+Defined in: generated/models/getCoinByContract200.ts:19
 
 Coin details retrieved successfully
 
@@ -18,7 +18,7 @@ Coin details retrieved successfully
 
 > **contractAddress**: `string`
 
-Defined in: src/generated/models/getCoinByContract200.ts:26
+Defined in: generated/models/getCoinByContract200.ts:26
 
 Base contract address for the coin
 
@@ -32,7 +32,7 @@ Base contract address for the coin
 
 > **id**: `string`
 
-Defined in: src/generated/models/getCoinByContract200.ts:21
+Defined in: generated/models/getCoinByContract200.ts:21
 
 Unique identifier for the coin
 
@@ -42,4 +42,4 @@ Unique identifier for the coin
 
 > **metadata**: [`GetCoinByContract200Metadata`](GetCoinByContract200Metadata.md)
 
-Defined in: src/generated/models/getCoinByContract200.ts:27
+Defined in: generated/models/getCoinByContract200.ts:27

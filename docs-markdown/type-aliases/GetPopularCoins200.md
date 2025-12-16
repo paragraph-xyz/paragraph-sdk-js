@@ -8,7 +8,7 @@
 
 > **GetPopularCoins200** = `object`
 
-Defined in: src/generated/models/getPopularCoins200.ts:19
+Defined in: generated/models/getPopularCoins200.ts:19
 
 Popular coins retrieved successfully
 
@@ -18,4 +18,4 @@ Popular coins retrieved successfully
 
 > **coins**: [`GetPopularCoins200CoinsItem`](GetPopularCoins200CoinsItem.md)[]
 
-Defined in: src/generated/models/getPopularCoins200.ts:20
+Defined in: generated/models/getPopularCoins200.ts:20

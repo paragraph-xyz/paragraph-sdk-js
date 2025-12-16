@@ -8,7 +8,7 @@
 
 > **GetPostById404** = `object`
 
-Defined in: src/generated/models/getPostById404.ts:18
+Defined in: generated/models/getPostById404.ts:18
 
 Post not found
 
@@ -18,7 +18,7 @@ Post not found
 
 > `optional` **error**: `string`
 
-Defined in: src/generated/models/getPostById404.ts:24
+Defined in: generated/models/getPostById404.ts:24
 
 Technical error details or error code
 
@@ -28,7 +28,7 @@ Technical error details or error code
 
 > **msg**: `string`
 
-Defined in: src/generated/models/getPostById404.ts:22
+Defined in: generated/models/getPostById404.ts:22
 
 Human-readable error message
 
@@ -38,6 +38,6 @@ Human-readable error message
 
 > **success**: `boolean`
 
-Defined in: src/generated/models/getPostById404.ts:20
+Defined in: generated/models/getPostById404.ts:20
 
 Always false for error responses

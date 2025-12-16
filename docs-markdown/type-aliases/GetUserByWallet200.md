@@ -8,7 +8,7 @@
 
 > **GetUserByWallet200** = `object`
 
-Defined in: src/generated/models/getUserByWallet200.ts:19
+Defined in: generated/models/getUserByWallet200.ts:19
 
 User details retrieved successfully
 
@@ -18,7 +18,7 @@ User details retrieved successfully
 
 > `optional` **avatarUrl**: `string`
 
-Defined in: src/generated/models/getUserByWallet200.ts:28
+Defined in: generated/models/getUserByWallet200.ts:28
 
 URL to the user's avatar image
 
@@ -28,7 +28,7 @@ URL to the user's avatar image
 
 > `optional` **bio**: `string`
 
-Defined in: src/generated/models/getUserByWallet200.ts:37
+Defined in: generated/models/getUserByWallet200.ts:37
 
 Brief biography of the user (max 500 characters)
 
@@ -42,7 +42,7 @@ Brief biography of the user (max 500 characters)
 
 > `optional` **farcaster**: [`GetUserByWallet200Farcaster`](GetUserByWallet200Farcaster.md)
 
-Defined in: src/generated/models/getUserByWallet200.ts:39
+Defined in: generated/models/getUserByWallet200.ts:39
 
 Farcaster profile information, if linked
 
@@ -52,7 +52,7 @@ Farcaster profile information, if linked
 
 > **id**: `string`
 
-Defined in: src/generated/models/getUserByWallet200.ts:21
+Defined in: generated/models/getUserByWallet200.ts:21
 
 Unique identifier for the user
 
@@ -62,7 +62,7 @@ Unique identifier for the user
 
 > `optional` **name**: `string`
 
-Defined in: src/generated/models/getUserByWallet200.ts:32
+Defined in: generated/models/getUserByWallet200.ts:32
 
 Display name of the user
 
@@ -72,7 +72,7 @@ Display name of the user
 
 > **publicationId**: `string`
 
-Defined in: src/generated/models/getUserByWallet200.ts:30
+Defined in: generated/models/getUserByWallet200.ts:30
 
 ID of the publication this user belongs to
 
@@ -82,7 +82,7 @@ ID of the publication this user belongs to
 
 > `optional` **walletAddress**: `string`
 
-Defined in: src/generated/models/getUserByWallet200.ts:26
+Defined in: generated/models/getUserByWallet200.ts:26
 
 Wallet address of the user
 

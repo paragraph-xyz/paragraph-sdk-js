@@ -8,7 +8,7 @@
 
 > **GetUserByWallet200Farcaster** = `object`
 
-Defined in: src/generated/models/getUserByWallet200Farcaster.ts:18
+Defined in: generated/models/getUserByWallet200Farcaster.ts:18
 
 Farcaster profile information, if linked
 
@@ -18,7 +18,7 @@ Farcaster profile information, if linked
 
 > **displayName**: `string`
 
-Defined in: src/generated/models/getUserByWallet200Farcaster.ts:22
+Defined in: generated/models/getUserByWallet200Farcaster.ts:22
 
 Farcaster display name
 
@@ -28,7 +28,7 @@ Farcaster display name
 
 > **fid**: `number`
 
-Defined in: src/generated/models/getUserByWallet200Farcaster.ts:24
+Defined in: generated/models/getUserByWallet200Farcaster.ts:24
 
 Farcaster fid
 
@@ -38,6 +38,6 @@ Farcaster fid
 
 > **username**: `string`
 
-Defined in: src/generated/models/getUserByWallet200Farcaster.ts:20
+Defined in: generated/models/getUserByWallet200Farcaster.ts:20
 
 Farcaster username

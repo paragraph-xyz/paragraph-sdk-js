@@ -8,7 +8,7 @@
 
 > **GetCoin200MetadataExtensions** = `object`
 
-Defined in: src/generated/models/getCoin200MetadataExtensions.ts:16
+Defined in: generated/models/getCoin200MetadataExtensions.ts:16
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: src/generated/models/getCoin200MetadataExtensions.ts:16
 
 > **coinType**: `string`
 
-Defined in: src/generated/models/getCoin200MetadataExtensions.ts:18
+Defined in: generated/models/getCoin200MetadataExtensions.ts:18
 
 Type of the coin
 
@@ -26,4 +26,4 @@ Type of the coin
 
 > **paragraph**: [`GetCoin200MetadataExtensionsParagraph`](GetCoin200MetadataExtensionsParagraph.md)
 
-Defined in: src/generated/models/getCoin200MetadataExtensions.ts:19
+Defined in: generated/models/getCoin200MetadataExtensions.ts:19

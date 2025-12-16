@@ -8,7 +8,7 @@
 
 > **GetQuoteById200** = `object`
 
-Defined in: src/generated/models/getQuoteById200.ts:18
+Defined in: generated/models/getQuoteById200.ts:18
 
 Coin quote retrieved successfully
 
@@ -18,6 +18,6 @@ Coin quote retrieved successfully
 
 > **quote**: `string`
 
-Defined in: src/generated/models/getQuoteById200.ts:20
+Defined in: generated/models/getQuoteById200.ts:20
 
 Approximate number of coins that could be received in exchange of the amount of ETH entered

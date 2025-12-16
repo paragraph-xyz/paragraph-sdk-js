@@ -8,7 +8,7 @@
 
 > **GetSellArgsById200** = `object`
 
-Defined in: src/generated/models/getSellArgsById200.ts:18
+Defined in: generated/models/getSellArgsById200.ts:18
 
 Sell args retrieved successfully
 
@@ -18,7 +18,7 @@ Sell args retrieved successfully
 
 > **commands**: `string`
 
-Defined in: src/generated/models/getSellArgsById200.ts:23
+Defined in: generated/models/getSellArgsById200.ts:23
 
 Commands needed to do a token swap
 
@@ -32,6 +32,6 @@ Commands needed to do a token swap
 
 > **inputs**: `string`[]
 
-Defined in: src/generated/models/getSellArgsById200.ts:25
+Defined in: generated/models/getSellArgsById200.ts:25
 
 Inputs needed to do a token swap

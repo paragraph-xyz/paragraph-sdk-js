@@ -8,7 +8,7 @@
 
 > **GetSubscriberCount200** = `object`
 
-Defined in: src/generated/models/getSubscriberCount200.ts:18
+Defined in: generated/models/getSubscriberCount200.ts:18
 
 Subscriber count retrieved successfully
 
@@ -18,6 +18,6 @@ Subscriber count retrieved successfully
 
 > **count**: `number`
 
-Defined in: src/generated/models/getSubscriberCount200.ts:20
+Defined in: generated/models/getSubscriberCount200.ts:20
 
 Total number of subscribers

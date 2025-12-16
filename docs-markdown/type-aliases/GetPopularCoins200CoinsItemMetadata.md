@@ -8,7 +8,7 @@
 
 > **GetPopularCoins200CoinsItemMetadata** = `object`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:18
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:18
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:18
 
 > **attributes**: [`GetPopularCoins200CoinsItemMetadataAttributesItem`](GetPopularCoins200CoinsItemMetadataAttributesItem.md)[]
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:39
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:39
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:39
 
 > **chainId**: `number`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:32
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:32
 
 Chain id number of the coin
 
@@ -34,7 +34,7 @@ Chain id number of the coin
 
 > **decimals**: `number`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:24
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:24
 
 Number of decimals of the coin
 
@@ -44,7 +44,7 @@ Number of decimals of the coin
 
 > **description**: `string`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:26
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:26
 
 Description of the coin
 
@@ -54,7 +54,7 @@ Description of the coin
 
 > **extensions**: [`GetPopularCoins200CoinsItemMetadataExtensions`](GetPopularCoins200CoinsItemMetadataExtensions.md)
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:38
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:38
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:38
 
 > **external\_url**: `string`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:34
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:34
 
 External url associated with the coin
 
@@ -72,7 +72,7 @@ External url associated with the coin
 
 > `optional` **image**: `string`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:28
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:28
 
 Image url of the logo associated with the coin
 
@@ -82,7 +82,7 @@ Image url of the logo associated with the coin
 
 > **links**: [`GetPopularCoins200CoinsItemMetadataLinksItem`](GetPopularCoins200CoinsItemMetadataLinksItem.md)[]
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:35
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:35
 
 ***
 
@@ -90,7 +90,7 @@ Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:35
 
 > `optional` **logoURI**: `string`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:30
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:30
 
 Image url of the logo associated with the coin
 
@@ -100,7 +100,7 @@ Image url of the logo associated with the coin
 
 > **name**: `string`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:20
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:20
 
 Name of the coin
 
@@ -110,7 +110,7 @@ Name of the coin
 
 > **symbol**: `string`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:22
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:22
 
 Symbol of the coin
 
@@ -120,6 +120,6 @@ Symbol of the coin
 
 > **tags**: `string`[]
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadata.ts:37
+Defined in: generated/models/getPopularCoins200CoinsItemMetadata.ts:37
 
 Tags associated with the coin

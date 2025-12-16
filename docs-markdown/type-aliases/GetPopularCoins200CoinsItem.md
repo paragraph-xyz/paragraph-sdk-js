@@ -8,7 +8,7 @@
 
 > **GetPopularCoins200CoinsItem** = `object`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItem.ts:16
+Defined in: generated/models/getPopularCoins200CoinsItem.ts:16
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: src/generated/models/getPopularCoins200CoinsItem.ts:16
 
 > **contractAddress**: `string`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItem.ts:23
+Defined in: generated/models/getPopularCoins200CoinsItem.ts:23
 
 Base contract address for the coin
 
@@ -30,7 +30,7 @@ Base contract address for the coin
 
 > **id**: `string`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItem.ts:18
+Defined in: generated/models/getPopularCoins200CoinsItem.ts:18
 
 Unique identifier for the coin
 
@@ -40,4 +40,4 @@ Unique identifier for the coin
 
 > **metadata**: [`GetPopularCoins200CoinsItemMetadata`](GetPopularCoins200CoinsItemMetadata.md)
 
-Defined in: src/generated/models/getPopularCoins200CoinsItem.ts:24
+Defined in: generated/models/getPopularCoins200CoinsItem.ts:24
