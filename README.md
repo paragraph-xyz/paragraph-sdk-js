@@ -1,17 +1,17 @@
-# @paragraph_xyz/sdk
+# @paragraph-com/sdk
 
 TypeScript SDK for the [Paragraph](https://paragraph.com) API. Used to interact with Paragraph posts, users, coins, & more.
 
 ## Install
 
 ```bash
-yarn add @paragraph_xyz/sdk
+yarn add @paragraph-com/sdk
 ```
 
 ## Quick start
 
 ```typescript
-import { getParagraphAPI } from "@paragraph_xyz/sdk";
+import { getParagraphAPI } from "@paragraph-com/sdk";
 const api = getParagraphAPI();
 const post = await api.getPost("postId");
 ```
