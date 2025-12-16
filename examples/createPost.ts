@@ -10,7 +10,7 @@ async function main() {
     title: "My First Post",
     markdown: "# Hello World\n\nThis is my first post created via the SDK!",
   });
-  console.log("Created basic post:", basicPost.id, basicPost.slug);
+  console.log("Created basic post:", basicPost.id);
 
   // Create a post with all options
   const fullPost = await api.posts.create({
@@ -31,11 +31,12 @@ More content here...
     subtitle: "A comprehensive guide to using the Paragraph SDK",
     slug: "my-full-post", // Custom URL slug
     imageUrl: "https://example.com/cover-image.jpg", // Cover image
-    postPreview: "Learn how to use the Paragraph SDK to create amazing posts...",
+    postPreview:
+      "Learn how to use the Paragraph SDK to create amazing posts...",
     categories: ["tutorial", "sdk", "development"],
     sendNewsletter: false, // Set to true to email subscribers
   });
-  console.log("Created full post:", fullPost.id, fullPost.slug);
+  console.log("Created full post:", fullPost.id);
 }
 
 main().catch(console.error);
