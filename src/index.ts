@@ -133,11 +133,12 @@ class SubscribersResource {
   /**
    * Gets a total count of subscribers for a given publication ID.
    *
-   * @param publicationId - The unique identifier of the publication.
+   * @param options - An object containing the publication ID.
+   * @param options.id - The unique identifier of the publication.
    * @returns A promise that resolves to an object containing the subscriber count.
    */
-  getCount(publicationId: string) {
-    return this.api.getSubscriberCount(publicationId);
+  getCount({ id }: { id: string }) {
+    return this.api.getSubscriberCount(id);
   }
 }
 
@@ -456,15 +457,11 @@ class CoinsResource {
     account: Account;
     amount: bigint;
   }) {
-    // Get coin data to retrieve contract address
-    let coinData: { contractAddress?: string };
-    if ("id" in coin) {
-      coinData = await this.api.getCoin(coin.id);
-    } else if ("contractAddress" in coin) {
-      coinData = await this.api.getCoinByContract(coin.contractAddress);
-    } else {
-      throw new Error("Invalid identifier provided to sell.");
-    }
+    const coinData = await this.get(coin);
+    const sellArgs = await this.getSellArgs(coin, {
+      walletAddress: account.address,
+      amount: amount.toString(),
+    });
 
     const publicClient = createPublicClient({
       chain: base,
@@ -507,25 +504,7 @@ class CoinsResource {
     commandBuilder.addPermit2Permit(permit, signature);
     const [signCommands, signInputs] = commandBuilder.build();
 
-    let sellCommands: string | undefined;
-    let sellInputs: string[] | undefined;
-
-    if ("id" in coin) {
-      const result = await this.api.getSellArgsById(coin.id, {
-        walletAddress: account.address,
-        amount: amount.toString(),
-      });
-      sellCommands = result.commands;
-      sellInputs = result.inputs;
-    } else if ("contractAddress" in coin) {
-      const result = await this.api.getSellArgsByContract(coin.contractAddress, {
-        walletAddress: account.address,
-        amount: amount.toString(),
-      });
-      sellCommands = result.commands;
-      sellInputs = result.inputs;
-    }
-
+    const { commands: sellCommands, inputs: sellInputs } = sellArgs;
     if (!sellCommands || !sellInputs)
       throw new Error("API error: Missing args");
     const commands = `${signCommands}${sellCommands.substring(
@@ -541,6 +520,21 @@ class CoinsResource {
       chain: base,
     });
     return txHash;
+  }
+
+  private getSellArgs(
+    identifier: CoinIdentifier,
+    params: Parameters<ReturnType<typeof getParagraphAPI>["getSellArgsById"]>[1]
+  ) {
+    if ("id" in identifier) {
+      return this.api.getSellArgsById(identifier.id, params);
+    }
+
+    if ("contractAddress" in identifier) {
+      return this.api.getSellArgsByContract(identifier.contractAddress, params);
+    }
+
+    throw new Error("Invalid identifier provided to getSellArgs.");
   }
 
   /**
@@ -583,7 +577,7 @@ class CoinsResource {
    *
    * @returns An array of coin objects
    */
-  getPopular() {
+  popular() {
     return this.api.getPopularCoins();
   }
 }
@@ -611,12 +605,12 @@ class CoinsResource {
  * const userByWallet = await api.users.get({ wallet: "0x1234..." });
  *
  * // Subscribers
- * const count = await api.subscribers.getCount("publicationId");
+ * const count = await api.subscribers.getCount({ id: "publicationId" });
  *
  * // Coins
  * const coin = await api.coins.get({ id: "coinId" });
  * const coinByContract = await api.coins.get({ contractAddress: "0x1234..." });
- * const popular = await api.coins.getPopular();
+ * const popular = await api.coins.popular();
  * ```
  */
 export class ParagraphAPI {
