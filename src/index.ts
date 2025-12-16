@@ -70,6 +70,23 @@ export type UserIdentifier = { id: string } | { wallet: string };
 export type CoinIdentifier = { id: string } | { contractAddress: string };
 
 /**
+ * A discriminated union of identifiers for listing posts.
+ * Use one of the following shapes:
+ * - `{ type: "publication", publicationId: string }` to list posts from a specific publication.
+ * - `{ type: "feed" }` to get the curated feed from across the platform.
+ */
+export type PostListIdentifier =
+  | { type: "publication"; publicationId: string }
+  | { type: "feed" };
+
+/**
+ * A discriminated union of identifiers for listing coins.
+ * Use one of the following shapes:
+ * - `{ type: "popular" }` to get the most popular coins.
+ */
+export type CoinListIdentifier = { type: "popular" };
+
+/**
  * Type helper to extract the query options for getting a post.
  * It correctly infers the type from the generated API client's method signature,
  * ensuring the types are always in sync.
@@ -140,6 +157,52 @@ class SubscribersResource {
   getCount({ id }: { id: string }) {
     return this.api.getSubscriberCount(id);
   }
+
+  /**
+   * Creates a new subscriber in the publication associated with the API key.
+   *
+   * @example
+   * ```ts
+   * const api = new ParagraphAPI();
+   *
+   * // Create subscriber by email
+   * await api.subscribers.create({ email: "user@example.com" });
+   *
+   * // Create subscriber by wallet
+   * await api.subscribers.create({ wallet: "0x1234..." });
+   *
+   * // Create subscriber with both email and wallet
+   * await api.subscribers.create({
+   *   email: "user@example.com",
+   *   wallet: "0x1234..."
+   * });
+   * ```
+   *
+   * @param body - The subscriber data. At least one of email or wallet must be provided.
+   * @returns A promise that resolves to the result of the operation.
+   */
+  create(body: Parameters<ReturnType<typeof getParagraphAPI>["addSubscriber"]>[0]) {
+    return this.api.addSubscriber(body);
+  }
+
+  /**
+   * Imports subscribers from a CSV file into the publication associated with the API key.
+   *
+   * @example
+   * ```ts
+   * const api = new ParagraphAPI();
+   *
+   * // Import from CSV file
+   * const file = new File([csvContent], "subscribers.csv", { type: "text/csv" });
+   * await api.subscribers.importCsv({ file });
+   * ```
+   *
+   * @param body - An object containing the CSV file to import.
+   * @returns A promise that resolves to the result of the import operation.
+   */
+  importCsv(body: Parameters<ReturnType<typeof getParagraphAPI>["importSubscribers"]>[0]) {
+    return this.api.importSubscribers(body);
+  }
 }
 
 /**
@@ -150,17 +213,50 @@ class PostsResource {
   constructor(private api: ReturnType<typeof getParagraphAPI>) {}
 
   /**
-   * Retrieves a paginated list of posts for a given publication.
+   * Retrieves a paginated list of posts using one of several sources.
    *
-   * @param publicationId - The unique identifier of the publication.
-   * @param params - Optional parameters for pagination and content inclusion.
+   * @example
+   * ```ts
+   * const api = new ParagraphAPI();
+   *
+   * // List posts from a specific publication
+   * const posts = await api.posts.list({
+   *   type: "publication",
+   *   publicationId: "BMV6abfvCSUl51ErCVzd"
+   * });
+   *
+   * // Get the curated feed from across the platform
+   * const feed = await api.posts.list({ type: "feed" });
+   *
+   * // With pagination
+   * const postsWithPagination = await api.posts.list(
+   *   { type: "publication", publicationId: "BMV6abfvCSUl51ErCVzd" },
+   *   { limit: 50, cursor: "abc123" }
+   * );
+   *
+   * // Include full content
+   * const postsWithContent = await api.posts.list(
+   *   { type: "feed" },
+   *   { includeContent: true }
+   * );
+   * ```
+   *
+   * @param identifier - A {@link PostListIdentifier} object to specify the source of posts.
+   * @param options - Optional parameters for pagination and content inclusion.
    * @returns A promise that resolves to a paginated list of posts.
    */
   list(
-    publicationId: string,
-    params?: Parameters<ReturnType<typeof getParagraphAPI>["getPosts"]>[1]
+    identifier: PostListIdentifier,
+    options?: Parameters<ReturnType<typeof getParagraphAPI>["getPosts"]>[1]
   ) {
-    return this.api.getPosts(publicationId, params);
+    switch (identifier.type) {
+      case "publication":
+        return this.api.getPosts(identifier.publicationId, options);
+      case "feed":
+        return this.api.getPostsFeed(options);
+      default:
+        throw new Error("Invalid identifier provided to list.");
+    }
   }
 
   /**
@@ -220,6 +316,39 @@ class PostsResource {
     }
 
     throw new Error("Invalid identifier provided to get.");
+  }
+
+  /**
+   * Creates a new post in the publication associated with the API key.
+   *
+   * @example
+   * ```ts
+   * const api = new ParagraphAPI();
+   *
+   * // Create a basic post
+   * const post = await api.posts.create({
+   *   title: "My First Post",
+   *   markdown: "# Hello World\n\nThis is my first post!"
+   * });
+   *
+   * // Create a post with all options
+   * const fullPost = await api.posts.create({
+   *   title: "My Full Post",
+   *   markdown: "# Content\n\nPost content here...",
+   *   subtitle: "A brief summary",
+   *   imageUrl: "https://example.com/cover.jpg",
+   *   slug: "my-full-post",
+   *   postPreview: "Preview text...",
+   *   categories: ["tech", "tutorial"],
+   *   sendNewsletter: true
+   * });
+   * ```
+   *
+   * @param body - The post data including title and markdown content.
+   * @returns A promise that resolves to the created post data.
+   */
+  create(body: Parameters<ReturnType<typeof getParagraphAPI>["createPost"]>[0]) {
+    return this.api.createPost(body);
   }
 }
 
@@ -573,12 +702,26 @@ class CoinsResource {
   }
 
   /**
-   * Retrieves the 50 most popular coins.
+   * Retrieves a list of coins using one of several sources.
    *
-   * @returns An array of coin objects
+   * @example
+   * ```ts
+   * const api = new ParagraphAPI();
+   *
+   * // Get the most popular coins
+   * const popular = await api.coins.list({ type: "popular" });
+   * ```
+   *
+   * @param identifier - A {@link CoinListIdentifier} object to specify the source of coins.
+   * @returns A promise that resolves to a list of coins.
    */
-  popular() {
-    return this.api.getPopularCoins();
+  list(identifier: CoinListIdentifier) {
+    switch (identifier.type) {
+      case "popular":
+        return this.api.getPopularCoins();
+      default:
+        throw new Error("Invalid identifier provided to list.");
+    }
   }
 }
 
@@ -597,8 +740,10 @@ class CoinsResource {
  * const pubByDomain = await api.publications.get({ domain: "blog.mydomain.com" });
  *
  * // Posts
- * const posts = await api.posts.list("publicationId");
+ * const posts = await api.posts.list({ type: "publication", publicationId: "publicationId" });
+ * const feed = await api.posts.list({ type: "feed" });
  * const post = await api.posts.get({ id: "postId" });
+ * const newPost = await api.posts.create({ title: "My Post", markdown: "# Hello" });
  *
  * // Users
  * const user = await api.users.get({ id: "userId" });
@@ -606,11 +751,12 @@ class CoinsResource {
  *
  * // Subscribers
  * const count = await api.subscribers.getCount({ id: "publicationId" });
+ * await api.subscribers.create({ email: "user@example.com" });
  *
  * // Coins
  * const coin = await api.coins.get({ id: "coinId" });
  * const coinByContract = await api.coins.get({ contractAddress: "0x1234..." });
- * const popular = await api.coins.popular();
+ * const popular = await api.coins.list({ type: "popular" });
  * ```
  */
 export class ParagraphAPI {
