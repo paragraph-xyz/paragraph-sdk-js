@@ -1,17 +1,17 @@
-# @paragraph_xyz/sdk
+# @paragraph-com/sdk
 
 TypeScript SDK for the [Paragraph](https://paragraph.com) API. Used to interact with Paragraph posts, users, coins, & more.
 
 ## Install
 
 ```bash
-yarn add @paragraph_xyz/sdk
+yarn add @paragraph-com/sdk
 ```
 
 ## Quick start
 
 ```typescript
-import { ParagraphAPI } from "@paragraph_xyz/sdk";
+import { ParagraphAPI } from "@paragraph-com/sdk";
 
 // For public endpoints
 const api = new ParagraphAPI();
@@ -21,7 +21,7 @@ const post = await api.posts.get({ id: "postId" });
 const apiWithAuth = new ParagraphAPI({ apiKey: "your-api-key" });
 const newPost = await apiWithAuth.posts.create({
   title: "My Post",
-  markdown: "# Hello World"
+  markdown: "# Hello World",
 });
 ```
 

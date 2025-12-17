@@ -580,9 +580,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@paragraph_xyz/sdk@workspace:.":
+"@paragraph-com/sdk@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@paragraph_xyz/sdk@workspace:."
+  resolution: "@paragraph-com/sdk@workspace:."
   dependencies:
     "@types/node": ^20.0.0
     "@whetstone-research/doppler-sdk": ^0.0.1-alpha.62
