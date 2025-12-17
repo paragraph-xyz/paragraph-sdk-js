@@ -4,22 +4,23 @@ import { ParagraphAPI } from "../src";
 const api = new ParagraphAPI();
 
 async function main() {
-  // Get popular coins
-  const { coins } = await api.coins.list({ type: "popular" });
+  // Get popular coins (returns paginated result)
+  const { items: coins, pagination: coinsPag } = await api.coins.get({ sortBy: "popular" });
   console.log(
     "Popular coins:",
     coins.map((c) => c.contractAddress)
   );
+  console.log("Total popular coins:", coinsPag.total);
 
-  // Get a specific coin by ID
-  const { metadata } = await api.coins.get({ id: "N3j7OrRYuRKZQM1rhYEh" });
-  console.log("Coin by ID:", metadata.name, metadata.symbol);
+  // Get a specific coin by ID (use .single() to get a single object)
+  const coin = await api.coins.get({ id: "N3j7OrRYuRKZQM1rhYEh" }).single();
+  console.log("Coin by ID:", coin.metadata.name, coin.metadata.symbol);
 
   // Get a coin by its contract address
   // const coinByContract = await api.coins.get({
   //   contractAddress: "0x1234...",
-  // });
-  // console.log("Coin by contract:", coinByContract.name);
+  // }).single();
+  // console.log("Coin by contract:", coinByContract.metadata.name);
 
   // Get a quote for buying a coin (how many tokens for X ETH)
   const quote = await api.coins.getQuote(

@@ -21,10 +21,10 @@ async function main() {
   // Fetch a post by publication slug and post slug
   // The slugs are the URL-friendly identifiers you see in the browser:
   // https://paragraph.xyz/@blog/coins -> publicationSlug: "blog", postSlug: "coins"
-  const post = await api.posts.get(
-    { publicationSlug: "blog", postSlug: "coins" },
-    { includeContent: true } // Include full markdown/HTML content
-  );
+  // Use .single() to get a single post from the result
+  const post = await api.posts
+    .get({ publicationSlug: "blog", postSlug: "coins" }, { includeContent: true })
+    .single();
 
   console.log("Post title:", post.title);
   console.log("Post subtitle:", post.subtitle);

@@ -9,10 +9,13 @@ import {
 } from "viem";
 import { getParagraphAPI } from "./generated/api";
 import type {
-  GetPosts200,
-  GetPostsFeed200,
+  GetCoin200,
+  GetPostById200,
+  GetPostsFeed200ItemsItem,
   GetPostsParams,
   GetPostsFeedParams,
+  GetPublicationById200,
+  GetUser200,
 } from "./generated/models";
 import { setCurrentApiKey } from "./mutator/custom-axios";
 import { base } from "viem/chains";
@@ -30,6 +33,89 @@ export interface ParagraphAPIOptions {
    * Obtain an API key from your Paragraph publication settings.
    */
   apiKey?: string;
+}
+
+/**
+ * Pagination information for paginated results.
+ */
+export interface Pagination {
+  /** Cursor for fetching the next page of results */
+  cursor?: string;
+  /** Whether more results are available */
+  hasMore: boolean;
+  /** Total number of items available */
+  total?: number;
+}
+
+/**
+ * Result type for paginated queries, containing both items and pagination info.
+ */
+export interface PaginatedResult<T> {
+  /** Array of items in this page */
+  items: T[];
+  /** Pagination information */
+  pagination: Pagination;
+}
+
+/**
+ * A wrapper class for query results that provides a consistent interface
+ * for both single-item and multi-item queries.
+ *
+ * All get() methods return a QueryResult, which can be awaited directly
+ * to get the paginated result, or use `.single()` to extract a single item.
+ *
+ * @example
+ * ```ts
+ * // Get paginated results
+ * const { items, pagination } = await api.posts.get({ publicationId: "..." });
+ *
+ * // Get a single item
+ * const post = await api.posts.get({ id: "..." }).single();
+ * ```
+ */
+export class QueryResult<T> implements PromiseLike<PaginatedResult<T>> {
+  constructor(private promise: Promise<PaginatedResult<T>>) {}
+
+  /**
+   * Implements PromiseLike interface, allowing QueryResult to be awaited directly.
+   */
+  then<TResult1 = PaginatedResult<T>, TResult2 = never>(
+    onfulfilled?:
+      | ((value: PaginatedResult<T>) => TResult1 | PromiseLike<TResult1>)
+      | null,
+    onrejected?: ((reason: unknown) => TResult2 | PromiseLike<TResult2>) | null
+  ): Promise<TResult1 | TResult2> {
+    return this.promise.then(onfulfilled, onrejected);
+  }
+
+  /**
+   * Returns the first item from the result.
+   * Use this when you expect a single result (e.g., getting by ID).
+   *
+   * @throws Error if no items are returned
+   * @returns A promise that resolves to a single item
+   */
+  async single(): Promise<T> {
+    const result = await this.promise;
+    if (result.items.length === 0) {
+      throw new Error("No items found");
+    }
+    return result.items[0];
+  }
+}
+
+/**
+ * Helper function to create a paginated result for a single item.
+ * Used internally to wrap single-item API responses in a consistent format.
+ */
+function singleItemResult<T>(item: T): PaginatedResult<T> {
+  return {
+    items: [item],
+    pagination: {
+      hasMore: false,
+      total: 1,
+    },
+  };
 }
 
 const executeAbi = [
@@ -61,16 +147,44 @@ export type PublicationIdentifier =
   | { domain: string };
 
 /**
- * A discriminated union of identifiers for retrieving a single post.
+ * Identifier for getting a single post by ID.
+ */
+export type PostIdIdentifier = { id: string };
+
+/**
+ * Identifier for getting a single post by publication ID and post slug.
+ */
+export type PostByPubIdAndSlugIdentifier = {
+  publicationId: string;
+  postSlug: string;
+};
+
+/**
+ * Identifier for getting a single post by publication slug and post slug.
+ */
+export type PostByPubSlugAndSlugIdentifier = {
+  publicationSlug: string;
+  postSlug: string;
+};
+
+/**
+ * Identifier for getting a list of posts from a publication.
+ */
+export type PostsByPublicationIdIdentifier = { publicationId: string };
+
+/**
+ * A discriminated union of identifiers for retrieving posts.
  * Use one of the following shapes:
- * - `{ id: string }` to get a post by its unique ID.
- * - `{ publicationId: string; postSlug: string }` to get a post by its slug within a known publication ID.
- * - `{ publicationSlug: string; postSlug: string }` to get a post by both the publication's and post's slugs.
+ * - `{ id: string }` to get a post by its unique ID (returns single post in array).
+ * - `{ publicationId: string; postSlug: string }` to get a post by its slug within a known publication ID (returns single post in array).
+ * - `{ publicationSlug: string; postSlug: string }` to get a post by both the publication's and post's slugs (returns single post in array).
+ * - `{ publicationId: string }` to get a list of posts from a publication (returns multiple posts).
  */
 export type PostIdentifier =
-  | { id: string }
-  | { publicationId: string; postSlug: string }
-  | { publicationSlug: string; postSlug: string };
+  | PostIdIdentifier
+  | PostByPubIdAndSlugIdentifier
+  | PostByPubSlugAndSlugIdentifier
+  | PostsByPublicationIdIdentifier;
 
 /**
  * A discriminated union of identifiers for retrieving a single user.
@@ -81,43 +195,34 @@ export type PostIdentifier =
 export type UserIdentifier = { id: string } | { wallet: string };
 
 /**
- * A discriminated union of identifiers for retrieving a single coin.
+ * Identifier for getting a single coin by ID.
+ */
+export type CoinIdIdentifier = { id: string };
+
+/**
+ * Identifier for getting a single coin by contract address.
+ */
+export type CoinByContractIdentifier = { contractAddress: string };
+
+/**
+ * Identifier for getting a list of popular coins.
+ */
+export type CoinPopularIdentifier = { sortBy: "popular" };
+
+/**
+ * Identifier for a single coin (by ID or contract address).
+ * Used for operations that require a specific coin.
+ */
+export type SingleCoinIdentifier = CoinIdIdentifier | CoinByContractIdentifier;
+
+/**
+ * A discriminated union of identifiers for retrieving coins.
  * Use one of the following shapes:
- * - `{ id: string }` to get a coin by its unique ID.
- * - `{ contractAddress: string }` to get a coin by its on-chain contract address.
+ * - `{ id: string }` to get a coin by its unique ID (returns single coin in array).
+ * - `{ contractAddress: string }` to get a coin by its on-chain contract address (returns single coin in array).
+ * - `{ sortBy: "popular" }` to get the most popular coins (returns multiple coins).
  */
-export type CoinIdentifier = { id: string } | { contractAddress: string };
-
-/**
- * Identifier for listing posts from a specific publication.
- * Returns posts with basic post data.
- */
-export type PublicationPostsIdentifier = { type: "publication"; publicationId: string };
-
-/**
- * Identifier for getting the curated feed from across the platform.
- * Returns posts with additional publication and user data.
- */
-export type FeedPostsIdentifier = { type: "feed" };
-
-/**
- * A discriminated union of identifiers for listing posts.
- * Use one of the following shapes:
- * - `{ type: "publication", publicationId: string }` to list posts from a specific publication.
- * - `{ type: "feed" }` to get the curated feed from across the platform.
- *
- * Note: The return type differs based on the identifier:
- * - Publication posts return `GetPosts200` with items containing post data directly.
- * - Feed posts return `GetPostsFeed200` with items containing `{ post, publication, user }`.
- */
-export type PostListIdentifier = PublicationPostsIdentifier | FeedPostsIdentifier;
-
-/**
- * A discriminated union of identifiers for listing coins.
- * Use one of the following shapes:
- * - `{ type: "popular" }` to get the most popular coins.
- */
-export type CoinListIdentifier = { type: "popular" };
+export type CoinIdentifier = SingleCoinIdentifier | CoinPopularIdentifier;
 
 /**
  * Type helper to extract the query options for getting a post.
@@ -142,31 +247,37 @@ class PublicationsResource {
    * ```ts
    * const api = new ParagraphAPI();
    *
-   * // Get publication by its unique ID
-   * const pubById = await api.publications.get({ id: "BMV6abfvCSUl51ErCVzd" });
+   * // Get publication by its unique ID (use .single() for single object)
+   * const pub = await api.publications.get({ id: "BMV6abfvCSUl51ErCVzd" }).single();
    *
-   * // Get publication by its URL-friendly slug
-   * const pubBySlug = await api.publications.get({ slug: "blog" });
-   * const pubBySlug2 = await api.publications.get({ slug: "@blog" });
+   * // Or get the full paginated result
+   * const { items, pagination } = await api.publications.get({ slug: "blog" });
+   * const pubBySlug = items[0];
    *
    * // Get publication by its custom domain
-   * const pubByDomain = await api.publications.get({ domain: "blog.mydomain.com" });
+   * const pubByDomain = await api.publications.get({ domain: "blog.mydomain.com" }).single();
    * ```
    *
    * @param identifier - A {@link PublicationIdentifier} object to specify which publication to retrieve.
-   * @returns A promise that resolves to the publication's data.
+   * @returns A QueryResult that resolves to a paginated result. Use `.single()` to get just the publication.
    */
-  get(identifier: PublicationIdentifier) {
+  get(identifier: PublicationIdentifier): QueryResult<GetPublicationById200> {
     if ("id" in identifier) {
-      return this.api.getPublicationById(identifier.id);
+      return new QueryResult(
+        this.api.getPublicationById(identifier.id).then(singleItemResult)
+      );
     }
 
     if ("slug" in identifier) {
-      return this.api.getPublicationBySlug(identifier.slug);
+      return new QueryResult(
+        this.api.getPublicationBySlug(identifier.slug).then(singleItemResult)
+      );
     }
 
     if ("domain" in identifier) {
-      return this.api.getPublicationByDomain(identifier.domain);
+      return new QueryResult(
+        this.api.getPublicationByDomain(identifier.domain).then(singleItemResult)
+      );
     }
 
     throw new Error("Invalid identifier provided to get.");
@@ -224,7 +335,9 @@ class SubscribersResource {
    * @param body - The subscriber data. At least one of email or wallet must be provided.
    * @returns A promise that resolves to the result of the operation.
    */
-  create(body: Parameters<ReturnType<typeof getParagraphAPI>["addSubscriber"]>[0]) {
+  create(
+    body: Parameters<ReturnType<typeof getParagraphAPI>["addSubscriber"]>[0]
+  ) {
     return this.api.addSubscriber(body);
   }
 
@@ -244,7 +357,9 @@ class SubscribersResource {
    * @param body - An object containing the CSV file to import.
    * @returns A promise that resolves to the result of the import operation.
    */
-  importCsv(body: Parameters<ReturnType<typeof getParagraphAPI>["importSubscribers"]>[0]) {
+  importCsv(
+    body: Parameters<ReturnType<typeof getParagraphAPI>["importSubscribers"]>[0]
+  ) {
     return this.api.importSubscribers(body);
   }
 }
@@ -257,130 +372,92 @@ class PostsResource {
   constructor(private api: ReturnType<typeof getParagraphAPI>) {}
 
   /**
-   * Retrieves a paginated list of posts from a specific publication.
-   * Each item in the response contains post data directly.
+   * Retrieves posts using one of several unique identifiers.
+   *
+   * All queries return a QueryResult with paginated results. Use `.single()` to get a single post.
    *
    * @example
    * ```ts
    * const api = new ParagraphAPI();
    *
-   * const { items, pagination } = await api.posts.list({
-   *   type: "publication",
-   *   publicationId: "BMV6abfvCSUl51ErCVzd"
-   * });
+   * // Get a paginated list of posts from a publication
+   * const { items: posts, pagination } = await api.posts.get(
+   *   { publicationId: "BMV6abfvCSUl51ErCVzd" },
+   *   { limit: 10 }
+   * );
+   * posts.forEach(post => console.log(post.title));
    *
-   * // Each item is a post object
-   * items.forEach(post => {
-   *   console.log(post.title, post.slug);
-   * });
-   * ```
+   * // Paginate through results
+   * if (pagination.hasMore && pagination.cursor) {
+   *   const nextPage = await api.posts.get(
+   *     { publicationId: "BMV6abfvCSUl51ErCVzd" },
+   *     { cursor: pagination.cursor }
+   *   );
+   * }
    *
-   * @param identifier - A {@link PublicationPostsIdentifier} specifying the publication.
-   * @param options - Optional parameters for pagination and content inclusion.
-   * @returns A promise that resolves to a paginated list of posts.
-   */
-  list(
-    identifier: PublicationPostsIdentifier,
-    options?: GetPostsParams
-  ): Promise<GetPosts200>;
-
-  /**
-   * Retrieves the curated feed of posts from across the platform.
-   * Each item in the response contains post data along with publication and user information.
+   * // Get a single post by ID
+   * const post = await api.posts.get({ id: "3T2PQZlsdQtigUp4fhlb" }).single();
    *
-   * @example
-   * ```ts
-   * const api = new ParagraphAPI();
-   *
-   * const { items, pagination } = await api.posts.list({ type: "feed" });
-   *
-   * // Each item contains post, publication, and user data
-   * items.forEach(item => {
-   *   console.log(item.post.title);
-   *   console.log(item.publication.name);
-   *   console.log(item.user.displayName);
-   * });
-   * ```
-   *
-   * @param identifier - A {@link FeedPostsIdentifier} to get the platform feed.
-   * @param options - Optional parameters for pagination and content inclusion.
-   * @returns A promise that resolves to a paginated list of feed items.
-   */
-  list(
-    identifier: FeedPostsIdentifier,
-    options?: GetPostsFeedParams
-  ): Promise<GetPostsFeed200>;
-
-  /**
-   * Implementation of list method.
-   */
-  list(
-    identifier: PostListIdentifier,
-    options?: GetPostsParams | GetPostsFeedParams
-  ): Promise<GetPosts200 | GetPostsFeed200> {
-    switch (identifier.type) {
-      case "publication":
-        return this.api.getPosts(identifier.publicationId, options);
-      case "feed":
-        return this.api.getPostsFeed(options);
-      default:
-        throw new Error("Invalid identifier provided to list.");
-    }
-  }
-
-  /**
-   * Retrieves a single post using one of several unique identifiers.
-   * This method allows fetching a post by its ID, or by a combination of
-   * publication and post slugs/IDs.
-   *
-   * @example
-   * ```ts
-   * const api = new ParagraphAPI();
-   *
-   * // Get post by its unique ID
-   * const postById = await api.posts.get({ id: "3T2PQZlsdQtigUp4fhlb" });
-   *
-   * // Get post by publication ID and post slug
-   * const postByPubIdAndSlug = await api.posts.get({
-   *   publicationId: "BMV6abfvCSUl51ErCVzd",
-   *   postSlug: "my-first-post"
-   * });
-   *
-   * // Get post by publication slug and post slug
+   * // Get a single post by publication slug and post slug
    * const postBySlugs = await api.posts.get({
    *   publicationSlug: "blog",
    *   postSlug: "my-first-post"
-   * });
+   * }).single();
    *
    * // Include full content
    * const postWithContent = await api.posts.get(
    *   { id: "3T2PQZlsdQtigUp4fhlb" },
    *   { includeContent: true }
-   * );
+   * ).single();
    * ```
    *
-   * @param identifier - A {@link PostIdentifier} object to specify which post to retrieve.
-   * @param options - Optional query parameters, e.g., `{ includeContent: boolean }`.
-   * @returns A promise that resolves to the post's data.
+   * @param identifier - A {@link PostIdentifier} object to specify which post(s) to retrieve.
+   * @param options - Optional query parameters for pagination and content inclusion.
+   * @returns A QueryResult with paginated results. Use `.single()` to get a single post.
    */
-  get(identifier: PostIdentifier, options?: PostQueryOptions) {
-    if ("id" in identifier) {
-      return this.api.getPostById(identifier.id, options);
+  get(
+    identifier: PostIdentifier,
+    options?: GetPostsParams | PostQueryOptions
+  ): QueryResult<GetPostById200> {
+    // If only publicationId is provided (no postSlug), get list of posts with pagination
+    if ("publicationId" in identifier && !("postSlug" in identifier)) {
+      return new QueryResult(
+        this.api.getPosts(
+          identifier.publicationId,
+          options as GetPostsParams
+        ) as Promise<PaginatedResult<GetPostById200>>
+      );
     }
 
-    if ("publicationId" in identifier) {
-      return this.api.getPostByPublicationIdAndPostSlug(
-        identifier.publicationId,
-        identifier.postSlug,
-        options
+    if ("id" in identifier) {
+      return new QueryResult(
+        this.api
+          .getPostById(identifier.id, options as PostQueryOptions)
+          .then(singleItemResult)
+      );
+    }
+
+    if ("publicationId" in identifier && "postSlug" in identifier) {
+      return new QueryResult(
+        this.api
+          .getPostByPublicationIdAndPostSlug(
+            identifier.publicationId,
+            identifier.postSlug,
+            options as PostQueryOptions
+          )
+          .then(singleItemResult)
       );
     }
 
     if ("publicationSlug" in identifier) {
-      return this.api.getPostByPublicationSlugAndPostSlug(
-        identifier.publicationSlug,
-        identifier.postSlug,
-        options
+      return new QueryResult(
+        this.api
+          .getPostByPublicationSlugAndPostSlug(
+            identifier.publicationSlug,
+            identifier.postSlug,
+            options as PostQueryOptions
+          )
+          .then(singleItemResult)
       );
     }
 
@@ -417,8 +494,53 @@ class PostsResource {
    * @param body - The post data including title and markdown content.
    * @returns A promise that resolves to the created post data.
    */
-  create(body: Parameters<ReturnType<typeof getParagraphAPI>["createPost"]>[0]) {
+  create(
+    body: Parameters<ReturnType<typeof getParagraphAPI>["createPost"]>[0]
+  ) {
     return this.api.createPost(body);
+  }
+}
+
+/**
+ * Feed resource handler.
+ * Access via `api.feed`
+ */
+class FeedResource {
+  constructor(private api: ReturnType<typeof getParagraphAPI>) {}
+
+  /**
+   * Retrieves the curated feed of posts from across the platform.
+   * Returns a QueryResult with paginated feed items and pagination info.
+   * Each item contains post data along with publication and user information.
+   *
+   * @example
+   * ```ts
+   * const api = new ParagraphAPI();
+   *
+   * // Get the curated feed with pagination info
+   * const { items: feedItems, pagination } = await api.feed.get();
+   * feedItems.forEach(item => {
+   *   console.log(item.post.title);
+   *   console.log(item.publication.name);
+   *   console.log(item.user.displayName);
+   * });
+   *
+   * // Paginate through results
+   * if (pagination.hasMore && pagination.cursor) {
+   *   const nextPage = await api.feed.get({ cursor: pagination.cursor });
+   * }
+   *
+   * // With custom limit
+   * const { items, pagination: pagInfo } = await api.feed.get({ limit: 10 });
+   * ```
+   *
+   * @param options - Optional parameters for pagination and content inclusion.
+   * @returns A QueryResult with paginated feed items and pagination info.
+   */
+  get(options?: GetPostsFeedParams): QueryResult<GetPostsFeed200ItemsItem> {
+    return new QueryResult(
+      this.api.getPostsFeed(options) as Promise<PaginatedResult<GetPostsFeed200ItemsItem>>
+    );
   }
 }
 
@@ -436,23 +558,30 @@ class UsersResource {
    * ```ts
    * const api = new ParagraphAPI();
    *
-   * // Get user by their unique ID
-   * const userById = await api.users.get({ id: "user123" });
+   * // Get user by their unique ID (use .single() to get single object)
+   * const userById = await api.users.get({ id: "user123" }).single();
    *
    * // Get user by their Ethereum wallet address
-   * const userByWallet = await api.users.get({ wallet: "0x1234..." });
+   * const userByWallet = await api.users.get({ wallet: "0x1234..." }).single();
+   *
+   * // Or get the full paginated result
+   * const { items, pagination } = await api.users.get({ wallet: "0x1234..." });
    * ```
    *
    * @param identifier - A {@link UserIdentifier} object to specify which user to retrieve.
-   * @returns A promise that resolves to the user's data.
+   * @returns A QueryResult that resolves to a paginated result. Use `.single()` to get just the user.
    */
-  get(identifier: UserIdentifier) {
+  get(identifier: UserIdentifier): QueryResult<GetUser200> {
     if ("id" in identifier) {
-      return this.api.getUser(identifier.id);
+      return new QueryResult(
+        this.api.getUser(identifier.id).then(singleItemResult)
+      );
     }
 
     if ("wallet" in identifier) {
-      return this.api.getUserByWallet(identifier.wallet);
+      return new QueryResult(
+        this.api.getUserByWallet(identifier.wallet).then(singleItemResult)
+      );
     }
 
     throw new Error("Invalid identifier provided to get.");
@@ -467,29 +596,51 @@ class CoinsResource {
   constructor(private api: ReturnType<typeof getParagraphAPI>) {}
 
   /**
-   * Retrieves metadata about a coin using one of several unique identifiers.
+   * Retrieves coins using one of several unique identifiers.
+   *
+   * All queries return a QueryResult with paginated results. Use `.single()` to get a single coin.
    *
    * @example
    * ```ts
    * const api = new ParagraphAPI();
    *
-   * // Get coin by its unique ID
-   * const coinById = await api.coins.get({ id: "coin123" });
+   * // Get popular coins
+   * const { items: popularCoins, pagination } = await api.coins.get({ sortBy: "popular" });
+   * popularCoins.forEach(coin => console.log(coin.metadata.name));
+   *
+   * // Get coin by its unique ID (use .single() for single object)
+   * const coinById = await api.coins.get({ id: "coin123" }).single();
    *
    * // Get coin by its on-chain contract address
-   * const coinByContract = await api.coins.get({ contractAddress: "0x1234..." });
+   * const coinByContract = await api.coins.get({ contractAddress: "0x1234..." }).single();
    * ```
    *
-   * @param identifier - A {@link CoinIdentifier} object to specify which coin to retrieve.
-   * @returns A promise that resolves to the coin's data.
+   * @param identifier - A {@link CoinIdentifier} object to specify which coin(s) to retrieve.
+   * @returns A QueryResult with paginated results. Use `.single()` to get a single coin.
    */
-  get(identifier: CoinIdentifier) {
+  get(identifier: CoinIdentifier): QueryResult<GetCoin200> {
+    if ("sortBy" in identifier && identifier.sortBy === "popular") {
+      return new QueryResult(
+        this.api.getPopularCoins().then((result) => ({
+          items: result.coins as GetCoin200[],
+          pagination: {
+            hasMore: false,
+            total: result.coins.length,
+          },
+        }))
+      );
+    }
+
     if ("id" in identifier) {
-      return this.api.getCoin(identifier.id);
+      return new QueryResult(
+        this.api.getCoin(identifier.id).then(singleItemResult)
+      );
     }
 
     if ("contractAddress" in identifier) {
-      return this.api.getCoinByContract(identifier.contractAddress);
+      return new QueryResult(
+        this.api.getCoinByContract(identifier.contractAddress).then(singleItemResult)
+      );
     }
 
     throw new Error("Invalid identifier provided to get.");
@@ -515,20 +666,25 @@ class CoinsResource {
    * );
    * ```
    *
-   * @param identifier - A {@link CoinIdentifier} object to specify which coin's holders to retrieve.
+   * @param identifier - A {@link SingleCoinIdentifier} object to specify which coin's holders to retrieve.
    * @param params - Optional parameters for pagination.
    * @returns A promise that resolves to a paginated list of coin holders.
    */
   getHolders(
-    identifier: CoinIdentifier,
-    params?: Parameters<ReturnType<typeof getParagraphAPI>["getCoinHoldersById"]>[1]
+    identifier: SingleCoinIdentifier,
+    params?: Parameters<
+      ReturnType<typeof getParagraphAPI>["getCoinHoldersById"]
+    >[1]
   ) {
     if ("id" in identifier) {
       return this.api.getCoinHoldersById(identifier.id, params);
     }
 
     if ("contractAddress" in identifier) {
-      return this.api.getCoinHoldersByContract(identifier.contractAddress, params);
+      return this.api.getCoinHoldersByContract(
+        identifier.contractAddress,
+        params
+      );
     }
 
     throw new Error("Invalid identifier provided to getHolders.");
@@ -559,7 +715,7 @@ class CoinsResource {
    * ```
    *
    * @param options
-   *  - coin: A {@link CoinIdentifier} to specify which coin to buy
+   *  - coin: A {@link SingleCoinIdentifier} to specify which coin to buy
    *  - client: the Client object that is going to make the transaction
    *  - account: the Account of the buyer
    *  - amount: the amount of ETH in wei that is going to be swapped for the coin
@@ -571,7 +727,7 @@ class CoinsResource {
     account,
     amount,
   }: {
-    coin: CoinIdentifier;
+    coin: SingleCoinIdentifier;
     client: WalletClient;
     account: Account;
     amount: bigint;
@@ -598,7 +754,7 @@ class CoinsResource {
   }
 
   private getBuyArgs(
-    identifier: CoinIdentifier,
+    identifier: SingleCoinIdentifier,
     params: Parameters<ReturnType<typeof getParagraphAPI>["getBuyArgsById"]>[1]
   ) {
     if ("id" in identifier) {
@@ -637,7 +793,7 @@ class CoinsResource {
    * ```
    *
    * @param options
-   *  - coin: A {@link CoinIdentifier} to specify which coin to sell
+   *  - coin: A {@link SingleCoinIdentifier} to specify which coin to sell
    *  - client: the Client object that is going to make the transaction
    *  - account: the Account of the seller
    *  - amount: the amount of coin in wei that is going to be swapped for WETH
@@ -649,12 +805,12 @@ class CoinsResource {
     account,
     amount,
   }: {
-    coin: CoinIdentifier;
+    coin: SingleCoinIdentifier;
     client: WalletClient;
     account: Account;
     amount: bigint;
   }) {
-    const coinData = await this.get(coin);
+    const coinData = await this.get(coin).single();
     const sellArgs = await this.getSellArgs(coin, {
       walletAddress: account.address,
       amount: amount.toString(),
@@ -720,7 +876,7 @@ class CoinsResource {
   }
 
   private getSellArgs(
-    identifier: CoinIdentifier,
+    identifier: SingleCoinIdentifier,
     params: Parameters<ReturnType<typeof getParagraphAPI>["getSellArgsById"]>[1]
   ) {
     if ("id" in identifier) {
@@ -751,13 +907,15 @@ class CoinsResource {
    * );
    * ```
    *
-   * @param identifier - A {@link CoinIdentifier} to specify which coin to get a quote for.
+   * @param identifier - A {@link SingleCoinIdentifier} to specify which coin to get a quote for.
    * @param amount - The amount of ETH in wei to be quoted.
    * @returns The amount of coin you would receive in exchange.
    */
-  getQuote(identifier: CoinIdentifier, amount: bigint) {
+  getQuote(identifier: SingleCoinIdentifier, amount: bigint) {
     if ("id" in identifier) {
-      return this.api.getQuoteById(identifier.id, { amount: amount.toString() });
+      return this.api.getQuoteById(identifier.id, {
+        amount: amount.toString(),
+      });
     }
 
     if ("contractAddress" in identifier) {
@@ -768,35 +926,14 @@ class CoinsResource {
 
     throw new Error("Invalid identifier provided to getQuote.");
   }
-
-  /**
-   * Retrieves a list of coins using one of several sources.
-   *
-   * @example
-   * ```ts
-   * const api = new ParagraphAPI();
-   *
-   * // Get the most popular coins
-   * const popular = await api.coins.list({ type: "popular" });
-   * ```
-   *
-   * @param identifier - A {@link CoinListIdentifier} object to specify the source of coins.
-   * @returns A promise that resolves to a list of coins.
-   */
-  list(identifier: CoinListIdentifier) {
-    switch (identifier.type) {
-      case "popular":
-        return this.api.getPopularCoins();
-      default:
-        throw new Error("Invalid identifier provided to list.");
-    }
-  }
 }
 
 /**
  * Paragraph API class wrapper.
  *
  * Entrypoint into all Paragraph API functionality.
+ * All get() methods return a QueryResult with paginated results.
+ * Use `.single()` to get a single item, or await directly to get `{ items, pagination }`.
  *
  * @example
  * ```ts
@@ -806,30 +943,30 @@ class CoinsResource {
  * // For protected endpoints (API key required)
  * const apiWithAuth = new ParagraphAPI({ apiKey: "your-api-key" });
  *
- * // Publications
- * const pub = await api.publications.get({ id: "publicationId" });
- * const pubBySlug = await api.publications.get({ slug: "@blog" });
- * const pubByDomain = await api.publications.get({ domain: "blog.mydomain.com" });
+ * // Publications (use .single() for single object)
+ * const pub = await api.publications.get({ id: "publicationId" }).single();
+ * const pubBySlug = await api.publications.get({ slug: "@blog" }).single();
  *
- * // Posts
- * const posts = await api.posts.list({ type: "publication", publicationId: "publicationId" });
- * const feed = await api.posts.list({ type: "feed" });
- * const post = await api.posts.get({ id: "postId" });
+ * // Posts (paginated list or use .single() for single post)
+ * const { items: posts, pagination } = await api.posts.get({ publicationId: "publicationId" });
+ * const post = await api.posts.get({ id: "postId" }).single();
  * // Creating posts requires an API key
  * const newPost = await apiWithAuth.posts.create({ title: "My Post", markdown: "# Hello" });
  *
- * // Users
- * const user = await api.users.get({ id: "userId" });
- * const userByWallet = await api.users.get({ wallet: "0x1234..." });
+ * // Feed (paginated)
+ * const { items: feedItems, pagination: feedPag } = await api.feed.get();
+ *
+ * // Users (use .single() for single object)
+ * const user = await api.users.get({ id: "userId" }).single();
+ * const userByWallet = await api.users.get({ wallet: "0x1234..." }).single();
  *
  * // Subscribers (mutations require an API key)
  * const count = await api.subscribers.getCount({ id: "publicationId" });
  * await apiWithAuth.subscribers.create({ email: "user@example.com" });
  *
- * // Coins
- * const coin = await api.coins.get({ id: "coinId" });
- * const coinByContract = await api.coins.get({ contractAddress: "0x1234..." });
- * const popular = await api.coins.list({ type: "popular" });
+ * // Coins (use .single() for single coin)
+ * const coin = await api.coins.get({ id: "coinId" }).single();
+ * const { items: popular } = await api.coins.get({ sortBy: "popular" });
  * ```
  */
 /**
@@ -864,6 +1001,9 @@ export class ParagraphAPI {
   /** Posts resource */
   public readonly posts: PostsResource;
 
+  /** Feed resource */
+  public readonly feed: FeedResource;
+
   /** Users resource */
   public readonly users: UsersResource;
 
@@ -886,6 +1026,7 @@ export class ParagraphAPI {
     this.publications = new PublicationsResource(this.api);
     this.subscribers = new SubscribersResource(this.api);
     this.posts = new PostsResource(this.api);
+    this.feed = new FeedResource(this.api);
     this.users = new UsersResource(this.api);
     this.coins = new CoinsResource(this.api);
   }

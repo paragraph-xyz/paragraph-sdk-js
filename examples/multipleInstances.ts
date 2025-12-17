@@ -24,8 +24,8 @@ async function main() {
   });
 
   // Public operations work without an API key
-  const posts = await publicApi.posts.list({ type: "feed" });
-  console.log("Public feed posts:", posts.items.length);
+  const { items: feedItems } = await publicApi.feed.get();
+  console.log("Public feed posts:", feedItems.length);
 
   // Each authenticated instance uses its own API key
   // Posts created with publication1Api go to publication 1
