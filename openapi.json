@@ -146,7 +146,7 @@
           {
             "lang": "typescript",
             "label": "Get publication by ID",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublication(\"BMV6abfvCSUl51ErCVzd\")"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.publications.get({ id: \"BMV6abfvCSUl51ErCVzd\" }).single()"
           }
         ]
       }
@@ -298,7 +298,7 @@
           {
             "lang": "typescript",
             "label": "Get publication by slug",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublicationBySlug(\"blog\")"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.publications.get({ slug: \"@blog\" }).single()"
           }
         ]
       }
@@ -448,7 +448,7 @@
           {
             "lang": "typescript",
             "label": "Get publication by domain",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.getPublicationByDomain(\"avc.xyz\")"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst publication = await api.publications.get({ domain: \"avc.xyz\" }).single()"
           }
         ]
       }
@@ -566,7 +566,7 @@
           {
             "lang": "typescript",
             "label": "Get subscriber count",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst count = await api.getSubscriberCount(\"BMV6abfvCSUl51ErCVzd\")"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst count = await api.subscribers.getCount({ id: \"BMV6abfvCSUl51ErCVzd\" })"
           }
         ]
       }
@@ -901,7 +901,7 @@
           {
             "lang": "typescript",
             "label": "Get feed posts with pagination",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst feed = await api.getPostsFeed({\n  limit: 20,\n  cursor: \"next-cursor\"\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst { items, pagination } = await api.feed.get({ limit: 20 })"
           }
         ]
       }
@@ -1129,7 +1129,7 @@
           {
             "lang": "typescript",
             "label": "List posts with pagination",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst posts = await api.getPosts(\"BMV6abfvCSUl51ErCVzd\", {\n  limit: 20,\n  cursor: \"next-cursor\"\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst { items: posts, pagination } = await api.posts.get({ publicationId: \"BMV6abfvCSUl51ErCVzd\" })"
           }
         ]
       }
@@ -1305,7 +1305,7 @@
           {
             "lang": "typescript",
             "label": "Get post by ID",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost({ id: \"3T2PQZlsdQtigUp4fhlb\" })"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.posts.get({ id: \"3T2PQZlsdQtigUp4fhlb\" }).single()"
           }
         ]
       }
@@ -1492,7 +1492,7 @@
           {
             "lang": "typescript",
             "label": "Get post by publication ID and slug",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost({ \n  publicationId: \"BMV6abfvCSUl51ErCVzd\", \n  postSlug: \"my-first-post\" \n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.posts.get({\n  publicationId: \"BMV6abfvCSUl51ErCVzd\",\n  slug: \"my-first-post\"\n}).single()"
           }
         ]
       }
@@ -1681,7 +1681,7 @@
           {
             "lang": "typescript",
             "label": "Get post by publication & post slug",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.getPost({\n  publicationSlug: \"blog\",\n  postSlug: \"my-first-post\"\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.posts.get({\n  publicationSlug: \"@blog\",\n  slug: \"my-first-post\"\n}).single()"
           }
         ]
       }
@@ -1908,7 +1908,7 @@
           {
             "lang": "typescript",
             "label": "Create a post with markdown",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.createPost({\n  title: \"My First Post\",\n  markdown: \"# Hello World\\n\\nThis is my first post!\",\n  sendNewsletter: true\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.posts.create({\n  title: \"My First Post\",\n  markdown: \"# Hello World\\n\\nThis is my first post!\",\n  sendNewsletter: true\n})"
           },
           {
             "lang": "bash",
@@ -2083,7 +2083,7 @@
           {
             "lang": "typescript",
             "label": "Get user by ID",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.getUser(\"AeAOtR8TqKWyzG5apA1R\")"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.users.get({ id: \"AeAOtR8TqKWyzG5apA1R\" }).single()"
           }
         ]
       }
@@ -2249,7 +2249,7 @@
           {
             "lang": "typescript",
             "label": "Get user by wallet address",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.getUserByWallet(\"0xc9ddb5E37165827BBBFf15b582E232C06862C4E8\")"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst user = await api.users.get({ wallet: \"0xc9ddb5E37165827BBBFf15b582E232C06862C4E8\" }).single()"
           }
         ]
       }
@@ -2510,7 +2510,7 @@
           {
             "lang": "typescript",
             "label": "Get coin by ID",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getCoin(\"S2AlaNG5Hw0NdNptmLTw\")"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.coins.get({ id: \"S2AlaNG5Hw0NdNptmLTw\" }).single()"
           }
         ]
       }
@@ -2772,7 +2772,7 @@
           {
             "lang": "typescript",
             "label": "Get coin by contract address",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getCoinByContract(\"0xe9bb3166ff5f96381e257d509a801303b68e5d34\")"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.coins.get({ contract: \"0xe9bb3166ff5f96381e257d509a801303b68e5d34\" }).single()"
           }
         ]
       }
@@ -2958,7 +2958,7 @@
           {
             "lang": "typescript",
             "label": "List coin holders (with pagination)",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst holders = await api.getCoinHolders(\"S2AlaNG5Hw0NdNptmLTw\", {\n  limit: 25,\n  cursor: \"next-cursor\"\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst { items: holders, pagination } = await api.coins.getHolders({ id: \"S2AlaNG5Hw0NdNptmLTw\", limit: 25 })"
           }
         ]
       }
@@ -3145,7 +3145,7 @@
           {
             "lang": "typescript",
             "label": "List coin holders (with pagination)",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst holders = await api.getCoinHoldersByContract(\"0xe9bb3166ff5f96381e257d509a801303b68e5d34\", {\n  limit: 50,\n  cursor: \"next-cursor\"\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst { items: holders, pagination } = await api.coins.getHolders({ contract: \"0xe9bb3166ff5f96381e257d509a801303b68e5d34\", limit: 50 })"
           }
         ]
       }
@@ -3839,7 +3839,7 @@
           {
             "lang": "typescript",
             "label": "Get coin quote by ID",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getQuoteById(\"S2AlaNG5Hw0NdNptmLTw\", \"1000000000000000000\")"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst quote = await api.coins.getQuote({ id: \"S2AlaNG5Hw0NdNptmLTw\", amount: \"1000000000000000000\" })"
           }
         ]
       }
@@ -3967,7 +3967,7 @@
           {
             "lang": "typescript",
             "label": "Get coin quote by contract address",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coin = await api.getQuoteByContract(\"0xe9bb3166ff5f96381e257d509a801303b68e5d34\", \"1000000000000000000\")"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst quote = await api.coins.getQuote({ contract: \"0xe9bb3166ff5f96381e257d509a801303b68e5d34\", amount: \"1000000000000000000\" })"
           }
         ]
       }
@@ -4229,7 +4229,7 @@
           {
             "lang": "typescript",
             "label": "Get popular coins",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI()\nconst coins = await api.getPopularCoins()"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst { items: coins } = await api.coins.get({ sortBy: \"popular\" })"
           }
         ]
       }
@@ -4417,7 +4417,7 @@
           {
             "lang": "typescript",
             "label": "Import subscribers from CSV",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.importSubscribers(csvFile)"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.subscribers.import(csvFile)"
           },
           {
             "lang": "bash",
@@ -4626,12 +4626,12 @@
           {
             "lang": "typescript",
             "label": "Add subscriber with email",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.addSubscriber({ email: \"reader@example.com\" })"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.subscribers.create({ email: \"reader@example.com\" })"
           },
           {
             "lang": "typescript",
             "label": "Add subscriber with wallet",
-            "source": "import { ParagraphAPI } from \"@paragraph_xyz/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.addSubscriber({ wallet: \"0x1234...abcd\" })"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.subscribers.create({ wallet: \"0x1234...abcd\" })"
           },
           {
             "lang": "bash",
