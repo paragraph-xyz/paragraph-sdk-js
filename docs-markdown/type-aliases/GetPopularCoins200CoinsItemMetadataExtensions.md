@@ -8,7 +8,7 @@
 
 > **GetPopularCoins200CoinsItemMetadataExtensions** = `object`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadataExtensions.ts:16
+Defined in: generated/models/getPopularCoins200CoinsItemMetadataExtensions.ts:16
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: src/generated/models/getPopularCoins200CoinsItemMetadataExtensions.t
 
 > **coinType**: `string`
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadataExtensions.ts:18
+Defined in: generated/models/getPopularCoins200CoinsItemMetadataExtensions.ts:18
 
 Type of the coin
 
@@ -26,4 +26,4 @@ Type of the coin
 
 > **paragraph**: [`GetPopularCoins200CoinsItemMetadataExtensionsParagraph`](GetPopularCoins200CoinsItemMetadataExtensionsParagraph.md)
 
-Defined in: src/generated/models/getPopularCoins200CoinsItemMetadataExtensions.ts:19
+Defined in: generated/models/getPopularCoins200CoinsItemMetadataExtensions.ts:19
