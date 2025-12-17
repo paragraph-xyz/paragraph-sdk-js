@@ -5,12 +5,14 @@ const api = new ParagraphAPI();
 
 async function main() {
   // Get popular coins (returns paginated result)
-  const { items: coins, pagination: coinsPag } = await api.coins.get({ sortBy: "popular" });
+  const { items: coins, pagination: coinsPage } = await api.coins.get({
+    sortBy: "popular",
+  });
   console.log(
     "Popular coins:",
     coins.map((c) => c.contractAddress)
   );
-  console.log("Total popular coins:", coinsPag.total);
+  console.log("Total popular coins:", coinsPage.total);
 
   // Get a specific coin by ID (use .single() to get a single object)
   const coin = await api.coins.get({ id: "N3j7OrRYuRKZQM1rhYEh" }).single();
