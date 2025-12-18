@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetCoinHoldersById200ItemsItem
+[@paragraph-com/sdk](../README.md) / GetCoinHoldersById200ItemsItem
 
 # Type Alias: GetCoinHoldersById200ItemsItem
 

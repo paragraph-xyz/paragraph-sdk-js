@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetPostByPublicationIdAndPostSlugParams
+[@paragraph-com/sdk](../README.md) / GetPostByPublicationIdAndPostSlugParams
 
 # Type Alias: GetPostByPublicationIdAndPostSlugParams
 

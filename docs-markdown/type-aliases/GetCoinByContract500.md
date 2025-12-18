@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetCoinByContract500
+[@paragraph-com/sdk](../README.md) / GetCoinByContract500
 
 # Type Alias: GetCoinByContract500
 

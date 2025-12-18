@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetPostsFeed200Pagination
+[@paragraph-com/sdk](../README.md) / GetPostsFeed200Pagination
 
 # Type Alias: GetPostsFeed200Pagination
 

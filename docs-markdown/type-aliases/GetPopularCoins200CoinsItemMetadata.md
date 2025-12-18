@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetPopularCoins200CoinsItemMetadata
+[@paragraph-com/sdk](../README.md) / GetPopularCoins200CoinsItemMetadata
 
 # Type Alias: GetPopularCoins200CoinsItemMetadata
 

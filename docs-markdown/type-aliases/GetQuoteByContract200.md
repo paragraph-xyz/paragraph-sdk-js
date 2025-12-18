@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetQuoteByContract200
+[@paragraph-com/sdk](../README.md) / GetQuoteByContract200
 
 # Type Alias: GetQuoteByContract200
 

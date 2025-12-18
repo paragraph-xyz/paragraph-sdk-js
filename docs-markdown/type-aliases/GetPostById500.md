@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetPostById500
+[@paragraph-com/sdk](../README.md) / GetPostById500
 
 # Type Alias: GetPostById500
 

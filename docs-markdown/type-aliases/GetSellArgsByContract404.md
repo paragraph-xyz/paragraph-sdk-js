@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetSellArgsByContract404
+[@paragraph-com/sdk](../README.md) / GetSellArgsByContract404
 
 # Type Alias: GetSellArgsByContract404
 

@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetPostsFeed200ItemsItemUserFarcaster
+[@paragraph-com/sdk](../README.md) / GetPostsFeed200ItemsItemUserFarcaster
 
 # Type Alias: GetPostsFeed200ItemsItemUserFarcaster
 
