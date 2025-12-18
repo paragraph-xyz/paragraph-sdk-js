@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetPosts200ItemsItem
+[@paragraph-com/sdk](../README.md) / GetPosts200ItemsItem
 
 # Type Alias: GetPosts200ItemsItem
 

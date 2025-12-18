@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / AddSubscriber200
+[@paragraph-com/sdk](../README.md) / AddSubscriber200
 
 # Type Alias: AddSubscriber200
 

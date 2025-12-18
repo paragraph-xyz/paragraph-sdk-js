@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetCoinByContract200MetadataLinksItem
+[@paragraph-com/sdk](../README.md) / GetCoinByContract200MetadataLinksItem
 
 # Type Alias: GetCoinByContract200MetadataLinksItem
 

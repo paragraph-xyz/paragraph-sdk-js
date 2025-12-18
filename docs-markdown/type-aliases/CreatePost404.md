@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / CreatePost404
+[@paragraph-com/sdk](../README.md) / CreatePost404
 
 # Type Alias: CreatePost404
 

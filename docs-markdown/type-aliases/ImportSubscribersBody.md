@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / ImportSubscribersBody
+[@paragraph-com/sdk](../README.md) / ImportSubscribersBody
 
 # Type Alias: ImportSubscribersBody
 

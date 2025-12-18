@@ -1,4 +1,5 @@
 import { getParagraphAPI } from "../generated/api";
+import type { ListSubscribersParams } from "../generated/models";
 
 /**
  * Subscribers resource handler.
@@ -6,6 +7,38 @@ import { getParagraphAPI } from "../generated/api";
  */
 export class SubscribersResource {
   constructor(private api: ReturnType<typeof getParagraphAPI>) {}
+
+  /**
+   * Retrieves a paginated list of subscribers for your publication.
+   * Requires an API key.
+   *
+   * @example
+   * ```ts
+   * const api = new ParagraphAPI({ apiKey: "your-api-key" });
+   *
+   * // Get first page of subscribers
+   * const { items: subscribers, pagination } = await api.subscribers.get();
+   * subscribers.forEach(sub => {
+   *   console.log(sub.email || sub.walletAddress);
+   * });
+   *
+   * // Paginate through results
+   * if (pagination.hasMore && pagination.cursor) {
+   *   const nextPage = await api.subscribers.get({ cursor: pagination.cursor });
+   * }
+   *
+   * // Get subscribers with custom limit
+   * const { items } = await api.subscribers.get({ limit: 50 });
+   * ```
+   *
+   * @param options - Optional pagination parameters.
+   * @param options.cursor - Cursor for pagination.
+   * @param options.limit - Maximum number of items to return (1-100, default: 10).
+   * @returns A promise that resolves to a paginated list of subscribers.
+   */
+  get(options?: ListSubscribersParams) {
+    return this.api.listSubscribers(options);
+  }
 
   /**
    * Gets a total count of subscribers for a given publication ID.

@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetUser200
+[@paragraph-com/sdk](../README.md) / GetUser200
 
 # Type Alias: GetUser200
 

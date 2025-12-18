@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetQuoteById200
+[@paragraph-com/sdk](../README.md) / GetQuoteById200
 
 # Type Alias: GetQuoteById200
 

@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetBuyArgsByIdParams
+[@paragraph-com/sdk](../README.md) / GetBuyArgsByIdParams
 
 # Type Alias: GetBuyArgsByIdParams
 

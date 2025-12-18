@@ -1,8 +1,8 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / GetPublicationById500
+[@paragraph-com/sdk](../README.md) / GetPublicationById500
 
 # Type Alias: GetPublicationById500
 

@@ -1,14 +1,14 @@
-[**@paragraph_xyz/sdk**](../README.md)
+[**@paragraph-com/sdk**](../README.md)
 
 ***
 
-[@paragraph_xyz/sdk](../README.md) / PublicationIdentifier
+[@paragraph-com/sdk](../README.md) / PublicationIdentifier
 
 # Type Alias: PublicationIdentifier
 
 > **PublicationIdentifier** = \{ `id`: `string`; \} \| \{ `slug`: `string`; \} \| \{ `domain`: `string`; \}
 
-Defined in: [index.ts:52](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/ab30c6498fe1f1fabf58dbd407f5d66c6e8ae4e5/src/index.ts#L52)
+Defined in: [types.ts:44](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/cfba7350e3d6fab39d3eab797ebb2d9f87a4bd99/src/types.ts#L44)
 
 A discriminated union of identifiers for retrieving a single publication.
 Use one of the following shapes:
