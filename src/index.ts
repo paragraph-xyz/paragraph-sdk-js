@@ -44,7 +44,8 @@ import type { ParagraphAPIOptions } from "./types";
  * const user = await api.users.get({ id: "userId" }).single();
  * const userByWallet = await api.users.get({ wallet: "0x1234..." }).single();
  *
- * // Subscribers (mutations require an API key)
+ * // Subscribers (get and mutations require an API key)
+ * const { items: subscribers, pagination: subPag } = await apiWithAuth.subscribers.get();
  * const count = await api.subscribers.getCount({ id: "publicationId" });
  * await apiWithAuth.subscribers.create({ email: "user@example.com" });
  *
