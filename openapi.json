@@ -906,10 +906,239 @@
         ]
       }
     },
+    "/v1/posts/tag/{tag}": {
+      "get": {
+        "description": "Retrieve a paginated list of posts with a specific tag, sorted by publish date (newest first)",
+        "summary": "Get posts by tag",
+        "tags": [
+          "posts"
+        ],
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "Tag to filter posts by"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Cursor for pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of items to return (1-100, default: 10)",
+            "schema": {
+              "default": 10,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "includeContent",
+            "in": "query",
+            "description": "Include full content fields (json, staticHtml, markdown) in the post. Default: false",
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Posts retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique identifier for the post"
+                          },
+                          "title": {
+                            "type": "string",
+                            "maxLength": 200,
+                            "description": "Title of the post"
+                          },
+                          "imageUrl": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "Optional URL to the post's main image"
+                          },
+                          "publishedAt": {
+                            "type": "string",
+                            "description": "Epoch timestamp when the post was published"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "description": "Epoch timestamp when the post was last updated"
+                          },
+                          "subtitle": {
+                            "type": "string",
+                            "maxLength": 300,
+                            "description": "Optional subtitle or brief summary"
+                          },
+                          "slug": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 256,
+                            "description": "URL-friendly identifier for the post; accessible at paragraph.com/@[publicationSlug]/[slug]"
+                          },
+                          "staticHtml": {
+                            "type": "string",
+                            "description": "Rendered HTML content of the post"
+                          },
+                          "json": {
+                            "type": "string",
+                            "description": "TipTap JSON representation of the post content structure. This is the source of truth that the staticHtml and markdown is generated from"
+                          },
+                          "markdown": {
+                            "type": "string",
+                            "description": "Markdown source of the post content"
+                          },
+                          "coinId": {
+                            "type": "string",
+                            "description": "ID of the associated coin, if the post is coined"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "title",
+                          "slug"
+                        ]
+                      },
+                      "description": "Array of items in this page"
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "cursor": {
+                          "type": "string",
+                          "description": "Cursor for fetching the next page of results"
+                        },
+                        "hasMore": {
+                          "type": "boolean",
+                          "description": "Whether more results are available"
+                        },
+                        "total": {
+                          "type": "number",
+                          "description": "Total number of items available"
+                        }
+                      },
+                      "required": [
+                        "hasMore"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "items",
+                    "pagination"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getPostsByTag",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "list-posts-by-tag",
+            "description": "Get posts with a specific tag"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get posts by tag with pagination",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst { items, pagination } = await api.posts.get({ tag: \"crypto\", limit: 20 })"
+          }
+        ]
+      }
+    },
     "/v1/publications/{publicationId}/posts": {
       "get": {
         "description": "Retrieve a paginated list of posts from a publication",
-        "summary": "List posts in a publication",
+        "summary": "Get posts in a publication",
         "tags": [
           "posts"
         ],
@@ -1122,13 +1351,13 @@
           "mcp": {
             "enabled": true,
             "name": "list-publication-posts",
-            "description": "List posts from a publication with pagination"
+            "description": "Get posts from a publication with pagination"
           }
         },
         "x-codeSamples": [
           {
             "lang": "typescript",
-            "label": "List posts with pagination",
+            "label": "Get posts from a publication with pagination",
             "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst { items: posts, pagination } = await api.posts.get({ publicationId: \"BMV6abfvCSUl51ErCVzd\" })"
           }
         ]
