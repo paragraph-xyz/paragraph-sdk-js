@@ -8,7 +8,7 @@
 
 > **PostIdIdentifier** = `object`
 
-Defined in: [types.ts:52](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/cfba7350e3d6fab39d3eab797ebb2d9f87a4bd99/src/types.ts#L52)
+Defined in: [types.ts:52](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/types.ts#L52)
 
 Identifier for getting a single post by ID.
 
@@ -18,4 +18,4 @@ Identifier for getting a single post by ID.
 
 > **id**: `string`
 
-Defined in: [types.ts:52](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/cfba7350e3d6fab39d3eab797ebb2d9f87a4bd99/src/types.ts#L52)
+Defined in: [types.ts:52](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/types.ts#L52)

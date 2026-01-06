@@ -73,18 +73,25 @@ export type PostByPubSlugAndSlugIdentifier = {
 export type PostsByPublicationIdIdentifier = { publicationId: string };
 
 /**
+ * Identifier for getting a list of posts by tag.
+ */
+export type PostsByTagIdentifier = { tag: string };
+
+/**
  * A discriminated union of identifiers for retrieving posts.
  * Use one of the following shapes:
  * - `{ id: string }` to get a post by its unique ID (returns single post in array).
  * - `{ publicationId: string; postSlug: string }` to get a post by its slug within a known publication ID (returns single post in array).
  * - `{ publicationSlug: string; postSlug: string }` to get a post by both the publication's and post's slugs (returns single post in array).
  * - `{ publicationId: string }` to get a list of posts from a publication (returns multiple posts).
+ * - `{ tag: string }` to get a list of posts with a specific tag (returns multiple posts).
  */
 export type PostIdentifier =
   | PostIdIdentifier
   | PostByPubIdAndSlugIdentifier
   | PostByPubSlugAndSlugIdentifier
-  | PostsByPublicationIdIdentifier;
+  | PostsByPublicationIdIdentifier
+  | PostsByTagIdentifier;
 
 /**
  * A discriminated union of identifiers for retrieving a single user.

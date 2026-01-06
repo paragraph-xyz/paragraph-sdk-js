@@ -1,5 +1,5 @@
 import { getParagraphAPI } from "../generated/api";
-import type { GetPostById200, GetPostsParams } from "../generated/models";
+import type { GetPostById200, GetPostsByTagParams, GetPostsParams } from "../generated/models";
 import type { PaginatedResult, PostIdentifier, PostQueryOptions } from "../types";
 import { QueryResult, singleItemResult } from "../utils";
 
@@ -48,6 +48,12 @@ export class PostsResource {
    *   { id: "3T2PQZlsdQtigUp4fhlb" },
    *   { includeContent: true }
    * ).single();
+   *
+   * // Get posts by tag
+   * const { items: taggedPosts } = await api.posts.get(
+   *   { tag: "web3" },
+   *   { limit: 10 }
+   * );
    * ```
    *
    * @param identifier - A {@link PostIdentifier} object to specify which post(s) to retrieve.
@@ -56,7 +62,7 @@ export class PostsResource {
    */
   get(
     identifier: PostIdentifier,
-    options?: GetPostsParams | PostQueryOptions
+    options?: GetPostsParams | GetPostsByTagParams | PostQueryOptions
   ): QueryResult<GetPostById200> {
     // If only publicationId is provided (no postSlug), get list of posts with pagination
     if ("publicationId" in identifier && !("postSlug" in identifier)) {
@@ -64,6 +70,15 @@ export class PostsResource {
         this.api.getPosts(
           identifier.publicationId,
           options as GetPostsParams
+        ) as Promise<PaginatedResult<GetPostById200>>
+      );
+    }
+
+    if ("tag" in identifier) {
+      return new QueryResult(
+        this.api.getPostsByTag(
+          identifier.tag,
+          options as GetPostsByTagParams
         ) as Promise<PaginatedResult<GetPostById200>>
       );
     }

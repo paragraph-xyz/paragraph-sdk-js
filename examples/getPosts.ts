@@ -54,6 +54,18 @@ async function main() {
     .single();
   console.log("Post with content:", postWithContent.title);
   console.log("Content preview:", postWithContent.json?.substring(0, 100));
+
+  // Get posts by tag
+  const { items: taggedPosts, pagination: tagPag } = await api.posts.get(
+    { tag: "web3" },
+    { limit: 5 }
+  );
+  console.log("\nPosts with 'web3' tag:", taggedPosts.length);
+  console.log(
+    "Tagged post titles:",
+    taggedPosts.map((p) => p.title)
+  );
+  console.log("Has more tagged posts:", tagPag.hasMore);
 }
 
 main().catch(console.error);
