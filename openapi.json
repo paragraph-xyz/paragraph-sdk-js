@@ -1950,7 +1950,20 @@
                     "description": "Optional URL to the post's cover image"
                   },
                   "sendNewsletter": {
-                    "type": "boolean",
+                    "oneOf": [
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "true",
+                          "false",
+                          "1",
+                          "0"
+                        ]
+                      }
+                    ],
                     "description": "Whether to send an email newsletter to subscribers. Default: false"
                   },
                   "slug": {
@@ -1965,11 +1978,18 @@
                     "description": "Optional preview text for the post. If not provided, will be generated from content"
                   },
                   "categories": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "Optional array of category tags for the post"
+                    "oneOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ],
+                    "description": "Optional array of category tags for the post. Can also be a comma-separated string."
                   }
                 },
                 "required": [
