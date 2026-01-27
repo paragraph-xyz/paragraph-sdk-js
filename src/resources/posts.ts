@@ -1,7 +1,6 @@
 import { getParagraphAPI } from "../generated/api";
 import type {
   GetPostById200,
-  GetPosts200ItemsItem,
   GetPostsByTagParams,
   GetPostsParams,
 } from "../generated/models";
@@ -72,14 +71,14 @@ export class PostsResource {
   get(
     identifier: PostIdentifier,
     options?: GetPostsParams | GetPostsByTagParams | PostQueryOptions
-  ): QueryResult<GetPosts200ItemsItem | GetPostById200> {
+  ): QueryResult<GetPostById200> {
     // If only publicationId is provided (no postSlug), get list of posts with pagination
     if ("publicationId" in identifier && !("postSlug" in identifier)) {
       return new QueryResult(
         this.api.getPosts(
           identifier.publicationId,
           options as GetPostsParams
-        ) as Promise<PaginatedResult<GetPosts200ItemsItem>>
+        ) as Promise<PaginatedResult<GetPostById200>>
       );
     }
 

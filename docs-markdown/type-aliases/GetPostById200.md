@@ -24,11 +24,31 @@ OpenAPI spec version: 1.0.0
 
 ## Properties
 
+### authors?
+
+> `optional` **authors**: [`GetPostById200AuthorsItem`](GetPostById200AuthorsItem.md)[]
+
+Defined in: generated/models/getPostById200.ts:52
+
+Authors of this post
+
+***
+
+### categories?
+
+> `optional` **categories**: `string`[]
+
+Defined in: generated/models/getPostById200.ts:50
+
+Categories/tags associated with this post
+
+***
+
 ### coinId?
 
 > `optional` **coinId**: `string`
 
-Defined in: generated/models/getPostById200.ts:47
+Defined in: generated/models/getPostById200.ts:48
 
 ID of the associated coin, if the post is coined
 
@@ -38,7 +58,7 @@ ID of the associated coin, if the post is coined
 
 > **id**: `string`
 
-Defined in: generated/models/getPostById200.ts:17
+Defined in: generated/models/getPostById200.ts:18
 
 Unique identifier for the post
 
@@ -48,7 +68,7 @@ Unique identifier for the post
 
 > `optional` **imageUrl**: `string`
 
-Defined in: generated/models/getPostById200.ts:24
+Defined in: generated/models/getPostById200.ts:25
 
 Optional URL to the post's main image
 
@@ -58,7 +78,7 @@ Optional URL to the post's main image
 
 > `optional` **json**: `string`
 
-Defined in: generated/models/getPostById200.ts:43
+Defined in: generated/models/getPostById200.ts:44
 
 TipTap JSON representation of the post content structure. This is the source of truth that the staticHtml and markdown is generated from
 
@@ -68,7 +88,7 @@ TipTap JSON representation of the post content structure. This is the source of 
 
 > `optional` **markdown**: `string`
 
-Defined in: generated/models/getPostById200.ts:45
+Defined in: generated/models/getPostById200.ts:46
 
 Markdown source of the post content
 
@@ -78,7 +98,7 @@ Markdown source of the post content
 
 > `optional` **publishedAt**: `string`
 
-Defined in: generated/models/getPostById200.ts:26
+Defined in: generated/models/getPostById200.ts:27
 
 Epoch timestamp when the post was published
 
@@ -88,7 +108,7 @@ Epoch timestamp when the post was published
 
 > **slug**: `string`
 
-Defined in: generated/models/getPostById200.ts:39
+Defined in: generated/models/getPostById200.ts:40
 
 URL-friendly identifier for the post; accessible at paragraph.com/@[publicationSlug]/[slug]
 
@@ -106,7 +126,7 @@ URL-friendly identifier for the post; accessible at paragraph.com/@[publicationS
 
 > `optional` **staticHtml**: `string`
 
-Defined in: generated/models/getPostById200.ts:41
+Defined in: generated/models/getPostById200.ts:42
 
 Rendered HTML content of the post
 
@@ -116,7 +136,7 @@ Rendered HTML content of the post
 
 > `optional` **subtitle**: `string`
 
-Defined in: generated/models/getPostById200.ts:33
+Defined in: generated/models/getPostById200.ts:34
 
 Optional subtitle or brief summary
 
@@ -130,7 +150,7 @@ Optional subtitle or brief summary
 
 > **title**: `string`
 
-Defined in: generated/models/getPostById200.ts:22
+Defined in: generated/models/getPostById200.ts:23
 
 Title of the post
 
@@ -144,6 +164,6 @@ Title of the post
 
 > `optional` **updatedAt**: `string`
 
-Defined in: generated/models/getPostById200.ts:28
+Defined in: generated/models/getPostById200.ts:29
 
 Epoch timestamp when the post was last updated
