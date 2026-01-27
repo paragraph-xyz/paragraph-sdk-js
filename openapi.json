@@ -674,6 +674,83 @@
                               "coinId": {
                                 "type": "string",
                                 "description": "ID of the associated coin, if the post is coined"
+                              },
+                              "categories": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "Categories/tags associated with this post"
+                              },
+                              "authors": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string",
+                                      "description": "Unique identifier for the user"
+                                    },
+                                    "walletAddress": {
+                                      "type": "string",
+                                      "pattern": "^0x[a-fA-F0-9]{40}$",
+                                      "description": "Wallet address of the user"
+                                    },
+                                    "avatarUrl": {
+                                      "type": "string",
+                                      "format": "uri",
+                                      "description": "URL to the user's avatar image"
+                                    },
+                                    "publicationId": {
+                                      "type": "string",
+                                      "description": "ID of the publication this user belongs to"
+                                    },
+                                    "name": {
+                                      "type": "string",
+                                      "description": "Display name of the user"
+                                    },
+                                    "bio": {
+                                      "type": "string",
+                                      "maxLength": 500,
+                                      "description": "Brief biography of the user (max 500 characters)"
+                                    },
+                                    "farcaster": {
+                                      "type": "object",
+                                      "properties": {
+                                        "username": {
+                                          "type": "string",
+                                          "description": "Farcaster username"
+                                        },
+                                        "displayName": {
+                                          "type": "string",
+                                          "description": "Farcaster display name"
+                                        },
+                                        "fid": {
+                                          "type": "number",
+                                          "description": "Farcaster fid"
+                                        }
+                                      },
+                                      "required": [
+                                        "username",
+                                        "displayName",
+                                        "fid"
+                                      ],
+                                      "description": "Farcaster profile information, if linked"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "publicationId"
+                                  ]
+                                },
+                                "description": "Authors of this post"
+                              },
+                              "authorIds": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "IDs of the authors of this post"
                               }
                             },
                             "required": [
@@ -1016,6 +1093,83 @@
                           "coinId": {
                             "type": "string",
                             "description": "ID of the associated coin, if the post is coined"
+                          },
+                          "categories": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "Categories/tags associated with this post"
+                          },
+                          "authors": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "Unique identifier for the user"
+                                },
+                                "walletAddress": {
+                                  "type": "string",
+                                  "pattern": "^0x[a-fA-F0-9]{40}$",
+                                  "description": "Wallet address of the user"
+                                },
+                                "avatarUrl": {
+                                  "type": "string",
+                                  "format": "uri",
+                                  "description": "URL to the user's avatar image"
+                                },
+                                "publicationId": {
+                                  "type": "string",
+                                  "description": "ID of the publication this user belongs to"
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "Display name of the user"
+                                },
+                                "bio": {
+                                  "type": "string",
+                                  "maxLength": 500,
+                                  "description": "Brief biography of the user (max 500 characters)"
+                                },
+                                "farcaster": {
+                                  "type": "object",
+                                  "properties": {
+                                    "username": {
+                                      "type": "string",
+                                      "description": "Farcaster username"
+                                    },
+                                    "displayName": {
+                                      "type": "string",
+                                      "description": "Farcaster display name"
+                                    },
+                                    "fid": {
+                                      "type": "number",
+                                      "description": "Farcaster fid"
+                                    }
+                                  },
+                                  "required": [
+                                    "username",
+                                    "displayName",
+                                    "fid"
+                                  ],
+                                  "description": "Farcaster profile information, if linked"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "publicationId"
+                              ]
+                            },
+                            "description": "Authors of this post"
+                          },
+                          "authorIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "IDs of the authors of this post"
                           }
                         },
                         "required": [
@@ -1244,6 +1398,83 @@
                           "coinId": {
                             "type": "string",
                             "description": "ID of the associated coin, if the post is coined"
+                          },
+                          "categories": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "Categories/tags associated with this post"
+                          },
+                          "authors": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "Unique identifier for the user"
+                                },
+                                "walletAddress": {
+                                  "type": "string",
+                                  "pattern": "^0x[a-fA-F0-9]{40}$",
+                                  "description": "Wallet address of the user"
+                                },
+                                "avatarUrl": {
+                                  "type": "string",
+                                  "format": "uri",
+                                  "description": "URL to the user's avatar image"
+                                },
+                                "publicationId": {
+                                  "type": "string",
+                                  "description": "ID of the publication this user belongs to"
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "Display name of the user"
+                                },
+                                "bio": {
+                                  "type": "string",
+                                  "maxLength": 500,
+                                  "description": "Brief biography of the user (max 500 characters)"
+                                },
+                                "farcaster": {
+                                  "type": "object",
+                                  "properties": {
+                                    "username": {
+                                      "type": "string",
+                                      "description": "Farcaster username"
+                                    },
+                                    "displayName": {
+                                      "type": "string",
+                                      "description": "Farcaster display name"
+                                    },
+                                    "fid": {
+                                      "type": "number",
+                                      "description": "Farcaster fid"
+                                    }
+                                  },
+                                  "required": [
+                                    "username",
+                                    "displayName",
+                                    "fid"
+                                  ],
+                                  "description": "Farcaster profile information, if linked"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "publicationId"
+                              ]
+                            },
+                            "description": "Authors of this post"
+                          },
+                          "authorIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "IDs of the authors of this post"
                           }
                         },
                         "required": [
@@ -1448,6 +1679,83 @@
                     "coinId": {
                       "type": "string",
                       "description": "ID of the associated coin, if the post is coined"
+                    },
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Categories/tags associated with this post"
+                    },
+                    "authors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique identifier for the user"
+                          },
+                          "walletAddress": {
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "Wallet address of the user"
+                          },
+                          "avatarUrl": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "URL to the user's avatar image"
+                          },
+                          "publicationId": {
+                            "type": "string",
+                            "description": "ID of the publication this user belongs to"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Display name of the user"
+                          },
+                          "bio": {
+                            "type": "string",
+                            "maxLength": 500,
+                            "description": "Brief biography of the user (max 500 characters)"
+                          },
+                          "farcaster": {
+                            "type": "object",
+                            "properties": {
+                              "username": {
+                                "type": "string",
+                                "description": "Farcaster username"
+                              },
+                              "displayName": {
+                                "type": "string",
+                                "description": "Farcaster display name"
+                              },
+                              "fid": {
+                                "type": "number",
+                                "description": "Farcaster fid"
+                              }
+                            },
+                            "required": [
+                              "username",
+                              "displayName",
+                              "fid"
+                            ],
+                            "description": "Farcaster profile information, if linked"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "publicationId"
+                        ]
+                      },
+                      "description": "Authors of this post"
+                    },
+                    "authorIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "IDs of the authors of this post"
                     }
                   },
                   "required": [
@@ -1635,6 +1943,83 @@
                     "coinId": {
                       "type": "string",
                       "description": "ID of the associated coin, if the post is coined"
+                    },
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Categories/tags associated with this post"
+                    },
+                    "authors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique identifier for the user"
+                          },
+                          "walletAddress": {
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "Wallet address of the user"
+                          },
+                          "avatarUrl": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "URL to the user's avatar image"
+                          },
+                          "publicationId": {
+                            "type": "string",
+                            "description": "ID of the publication this user belongs to"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Display name of the user"
+                          },
+                          "bio": {
+                            "type": "string",
+                            "maxLength": 500,
+                            "description": "Brief biography of the user (max 500 characters)"
+                          },
+                          "farcaster": {
+                            "type": "object",
+                            "properties": {
+                              "username": {
+                                "type": "string",
+                                "description": "Farcaster username"
+                              },
+                              "displayName": {
+                                "type": "string",
+                                "description": "Farcaster display name"
+                              },
+                              "fid": {
+                                "type": "number",
+                                "description": "Farcaster fid"
+                              }
+                            },
+                            "required": [
+                              "username",
+                              "displayName",
+                              "fid"
+                            ],
+                            "description": "Farcaster profile information, if linked"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "publicationId"
+                        ]
+                      },
+                      "description": "Authors of this post"
+                    },
+                    "authorIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "IDs of the authors of this post"
                     }
                   },
                   "required": [
@@ -1824,6 +2209,83 @@
                     "coinId": {
                       "type": "string",
                       "description": "ID of the associated coin, if the post is coined"
+                    },
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Categories/tags associated with this post"
+                    },
+                    "authors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique identifier for the user"
+                          },
+                          "walletAddress": {
+                            "type": "string",
+                            "pattern": "^0x[a-fA-F0-9]{40}$",
+                            "description": "Wallet address of the user"
+                          },
+                          "avatarUrl": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "URL to the user's avatar image"
+                          },
+                          "publicationId": {
+                            "type": "string",
+                            "description": "ID of the publication this user belongs to"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Display name of the user"
+                          },
+                          "bio": {
+                            "type": "string",
+                            "maxLength": 500,
+                            "description": "Brief biography of the user (max 500 characters)"
+                          },
+                          "farcaster": {
+                            "type": "object",
+                            "properties": {
+                              "username": {
+                                "type": "string",
+                                "description": "Farcaster username"
+                              },
+                              "displayName": {
+                                "type": "string",
+                                "description": "Farcaster display name"
+                              },
+                              "fid": {
+                                "type": "number",
+                                "description": "Farcaster fid"
+                              }
+                            },
+                            "required": [
+                              "username",
+                              "displayName",
+                              "fid"
+                            ],
+                            "description": "Farcaster profile information, if linked"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "publicationId"
+                        ]
+                      },
+                      "description": "Authors of this post"
+                    },
+                    "authorIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "IDs of the authors of this post"
                     }
                   },
                   "required": [
