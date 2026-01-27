@@ -1467,6 +1467,13 @@
                               ]
                             },
                             "description": "Authors of this post"
+                          },
+                          "authorIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "IDs of the authors of this post"
                           }
                         },
                         "required": [
@@ -1740,6 +1747,13 @@
                         ]
                       },
                       "description": "Authors of this post"
+                    },
+                    "authorIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "IDs of the authors of this post"
                     }
                   },
                   "required": [
