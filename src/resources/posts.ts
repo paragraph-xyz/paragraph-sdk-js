@@ -1,14 +1,6 @@
 import { getParagraphAPI } from "../generated/api";
-import type {
-  GetPostById200,
-  GetPostsByTagParams,
-  GetPostsParams,
-} from "../generated/models";
-import type {
-  PaginatedResult,
-  PostIdentifier,
-  PostQueryOptions,
-} from "../types";
+import type { GetPostById200, GetPostsByTagParams, GetPostsParams } from "../generated/models";
+import type { PaginatedResult, PostIdentifier, PostQueryOptions } from "../types";
 import { QueryResult, singleItemResult } from "../utils";
 
 /**
