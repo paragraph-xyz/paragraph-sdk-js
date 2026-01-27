@@ -1463,7 +1463,8 @@
                                 }
                               },
                               "required": [
-                                "id"
+                                "id",
+                                "publicationId"
                               ]
                             },
                             "description": "Authors of this post"
@@ -1743,7 +1744,8 @@
                           }
                         },
                         "required": [
-                          "id"
+                          "id",
+                          "publicationId"
                         ]
                       },
                       "description": "Authors of this post"
