@@ -6,7 +6,7 @@
 
 # Class: ParagraphAPI
 
-Defined in: [index.ts:57](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/index.ts#L57)
+Defined in: [index.ts:63](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/index.ts#L63)
 
 Paragraph API class wrapper.
 
@@ -48,6 +48,11 @@ await apiWithAuth.subscribers.create({ email: "user@example.com" });
 // Coins (use .single() for single coin)
 const coin = await api.coins.get({ id: "coinId" }).single();
 const { items: popular } = await api.coins.get({ sortBy: "popular" });
+
+// Search
+const posts = await api.search.posts("ethereum");
+const coins = await api.search.coins("test");
+const blogs = await api.search.blogs("crypto");
 ```
 
 ## Constructors
@@ -56,7 +61,7 @@ const { items: popular } = await api.coins.get({ sortBy: "popular" });
 
 > **new ParagraphAPI**(`options?`): `ParagraphAPI`
 
-Defined in: [index.ts:89](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/index.ts#L89)
+Defined in: [index.ts:98](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/index.ts#L98)
 
 Initializes a new instance of the Paragraph API client.
 Each instance has its own isolated authentication context, allowing
@@ -80,7 +85,7 @@ Optional configuration options.
 
 > `readonly` **coins**: `CoinsResource`
 
-Defined in: [index.ts:79](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/index.ts#L79)
+Defined in: [index.ts:85](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/index.ts#L85)
 
 Coins resource
 
@@ -90,7 +95,7 @@ Coins resource
 
 > `readonly` **feed**: `FeedResource`
 
-Defined in: [index.ts:73](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/index.ts#L73)
+Defined in: [index.ts:79](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/index.ts#L79)
 
 Feed resource
 
@@ -100,7 +105,7 @@ Feed resource
 
 > `readonly` **posts**: `PostsResource`
 
-Defined in: [index.ts:70](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/index.ts#L70)
+Defined in: [index.ts:76](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/index.ts#L76)
 
 Posts resource
 
@@ -110,9 +115,19 @@ Posts resource
 
 > `readonly` **publications**: `PublicationsResource`
 
-Defined in: [index.ts:64](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/index.ts#L64)
+Defined in: [index.ts:70](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/index.ts#L70)
 
 Publications resource
+
+***
+
+### search
+
+> `readonly` **search**: `SearchResource`
+
+Defined in: [index.ts:88](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/index.ts#L88)
+
+Search resource
 
 ***
 
@@ -120,7 +135,7 @@ Publications resource
 
 > `readonly` **subscribers**: `SubscribersResource`
 
-Defined in: [index.ts:67](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/index.ts#L67)
+Defined in: [index.ts:73](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/index.ts#L73)
 
 Subscribers resource
 
@@ -130,6 +145,6 @@ Subscribers resource
 
 > `readonly` **users**: `UsersResource`
 
-Defined in: [index.ts:76](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/index.ts#L76)
+Defined in: [index.ts:82](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/index.ts#L82)
 
 Users resource
