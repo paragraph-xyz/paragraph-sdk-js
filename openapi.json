@@ -5535,6 +5535,676 @@
           }
         ]
       }
+    },
+    "/v1/discover/search": {
+      "get": {
+        "description": "Search for posts across all publications. Returns results ranked by relevance, popularity, and recency.",
+        "summary": "Search posts",
+        "tags": [
+          "discover"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search query string",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "blogId",
+            "in": "query",
+            "description": "Optional publication ID to restrict search to a specific publication",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "post": {
+                        "type": "object",
+                        "properties": {
+                          "postId": {
+                            "type": "string",
+                            "description": "Unique identifier for the post"
+                          },
+                          "blogId": {
+                            "type": "string",
+                            "description": "ID of the publication this post belongs to"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "description": "Timestamp when the post was created"
+                          },
+                          "publishedAt": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Timestamp when the post was published"
+                          },
+                          "title": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Title of the post"
+                          },
+                          "subtitle": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Subtitle of the post"
+                          },
+                          "postPreview": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Preview text of the post"
+                          },
+                          "coverImageUrl": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL to the post's cover image"
+                          },
+                          "slug": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL-friendly identifier for the post"
+                          },
+                          "coinId": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Associated coin ID, if any"
+                          }
+                        },
+                        "required": [
+                          "postId",
+                          "blogId",
+                          "createdAt",
+                          "publishedAt",
+                          "title",
+                          "subtitle",
+                          "postPreview",
+                          "coverImageUrl",
+                          "slug",
+                          "coinId"
+                        ],
+                        "description": "The matched post"
+                      },
+                      "blog": {
+                        "type": "object",
+                        "properties": {
+                          "blogId": {
+                            "type": "string",
+                            "description": "Unique identifier for the publication"
+                          },
+                          "userId": {
+                            "type": "string",
+                            "description": "ID of the publication owner"
+                          },
+                          "name": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Display name of the publication"
+                          },
+                          "url": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL of the publication"
+                          },
+                          "slug": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL-friendly slug of the publication"
+                          },
+                          "logoUrl": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL to the publication's logo"
+                          },
+                          "coinId": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Associated coin ID, if any"
+                          },
+                          "customDomain": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Custom domain for the publication"
+                          },
+                          "summary": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Brief description of the publication"
+                          }
+                        },
+                        "required": [
+                          "blogId",
+                          "userId",
+                          "name",
+                          "url",
+                          "slug",
+                          "logoUrl",
+                          "coinId"
+                        ],
+                        "description": "The publication this post belongs to"
+                      },
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "userId": {
+                            "type": "string",
+                            "description": "Unique identifier for the user"
+                          },
+                          "name": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Display name of the author"
+                          },
+                          "bio": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Brief biography of the author"
+                          },
+                          "avatarUrl": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL to the author's avatar"
+                          },
+                          "walletAddress": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Wallet address of the author"
+                          }
+                        },
+                        "required": [
+                          "userId",
+                          "name"
+                        ],
+                        "description": "The author of the post"
+                      }
+                    },
+                    "required": [
+                      "post",
+                      "blog",
+                      "user"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "searchPosts",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "search-posts",
+            "description": "Search for posts across all publications by keyword"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Search posts",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst results = await api.discover.searchPosts({ q: \"web3 publishing\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "Search posts using curl",
+            "source": "curl \"https://public.api.paragraph.com/api/v1/discover/search?q=web3+publishing\""
+          }
+        ]
+      }
+    },
+    "/v1/discover/blogs/search": {
+      "get": {
+        "description": "Search for publications by name, slug, or description. Returns results ranked by relevance and subscriber count.",
+        "summary": "Search publications",
+        "tags": [
+          "discover"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search query string",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Publication search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "blog": {
+                        "type": "object",
+                        "properties": {
+                          "blogId": {
+                            "type": "string",
+                            "description": "Unique identifier for the publication"
+                          },
+                          "userId": {
+                            "type": "string",
+                            "description": "ID of the publication owner"
+                          },
+                          "name": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Display name of the publication"
+                          },
+                          "url": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL of the publication"
+                          },
+                          "slug": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL-friendly slug of the publication"
+                          },
+                          "logoUrl": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL to the publication's logo"
+                          },
+                          "coinId": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Associated coin ID, if any"
+                          },
+                          "customDomain": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Custom domain for the publication"
+                          },
+                          "summary": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Brief description of the publication"
+                          }
+                        },
+                        "required": [
+                          "blogId",
+                          "userId",
+                          "name",
+                          "url",
+                          "slug",
+                          "logoUrl",
+                          "coinId"
+                        ],
+                        "description": "The matched publication"
+                      },
+                      "user": {
+                        "type": "object",
+                        "properties": {
+                          "userId": {
+                            "type": "string",
+                            "description": "Unique identifier for the user"
+                          },
+                          "name": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Display name of the author"
+                          },
+                          "bio": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Brief biography of the author"
+                          },
+                          "avatarUrl": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL to the author's avatar"
+                          },
+                          "walletAddress": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Wallet address of the author"
+                          }
+                        },
+                        "required": [
+                          "userId",
+                          "name"
+                        ],
+                        "description": "The publication owner"
+                      },
+                      "activeSubscriberCount": {
+                        "type": "number",
+                        "description": "Number of active subscribers to this publication"
+                      }
+                    },
+                    "required": [
+                      "blog",
+                      "user",
+                      "activeSubscriberCount"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "searchBlogs",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "search-publications",
+            "description": "Search for publications by name or description"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Search publications",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst results = await api.discover.searchBlogs({ q: \"crypto\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "Search publications using curl",
+            "source": "curl \"https://public.api.paragraph.com/api/v1/discover/blogs/search?q=crypto\""
+          }
+        ]
+      }
+    },
+    "/v1/discover/coins/search": {
+      "get": {
+        "description": "Search for writer coins by ticker, contract address, or publication name. Returns results ranked by relevance and subscriber count.",
+        "summary": "Search coins",
+        "tags": [
+          "discover"
+        ],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search query string",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Coin search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "coin": {
+                        "type": "object",
+                        "properties": {
+                          "coinId": {
+                            "type": "string",
+                            "description": "Unique identifier for the coin"
+                          },
+                          "ticker": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Ticker symbol of the coin"
+                          },
+                          "contractAddress": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Contract address of the coin"
+                          },
+                          "blogId": {
+                            "type": "string",
+                            "description": "ID of the associated publication"
+                          }
+                        },
+                        "required": [
+                          "coinId",
+                          "ticker",
+                          "contractAddress",
+                          "blogId"
+                        ],
+                        "description": "The matched coin"
+                      },
+                      "blog": {
+                        "type": "object",
+                        "properties": {
+                          "blogId": {
+                            "type": "string",
+                            "description": "Unique identifier for the publication"
+                          },
+                          "name": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Display name of the publication"
+                          },
+                          "slug": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL-friendly slug of the publication"
+                          },
+                          "logoUrl": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "URL to the publication's logo"
+                          }
+                        },
+                        "required": [
+                          "blogId",
+                          "name",
+                          "slug",
+                          "logoUrl"
+                        ],
+                        "description": "The associated publication"
+                      },
+                      "activeSubscriberCount": {
+                        "type": "number",
+                        "description": "Number of active subscribers to this publication"
+                      }
+                    },
+                    "required": [
+                      "coin",
+                      "blog",
+                      "activeSubscriberCount"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "searchCoins",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "search-coins",
+            "description": "Search for writer coins by ticker, contract address, or publication name"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Search coins",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst results = await api.discover.searchCoins({ q: \"$WRITER\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "Search coins using curl",
+            "source": "curl \"https://public.api.paragraph.com/api/v1/discover/coins/search?q=WRITER\""
+          }
+        ]
+      }
     }
   },
   "info": {
