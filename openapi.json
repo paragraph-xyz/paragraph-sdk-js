@@ -5736,31 +5736,18 @@
                             ],
                             "description": "Display name of the author"
                           },
-                          "bio": {
-                            "type": [
-                              "string",
-                              "null"
-                            ],
-                            "description": "Brief biography of the author"
-                          },
                           "avatarUrl": {
                             "type": [
                               "string",
                               "null"
                             ],
                             "description": "URL to the author's avatar"
-                          },
-                          "walletAddress": {
-                            "type": [
-                              "string",
-                              "null"
-                            ],
-                            "description": "Wallet address of the author"
                           }
                         },
                         "required": [
                           "userId",
-                          "name"
+                          "name",
+                          "avatarUrl"
                         ],
                         "description": "The author of the post"
                       }
@@ -5942,31 +5929,18 @@
                             ],
                             "description": "Display name of the author"
                           },
-                          "bio": {
-                            "type": [
-                              "string",
-                              "null"
-                            ],
-                            "description": "Brief biography of the author"
-                          },
                           "avatarUrl": {
                             "type": [
                               "string",
                               "null"
                             ],
                             "description": "URL to the author's avatar"
-                          },
-                          "walletAddress": {
-                            "type": [
-                              "string",
-                              "null"
-                            ],
-                            "description": "Wallet address of the author"
                           }
                         },
                         "required": [
                           "userId",
-                          "name"
+                          "name",
+                          "avatarUrl"
                         ],
                         "description": "The publication owner"
                       },

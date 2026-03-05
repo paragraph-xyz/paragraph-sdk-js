@@ -8,7 +8,7 @@
 
 > **CoinByContractIdentifier** = `object`
 
-Defined in: [types.ts:105](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/types.ts#L105)
+Defined in: [types.ts:112](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/types.ts#L112)
 
 Identifier for getting a single coin by contract address.
 
@@ -18,4 +18,4 @@ Identifier for getting a single coin by contract address.
 
 > **contractAddress**: `string`
 
-Defined in: [types.ts:105](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d2ed1adbc1c090566c9d33bd26077a5d94c8847e/src/types.ts#L105)
+Defined in: [types.ts:112](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/types.ts#L112)

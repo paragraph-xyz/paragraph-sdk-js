@@ -7,6 +7,7 @@ import {
   FeedResource,
   PostsResource,
   PublicationsResource,
+  SearchResource,
   SubscribersResource,
   UsersResource,
 } from "./resources";
@@ -52,6 +53,11 @@ import type { ParagraphAPIOptions } from "./types";
  * // Coins (use .single() for single coin)
  * const coin = await api.coins.get({ id: "coinId" }).single();
  * const { items: popular } = await api.coins.get({ sortBy: "popular" });
+ *
+ * // Search
+ * const posts = await api.search.posts("ethereum");
+ * const coins = await api.search.coins("test");
+ * const blogs = await api.search.blogs("crypto");
  * ```
  */
 export class ParagraphAPI {
@@ -78,6 +84,9 @@ export class ParagraphAPI {
   /** Coins resource */
   public readonly coins: CoinsResource;
 
+  /** Search resource */
+  public readonly search: SearchResource;
+
   /**
    * Initializes a new instance of the Paragraph API client.
    * Each instance has its own isolated authentication context, allowing
@@ -97,6 +106,7 @@ export class ParagraphAPI {
     this.feed = new FeedResource(this.api);
     this.users = new UsersResource(this.api);
     this.coins = new CoinsResource(this.api);
+    this.search = new SearchResource(this.api);
   }
 }
 

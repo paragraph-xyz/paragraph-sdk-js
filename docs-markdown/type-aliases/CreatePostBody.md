@@ -26,11 +26,11 @@ OpenAPI spec version: 1.0.0
 
 ### categories?
 
-> `optional` **categories**: `string`[]
+> `optional` **categories**: [`CreatePostBodyCategories`](CreatePostBodyCategories.md)
 
-Defined in: generated/models/createPostBody.ts:44
+Defined in: generated/models/createPostBody.ts:46
 
-Optional array of category tags for the post
+Optional array of category tags for the post. Can also be a comma-separated string.
 
 ***
 
@@ -38,7 +38,7 @@ Optional array of category tags for the post
 
 > `optional` **imageUrl**: `string`
 
-Defined in: generated/models/createPostBody.ts:29
+Defined in: generated/models/createPostBody.ts:31
 
 Optional URL to the post's cover image
 
@@ -48,7 +48,7 @@ Optional URL to the post's cover image
 
 > **markdown**: `string`
 
-Defined in: generated/models/createPostBody.ts:17
+Defined in: generated/models/createPostBody.ts:19
 
 Post content in Markdown format
 
@@ -58,7 +58,7 @@ Post content in Markdown format
 
 > `optional` **postPreview**: `string`
 
-Defined in: generated/models/createPostBody.ts:42
+Defined in: generated/models/createPostBody.ts:44
 
 Optional preview text for the post. If not provided, will be generated from content
 
@@ -70,9 +70,9 @@ Optional preview text for the post. If not provided, will be generated from cont
 
 ### sendNewsletter?
 
-> `optional` **sendNewsletter**: `boolean`
+> `optional` **sendNewsletter**: [`CreatePostBodySendNewsletter`](CreatePostBodySendNewsletter.md)
 
-Defined in: generated/models/createPostBody.ts:31
+Defined in: generated/models/createPostBody.ts:33
 
 Whether to send an email newsletter to subscribers. Default: false
 
@@ -82,7 +82,7 @@ Whether to send an email newsletter to subscribers. Default: false
 
 > `optional` **slug**: `string`
 
-Defined in: generated/models/createPostBody.ts:37
+Defined in: generated/models/createPostBody.ts:39
 
 Optional URL-friendly identifier for the post. If not provided, will be generated from title
 
@@ -100,7 +100,7 @@ Optional URL-friendly identifier for the post. If not provided, will be generate
 
 > `optional` **subtitle**: `string`
 
-Defined in: generated/models/createPostBody.ts:27
+Defined in: generated/models/createPostBody.ts:29
 
 Optional subtitle or brief summary
 
@@ -114,7 +114,7 @@ Optional subtitle or brief summary
 
 > **title**: `string`
 
-Defined in: generated/models/createPostBody.ts:22
+Defined in: generated/models/createPostBody.ts:24
 
 Title of the post
 
