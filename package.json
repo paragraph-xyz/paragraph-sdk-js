@@ -1,6 +1,6 @@
 {
   "name": "@paragraph-com/sdk",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "TypeScript SDK for Paragraph API",
   "repository": {
     "url": "git+https://github.com/paragraph-xyz/paragraph-sdk-js.git"
