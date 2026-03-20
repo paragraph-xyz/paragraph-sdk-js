@@ -1,5 +1,6 @@
 export { CoinsResource } from "./coins";
 export { FeedResource } from "./feed";
+export { MeResource } from "./me";
 export { PostsResource } from "./posts";
 export { PublicationsResource } from "./publications";
 export { SearchResource } from "./search";

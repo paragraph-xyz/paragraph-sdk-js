@@ -132,6 +132,32 @@ export type SingleCoinIdentifier = CoinIdIdentifier | CoinByContractIdentifier;
 export type CoinIdentifier = SingleCoinIdentifier | CoinPopularIdentifier;
 
 /**
+ * Identifier for updating a post by ID.
+ */
+export type PostUpdateById = { id: string };
+
+/**
+ * Identifier for updating a post by slug.
+ */
+export type PostUpdateBySlug = { slug: string };
+
+/**
+ * A discriminated union of identifiers for updating a post.
+ * Use one of the following shapes:
+ * - `{ id: string }` to update a post by its unique ID.
+ * - `{ slug: string }` to update a post by its URL-friendly slug.
+ */
+export type PostUpdateIdentifier = PostUpdateById | PostUpdateBySlug;
+
+/**
+ * A discriminated union of identifiers for deleting a post.
+ * Use one of the following shapes:
+ * - `{ id: string }` to delete a post by its unique ID.
+ * - `{ slug: string }` to delete a post by its URL-friendly slug.
+ */
+export type PostDeleteIdentifier = { id: string } | { slug: string };
+
+/**
  * Type helper to extract the query options for getting a post.
  * It correctly infers the type from the generated API client's method signature,
  * ensuring the types are always in sync.

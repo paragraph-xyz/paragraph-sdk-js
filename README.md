@@ -25,6 +25,31 @@ const newPost = await apiWithAuth.posts.create({
 });
 ```
 
+## Authenticated endpoints
+
+Several endpoints require an API key, which identifies your publication. Pass it when creating the client:
+
+```typescript
+const api = new ParagraphAPI({ apiKey: "your-api-key" });
+
+// Get your publication info
+const publication = await api.me.get();
+
+// List your drafts
+const { items: drafts } = await api.posts.list({ status: "draft" });
+
+// Update a post
+await api.posts.update({
+  id: "postId",
+  title: "Updated Title",
+  markdown: "## New content",
+  status: "published",
+});
+
+// Delete a post
+await api.posts.delete({ id: "postId" });
+```
+
 ## Documentation
 
 See the [API reference](https://paragraph.com/docs/api-reference/) for detailed documentation & a playground.

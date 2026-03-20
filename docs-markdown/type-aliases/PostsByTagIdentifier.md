@@ -8,7 +8,7 @@
 
 > **PostsByTagIdentifier** = `object`
 
-Defined in: [types.ts:78](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/types.ts#L78)
+Defined in: [types.ts:78](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/0cd64bdbf46b188b3d224ff11c6b5e939864171f/src/types.ts#L78)
 
 Identifier for getting a list of posts by tag.
 
@@ -18,4 +18,4 @@ Identifier for getting a list of posts by tag.
 
 > **tag**: `string`
 
-Defined in: [types.ts:78](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/types.ts#L78)
+Defined in: [types.ts:78](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/0cd64bdbf46b188b3d224ff11c6b5e939864171f/src/types.ts#L78)
