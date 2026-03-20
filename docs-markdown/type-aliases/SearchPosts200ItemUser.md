@@ -8,19 +8,29 @@
 
 > **SearchPosts200ItemUser** = `object`
 
-Defined in: generated/models/searchPosts200ItemUser.ts:20
+Defined in: generated/models/searchPosts200ItemUser.ts:22
 
 The author of the post
 
 ## Properties
 
-### avatarUrl
+### avatarUrl?
 
-> **avatarUrl**: [`SearchPosts200ItemUserAvatarUrl`](SearchPosts200ItemUserAvatarUrl.md)
+> `optional` **avatarUrl**: [`SearchPosts200ItemUserAvatarUrl`](SearchPosts200ItemUserAvatarUrl.md)
 
-Defined in: generated/models/searchPosts200ItemUser.ts:26
+Defined in: generated/models/searchPosts200ItemUser.ts:30
 
 URL to the author's avatar
+
+***
+
+### bio?
+
+> `optional` **bio**: [`SearchPosts200ItemUserBio`](SearchPosts200ItemUserBio.md)
+
+Defined in: generated/models/searchPosts200ItemUser.ts:28
+
+Brief biography of the author
 
 ***
 
@@ -28,7 +38,7 @@ URL to the author's avatar
 
 > **name**: [`SearchPosts200ItemUserName`](SearchPosts200ItemUserName.md)
 
-Defined in: generated/models/searchPosts200ItemUser.ts:24
+Defined in: generated/models/searchPosts200ItemUser.ts:26
 
 Display name of the author
 
@@ -38,6 +48,16 @@ Display name of the author
 
 > **userId**: `string`
 
-Defined in: generated/models/searchPosts200ItemUser.ts:22
+Defined in: generated/models/searchPosts200ItemUser.ts:24
 
 Unique identifier for the user
+
+***
+
+### walletAddress?
+
+> `optional` **walletAddress**: [`SearchPosts200ItemUserWalletAddress`](SearchPosts200ItemUserWalletAddress.md)
+
+Defined in: generated/models/searchPosts200ItemUser.ts:32
+
+Wallet address of the author

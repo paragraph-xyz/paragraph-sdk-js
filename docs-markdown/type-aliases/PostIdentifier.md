@@ -8,7 +8,7 @@
 
 > **PostIdentifier** = [`PostIdIdentifier`](PostIdIdentifier.md) \| [`PostByPubIdAndSlugIdentifier`](PostByPubIdAndSlugIdentifier.md) \| [`PostByPubSlugAndSlugIdentifier`](PostByPubSlugAndSlugIdentifier.md) \| [`PostsByPublicationIdIdentifier`](PostsByPublicationIdIdentifier.md) \| [`PostsByTagIdentifier`](PostsByTagIdentifier.md)
 
-Defined in: [types.ts:89](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/types.ts#L89)
+Defined in: [types.ts:89](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/0cd64bdbf46b188b3d224ff11c6b5e939864171f/src/types.ts#L89)
 
 A discriminated union of identifiers for retrieving posts.
 Use one of the following shapes:

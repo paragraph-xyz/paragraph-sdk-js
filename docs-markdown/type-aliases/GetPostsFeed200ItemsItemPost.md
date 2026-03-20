@@ -8,17 +8,47 @@
 
 > **GetPostsFeed200ItemsItemPost** = `object`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:18
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:19
 
 The post content
 
 ## Properties
 
+### authorIds?
+
+> `optional` **authorIds**: `string`[]
+
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:57
+
+IDs of the authors of this post
+
+***
+
+### authors?
+
+> `optional` **authors**: [`GetPostsFeed200ItemsItemPostAuthorsItem`](GetPostsFeed200ItemsItemPostAuthorsItem.md)[]
+
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:55
+
+Authors of this post
+
+***
+
+### categories?
+
+> `optional` **categories**: `string`[]
+
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:53
+
+Categories/tags associated with this post
+
+***
+
 ### coinId?
 
 > `optional` **coinId**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:50
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:51
 
 ID of the associated coin, if the post is coined
 
@@ -28,7 +58,7 @@ ID of the associated coin, if the post is coined
 
 > **id**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:20
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:21
 
 Unique identifier for the post
 
@@ -38,7 +68,7 @@ Unique identifier for the post
 
 > `optional` **imageUrl**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:27
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:28
 
 Optional URL to the post's main image
 
@@ -48,7 +78,7 @@ Optional URL to the post's main image
 
 > `optional` **json**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:46
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:47
 
 TipTap JSON representation of the post content structure. This is the source of truth that the staticHtml and markdown is generated from
 
@@ -58,7 +88,7 @@ TipTap JSON representation of the post content structure. This is the source of 
 
 > `optional` **markdown**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:48
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:49
 
 Markdown source of the post content
 
@@ -68,7 +98,7 @@ Markdown source of the post content
 
 > `optional` **publishedAt**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:29
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:30
 
 Epoch timestamp when the post was published
 
@@ -78,7 +108,7 @@ Epoch timestamp when the post was published
 
 > **slug**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:42
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:43
 
 URL-friendly identifier for the post; accessible at paragraph.com/@[publicationSlug]/[slug]
 
@@ -96,7 +126,7 @@ URL-friendly identifier for the post; accessible at paragraph.com/@[publicationS
 
 > `optional` **staticHtml**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:44
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:45
 
 Rendered HTML content of the post
 
@@ -106,7 +136,7 @@ Rendered HTML content of the post
 
 > `optional` **subtitle**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:36
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:37
 
 Optional subtitle or brief summary
 
@@ -120,7 +150,7 @@ Optional subtitle or brief summary
 
 > **title**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:25
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:26
 
 Title of the post
 
@@ -134,6 +164,16 @@ Title of the post
 
 > `optional` **updatedAt**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:31
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:32
 
 Epoch timestamp when the post was last updated
+
+***
+
+### views?
+
+> `optional` **views**: `number`
+
+Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:59
+
+Total page views. Only included when fetching your own posts via GET /v1/posts

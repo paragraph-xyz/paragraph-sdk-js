@@ -6,7 +6,7 @@
 
 # Interface: PaginatedResult\<T\>
 
-Defined in: [types.ts:30](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/types.ts#L30)
+Defined in: [types.ts:30](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/0cd64bdbf46b188b3d224ff11c6b5e939864171f/src/types.ts#L30)
 
 Result type for paginated queries, containing both items and pagination info.
 
@@ -22,7 +22,7 @@ Result type for paginated queries, containing both items and pagination info.
 
 > **items**: `T`[]
 
-Defined in: [types.ts:32](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/types.ts#L32)
+Defined in: [types.ts:32](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/0cd64bdbf46b188b3d224ff11c6b5e939864171f/src/types.ts#L32)
 
 Array of items in this page
 
@@ -32,6 +32,6 @@ Array of items in this page
 
 > **pagination**: [`Pagination`](Pagination.md)
 
-Defined in: [types.ts:34](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f6e8fcdd990a5c6abaa636234b2d1bc912827dfd/src/types.ts#L34)
+Defined in: [types.ts:34](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/0cd64bdbf46b188b3d224ff11c6b5e939864171f/src/types.ts#L34)
 
 Pagination information

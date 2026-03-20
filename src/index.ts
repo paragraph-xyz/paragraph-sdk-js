@@ -5,6 +5,7 @@ import { wrapAPIWithAuth } from "./utils";
 import {
   CoinsResource,
   FeedResource,
+  MeResource,
   PostsResource,
   PublicationsResource,
   SearchResource,
@@ -37,6 +38,15 @@ import type { ParagraphAPIOptions } from "./types";
  * const post = await api.posts.get({ id: "postId" }).single();
  * // Creating posts requires an API key
  * const newPost = await apiWithAuth.posts.create({ title: "My Post", markdown: "# Hello" });
+ * // List your own posts (requires API key)
+ * const { items: drafts } = await apiWithAuth.posts.list({ status: "draft" });
+ * // Update a post (requires API key)
+ * await apiWithAuth.posts.update({ id: "postId", title: "Updated Title" });
+ * // Delete a post (requires API key)
+ * await apiWithAuth.posts.delete({ id: "postId" });
+ *
+ * // Me - get your authenticated publication (requires API key)
+ * const myPub = await apiWithAuth.me.get();
  *
  * // Feed (paginated)
  * const { items: feedItems, pagination: feedPag } = await api.feed.get();
@@ -87,6 +97,9 @@ export class ParagraphAPI {
   /** Search resource */
   public readonly search: SearchResource;
 
+  /** Me resource - authenticated publication info */
+  public readonly me: MeResource;
+
   /**
    * Initializes a new instance of the Paragraph API client.
    * Each instance has its own isolated authentication context, allowing
@@ -107,6 +120,7 @@ export class ParagraphAPI {
     this.users = new UsersResource(this.api);
     this.coins = new CoinsResource(this.api);
     this.search = new SearchResource(this.api);
+    this.me = new MeResource(this.api);
   }
 }
 
