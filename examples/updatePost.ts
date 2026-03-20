@@ -6,7 +6,7 @@ const api = new ParagraphAPI({ apiKey: "your-api-key" });
 async function main() {
   // Update a post by ID
   await api.posts.update({
-    id: "3T2PQZlsdQtigUp4fhlb",
+    id: "postId",
     title: "Updated Title",
     markdown: "## New content\n\nUpdated post body.",
     status: "published",
@@ -15,7 +15,7 @@ async function main() {
 
   // Update a post by slug
   await api.posts.update({
-    slug: "my-first-post",
+    slug: "post-slug",
     title: "Updated Title",
     markdown: "## New content",
   });
@@ -23,14 +23,14 @@ async function main() {
 
   // Publish a draft
   await api.posts.update({
-    id: "draftPostId",
+    id: "draft-post-id",
     status: "published",
   });
   console.log("Draft published");
 
   // Archive a post
   await api.posts.update({
-    slug: "old-post",
+    slug: "post-slug-to-archive",
     status: "archived",
   });
   console.log("Post archived");
