@@ -751,6 +751,10 @@
                                   "type": "string"
                                 },
                                 "description": "IDs of the authors of this post"
+                              },
+                              "views": {
+                                "type": "number",
+                                "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
                               }
                             },
                             "required": [
@@ -1170,6 +1174,10 @@
                               "type": "string"
                             },
                             "description": "IDs of the authors of this post"
+                          },
+                          "views": {
+                            "type": "number",
+                            "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
                           }
                         },
                         "required": [
@@ -1291,7 +1299,7 @@
     },
     "/v1/publications/{publicationId}/posts": {
       "get": {
-        "description": "Retrieve a paginated list of posts from a publication",
+        "description": "Retrieve a paginated list of published posts from a publication",
         "summary": "Get posts in a publication",
         "tags": [
           "posts"
@@ -1475,6 +1483,10 @@
                               "type": "string"
                             },
                             "description": "IDs of the authors of this post"
+                          },
+                          "views": {
+                            "type": "number",
+                            "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
                           }
                         },
                         "required": [
@@ -1756,6 +1768,10 @@
                         "type": "string"
                       },
                       "description": "IDs of the authors of this post"
+                    },
+                    "views": {
+                      "type": "number",
+                      "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
                     }
                   },
                   "required": [
@@ -1843,6 +1859,428 @@
             "lang": "typescript",
             "label": "Get post by ID",
             "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI()\nconst post = await api.posts.get({ id: \"3T2PQZlsdQtigUp4fhlb\" }).single()"
+          }
+        ]
+      },
+      "put": {
+        "description": "Update an existing post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- When `markdown` is provided, it replaces the full content. Rich blocks (embeds, buttons, callouts) created in the editor will be lost — the markdown to editor conversion is lossy for blocks without a markdown equivalent\n- Set `status` to `\"published\"` to publish a draft, `\"draft\"` to unpublish, or `\"archived\"` to archive",
+        "summary": "Update a post by ID",
+        "tags": [
+          "posts"
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the post to update"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "markdown": {
+                    "type": "string",
+                    "description": "Post content in Markdown format. Replaces full content — rich blocks created in the editor will be lost"
+                  },
+                  "title": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "description": "Title of the post"
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "maxLength": 300,
+                    "description": "Optional subtitle or brief summary"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256,
+                    "description": "URL-friendly identifier for the post"
+                  },
+                  "postPreview": {
+                    "type": "string",
+                    "maxLength": 500,
+                    "description": "Preview text for the post"
+                  },
+                  "categories": {
+                    "oneOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ],
+                    "description": "Category tags for the post. Can also be a comma-separated string."
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "draft",
+                      "published",
+                      "archived"
+                    ],
+                    "description": "Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Post updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "description": "Whether the update succeeded"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request - check field values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found in your publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "updatePost",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "update-post",
+            "description": "Update an existing post by its ID"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Update a post",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.posts.update({\n  id: \"3T2PQZlsdQtigUp4fhlb\",\n  title: \"Updated Title\",\n  markdown: \"## New content\\n\\nUpdated post body.\",\n  status: \"published\"\n})"
+          },
+          {
+            "lang": "bash",
+            "label": "Update post using curl",
+            "source": "curl -X PUT \"https://public.api.paragraph.com/api/v1/posts/3T2PQZlsdQtigUp4fhlb\" \\\n  -H \"Authorization: Bearer your-api-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"title\": \"Updated Title\", \"markdown\": \"New content\"}'"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Permanently delete a post from your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Warning:** This action is irreversible. The post and all related data (comments, notifications, drafts) will be permanently deleted.",
+        "summary": "Delete a post",
+        "tags": [
+          "posts"
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the post to delete"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Post deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "description": "Whether the deletion succeeded"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found in your publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deletePost",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "delete-post",
+            "description": "Permanently delete a post by its ID"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Delete a post",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.posts.delete({ id: \"3T2PQZlsdQtigUp4fhlb\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "Delete post using curl",
+            "source": "curl -X DELETE \"https://public.api.paragraph.com/api/v1/posts/3T2PQZlsdQtigUp4fhlb\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
           }
         ]
       }
@@ -2020,6 +2458,10 @@
                         "type": "string"
                       },
                       "description": "IDs of the authors of this post"
+                    },
+                    "views": {
+                      "type": "number",
+                      "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
                     }
                   },
                   "required": [
@@ -2286,6 +2728,10 @@
                         "type": "string"
                       },
                       "description": "IDs of the authors of this post"
+                    },
+                    "views": {
+                      "type": "number",
+                      "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
                     }
                   },
                   "required": [
@@ -2379,7 +2825,7 @@
     },
     "/v1/posts": {
       "post": {
-        "description": "Create a new post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Requirements:**\n- `markdown` field is required and will be converted to TipTap JSON format\n- `title` field is required\n\n**Behavior:**\n- The post will be created as published by default\n- If `sendNewsletter` is true, an email will be sent to all subscribers",
+        "description": "Create a new post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Requirements:**\n- `markdown` field is required and will be converted to TipTap JSON format\n- `title` field is required\n\n**Behavior:**\n- The post will be created as published by default. Set `status` to `\"draft\"` to create a draft instead\n- If `sendNewsletter` is true, an email will be sent to all subscribers",
         "summary": "Create a new post",
         "tags": [
           "posts"
@@ -2427,6 +2873,14 @@
                       }
                     ],
                     "description": "Whether to send an email newsletter to subscribers. Default: false"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "published",
+                      "draft"
+                    ],
+                    "description": "Status of the post. Default: published"
                   },
                   "slug": {
                     "type": "string",
@@ -2618,13 +3072,1112 @@
         "x-codeSamples": [
           {
             "lang": "typescript",
-            "label": "Create a post with markdown",
+            "label": "Create and publish a post",
             "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.posts.create({\n  title: \"My First Post\",\n  markdown: \"# Hello World\\n\\nThis is my first post!\",\n  sendNewsletter: true\n})"
+          },
+          {
+            "lang": "typescript",
+            "label": "Create a draft",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.posts.create({\n  title: \"Work in Progress\",\n  markdown: \"# Draft\\n\\nStill working on this.\",\n  status: \"draft\"\n})"
           },
           {
             "lang": "bash",
             "label": "Create post using curl",
             "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/posts\" \\\n  -H \"Authorization: Bearer your-api-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"title\": \"My First Post\", \"markdown\": \"# Hello World\"}'"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieve a paginated list of posts from your publication. The publication is identified by the API key provided in the Authorization header.\n\nUse the `status` parameter to filter by post status (published, draft, scheduled, or archived). Defaults to published.",
+        "summary": "List your posts",
+        "tags": [
+          "posts"
+        ],
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Cursor for pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of items to return (1-100, default: 10)",
+            "schema": {
+              "default": 10,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "includeContent",
+            "in": "query",
+            "description": "Include full content fields (markdown, json, staticHtml). Default: false",
+            "schema": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by post status. Default: published",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "published",
+                "draft",
+                "scheduled",
+                "archived"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Posts retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique identifier for the post"
+                          },
+                          "title": {
+                            "type": "string",
+                            "maxLength": 200,
+                            "description": "Title of the post"
+                          },
+                          "imageUrl": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "Optional URL to the post's main image"
+                          },
+                          "publishedAt": {
+                            "type": "string",
+                            "description": "Epoch timestamp when the post was published"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "description": "Epoch timestamp when the post was last updated"
+                          },
+                          "subtitle": {
+                            "type": "string",
+                            "maxLength": 300,
+                            "description": "Optional subtitle or brief summary"
+                          },
+                          "slug": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 256,
+                            "description": "URL-friendly identifier for the post; accessible at paragraph.com/@[publicationSlug]/[slug]"
+                          },
+                          "staticHtml": {
+                            "type": "string",
+                            "description": "Rendered HTML content of the post"
+                          },
+                          "json": {
+                            "type": "string",
+                            "description": "TipTap JSON representation of the post content structure. This is the source of truth that the staticHtml and markdown is generated from"
+                          },
+                          "markdown": {
+                            "type": "string",
+                            "description": "Markdown source of the post content"
+                          },
+                          "coinId": {
+                            "type": "string",
+                            "description": "ID of the associated coin, if the post is coined"
+                          },
+                          "categories": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "Categories/tags associated with this post"
+                          },
+                          "authors": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "description": "Unique identifier for the user"
+                                },
+                                "walletAddress": {
+                                  "type": "string",
+                                  "pattern": "^0x[a-fA-F0-9]{40}$",
+                                  "description": "Wallet address of the user"
+                                },
+                                "avatarUrl": {
+                                  "type": "string",
+                                  "format": "uri",
+                                  "description": "URL to the user's avatar image"
+                                },
+                                "publicationId": {
+                                  "type": "string",
+                                  "description": "ID of the publication this user belongs to"
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "Display name of the user"
+                                },
+                                "bio": {
+                                  "type": "string",
+                                  "maxLength": 500,
+                                  "description": "Brief biography of the user (max 500 characters)"
+                                },
+                                "farcaster": {
+                                  "type": "object",
+                                  "properties": {
+                                    "username": {
+                                      "type": "string",
+                                      "description": "Farcaster username"
+                                    },
+                                    "displayName": {
+                                      "type": "string",
+                                      "description": "Farcaster display name"
+                                    },
+                                    "fid": {
+                                      "type": "number",
+                                      "description": "Farcaster fid"
+                                    }
+                                  },
+                                  "required": [
+                                    "username",
+                                    "displayName",
+                                    "fid"
+                                  ],
+                                  "description": "Farcaster profile information, if linked"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "publicationId"
+                              ]
+                            },
+                            "description": "Authors of this post"
+                          },
+                          "authorIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "IDs of the authors of this post"
+                          },
+                          "views": {
+                            "type": "number",
+                            "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "title",
+                          "slug"
+                        ]
+                      },
+                      "description": "Array of items in this page"
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "cursor": {
+                          "type": "string",
+                          "description": "Cursor for fetching the next page of results"
+                        },
+                        "hasMore": {
+                          "type": "boolean",
+                          "description": "Whether more results are available"
+                        },
+                        "total": {
+                          "type": "number",
+                          "description": "Total number of items available"
+                        }
+                      },
+                      "required": [
+                        "hasMore"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "items",
+                    "pagination"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listOwnPosts",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "list-own-posts",
+            "description": "List posts from your publication, filterable by status"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "List draft posts",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst { items: drafts, pagination } = await api.posts.list({ status: \"draft\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "List draft posts using curl",
+            "source": "curl \"https://public.api.paragraph.com/api/v1/posts?status=draft\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/posts/slug/{slug}": {
+      "put": {
+        "description": "Update an existing post using its URL slug. The publication is identified by the API key provided in the Authorization header.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- When `markdown` is provided, it replaces the full content. Rich blocks (embeds, buttons, callouts) created in the editor will be lost\n- Set `status` to `\"published\"` to publish a draft, `\"draft\"` to unpublish, or `\"archived\"` to archive",
+        "summary": "Update a post by slug",
+        "tags": [
+          "posts"
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "description": "URL-friendly identifier of the post to update"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "markdown": {
+                    "type": "string",
+                    "description": "Post content in Markdown format. Replaces full content — rich blocks created in the editor will be lost"
+                  },
+                  "title": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "description": "Title of the post"
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "maxLength": 300,
+                    "description": "Optional subtitle or brief summary"
+                  },
+                  "slug": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256,
+                    "description": "URL-friendly identifier for the post"
+                  },
+                  "postPreview": {
+                    "type": "string",
+                    "maxLength": 500,
+                    "description": "Preview text for the post"
+                  },
+                  "categories": {
+                    "oneOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ],
+                    "description": "Category tags for the post. Can also be a comma-separated string."
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "draft",
+                      "published",
+                      "archived"
+                    ],
+                    "description": "Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Post updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "description": "Whether the update succeeded"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request - check field values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found in your publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "updatePostBySlug",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "update-post-by-slug",
+            "description": "Update an existing post by its URL slug"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Update a post by slug",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.posts.update({\n  slug: \"my-first-post\",\n  title: \"Updated Title\",\n  markdown: \"## New content\"\n})"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "Permanently delete a post using its URL slug. The publication is identified by the API key provided in the Authorization header.\n\n**Warning:** This action is irreversible. The post and all related data (comments, notifications, drafts) will be permanently deleted.",
+        "summary": "Delete a post by slug",
+        "tags": [
+          "posts"
+        ],
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "description": "URL-friendly identifier of the post to delete"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Post deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "description": "Whether the deletion succeeded"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found in your publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "deletePostBySlug",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "delete-post-by-slug",
+            "description": "Permanently delete a post by its URL slug"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Delete a post by slug",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.posts.delete({ slug: \"my-first-post\" })"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/posts/{postId}/test-email": {
+      "post": {
+        "description": "Sends a test newsletter email for the specified draft post to the publication owner's email address. Useful for previewing how a post will look as a newsletter before publishing. Only works for draft posts.",
+        "summary": "Send a test newsletter email",
+        "tags": [
+          "posts"
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the post to preview"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Test email sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ],
+                      "description": "Whether the email was sent"
+                    }
+                  },
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No email associated with the account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found in your publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "sendTestEmail",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "send-test-email",
+            "description": "Send a test newsletter email for a post"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Send a test email",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.posts.sendTestEmail({ id: \"3T2PQZlsdQtigUp4fhlb\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "Send test email using curl",
+            "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/posts/3T2PQZlsdQtigUp4fhlb/test-email\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/me": {
+      "get": {
+        "description": "Returns the publication associated with the API key used in the request. Useful for verifying your API key and retrieving your publication details.",
+        "summary": "Get authenticated publication",
+        "tags": [
+          "me"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Authenticated publication details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for the publication"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Display name of the publication"
+                    },
+                    "ownerUserId": {
+                      "type": "string",
+                      "description": "ID of the user who owns this publication"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 256,
+                      "description": "URL-friendly identifier for the publication; accessible at paragraph.com/@[slug]"
+                    },
+                    "customDomain": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "Custom domain configured for this publication"
+                    },
+                    "summary": {
+                      "type": "string",
+                      "maxLength": 500,
+                      "description": "Brief description of the publication (max 500 characters)"
+                    },
+                    "logoUrl": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL to the publication's logo image"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "ownerUserId",
+                    "slug"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getMe",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-me",
+            "description": "Get the publication associated with the authenticated API key"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get authenticated publication",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst publication = await api.me.get()"
+          },
+          {
+            "lang": "bash",
+            "label": "Get authenticated publication using curl",
+            "source": "curl \"https://public.api.paragraph.com/api/v1/me\" \\\n  -H \"Authorization: Bearer your-api-key\""
           }
         ],
         "security": [
@@ -5736,18 +7289,31 @@
                             ],
                             "description": "Display name of the author"
                           },
+                          "bio": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Brief biography of the author"
+                          },
                           "avatarUrl": {
                             "type": [
                               "string",
                               "null"
                             ],
                             "description": "URL to the author's avatar"
+                          },
+                          "walletAddress": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Wallet address of the author"
                           }
                         },
                         "required": [
                           "userId",
-                          "name",
-                          "avatarUrl"
+                          "name"
                         ],
                         "description": "The author of the post"
                       }
@@ -5929,18 +7495,31 @@
                             ],
                             "description": "Display name of the author"
                           },
+                          "bio": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Brief biography of the author"
+                          },
                           "avatarUrl": {
                             "type": [
                               "string",
                               "null"
                             ],
                             "description": "URL to the author's avatar"
+                          },
+                          "walletAddress": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Wallet address of the author"
                           }
                         },
                         "required": [
                           "userId",
-                          "name",
-                          "avatarUrl"
+                          "name"
                         ],
                         "description": "The publication owner"
                       },
