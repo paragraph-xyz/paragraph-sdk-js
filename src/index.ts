@@ -3,6 +3,7 @@ import { getParagraphAPI } from "./generated/api";
 import { setCurrentApiKey } from "./mutator/custom-axios";
 import { wrapAPIWithAuth } from "./utils";
 import {
+  AuthResource,
   CoinsResource,
   FeedResource,
   MeResource,
@@ -68,6 +69,11 @@ import type { ParagraphAPIOptions } from "./types";
  * const posts = await api.search.posts("ethereum");
  * const coins = await api.search.coins("test");
  * const blogs = await api.search.blogs("crypto");
+ *
+ * // Auth - browser-based auth sessions for CLI/API clients
+ * const session = await api.auth.createSession({ deviceName: "my-cli" });
+ * console.log("Open this URL:", session.verificationUrl);
+ * const status = await api.auth.getSession(session.sessionId);
  * ```
  */
 export class ParagraphAPI {
@@ -75,6 +81,9 @@ export class ParagraphAPI {
 
   /** The API key for this instance */
   private apiKey: string | undefined;
+
+  /** Auth resource - browser-based auth sessions */
+  public readonly auth: AuthResource;
 
   /** Publications resource */
   public readonly publications: PublicationsResource;
@@ -113,6 +122,7 @@ export class ParagraphAPI {
     // Wrap the API to set the current API key context before each call
     this.api = wrapAPIWithAuth(getParagraphAPI(), this.apiKey, setCurrentApiKey);
 
+    this.auth = new AuthResource(this.api);
     this.publications = new PublicationsResource(this.api);
     this.subscribers = new SubscribersResource(this.api);
     this.posts = new PostsResource(this.api);

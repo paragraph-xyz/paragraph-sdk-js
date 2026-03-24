@@ -70,7 +70,7 @@ URL-friendly identifier for the post
 
 Defined in: generated/models/updatePostBody.ts:44
 
-Set to 'published' to publish or 'draft' to unpublish
+Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive
 
 ***
 

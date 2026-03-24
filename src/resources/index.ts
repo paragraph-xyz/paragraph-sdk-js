@@ -1,3 +1,4 @@
+export { AuthResource } from "./auth";
 export { CoinsResource } from "./coins";
 export { FeedResource } from "./feed";
 export { MeResource } from "./me";
