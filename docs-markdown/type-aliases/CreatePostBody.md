@@ -8,7 +8,7 @@
 
 > **CreatePostBody** = `object`
 
-Defined in: generated/models/createPostBody.ts:17
+Defined in: generated/models/createPostBody.ts:18
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: generated/models/createPostBody.ts:17
 
 > `optional` **categories**: [`CreatePostBodyCategories`](CreatePostBodyCategories.md)
 
-Defined in: generated/models/createPostBody.ts:46
+Defined in: generated/models/createPostBody.ts:49
 
 Optional array of category tags for the post. Can also be a comma-separated string.
 
@@ -26,7 +26,7 @@ Optional array of category tags for the post. Can also be a comma-separated stri
 
 > `optional` **imageUrl**: `string`
 
-Defined in: generated/models/createPostBody.ts:31
+Defined in: generated/models/createPostBody.ts:32
 
 Optional URL to the post's cover image
 
@@ -36,7 +36,7 @@ Optional URL to the post's cover image
 
 > **markdown**: `string`
 
-Defined in: generated/models/createPostBody.ts:19
+Defined in: generated/models/createPostBody.ts:20
 
 Post content in Markdown format
 
@@ -46,7 +46,7 @@ Post content in Markdown format
 
 > `optional` **postPreview**: `string`
 
-Defined in: generated/models/createPostBody.ts:44
+Defined in: generated/models/createPostBody.ts:47
 
 Optional preview text for the post. If not provided, will be generated from content
 
@@ -60,7 +60,7 @@ Optional preview text for the post. If not provided, will be generated from cont
 
 > `optional` **sendNewsletter**: [`CreatePostBodySendNewsletter`](CreatePostBodySendNewsletter.md)
 
-Defined in: generated/models/createPostBody.ts:33
+Defined in: generated/models/createPostBody.ts:34
 
 Whether to send an email newsletter to subscribers. Default: false
 
@@ -70,7 +70,7 @@ Whether to send an email newsletter to subscribers. Default: false
 
 > `optional` **slug**: `string`
 
-Defined in: generated/models/createPostBody.ts:39
+Defined in: generated/models/createPostBody.ts:42
 
 Optional URL-friendly identifier for the post. If not provided, will be generated from title
 
@@ -84,11 +84,21 @@ Optional URL-friendly identifier for the post. If not provided, will be generate
 
 ***
 
+### status?
+
+> `optional` **status**: [`CreatePostBodyStatus`](CreatePostBodyStatus.md)
+
+Defined in: generated/models/createPostBody.ts:36
+
+Status of the post. Default: published
+
+***
+
 ### subtitle?
 
 > `optional` **subtitle**: `string`
 
-Defined in: generated/models/createPostBody.ts:29
+Defined in: generated/models/createPostBody.ts:30
 
 Optional subtitle or brief summary
 
@@ -102,7 +112,7 @@ Optional subtitle or brief summary
 
 > **title**: `string`
 
-Defined in: generated/models/createPostBody.ts:24
+Defined in: generated/models/createPostBody.ts:25
 
 Title of the post
 

@@ -12,6 +12,10 @@ Defined in: generated/models/updatePostBySlugBodyStatus.ts:18
 
 ## Type Declaration
 
+### archived
+
+> `readonly` **archived**: `"archived"` = `'archived'`
+
 ### draft
 
 > `readonly` **draft**: `"draft"` = `'draft'`
