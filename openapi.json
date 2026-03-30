@@ -7783,7 +7783,7 @@
                     "type": "string",
                     "format": "uri",
                     "maxLength": 2048,
-                    "description": "HTTPS URL on paragraph.com to redirect the user to after approving the session"
+                    "description": "HTTPS callback URL to redirect the user to after approving the session"
                   }
                 }
               }
