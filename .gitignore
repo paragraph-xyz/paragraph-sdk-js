@@ -42,5 +42,6 @@ temp/
 .cache/
 
 # Package manager files
+package-lock.json
 .pnp.*
 .yarn-integrity

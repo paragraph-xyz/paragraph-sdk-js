@@ -7,6 +7,10 @@ export default {
     //'src/generated/models/**/*.ts'
   ],
 
+  // Skip TS type-checking — avoids errors from transitive deps (e.g. ox)
+  // that require different lib/DOM targets than this project's tsconfig
+  skipErrorChecking: true,
+
   // Use the Markdown theme from the plugin
   plugin: ['typedoc-plugin-markdown'],
   theme: 'markdown',
