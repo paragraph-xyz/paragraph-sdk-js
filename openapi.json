@@ -7778,6 +7778,12 @@
                     "type": "string",
                     "maxLength": 100,
                     "description": "Name of the device requesting access (e.g. user@MacBook-Pro.local)"
+                  },
+                  "callbackUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "maxLength": 2048,
+                    "description": "HTTPS URL on paragraph.com to redirect the user to after approving the session"
                   }
                 }
               }
@@ -7884,6 +7890,9 @@
                           ]
                         },
                         "deviceName": {
+                          "type": "string"
+                        },
+                        "callbackUrl": {
                           "type": "string"
                         }
                       },
