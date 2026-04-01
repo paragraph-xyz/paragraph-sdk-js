@@ -603,9 +603,13 @@
             "in": "query",
             "description": "Include full content fields (json, staticHtml, markdown) in the post. Default: false",
             "schema": {
-              "type": [
-                "boolean",
-                "null"
+              "oneOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string"
+                }
               ]
             }
           }
@@ -1029,9 +1033,13 @@
             "in": "query",
             "description": "Include full content fields (json, staticHtml, markdown) in the post. Default: false",
             "schema": {
-              "type": [
-                "boolean",
-                "null"
+              "oneOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string"
+                }
               ]
             }
           }
@@ -1338,9 +1346,13 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": [
-                "boolean",
-                "null"
+              "oneOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string"
+                }
               ]
             }
           }
@@ -1628,9 +1640,13 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": [
-                "boolean",
-                "null"
+              "oneOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string"
+                }
               ]
             }
           }
@@ -2318,9 +2334,13 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": [
-                "boolean",
-                "null"
+              "oneOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string"
+                }
               ]
             }
           }
@@ -2588,9 +2608,13 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": [
-                "boolean",
-                "null"
+              "oneOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string"
+                }
               ]
             }
           }
@@ -3123,9 +3147,13 @@
             "in": "query",
             "description": "Include full content fields (markdown, json, staticHtml). Default: false",
             "schema": {
-              "type": [
-                "boolean",
-                "null"
+              "oneOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string"
+                }
               ]
             }
           },
