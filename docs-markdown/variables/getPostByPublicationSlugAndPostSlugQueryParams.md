@@ -1,0 +1,11 @@
+[**@paragraph-com/sdk**](../README.md)
+
+***
+
+[@paragraph-com/sdk](../README.md) / getPostByPublicationSlugAndPostSlugQueryParams
+
+# Variable: getPostByPublicationSlugAndPostSlugQueryParams
+
+> `const` **getPostByPublicationSlugAndPostSlugQueryParams**: `ZodObject`\<\{ `includeContent`: `ZodOptional`\<`ZodNullable`\<`ZodBoolean`\>\>; \}, `"strip"`, `ZodTypeAny`, \{ `includeContent?`: `boolean` \| `null`; \}, \{ `includeContent?`: `boolean` \| `null`; \}\>
+
+Defined in: generated/zod.ts:527

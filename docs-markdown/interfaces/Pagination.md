@@ -6,7 +6,7 @@
 
 # Interface: Pagination
 
-Defined in: [types.ts:18](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7a67bd47ae5248b20c215f35d9f2785f77cbd5de/src/types.ts#L18)
+Defined in: [types.ts:18](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/89c6ec6af81e223cf3c6f30a664c3d5f3b0bb394/src/types.ts#L18)
 
 Pagination information for paginated results.
 
@@ -14,9 +14,9 @@ Pagination information for paginated results.
 
 ### cursor?
 
-> `optional` **cursor**: `string`
+> `optional` **cursor?**: `string`
 
-Defined in: [types.ts:20](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7a67bd47ae5248b20c215f35d9f2785f77cbd5de/src/types.ts#L20)
+Defined in: [types.ts:20](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/89c6ec6af81e223cf3c6f30a664c3d5f3b0bb394/src/types.ts#L20)
 
 Cursor for fetching the next page of results
 
@@ -26,7 +26,7 @@ Cursor for fetching the next page of results
 
 > **hasMore**: `boolean`
 
-Defined in: [types.ts:22](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7a67bd47ae5248b20c215f35d9f2785f77cbd5de/src/types.ts#L22)
+Defined in: [types.ts:22](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/89c6ec6af81e223cf3c6f30a664c3d5f3b0bb394/src/types.ts#L22)
 
 Whether more results are available
 
@@ -34,8 +34,8 @@ Whether more results are available
 
 ### total?
 
-> `optional` **total**: `number`
+> `optional` **total?**: `number`
 
-Defined in: [types.ts:24](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7a67bd47ae5248b20c215f35d9f2785f77cbd5de/src/types.ts#L24)
+Defined in: [types.ts:24](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/89c6ec6af81e223cf3c6f30a664c3d5f3b0bb394/src/types.ts#L24)
 
 Total number of items available

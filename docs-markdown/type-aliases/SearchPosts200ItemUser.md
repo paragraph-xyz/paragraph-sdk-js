@@ -16,7 +16,7 @@ The author of the post
 
 ### avatarUrl?
 
-> `optional` **avatarUrl**: [`SearchPosts200ItemUserAvatarUrl`](SearchPosts200ItemUserAvatarUrl.md)
+> `optional` **avatarUrl?**: [`SearchPosts200ItemUserAvatarUrl`](SearchPosts200ItemUserAvatarUrl.md)
 
 Defined in: generated/models/searchPosts200ItemUser.ts:30
 
@@ -26,7 +26,7 @@ URL to the author's avatar
 
 ### bio?
 
-> `optional` **bio**: [`SearchPosts200ItemUserBio`](SearchPosts200ItemUserBio.md)
+> `optional` **bio?**: [`SearchPosts200ItemUserBio`](SearchPosts200ItemUserBio.md)
 
 Defined in: generated/models/searchPosts200ItemUser.ts:28
 
@@ -56,7 +56,7 @@ Unique identifier for the user
 
 ### walletAddress?
 
-> `optional` **walletAddress**: [`SearchPosts200ItemUserWalletAddress`](SearchPosts200ItemUserWalletAddress.md)
+> `optional` **walletAddress?**: [`SearchPosts200ItemUserWalletAddress`](SearchPosts200ItemUserWalletAddress.md)
 
 Defined in: generated/models/searchPosts200ItemUser.ts:32
 

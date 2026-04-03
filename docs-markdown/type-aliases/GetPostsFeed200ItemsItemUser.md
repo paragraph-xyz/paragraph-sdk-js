@@ -16,7 +16,7 @@ The user who owns the publication this post belongs to
 
 ### avatarUrl?
 
-> `optional` **avatarUrl**: `string`
+> `optional` **avatarUrl?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemUser.ts:28
 
@@ -26,7 +26,7 @@ URL to the user's avatar image
 
 ### bio?
 
-> `optional` **bio**: `string`
+> `optional` **bio?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemUser.ts:37
 
@@ -40,7 +40,7 @@ Brief biography of the user (max 500 characters)
 
 ### farcaster?
 
-> `optional` **farcaster**: [`GetPostsFeed200ItemsItemUserFarcaster`](GetPostsFeed200ItemsItemUserFarcaster.md)
+> `optional` **farcaster?**: [`GetPostsFeed200ItemsItemUserFarcaster`](GetPostsFeed200ItemsItemUserFarcaster.md)
 
 Defined in: generated/models/getPostsFeed200ItemsItemUser.ts:39
 
@@ -60,7 +60,7 @@ Unique identifier for the user
 
 ### name?
 
-> `optional` **name**: `string`
+> `optional` **name?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemUser.ts:32
 
@@ -80,7 +80,7 @@ ID of the publication this user belongs to
 
 ### walletAddress?
 
-> `optional` **walletAddress**: `string`
+> `optional` **walletAddress?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemUser.ts:26
 

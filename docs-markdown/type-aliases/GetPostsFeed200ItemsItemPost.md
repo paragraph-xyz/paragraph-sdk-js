@@ -16,7 +16,7 @@ The post content
 
 ### authorIds?
 
-> `optional` **authorIds**: `string`[]
+> `optional` **authorIds?**: `string`[]
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:57
 
@@ -26,7 +26,7 @@ IDs of the authors of this post
 
 ### authors?
 
-> `optional` **authors**: [`GetPostsFeed200ItemsItemPostAuthorsItem`](GetPostsFeed200ItemsItemPostAuthorsItem.md)[]
+> `optional` **authors?**: [`GetPostsFeed200ItemsItemPostAuthorsItem`](GetPostsFeed200ItemsItemPostAuthorsItem.md)[]
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:55
 
@@ -36,7 +36,7 @@ Authors of this post
 
 ### categories?
 
-> `optional` **categories**: `string`[]
+> `optional` **categories?**: `string`[]
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:53
 
@@ -46,7 +46,7 @@ Categories/tags associated with this post
 
 ### coinId?
 
-> `optional` **coinId**: `string`
+> `optional` **coinId?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:51
 
@@ -66,7 +66,7 @@ Unique identifier for the post
 
 ### imageUrl?
 
-> `optional` **imageUrl**: `string`
+> `optional` **imageUrl?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:28
 
@@ -76,7 +76,7 @@ Optional URL to the post's main image
 
 ### json?
 
-> `optional` **json**: `string`
+> `optional` **json?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:47
 
@@ -86,7 +86,7 @@ TipTap JSON representation of the post content structure. This is the source of 
 
 ### markdown?
 
-> `optional` **markdown**: `string`
+> `optional` **markdown?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:49
 
@@ -96,7 +96,7 @@ Markdown source of the post content
 
 ### publishedAt?
 
-> `optional` **publishedAt**: `string`
+> `optional` **publishedAt?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:30
 
@@ -124,7 +124,7 @@ URL-friendly identifier for the post; accessible at paragraph.com/@[publicationS
 
 ### staticHtml?
 
-> `optional` **staticHtml**: `string`
+> `optional` **staticHtml?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:45
 
@@ -134,7 +134,7 @@ Rendered HTML content of the post
 
 ### subtitle?
 
-> `optional` **subtitle**: `string`
+> `optional` **subtitle?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:37
 
@@ -162,7 +162,7 @@ Title of the post
 
 ### updatedAt?
 
-> `optional` **updatedAt**: `string`
+> `optional` **updatedAt?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:32
 
@@ -172,7 +172,7 @@ Epoch timestamp when the post was last updated
 
 ### views?
 
-> `optional` **views**: `number`
+> `optional` **views?**: `number`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:59
 

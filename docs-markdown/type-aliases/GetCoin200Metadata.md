@@ -70,7 +70,7 @@ External url associated with the coin
 
 ### image?
 
-> `optional` **image**: `string`
+> `optional` **image?**: `string`
 
 Defined in: generated/models/getCoin200Metadata.ts:28
 
@@ -88,7 +88,7 @@ Defined in: generated/models/getCoin200Metadata.ts:35
 
 ### logoURI?
 
-> `optional` **logoURI**: `string`
+> `optional` **logoURI?**: `string`
 
 Defined in: generated/models/getCoin200Metadata.ts:30
 

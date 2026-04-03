@@ -16,7 +16,7 @@ The publication this post belongs to
 
 ### customDomain?
 
-> `optional` **customDomain**: `string`
+> `optional` **customDomain?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPublication.ts:32
 
@@ -36,7 +36,7 @@ Unique identifier for the publication
 
 ### logoUrl?
 
-> `optional` **logoUrl**: `string`
+> `optional` **logoUrl?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPublication.ts:39
 
@@ -84,7 +84,7 @@ URL-friendly identifier for the publication; accessible at paragraph.com/@[slug]
 
 ### summary?
 
-> `optional` **summary**: `string`
+> `optional` **summary?**: `string`
 
 Defined in: generated/models/getPostsFeed200ItemsItemPublication.ts:37
 

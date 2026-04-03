@@ -8,7 +8,7 @@
 
 > **CoinPopularIdentifier** = `object`
 
-Defined in: [types.ts:117](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7a67bd47ae5248b20c215f35d9f2785f77cbd5de/src/types.ts#L117)
+Defined in: [types.ts:117](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/89c6ec6af81e223cf3c6f30a664c3d5f3b0bb394/src/types.ts#L117)
 
 Identifier for getting a list of popular coins.
 
@@ -18,4 +18,4 @@ Identifier for getting a list of popular coins.
 
 > **sortBy**: `"popular"`
 
-Defined in: [types.ts:117](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7a67bd47ae5248b20c215f35d9f2785f77cbd5de/src/types.ts#L117)
+Defined in: [types.ts:117](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/89c6ec6af81e223cf3c6f30a664c3d5f3b0bb394/src/types.ts#L117)

@@ -14,7 +14,7 @@ Defined in: generated/models/updatePostBody.ts:17
 
 ### categories?
 
-> `optional` **categories**: [`UpdatePostBodyCategories`](UpdatePostBodyCategories.md)
+> `optional` **categories?**: [`UpdatePostBodyCategories`](UpdatePostBodyCategories.md)
 
 Defined in: generated/models/updatePostBody.ts:42
 
@@ -24,7 +24,7 @@ Category tags for the post. Can also be a comma-separated string.
 
 ### markdown?
 
-> `optional` **markdown**: `string`
+> `optional` **markdown?**: `string`
 
 Defined in: generated/models/updatePostBody.ts:19
 
@@ -34,7 +34,7 @@ Post content in Markdown format. Replaces full content — rich blocks created i
 
 ### postPreview?
 
-> `optional` **postPreview**: `string`
+> `optional` **postPreview?**: `string`
 
 Defined in: generated/models/updatePostBody.ts:40
 
@@ -48,7 +48,7 @@ Preview text for the post
 
 ### slug?
 
-> `optional` **slug**: `string`
+> `optional` **slug?**: `string`
 
 Defined in: generated/models/updatePostBody.ts:35
 
@@ -66,7 +66,7 @@ URL-friendly identifier for the post
 
 ### status?
 
-> `optional` **status**: [`UpdatePostBodyStatus`](UpdatePostBodyStatus.md)
+> `optional` **status?**: [`UpdatePostBodyStatus`](UpdatePostBodyStatus.md)
 
 Defined in: generated/models/updatePostBody.ts:44
 
@@ -76,7 +76,7 @@ Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive
 
 ### subtitle?
 
-> `optional` **subtitle**: `string`
+> `optional` **subtitle?**: `string`
 
 Defined in: generated/models/updatePostBody.ts:29
 
@@ -90,7 +90,7 @@ Optional subtitle or brief summary
 
 ### title?
 
-> `optional` **title**: `string`
+> `optional` **title?**: `string`
 
 Defined in: generated/models/updatePostBody.ts:24
 

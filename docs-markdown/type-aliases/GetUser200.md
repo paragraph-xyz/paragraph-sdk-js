@@ -14,7 +14,7 @@ Defined in: generated/models/getUser200.ts:16
 
 ### avatarUrl?
 
-> `optional` **avatarUrl**: `string`
+> `optional` **avatarUrl?**: `string`
 
 Defined in: generated/models/getUser200.ts:25
 
@@ -24,7 +24,7 @@ URL to the user's avatar image
 
 ### bio?
 
-> `optional` **bio**: `string`
+> `optional` **bio?**: `string`
 
 Defined in: generated/models/getUser200.ts:34
 
@@ -38,7 +38,7 @@ Brief biography of the user (max 500 characters)
 
 ### farcaster?
 
-> `optional` **farcaster**: [`GetUser200Farcaster`](GetUser200Farcaster.md)
+> `optional` **farcaster?**: [`GetUser200Farcaster`](GetUser200Farcaster.md)
 
 Defined in: generated/models/getUser200.ts:36
 
@@ -58,7 +58,7 @@ Unique identifier for the user
 
 ### name?
 
-> `optional` **name**: `string`
+> `optional` **name?**: `string`
 
 Defined in: generated/models/getUser200.ts:29
 
@@ -78,7 +78,7 @@ ID of the publication this user belongs to
 
 ### walletAddress?
 
-> `optional` **walletAddress**: `string`
+> `optional` **walletAddress?**: `string`
 
 Defined in: generated/models/getUser200.ts:23
 

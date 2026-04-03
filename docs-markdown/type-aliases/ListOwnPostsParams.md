@@ -14,7 +14,7 @@ Defined in: generated/models/listOwnPostsParams.ts:16
 
 ### cursor?
 
-> `optional` **cursor**: `string`
+> `optional` **cursor?**: `string`
 
 Defined in: generated/models/listOwnPostsParams.ts:20
 
@@ -24,7 +24,7 @@ Cursor for pagination
 
 ### includeContent?
 
-> `optional` **includeContent**: `boolean` \| `null`
+> `optional` **includeContent?**: `boolean` \| `null`
 
 Defined in: generated/models/listOwnPostsParams.ts:30
 
@@ -34,7 +34,7 @@ Include full content fields (markdown, json, staticHtml). Default: false
 
 ### limit?
 
-> `optional` **limit**: `number`
+> `optional` **limit?**: `number`
 
 Defined in: generated/models/listOwnPostsParams.ts:26
 
@@ -52,7 +52,7 @@ Maximum number of items to return (1-100, default: 10)
 
 ### status?
 
-> `optional` **status**: [`ListOwnPostsStatus`](ListOwnPostsStatus.md)
+> `optional` **status?**: [`ListOwnPostsStatus`](ListOwnPostsStatus.md)
 
 Defined in: generated/models/listOwnPostsParams.ts:34
 

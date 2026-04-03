@@ -24,4 +24,15 @@ export default defineConfig({
       },
     },
   },
+  paragraphZod: {
+    input: {
+      target: "./openapi.json",
+    },
+    output: {
+      mode: "single",
+      target: "./src/generated/zod.ts",
+      client: "zod",
+      prettier: true,
+    },
+  },
 })

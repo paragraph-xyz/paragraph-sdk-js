@@ -12,6 +12,14 @@ Defined in: generated/models/getAuthSession200OneOf.ts:16
 
 ## Properties
 
+### callbackUrl?
+
+> `optional` **callbackUrl?**: `string`
+
+Defined in: generated/models/getAuthSession200OneOf.ts:19
+
+***
+
 ### deviceName
 
 > **deviceName**: `string`

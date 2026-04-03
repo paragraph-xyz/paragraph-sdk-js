@@ -36,7 +36,7 @@ Associated coin ID, if any
 
 ### customDomain?
 
-> `optional` **customDomain**: [`SearchPosts200ItemBlogCustomDomain`](SearchPosts200ItemBlogCustomDomain.md)
+> `optional` **customDomain?**: [`SearchPosts200ItemBlogCustomDomain`](SearchPosts200ItemBlogCustomDomain.md)
 
 Defined in: generated/models/searchPosts200ItemBlog.ts:41
 
@@ -76,7 +76,7 @@ URL-friendly slug of the publication
 
 ### summary?
 
-> `optional` **summary**: [`SearchPosts200ItemBlogSummary`](SearchPosts200ItemBlogSummary.md)
+> `optional` **summary?**: [`SearchPosts200ItemBlogSummary`](SearchPosts200ItemBlogSummary.md)
 
 Defined in: generated/models/searchPosts200ItemBlog.ts:43
 

@@ -152,3 +152,7 @@ export { QueryResult } from "./utils";
 
 // Re-export generated types for consumers
 export * from "./generated/models";
+
+// Re-export generated Zod schemas for MCP/CLI validation
+export * from "./generated/zod";
+

@@ -14,7 +14,7 @@ Defined in: generated/models/createPostBody.ts:18
 
 ### categories?
 
-> `optional` **categories**: [`CreatePostBodyCategories`](CreatePostBodyCategories.md)
+> `optional` **categories?**: [`CreatePostBodyCategories`](CreatePostBodyCategories.md)
 
 Defined in: generated/models/createPostBody.ts:49
 
@@ -24,7 +24,7 @@ Optional array of category tags for the post. Can also be a comma-separated stri
 
 ### imageUrl?
 
-> `optional` **imageUrl**: `string`
+> `optional` **imageUrl?**: `string`
 
 Defined in: generated/models/createPostBody.ts:32
 
@@ -44,7 +44,7 @@ Post content in Markdown format
 
 ### postPreview?
 
-> `optional` **postPreview**: `string`
+> `optional` **postPreview?**: `string`
 
 Defined in: generated/models/createPostBody.ts:47
 
@@ -58,7 +58,7 @@ Optional preview text for the post. If not provided, will be generated from cont
 
 ### sendNewsletter?
 
-> `optional` **sendNewsletter**: [`CreatePostBodySendNewsletter`](CreatePostBodySendNewsletter.md)
+> `optional` **sendNewsletter?**: [`CreatePostBodySendNewsletter`](CreatePostBodySendNewsletter.md)
 
 Defined in: generated/models/createPostBody.ts:34
 
@@ -68,7 +68,7 @@ Whether to send an email newsletter to subscribers. Default: false
 
 ### slug?
 
-> `optional` **slug**: `string`
+> `optional` **slug?**: `string`
 
 Defined in: generated/models/createPostBody.ts:42
 
@@ -86,7 +86,7 @@ Optional URL-friendly identifier for the post. If not provided, will be generate
 
 ### status?
 
-> `optional` **status**: [`CreatePostBodyStatus`](CreatePostBodyStatus.md)
+> `optional` **status?**: [`CreatePostBodyStatus`](CreatePostBodyStatus.md)
 
 Defined in: generated/models/createPostBody.ts:36
 
@@ -96,7 +96,7 @@ Status of the post. Default: published
 
 ### subtitle?
 
-> `optional` **subtitle**: `string`
+> `optional` **subtitle?**: `string`
 
 Defined in: generated/models/createPostBody.ts:30
 

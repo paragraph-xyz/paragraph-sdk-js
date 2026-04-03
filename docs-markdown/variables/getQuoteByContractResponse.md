@@ -1,0 +1,11 @@
+[**@paragraph-com/sdk**](../README.md)
+
+***
+
+[@paragraph-com/sdk](../README.md) / getQuoteByContractResponse
+
+# Variable: getQuoteByContractResponse
+
+> `const` **getQuoteByContractResponse**: `ZodObject`\<\{ `quote`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `quote`: `string`; \}, \{ `quote`: `string`; \}\>
+
+Defined in: generated/zod.ts:1162
