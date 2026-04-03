@@ -6,6 +6,6 @@
 
 # Variable: getPostByPublicationIdAndPostSlugQueryParams
 
-> `const` **getPostByPublicationIdAndPostSlugQueryParams**: `ZodObject`\<\{ `includeContent`: `ZodOptional`\<`ZodNullable`\<`ZodBoolean`\>\>; \}, `"strip"`, `ZodTypeAny`, \{ `includeContent?`: `boolean` \| `null`; \}, \{ `includeContent?`: `boolean` \| `null`; \}\>
+> `const` **getPostByPublicationIdAndPostSlugQueryParams**: `ZodObject`\<\{ `includeContent`: `ZodOptional`\<`ZodUnion`\<\[`ZodBoolean`, `ZodString`\]\>\>; \}, `"strip"`, `ZodTypeAny`, \{ `includeContent?`: `string` \| `boolean`; \}, \{ `includeContent?`: `string` \| `boolean`; \}\>
 
 Defined in: generated/zod.ts:466

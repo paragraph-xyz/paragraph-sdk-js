@@ -30,7 +30,7 @@ OpenAPI spec version: 1.0.0
 
 Defined in: generated/models/createAuthSessionBody.ts:25
 
-HTTPS URL on paragraph.com to redirect the user to after approving the session
+HTTPS callback URL to redirect the user to after approving the session
 
 #### Max Length
 

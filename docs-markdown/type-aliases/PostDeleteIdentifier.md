@@ -8,7 +8,7 @@
 
 > **PostDeleteIdentifier** = \{ `id`: `string`; \} \| \{ `slug`: `string`; \}
 
-Defined in: [types.ts:158](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/89c6ec6af81e223cf3c6f30a664c3d5f3b0bb394/src/types.ts#L158)
+Defined in: [types.ts:158](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/3427af520154d9456843fc89de73272ff4635a41/src/types.ts#L158)
 
 A discriminated union of identifiers for deleting a post.
 Use one of the following shapes:

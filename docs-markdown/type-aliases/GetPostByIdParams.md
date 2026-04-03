@@ -26,7 +26,7 @@ OpenAPI spec version: 1.0.0
 
 ### includeContent?
 
-> `optional` **includeContent?**: `boolean` \| `null`
+> `optional` **includeContent?**: `boolean` \| `string`
 
 Defined in: generated/models/getPostByIdParams.ts:19
 

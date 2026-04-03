@@ -24,7 +24,7 @@ Cursor for pagination
 
 ### includeContent?
 
-> `optional` **includeContent?**: `boolean` \| `null`
+> `optional` **includeContent?**: `boolean` \| `string`
 
 Defined in: generated/models/listOwnPostsParams.ts:30
 

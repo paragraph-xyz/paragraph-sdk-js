@@ -6,6 +6,6 @@
 
 # Variable: getPostsQueryParams
 
-> `const` **getPostsQueryParams**: `ZodObject`\<\{ `cursor`: `ZodOptional`\<`ZodString`\>; `includeContent`: `ZodOptional`\<`ZodNullable`\<`ZodBoolean`\>\>; `limit`: `ZodDefault`\<`ZodNumber`\>; \}, `"strip"`, `ZodTypeAny`, \{ `cursor?`: `string`; `includeContent?`: `boolean` \| `null`; `limit`: `number`; \}, \{ `cursor?`: `string`; `includeContent?`: `boolean` \| `null`; `limit?`: `number`; \}\>
+> `const` **getPostsQueryParams**: `ZodObject`\<\{ `cursor`: `ZodOptional`\<`ZodString`\>; `includeContent`: `ZodOptional`\<`ZodUnion`\<\[`ZodBoolean`, `ZodString`\]\>\>; `limit`: `ZodDefault`\<`ZodNumber`\>; \}, `"strip"`, `ZodTypeAny`, \{ `cursor?`: `string`; `includeContent?`: `string` \| `boolean`; `limit`: `number`; \}, \{ `cursor?`: `string`; `includeContent?`: `string` \| `boolean`; `limit?`: `number`; \}\>
 
 Defined in: generated/zod.ts:287
