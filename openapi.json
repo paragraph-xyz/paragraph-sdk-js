@@ -1879,7 +1879,7 @@
         ]
       },
       "put": {
-        "description": "Update an existing post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- When `markdown` is provided, it replaces the full content. Rich blocks (embeds, buttons, callouts) created in the editor will be lost — the markdown to editor conversion is lossy for blocks without a markdown equivalent\n- Set `status` to `\"published\"` to publish a draft, `\"draft\"` to unpublish, or `\"archived\"` to archive",
+        "description": "Update an existing post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- When `markdown` is provided, it replaces the full content. Rich blocks (embeds, buttons, callouts) created in the editor will be lost — the markdown to editor conversion is lossy for blocks without a markdown equivalent\n- Set `status` to `\"published\"` to publish a draft, `\"draft\"` to unpublish, or `\"archived\"` to archive\n- Set `scheduledAt` (Unix timestamp in milliseconds) to schedule a draft's first-publish for a future time. Must be in the future and at most 30 days out. Only valid for posts that haven't been published or already scheduled. Pass `scheduledAt: null` to cancel a previously scheduled publish (or to reschedule: cancel first, then schedule again with the new time). Set `sendNewsletter: true` alongside `scheduledAt` to email subscribers when the post publishes.",
         "summary": "Update a post by ID",
         "tags": [
           "posts"
@@ -1949,6 +1949,32 @@
                       "archived"
                     ],
                     "description": "Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive"
+                  },
+                  "scheduledAt": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 0,
+                    "exclusiveMinimum": 0,
+                    "description": "Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish."
+                  },
+                  "sendNewsletter": {
+                    "oneOf": [
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "true",
+                          "false",
+                          "1",
+                          "0"
+                        ]
+                      }
+                    ],
+                    "description": "Whether to send an email newsletter to subscribers when the post publishes. Only meaningful when publishing (status: 'published') or scheduling (scheduledAt set). Default: false"
                   }
                 }
               }
@@ -2116,6 +2142,16 @@
             "lang": "typescript",
             "label": "Update a post",
             "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.posts.update({\n  id: \"3T2PQZlsdQtigUp4fhlb\",\n  title: \"Updated Title\",\n  markdown: \"## New content\\n\\nUpdated post body.\",\n  status: \"published\"\n})"
+          },
+          {
+            "lang": "typescript",
+            "label": "Schedule a draft for a future publish",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.posts.update({\n  id: \"3T2PQZlsdQtigUp4fhlb\",\n  scheduledAt: Date.now() + 24 * 60 * 60 * 1000,\n})"
+          },
+          {
+            "lang": "typescript",
+            "label": "Cancel a scheduled publish",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.posts.update({\n  id: \"3T2PQZlsdQtigUp4fhlb\",\n  scheduledAt: null,\n})"
           },
           {
             "lang": "bash",
@@ -2849,7 +2885,7 @@
     },
     "/v1/posts": {
       "post": {
-        "description": "Create a new post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Requirements:**\n- `markdown` field is required and will be converted to TipTap JSON format\n- `title` field is required\n\n**Behavior:**\n- The post will be created as published by default. Set `status` to `\"draft\"` to create a draft instead\n- If `sendNewsletter` is true, an email will be sent to all subscribers",
+        "description": "Create a new post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Requirements:**\n- `markdown` field is required and will be converted to TipTap JSON format\n- `title` field is required\n\n**Behavior:**\n- The post will be created as published by default. Set `status` to `\"draft\"` to create a draft instead\n- If `sendNewsletter` is true, an email will be sent to all subscribers when the post publishes\n- Set `scheduledAt` (Unix timestamp in milliseconds) to schedule first-publish for a future time. Must be in the future and at most 30 days out. Scheduling cannot be combined with `status: \"draft\"`. When scheduled, the response `status` is `\"scheduled\"` and the post publishes (plus sends newsletter, if requested) at the scheduled time.",
         "summary": "Create a new post",
         "tags": [
           "posts"
@@ -2930,6 +2966,12 @@
                       }
                     ],
                     "description": "Optional array of category tags for the post. Can also be a comma-separated string."
+                  },
+                  "scheduledAt": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "exclusiveMinimum": 0,
+                    "description": "Optional Unix timestamp (milliseconds) to schedule first-publish of the post at a future time. Must be in the future. Cannot be combined with status: 'draft'. When set, the post is created and queued to publish (and send newsletter, if requested) at the specified time."
                   }
                 },
                 "required": [
@@ -2951,10 +2993,20 @@
                     "id": {
                       "type": "string",
                       "description": "The ID of the created post"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "published",
+                        "draft",
+                        "scheduled"
+                      ],
+                      "description": "Final status of the post: 'published' if published immediately, 'draft' if created as a draft, 'scheduled' if queued to publish at scheduledAt"
                     }
                   },
                   "required": [
-                    "id"
+                    "id",
+                    "status"
                   ]
                 }
               }
@@ -3097,12 +3149,17 @@
           {
             "lang": "typescript",
             "label": "Create and publish a post",
-            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.posts.create({\n  title: \"My First Post\",\n  markdown: \"# Hello World\\n\\nThis is my first post!\",\n  sendNewsletter: true\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst { id, status } = await api.posts.create({\n  title: \"My First Post\",\n  markdown: \"# Hello World\\n\\nThis is my first post!\",\n  sendNewsletter: true\n})\n// status: \"published\""
           },
           {
             "lang": "typescript",
             "label": "Create a draft",
-            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.posts.create({\n  title: \"Work in Progress\",\n  markdown: \"# Draft\\n\\nStill working on this.\",\n  status: \"draft\"\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst { id, status } = await api.posts.create({\n  title: \"Work in Progress\",\n  markdown: \"# Draft\\n\\nStill working on this.\",\n  status: \"draft\"\n})\n// status: \"draft\""
+          },
+          {
+            "lang": "typescript",
+            "label": "Schedule a post for a future time",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst { id, status } = await api.posts.create({\n  title: \"Launch Announcement\",\n  markdown: \"# We're launching tomorrow!\",\n  scheduledAt: Date.now() + 24 * 60 * 60 * 1000,\n  sendNewsletter: true,\n})\n// status: \"scheduled\""
           },
           {
             "lang": "bash",
@@ -3445,7 +3502,7 @@
     },
     "/v1/posts/slug/{slug}": {
       "put": {
-        "description": "Update an existing post using its URL slug. The publication is identified by the API key provided in the Authorization header.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- When `markdown` is provided, it replaces the full content. Rich blocks (embeds, buttons, callouts) created in the editor will be lost\n- Set `status` to `\"published\"` to publish a draft, `\"draft\"` to unpublish, or `\"archived\"` to archive",
+        "description": "Update an existing post using its URL slug. The publication is identified by the API key provided in the Authorization header.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- When `markdown` is provided, it replaces the full content. Rich blocks (embeds, buttons, callouts) created in the editor will be lost\n- Set `status` to `\"published\"` to publish a draft, `\"draft\"` to unpublish, or `\"archived\"` to archive\n- Set `scheduledAt` (Unix timestamp in milliseconds) to schedule a draft's first-publish for a future time. Must be in the future and at most 30 days out. Only valid for posts that haven't been published or already scheduled. Pass `scheduledAt: null` to cancel a previously scheduled publish (or to reschedule: cancel first, then schedule again with the new time). Set `sendNewsletter: true` alongside `scheduledAt` to email subscribers when the post publishes.",
         "summary": "Update a post by slug",
         "tags": [
           "posts"
@@ -3517,6 +3574,32 @@
                       "archived"
                     ],
                     "description": "Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive"
+                  },
+                  "scheduledAt": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 0,
+                    "exclusiveMinimum": 0,
+                    "description": "Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish."
+                  },
+                  "sendNewsletter": {
+                    "oneOf": [
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "true",
+                          "false",
+                          "1",
+                          "0"
+                        ]
+                      }
+                    ],
+                    "description": "Whether to send an email newsletter to subscribers when the post publishes. Only meaningful when publishing (status: 'published') or scheduling (scheduledAt set). Default: false"
                   }
                 }
               }
