@@ -8,4 +8,4 @@
 
 > `const` **updatePostBySlugBodyTitleMax**: `200` = `200`
 
-Defined in: generated/zod.ts:696
+Defined in: generated/zod.ts:707

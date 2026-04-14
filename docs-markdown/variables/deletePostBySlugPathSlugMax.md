@@ -8,7 +8,7 @@
 
 > `const` **deletePostBySlugPathSlugMax**: `256` = `256`
 
-Defined in: generated/zod.ts:727
+Defined in: generated/zod.ts:742
 
 Permanently delete a post using its URL slug. The publication is identified by the API key provided in the Authorization header.
 

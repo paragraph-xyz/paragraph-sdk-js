@@ -8,7 +8,7 @@
 
 > `const` **listOwnPostsQueryLimitDefault**: `10` = `10`
 
-Defined in: generated/zod.ts:618
+Defined in: generated/zod.ts:628
 
 Retrieve a paginated list of posts from your publication. The publication is identified by the API key provided in the Authorization header.
 

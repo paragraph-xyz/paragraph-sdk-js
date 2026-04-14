@@ -8,4 +8,4 @@
 
 > `const` **listOwnPostsResponseItemsItemAuthorsItemWalletAddressRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:636
+Defined in: generated/zod.ts:646

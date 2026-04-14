@@ -8,6 +8,6 @@
 
 > `const` **getCoinHoldersByContractPathContractAddressRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:977
+Defined in: generated/zod.ts:992
 
 Retrieve a paginated list of holders for a tokenized post

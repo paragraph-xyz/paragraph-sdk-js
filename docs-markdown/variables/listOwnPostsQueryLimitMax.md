@@ -8,4 +8,4 @@
 
 > `const` **listOwnPostsQueryLimitMax**: `100` = `100`
 
-Defined in: generated/zod.ts:619
+Defined in: generated/zod.ts:629

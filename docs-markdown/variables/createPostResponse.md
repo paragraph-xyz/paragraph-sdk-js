@@ -6,6 +6,6 @@
 
 # Variable: createPostResponse
 
-> `const` **createPostResponse**: `ZodObject`\<\{ `id`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `id`: `string`; \}, \{ `id`: `string`; \}\>
+> `const` **createPostResponse**: `ZodObject`\<\{ `id`: `ZodString`; `status`: `ZodEnum`\<\[`"published"`, `"draft"`, `"scheduled"`\]\>; \}, `"strip"`, `ZodTypeAny`, \{ `id`: `string`; `status`: `"published"` \| `"draft"` \| `"scheduled"`; \}, \{ `id`: `string`; `status`: `"published"` \| `"draft"` \| `"scheduled"`; \}\>
 
-Defined in: generated/zod.ts:607
+Defined in: generated/zod.ts:616

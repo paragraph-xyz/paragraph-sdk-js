@@ -8,4 +8,4 @@
 
 > `const` **updatePostBodyTitleMax**: `200` = `200`
 
-Defined in: generated/zod.ts:409
+Defined in: generated/zod.ts:410

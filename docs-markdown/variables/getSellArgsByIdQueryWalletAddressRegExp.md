@@ -8,4 +8,4 @@
 
 > `const` **getSellArgsByIdQueryWalletAddressRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:1078
+Defined in: generated/zod.ts:1093

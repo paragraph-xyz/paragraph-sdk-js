@@ -8,4 +8,4 @@
 
 > `const` **deletePostBody**: `ZodObject`\<\{ \}, `"strip"`, `ZodTypeAny`, \{ \}, \{ \}\>
 
-Defined in: generated/zod.ts:444
+Defined in: generated/zod.ts:449

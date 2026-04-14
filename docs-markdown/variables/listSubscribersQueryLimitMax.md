@@ -8,4 +8,4 @@
 
 > `const` **listSubscribersQueryLimitMax**: `100` = `100`
 
-Defined in: generated/zod.ts:1270
+Defined in: generated/zod.ts:1285

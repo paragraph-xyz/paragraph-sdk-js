@@ -8,4 +8,4 @@
 
 > `const` **getCoinHoldersByContractQueryLimitMax**: `100` = `100`
 
-Defined in: generated/zod.ts:985
+Defined in: generated/zod.ts:1000

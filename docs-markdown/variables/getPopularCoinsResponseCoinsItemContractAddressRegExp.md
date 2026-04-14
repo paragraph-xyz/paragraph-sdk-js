@@ -8,6 +8,6 @@
 
 > `const` **getPopularCoinsResponseCoinsItemContractAddressRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:1171
+Defined in: generated/zod.ts:1186
 
 Retrieve popular coins

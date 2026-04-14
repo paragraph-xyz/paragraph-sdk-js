@@ -8,4 +8,4 @@
 
 > `const` **addSubscriberResponse**: `ZodObject`\<\{ `success`: `ZodLiteral`\<`true`\>; \}, `"strip"`, `ZodTypeAny`, \{ `success`: `true`; \}, \{ `success`: `true`; \}\>
 
-Defined in: generated/zod.ts:1255
+Defined in: generated/zod.ts:1270

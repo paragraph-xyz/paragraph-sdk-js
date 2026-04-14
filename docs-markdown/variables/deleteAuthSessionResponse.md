@@ -8,4 +8,4 @@
 
 > `const` **deleteAuthSessionResponse**: `ZodObject`\<\{ `success`: `ZodLiteral`\<`true`\>; \}, `"strip"`, `ZodTypeAny`, \{ `success`: `true`; \}, \{ `success`: `true`; \}\>
 
-Defined in: generated/zod.ts:1442
+Defined in: generated/zod.ts:1457

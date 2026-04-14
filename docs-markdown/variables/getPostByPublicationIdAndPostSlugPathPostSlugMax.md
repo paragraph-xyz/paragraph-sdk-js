@@ -8,6 +8,6 @@
 
 > `const` **getPostByPublicationIdAndPostSlugPathPostSlugMax**: `256` = `256`
 
-Defined in: generated/zod.ts:457
+Defined in: generated/zod.ts:462
 
 Retrieve a post using its publication ID and its URL-friendly slug

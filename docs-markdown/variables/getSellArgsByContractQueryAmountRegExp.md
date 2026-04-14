@@ -8,4 +8,4 @@
 
 > `const` **getSellArgsByContractQueryAmountRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:1109
+Defined in: generated/zod.ts:1124

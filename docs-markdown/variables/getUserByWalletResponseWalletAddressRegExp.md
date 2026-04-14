@@ -8,4 +8,4 @@
 
 > `const` **getUserByWalletResponseWalletAddressRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:821
+Defined in: generated/zod.ts:836

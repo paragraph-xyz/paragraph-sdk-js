@@ -8,4 +8,4 @@
 
 > `const` **getQuoteByIdQueryParams**: `ZodObject`\<\{ `amount`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `amount`: `string`; \}, \{ `amount`: `string`; \}\>
 
-Defined in: generated/zod.ts:1138
+Defined in: generated/zod.ts:1153

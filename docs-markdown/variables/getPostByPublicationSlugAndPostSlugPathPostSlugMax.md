@@ -8,4 +8,4 @@
 
 > `const` **getPostByPublicationSlugAndPostSlugPathPostSlugMax**: `256` = `256`
 
-Defined in: generated/zod.ts:518
+Defined in: generated/zod.ts:523

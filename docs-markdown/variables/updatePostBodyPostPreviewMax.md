@@ -8,4 +8,4 @@
 
 > `const` **updatePostBodyPostPreviewMax**: `500` = `500`
 
-Defined in: generated/zod.ts:415
+Defined in: generated/zod.ts:416

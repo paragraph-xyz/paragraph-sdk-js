@@ -56,6 +56,20 @@ Optional preview text for the post. If not provided, will be generated from cont
 
 ***
 
+### scheduledAt?
+
+> `optional` **scheduledAt?**: `number`
+
+Defined in: generated/models/createPostBody.ts:54
+
+Optional Unix timestamp (milliseconds) to schedule first-publish of the post at a future time. Must be in the future. Cannot be combined with status: 'draft'. When set, the post is created and queued to publish (and send newsletter, if requested) at the specified time.
+
+#### Minimum
+
+0
+
+***
+
 ### sendNewsletter?
 
 > `optional` **sendNewsletter?**: [`CreatePostBodySendNewsletter`](CreatePostBodySendNewsletter.md)

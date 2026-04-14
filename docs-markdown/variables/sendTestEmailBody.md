@@ -8,4 +8,4 @@
 
 > `const` **sendTestEmailBody**: `ZodObject`\<\{ \}, `"strip"`, `ZodTypeAny`, \{ \}, \{ \}\>
 
-Defined in: generated/zod.ts:752
+Defined in: generated/zod.ts:767

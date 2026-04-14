@@ -8,6 +8,6 @@
 
 > `const` **getBuyArgsByContractPathContractAddressRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:1044
+Defined in: generated/zod.ts:1059
 
 Retrieve the args needed to buy a coin using a wallet

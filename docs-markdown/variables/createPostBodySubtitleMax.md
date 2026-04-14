@@ -8,4 +8,4 @@
 
 > `const` **createPostBodySubtitleMax**: `300` = `300`
 
-Defined in: generated/zod.ts:587
+Defined in: generated/zod.ts:593

@@ -8,4 +8,4 @@
 
 > `const` **getSellArgsByIdQueryParams**: `ZodObject`\<\{ `amount`: `ZodString`; `walletAddress`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `amount`: `string`; `walletAddress`: `string`; \}, \{ `amount`: `string`; `walletAddress`: `string`; \}\>
 
-Defined in: generated/zod.ts:1082
+Defined in: generated/zod.ts:1097

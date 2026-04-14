@@ -8,4 +8,4 @@
 
 > `const` **getPostByPublicationSlugAndPostSlugResponseSubtitleMax**: `300` = `300`
 
-Defined in: generated/zod.ts:533
+Defined in: generated/zod.ts:538

@@ -8,4 +8,4 @@
 
 > `const` **getPostByPublicationIdAndPostSlugResponseAuthorsItemBioMax**: `500` = `500`
 
-Defined in: generated/zod.ts:477
+Defined in: generated/zod.ts:482

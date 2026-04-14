@@ -8,4 +8,4 @@
 
 > `const` **getCoinResponseContractAddressRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:849
+Defined in: generated/zod.ts:864

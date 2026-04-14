@@ -8,4 +8,4 @@
 
 > `const` **getPostByPublicationSlugAndPostSlugResponseAuthorsItemWalletAddressRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:537
+Defined in: generated/zod.ts:542

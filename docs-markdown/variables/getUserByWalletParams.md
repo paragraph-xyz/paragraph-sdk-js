@@ -8,4 +8,4 @@
 
 > `const` **getUserByWalletParams**: `ZodObject`\<\{ `walletAddress`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `walletAddress`: `string`; \}, \{ `walletAddress`: `string`; \}\>
 
-Defined in: generated/zod.ts:817
+Defined in: generated/zod.ts:832

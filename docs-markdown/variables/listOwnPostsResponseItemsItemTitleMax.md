@@ -8,4 +8,4 @@
 
 > `const` **listOwnPostsResponseItemsItemTitleMax**: `200` = `200`
 
-Defined in: generated/zod.ts:630
+Defined in: generated/zod.ts:640

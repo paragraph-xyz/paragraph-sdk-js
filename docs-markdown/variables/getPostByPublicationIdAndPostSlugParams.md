@@ -8,4 +8,4 @@
 
 > `const` **getPostByPublicationIdAndPostSlugParams**: `ZodObject`\<\{ `postSlug`: `ZodString`; `publicationId`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `postSlug`: `string`; `publicationId`: `string`; \}, \{ `postSlug`: `string`; `publicationId`: `string`; \}\>
 
-Defined in: generated/zod.ts:461
+Defined in: generated/zod.ts:466

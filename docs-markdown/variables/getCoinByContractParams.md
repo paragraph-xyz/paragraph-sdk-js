@@ -8,4 +8,4 @@
 
 > `const` **getCoinByContractParams**: `ZodObject`\<\{ `contractAddress`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `contractAddress`: `string`; \}, \{ `contractAddress`: `string`; \}\>
 
-Defined in: generated/zod.ts:894
+Defined in: generated/zod.ts:909

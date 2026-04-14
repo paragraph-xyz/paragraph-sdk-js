@@ -8,4 +8,4 @@
 
 > `const` **listOwnPostsResponseItemsItemAuthorsItemBioMax**: `500` = `500`
 
-Defined in: generated/zod.ts:637
+Defined in: generated/zod.ts:647

@@ -8,4 +8,4 @@
 
 > `const` **createAuthSessionBodyCallbackUrlMax**: `2048` = `2048`
 
-Defined in: generated/zod.ts:1404
+Defined in: generated/zod.ts:1419

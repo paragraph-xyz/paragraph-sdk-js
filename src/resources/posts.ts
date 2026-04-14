@@ -186,6 +186,15 @@ export class PostsResource {
    *   categories: ["tech", "tutorial"],
    *   sendNewsletter: true
    * });
+   *
+   * // Schedule a post for future publication
+   * const scheduled = await api.posts.create({
+   *   title: "Launch Announcement",
+   *   markdown: "# We're launching tomorrow!",
+   *   scheduledAt: Date.now() + 24 * 60 * 60 * 1000,
+   *   sendNewsletter: true,
+   * });
+   * // scheduled.status === "scheduled"
    * ```
    *
    * @param body - The post data including title and markdown content.
@@ -219,6 +228,18 @@ export class PostsResource {
    *   slug: "my-first-post",
    *   title: "Updated Title",
    *   markdown: "## New content"
+   * });
+   *
+   * // Schedule a draft for future publication
+   * await api.posts.update({
+   *   id: "postId",
+   *   scheduledAt: Date.now() + 24 * 60 * 60 * 1000,
+   * });
+   *
+   * // Cancel a scheduled publication
+   * await api.posts.update({
+   *   id: "postId",
+   *   scheduledAt: null,
    * });
    * ```
    *

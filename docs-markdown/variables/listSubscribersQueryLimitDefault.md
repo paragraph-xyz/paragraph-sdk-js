@@ -8,7 +8,7 @@
 
 > `const` **listSubscribersQueryLimitDefault**: `10` = `10`
 
-Defined in: generated/zod.ts:1269
+Defined in: generated/zod.ts:1284
 
 Retrieve a paginated list of subscribers for your publication. The publication is identified by the API key provided in the Authorization header.
 

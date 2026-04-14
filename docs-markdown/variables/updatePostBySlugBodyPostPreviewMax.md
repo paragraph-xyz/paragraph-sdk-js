@@ -8,4 +8,4 @@
 
 > `const` **updatePostBySlugBodyPostPreviewMax**: `500` = `500`
 
-Defined in: generated/zod.ts:702
+Defined in: generated/zod.ts:713

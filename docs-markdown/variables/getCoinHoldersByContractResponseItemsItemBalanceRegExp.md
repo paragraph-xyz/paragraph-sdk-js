@@ -8,4 +8,4 @@
 
 > `const` **getCoinHoldersByContractResponseItemsItemBalanceRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:995
+Defined in: generated/zod.ts:1010

@@ -8,4 +8,4 @@
 
 > `const` **getUserResponseBioMax**: `500` = `500`
 
-Defined in: generated/zod.ts:791
+Defined in: generated/zod.ts:806

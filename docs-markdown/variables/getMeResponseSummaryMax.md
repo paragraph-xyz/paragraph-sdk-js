@@ -8,4 +8,4 @@
 
 > `const` **getMeResponseSummaryMax**: `500` = `500`
 
-Defined in: generated/zod.ts:767
+Defined in: generated/zod.ts:782

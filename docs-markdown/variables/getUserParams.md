@@ -8,6 +8,6 @@
 
 > `const` **getUserParams**: `ZodObject`\<\{ `userId`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `userId`: `string`; \}, \{ `userId`: `string`; \}\>
 
-Defined in: generated/zod.ts:786
+Defined in: generated/zod.ts:801
 
 Retrieve detailed information about a specific user

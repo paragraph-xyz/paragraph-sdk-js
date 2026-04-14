@@ -8,4 +8,4 @@
 
 > `const` **getCoinHoldersByContractResponseItemsItemWalletAddressRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:994
+Defined in: generated/zod.ts:1009

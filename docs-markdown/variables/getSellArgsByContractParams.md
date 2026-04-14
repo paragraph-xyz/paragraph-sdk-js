@@ -8,4 +8,4 @@
 
 > `const` **getSellArgsByContractParams**: `ZodObject`\<\{ `contractAddress`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `contractAddress`: `string`; \}, \{ `contractAddress`: `string`; \}\>
 
-Defined in: generated/zod.ts:1104
+Defined in: generated/zod.ts:1119

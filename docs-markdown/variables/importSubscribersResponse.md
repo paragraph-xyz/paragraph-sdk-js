@@ -8,4 +8,4 @@
 
 > `const` **importSubscribersResponse**: `ZodObject`\<\{ `success`: `ZodLiteral`\<`true`\>; \}, `"strip"`, `ZodTypeAny`, \{ `success`: `true`; \}, \{ `success`: `true`; \}\>
 
-Defined in: generated/zod.ts:1230
+Defined in: generated/zod.ts:1245

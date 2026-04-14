@@ -8,4 +8,4 @@
 
 > `const` **getCoinHoldersByContractQueryParams**: `ZodObject`\<\{ `cursor`: `ZodOptional`\<`ZodString`\>; `limit`: `ZodDefault`\<`ZodNumber`\>; \}, `"strip"`, `ZodTypeAny`, \{ `cursor?`: `string`; `limit`: `number`; \}, \{ `cursor?`: `string`; `limit?`: `number`; \}\>
 
-Defined in: generated/zod.ts:989
+Defined in: generated/zod.ts:1004

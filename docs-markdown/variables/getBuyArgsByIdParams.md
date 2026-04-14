@@ -8,6 +8,6 @@
 
 > `const` **getBuyArgsByIdParams**: `ZodObject`\<\{ `id`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `id`: `string`; \}, \{ `id`: `string`; \}\>
 
-Defined in: generated/zod.ts:1017
+Defined in: generated/zod.ts:1032
 
 Retrieve the args needed to buy a coin using a wallet

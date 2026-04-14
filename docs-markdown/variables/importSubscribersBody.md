@@ -8,7 +8,7 @@
 
 > `const` **importSubscribersBody**: `ZodObject`\<\{ `file`: `ZodOptional`\<`ZodUnknown`\>; \}, `"strip"`, `ZodTypeAny`, \{ `file?`: `unknown`; \}, \{ `file?`: `unknown`; \}\>
 
-Defined in: generated/zod.ts:1226
+Defined in: generated/zod.ts:1241
 
 Import subscribers from a CSV file into your publication. The publication is identified by the API key provided in the Authorization header.
 

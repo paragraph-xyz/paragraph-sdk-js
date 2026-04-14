@@ -8,7 +8,7 @@
 
 > `const` **addSubscriberBodyWalletRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:1246
+Defined in: generated/zod.ts:1261
 
 Add a new subscriber to your publication. The publication is identified by the API key provided in the Authorization header.
 

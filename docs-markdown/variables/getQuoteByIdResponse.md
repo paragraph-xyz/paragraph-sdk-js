@@ -8,4 +8,4 @@
 
 > `const` **getQuoteByIdResponse**: `ZodObject`\<\{ `quote`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `quote`: `string`; \}, \{ `quote`: `string`; \}\>
 
-Defined in: generated/zod.ts:1142
+Defined in: generated/zod.ts:1157

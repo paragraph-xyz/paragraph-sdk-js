@@ -8,7 +8,7 @@
 
 > `const` **deletePostParams**: `ZodObject`\<\{ `postId`: `ZodString`; \}, `"strip"`, `ZodTypeAny`, \{ `postId`: `string`; \}, \{ `postId`: `string`; \}\>
 
-Defined in: generated/zod.ts:440
+Defined in: generated/zod.ts:445
 
 Permanently delete a post from your publication. The publication is identified by the API key provided in the Authorization header.
 

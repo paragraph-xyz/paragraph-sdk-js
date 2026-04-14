@@ -8,7 +8,7 @@
 
 > **UpdatePostBySlugBody** = `object`
 
-Defined in: generated/models/updatePostBySlugBody.ts:17
+Defined in: generated/models/updatePostBySlugBody.ts:19
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: generated/models/updatePostBySlugBody.ts:17
 
 > `optional` **categories?**: [`UpdatePostBySlugBodyCategories`](UpdatePostBySlugBodyCategories.md)
 
-Defined in: generated/models/updatePostBySlugBody.ts:42
+Defined in: generated/models/updatePostBySlugBody.ts:44
 
 Category tags for the post. Can also be a comma-separated string.
 
@@ -26,7 +26,7 @@ Category tags for the post. Can also be a comma-separated string.
 
 > `optional` **markdown?**: `string`
 
-Defined in: generated/models/updatePostBySlugBody.ts:19
+Defined in: generated/models/updatePostBySlugBody.ts:21
 
 Post content in Markdown format. Replaces full content — rich blocks created in the editor will be lost
 
@@ -36,7 +36,7 @@ Post content in Markdown format. Replaces full content — rich blocks created i
 
 > `optional` **postPreview?**: `string`
 
-Defined in: generated/models/updatePostBySlugBody.ts:40
+Defined in: generated/models/updatePostBySlugBody.ts:42
 
 Preview text for the post
 
@@ -46,11 +46,35 @@ Preview text for the post
 
 ***
 
+### scheduledAt?
+
+> `optional` **scheduledAt?**: [`UpdatePostBySlugBodyScheduledAt`](UpdatePostBySlugBodyScheduledAt.md)
+
+Defined in: generated/models/updatePostBySlugBody.ts:51
+
+Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish.
+
+#### Minimum
+
+0
+
+***
+
+### sendNewsletter?
+
+> `optional` **sendNewsletter?**: [`UpdatePostBySlugBodySendNewsletter`](UpdatePostBySlugBodySendNewsletter.md)
+
+Defined in: generated/models/updatePostBySlugBody.ts:53
+
+Whether to send an email newsletter to subscribers when the post publishes. Only meaningful when publishing (status: 'published') or scheduling (scheduledAt set). Default: false
+
+***
+
 ### slug?
 
 > `optional` **slug?**: `string`
 
-Defined in: generated/models/updatePostBySlugBody.ts:35
+Defined in: generated/models/updatePostBySlugBody.ts:37
 
 URL-friendly identifier for the post
 
@@ -68,7 +92,7 @@ URL-friendly identifier for the post
 
 > `optional` **status?**: [`UpdatePostBySlugBodyStatus`](UpdatePostBySlugBodyStatus.md)
 
-Defined in: generated/models/updatePostBySlugBody.ts:44
+Defined in: generated/models/updatePostBySlugBody.ts:46
 
 Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive
 
@@ -78,7 +102,7 @@ Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive
 
 > `optional` **subtitle?**: `string`
 
-Defined in: generated/models/updatePostBySlugBody.ts:29
+Defined in: generated/models/updatePostBySlugBody.ts:31
 
 Optional subtitle or brief summary
 
@@ -92,7 +116,7 @@ Optional subtitle or brief summary
 
 > `optional` **title?**: `string`
 
-Defined in: generated/models/updatePostBySlugBody.ts:24
+Defined in: generated/models/updatePostBySlugBody.ts:26
 
 Title of the post
 

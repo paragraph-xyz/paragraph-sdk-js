@@ -8,4 +8,4 @@
 
 > `const` **getCoinHoldersByIdResponseItemsItemBalanceRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:955
+Defined in: generated/zod.ts:970

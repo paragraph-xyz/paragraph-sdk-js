@@ -8,6 +8,6 @@
 
 > `const` **searchCoinsQueryParams**: `ZodObject`\<\{ `q`: `ZodOptional`\<`ZodString`\>; \}, `"strip"`, `ZodTypeAny`, \{ `q?`: `string`; \}, \{ `q?`: `string`; \}\>
 
-Defined in: generated/zod.ts:1376
+Defined in: generated/zod.ts:1391
 
 Search for writer coins by ticker, contract address, or publication name. Returns results ranked by relevance and subscriber count.

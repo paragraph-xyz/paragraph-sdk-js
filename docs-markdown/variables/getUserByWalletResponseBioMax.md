@@ -8,4 +8,4 @@
 
 > `const` **getUserByWalletResponseBioMax**: `500` = `500`
 
-Defined in: generated/zod.ts:822
+Defined in: generated/zod.ts:837

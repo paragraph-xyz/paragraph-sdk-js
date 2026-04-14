@@ -8,4 +8,4 @@
 
 > `const` **getBuyArgsByIdResponseInputsItemRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:1031
+Defined in: generated/zod.ts:1046

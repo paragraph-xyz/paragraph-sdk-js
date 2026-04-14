@@ -8,4 +8,4 @@
 
 > `const` **updatePostBodySlugMax**: `256` = `256`
 
-Defined in: generated/zod.ts:413
+Defined in: generated/zod.ts:414

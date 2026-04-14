@@ -8,4 +8,4 @@
 
 > `const` **deletePostResponse**: `ZodObject`\<\{ `success`: `ZodLiteral`\<`true`\>; \}, `"strip"`, `ZodTypeAny`, \{ `success`: `true`; \}, \{ `success`: `true`; \}\>
 
-Defined in: generated/zod.ts:448
+Defined in: generated/zod.ts:453

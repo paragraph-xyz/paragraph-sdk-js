@@ -8,6 +8,6 @@
 
 > `const` **getSellArgsByContractPathContractAddressRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:1101
+Defined in: generated/zod.ts:1116
 
 Retrieve the args needed to sell a coin using a wallet that has it

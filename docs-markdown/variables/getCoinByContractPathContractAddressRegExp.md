@@ -8,6 +8,6 @@
 
 > `const` **getCoinByContractPathContractAddressRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:891
+Defined in: generated/zod.ts:906
 
 Retrieve information about a tokenized post using its contract address

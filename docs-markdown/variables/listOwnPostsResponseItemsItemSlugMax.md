@@ -8,4 +8,4 @@
 
 > `const` **listOwnPostsResponseItemsItemSlugMax**: `256` = `256`
 
-Defined in: generated/zod.ts:634
+Defined in: generated/zod.ts:644

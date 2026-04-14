@@ -8,4 +8,4 @@
 
 > `const` **getCoinHoldersByIdQueryLimitDefault**: `10` = `10`
 
-Defined in: generated/zod.ts:944
+Defined in: generated/zod.ts:959

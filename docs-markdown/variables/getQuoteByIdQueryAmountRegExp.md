@@ -8,4 +8,4 @@
 
 > `const` **getQuoteByIdQueryAmountRegExp**: `RegExp`
 
-Defined in: generated/zod.ts:1135
+Defined in: generated/zod.ts:1150
