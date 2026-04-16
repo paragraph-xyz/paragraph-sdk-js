@@ -1,6 +1,6 @@
 {
   "name": "@paragraph-com/sdk",
-  "version": "3.0.0",
+  "version": "2.0.0",
   "description": "TypeScript SDK for Paragraph API",
   "repository": {
     "url": "git+https://github.com/paragraph-xyz/paragraph-sdk-js.git"
@@ -33,7 +33,6 @@
     "release:minor": "npm version minor && git push && git push --tags",
     "release:major": "npm version major && git push && git push --tags"
   },
-  "dependencies": {},
   "peerDependencies": {
     "@whetstone-research/doppler-sdk": "^0.0.1-alpha.62",
     "doppler-router": "^1.0.15",
