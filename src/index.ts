@@ -149,10 +149,8 @@ export const createParagraphAPI = (options?: ParagraphAPIOptions) =>
 // Re-export types for consumers
 export * from "./types";
 export { QueryResult } from "./utils";
+export { ParagraphApiError } from "./mutator/custom-axios";
 
 // Re-export generated types for consumers
 export * from "./generated/models";
-
-// Re-export generated Zod schemas for MCP/CLI validation
-export * from "./generated/zod";
 

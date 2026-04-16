@@ -1,4 +1,3 @@
-import { parseAbi } from "viem";
 import type { PaginatedResult } from "./types";
 
 /**
@@ -104,6 +103,20 @@ export const executeAbi = [
  * ABI for the Permit2 allowance function.
  * Used for checking token allowances in coin sell operations.
  */
-export const permit2Abi = parseAbi([
-  "function allowance(address user, address token, address spender) external view returns (uint160 amount, uint48 expiration, uint48 nonce)",
-]);
+export const permit2Abi = [
+  {
+    type: "function",
+    name: "allowance",
+    stateMutability: "view",
+    inputs: [
+      { type: "address", name: "user" },
+      { type: "address", name: "token" },
+      { type: "address", name: "spender" },
+    ],
+    outputs: [
+      { type: "uint160", name: "amount" },
+      { type: "uint48", name: "expiration" },
+      { type: "uint48", name: "nonce" },
+    ],
+  },
+] as const;

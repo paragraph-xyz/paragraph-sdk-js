@@ -1,19 +1,56 @@
-import {
-  Account,
-  Address,
-  createPublicClient,
-  http,
-  WalletClient,
-} from "viem";
-import { base } from "viem/chains";
-import { ADDRESSES } from "@whetstone-research/doppler-sdk";
-import { signPermit } from "doppler-router/dist/Permit2";
-import { CommandBuilder } from "doppler-router";
+import type { Account, Address, WalletClient } from "viem";
 
 import { getParagraphAPI } from "../generated/api";
 import type { GetCoin200 } from "../generated/models";
 import type { CoinIdentifier, SingleCoinIdentifier } from "../types";
 import { QueryResult, singleItemResult, executeAbi, permit2Abi } from "../utils";
+
+const MISSING_COIN_PEERS_MESSAGE =
+  'Paragraph SDK: coin trading requires the "viem", ' +
+  '"@whetstone-research/doppler-sdk", and "doppler-router" peer dependencies. ' +
+  "Install them with: npm install viem @whetstone-research/doppler-sdk doppler-router";
+
+function isMissingModuleError(err: unknown): boolean {
+  if (!(err instanceof Error)) return false;
+  const code = (err as { code?: string }).code;
+  if (code === "ERR_MODULE_NOT_FOUND" || code === "MODULE_NOT_FOUND") return true;
+  return /Cannot find (module|package)|Failed to resolve module/i.test(err.message);
+}
+
+async function loadBuyPeers() {
+  try {
+    const [{ base }, { ADDRESSES }] = await Promise.all([
+      import("viem/chains"),
+      import("@whetstone-research/doppler-sdk"),
+    ]);
+    return { base, ADDRESSES };
+  } catch (err) {
+    if (isMissingModuleError(err)) throw new Error(MISSING_COIN_PEERS_MESSAGE);
+    throw err;
+  }
+}
+
+async function loadSellPeers() {
+  try {
+    const [
+      { createPublicClient, http },
+      { base },
+      { ADDRESSES },
+      { signPermit },
+      { CommandBuilder },
+    ] = await Promise.all([
+      import("viem"),
+      import("viem/chains"),
+      import("@whetstone-research/doppler-sdk"),
+      import("doppler-router/dist/Permit2"),
+      import("doppler-router"),
+    ]);
+    return { createPublicClient, http, base, ADDRESSES, signPermit, CommandBuilder };
+  } catch (err) {
+    if (isMissingModuleError(err)) throw new Error(MISSING_COIN_PEERS_MESSAGE);
+    throw err;
+  }
+}
 
 /**
  * Coins resource handler.
@@ -159,10 +196,13 @@ export class CoinsResource {
     account: Account;
     amount: bigint;
   }) {
-    const buyArgs = await this.getBuyArgs(coin, {
-      walletAddress: account.address,
-      amount: amount.toString(),
-    });
+    const [buyArgs, { base, ADDRESSES }] = await Promise.all([
+      this.getBuyArgs(coin, {
+        walletAddress: account.address,
+        amount: amount.toString(),
+      }),
+      loadBuyPeers(),
+    ]);
 
     const { commands, inputs } = buyArgs;
     if (!commands || !inputs) throw new Error("API error: Missing args");
@@ -237,11 +277,18 @@ export class CoinsResource {
     account: Account;
     amount: bigint;
   }) {
-    const coinData = await this.get(coin).single();
-    const sellArgs = await this.getSellArgs(coin, {
-      walletAddress: account.address,
-      amount: amount.toString(),
-    });
+    const [
+      coinData,
+      sellArgs,
+      { createPublicClient, http, base, ADDRESSES, signPermit, CommandBuilder },
+    ] = await Promise.all([
+      this.get(coin).single(),
+      this.getSellArgs(coin, {
+        walletAddress: account.address,
+        amount: amount.toString(),
+      }),
+      loadSellPeers(),
+    ]);
 
     const publicClient = createPublicClient({
       chain: base,
