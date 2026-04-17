@@ -759,6 +759,16 @@
                               "views": {
                                 "type": "number",
                                 "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                              },
+                              "status": {
+                                "type": "string",
+                                "enum": [
+                                  "published",
+                                  "draft",
+                                  "scheduled",
+                                  "archived"
+                                ],
+                                "description": "Current publish status. Only set on authenticated endpoints (listOwn, getById for your own post). Use this instead of publishedAt to determine publish state — publishedAt is preserved across unpublishing."
                               }
                             },
                             "required": [
@@ -1186,6 +1196,16 @@
                           "views": {
                             "type": "number",
                             "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "published",
+                              "draft",
+                              "scheduled",
+                              "archived"
+                            ],
+                            "description": "Current publish status. Only set on authenticated endpoints (listOwn, getById for your own post). Use this instead of publishedAt to determine publish state — publishedAt is preserved across unpublishing."
                           }
                         },
                         "required": [
@@ -1499,6 +1519,16 @@
                           "views": {
                             "type": "number",
                             "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "published",
+                              "draft",
+                              "scheduled",
+                              "archived"
+                            ],
+                            "description": "Current publish status. Only set on authenticated endpoints (listOwn, getById for your own post). Use this instead of publishedAt to determine publish state — publishedAt is preserved across unpublishing."
                           }
                         },
                         "required": [
@@ -1788,6 +1818,16 @@
                     "views": {
                       "type": "number",
                       "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "published",
+                        "draft",
+                        "scheduled",
+                        "archived"
+                      ],
+                      "description": "Current publish status. Only set on authenticated endpoints (listOwn, getById for your own post). Use this instead of publishedAt to determine publish state — publishedAt is preserved across unpublishing."
                     }
                   },
                   "required": [
@@ -2518,6 +2558,16 @@
                     "views": {
                       "type": "number",
                       "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "published",
+                        "draft",
+                        "scheduled",
+                        "archived"
+                      ],
+                      "description": "Current publish status. Only set on authenticated endpoints (listOwn, getById for your own post). Use this instead of publishedAt to determine publish state — publishedAt is preserved across unpublishing."
                     }
                   },
                   "required": [
@@ -2792,6 +2842,16 @@
                     "views": {
                       "type": "number",
                       "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "published",
+                        "draft",
+                        "scheduled",
+                        "archived"
+                      ],
+                      "description": "Current publish status. Only set on authenticated endpoints (listOwn, getById for your own post). Use this instead of publishedAt to determine publish state — publishedAt is preserved across unpublishing."
                     }
                   },
                   "required": [
@@ -3371,6 +3431,16 @@
                           "views": {
                             "type": "number",
                             "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "published",
+                              "draft",
+                              "scheduled",
+                              "archived"
+                            ],
+                            "description": "Current publish status. Only set on authenticated endpoints (listOwn, getById for your own post). Use this instead of publishedAt to determine publish state — publishedAt is preserved across unpublishing."
                           }
                         },
                         "required": [
