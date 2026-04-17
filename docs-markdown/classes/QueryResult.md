@@ -6,7 +6,7 @@
 
 # Class: QueryResult\<T\>
 
-Defined in: [utils.ts:20](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f49f6a3e800b3f0ba716e419a0e937fac972d9c6/src/utils.ts#L20)
+Defined in: [src/utils.ts:19](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/e15009bc89c1d201aa38ea9cccb188b784897166/src/utils.ts#L19)
 
 A wrapper class for query results that provides a consistent interface
 for both single-item and multi-item queries.
@@ -40,7 +40,7 @@ const post = await api.posts.get({ id: "..." }).single();
 
 > **new QueryResult**\<`T`\>(`promise`): `QueryResult`\<`T`\>
 
-Defined in: [utils.ts:21](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f49f6a3e800b3f0ba716e419a0e937fac972d9c6/src/utils.ts#L21)
+Defined in: [src/utils.ts:20](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/e15009bc89c1d201aa38ea9cccb188b784897166/src/utils.ts#L20)
 
 #### Parameters
 
@@ -58,7 +58,7 @@ Defined in: [utils.ts:21](https://github.com/paragraph-xyz/paragraph-sdk-js/blob
 
 > **single**(): `Promise`\<`T`\>
 
-Defined in: [utils.ts:42](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f49f6a3e800b3f0ba716e419a0e937fac972d9c6/src/utils.ts#L42)
+Defined in: [src/utils.ts:41](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/e15009bc89c1d201aa38ea9cccb188b784897166/src/utils.ts#L41)
 
 Returns the first item from the result.
 Use this when you expect a single result (e.g., getting by ID).
@@ -79,7 +79,7 @@ Error if no items are returned
 
 > **then**\<`TResult1`, `TResult2`\>(`onfulfilled?`, `onrejected?`): `Promise`\<`TResult1` \| `TResult2`\>
 
-Defined in: [utils.ts:26](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f49f6a3e800b3f0ba716e419a0e937fac972d9c6/src/utils.ts#L26)
+Defined in: [src/utils.ts:25](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/e15009bc89c1d201aa38ea9cccb188b784897166/src/utils.ts#L25)
 
 Implements PromiseLike interface, allowing QueryResult to be awaited directly.
 

@@ -8,7 +8,7 @@
 
 > **GetPostsFeed200ItemsItem** = `object`
 
-Defined in: generated/models/getPostsFeed200ItemsItem.ts:18
+Defined in: src/generated/models/getPostsFeed200ItemsItem.ts:18
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: generated/models/getPostsFeed200ItemsItem.ts:18
 
 > **post**: [`GetPostsFeed200ItemsItemPost`](GetPostsFeed200ItemsItemPost.md)
 
-Defined in: generated/models/getPostsFeed200ItemsItem.ts:20
+Defined in: src/generated/models/getPostsFeed200ItemsItem.ts:20
 
 The post content
 
@@ -26,7 +26,7 @@ The post content
 
 > **publication**: [`GetPostsFeed200ItemsItemPublication`](GetPostsFeed200ItemsItemPublication.md)
 
-Defined in: generated/models/getPostsFeed200ItemsItem.ts:22
+Defined in: src/generated/models/getPostsFeed200ItemsItem.ts:22
 
 The publication this post belongs to
 
@@ -36,6 +36,6 @@ The publication this post belongs to
 
 > **user**: [`GetPostsFeed200ItemsItemUser`](GetPostsFeed200ItemsItemUser.md)
 
-Defined in: generated/models/getPostsFeed200ItemsItem.ts:24
+Defined in: src/generated/models/getPostsFeed200ItemsItem.ts:24
 
 The user who owns the publication this post belongs to

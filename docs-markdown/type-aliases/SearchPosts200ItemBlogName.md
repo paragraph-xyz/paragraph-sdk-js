@@ -8,6 +8,6 @@
 
 > **SearchPosts200ItemBlogName** = `string` \| `null`
 
-Defined in: generated/models/searchPosts200ItemBlogName.ts:18
+Defined in: src/generated/models/searchPosts200ItemBlogName.ts:18
 
 Display name of the publication

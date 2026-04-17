@@ -8,7 +8,7 @@
 
 > **GetAuthSession200OneOf** = `object`
 
-Defined in: generated/models/getAuthSession200OneOf.ts:16
+Defined in: src/generated/models/getAuthSession200OneOf.ts:16
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: generated/models/getAuthSession200OneOf.ts:16
 
 > `optional` **callbackUrl?**: `string`
 
-Defined in: generated/models/getAuthSession200OneOf.ts:19
+Defined in: src/generated/models/getAuthSession200OneOf.ts:19
 
 ***
 
@@ -24,7 +24,7 @@ Defined in: generated/models/getAuthSession200OneOf.ts:19
 
 > **deviceName**: `string`
 
-Defined in: generated/models/getAuthSession200OneOf.ts:18
+Defined in: src/generated/models/getAuthSession200OneOf.ts:18
 
 ***
 
@@ -32,4 +32,4 @@ Defined in: generated/models/getAuthSession200OneOf.ts:18
 
 > **status**: [`GetAuthSession200OneOfStatus`](GetAuthSession200OneOfStatus.md)
 
-Defined in: generated/models/getAuthSession200OneOf.ts:17
+Defined in: src/generated/models/getAuthSession200OneOf.ts:17

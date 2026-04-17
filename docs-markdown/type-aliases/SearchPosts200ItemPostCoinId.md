@@ -8,6 +8,6 @@
 
 > **SearchPosts200ItemPostCoinId** = `string` \| `null`
 
-Defined in: generated/models/searchPosts200ItemPostCoinId.ts:18
+Defined in: src/generated/models/searchPosts200ItemPostCoinId.ts:18
 
 Associated coin ID, if any

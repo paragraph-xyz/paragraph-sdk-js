@@ -8,6 +8,6 @@
 
 > **SearchBlogs200ItemBlogCustomDomain** = `string` \| `null`
 
-Defined in: generated/models/searchBlogs200ItemBlogCustomDomain.ts:18
+Defined in: src/generated/models/searchBlogs200ItemBlogCustomDomain.ts:18
 
 Custom domain for the publication

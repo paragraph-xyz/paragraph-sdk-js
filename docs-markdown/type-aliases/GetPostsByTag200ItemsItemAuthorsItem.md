@@ -8,7 +8,7 @@
 
 > **GetPostsByTag200ItemsItemAuthorsItem** = `object`
 
-Defined in: generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:16
+Defined in: src/generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:16
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:16
 
 > `optional` **avatarUrl?**: `string`
 
-Defined in: generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:25
+Defined in: src/generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:25
 
 URL to the user's avatar image
 
@@ -26,7 +26,7 @@ URL to the user's avatar image
 
 > `optional` **bio?**: `string`
 
-Defined in: generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:34
+Defined in: src/generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:34
 
 Brief biography of the user (max 500 characters)
 
@@ -40,7 +40,7 @@ Brief biography of the user (max 500 characters)
 
 > `optional` **farcaster?**: [`GetPostsByTag200ItemsItemAuthorsItemFarcaster`](GetPostsByTag200ItemsItemAuthorsItemFarcaster.md)
 
-Defined in: generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:36
+Defined in: src/generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:36
 
 Farcaster profile information, if linked
 
@@ -50,7 +50,7 @@ Farcaster profile information, if linked
 
 > **id**: `string`
 
-Defined in: generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:18
+Defined in: src/generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:18
 
 Unique identifier for the user
 
@@ -60,7 +60,7 @@ Unique identifier for the user
 
 > `optional` **name?**: `string`
 
-Defined in: generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:29
+Defined in: src/generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:29
 
 Display name of the user
 
@@ -70,7 +70,7 @@ Display name of the user
 
 > **publicationId**: `string`
 
-Defined in: generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:27
+Defined in: src/generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:27
 
 ID of the publication this user belongs to
 
@@ -80,7 +80,7 @@ ID of the publication this user belongs to
 
 > `optional` **walletAddress?**: `string`
 
-Defined in: generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:23
+Defined in: src/generated/models/getPostsByTag200ItemsItemAuthorsItem.ts:23
 
 Wallet address of the user
 

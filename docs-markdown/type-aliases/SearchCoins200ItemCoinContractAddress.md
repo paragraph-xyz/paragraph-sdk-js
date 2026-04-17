@@ -8,6 +8,6 @@
 
 > **SearchCoins200ItemCoinContractAddress** = `string` \| `null`
 
-Defined in: generated/models/searchCoins200ItemCoinContractAddress.ts:18
+Defined in: src/generated/models/searchCoins200ItemCoinContractAddress.ts:18
 
 Contract address of the coin

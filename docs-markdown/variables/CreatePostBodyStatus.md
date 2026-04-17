@@ -8,7 +8,7 @@
 
 > **CreatePostBodyStatus**: `object`
 
-Defined in: generated/models/createPostBodyStatus.ts:18
+Defined in: src/generated/models/createPostBodyStatus.ts:18
 
 ## Type Declaration
 

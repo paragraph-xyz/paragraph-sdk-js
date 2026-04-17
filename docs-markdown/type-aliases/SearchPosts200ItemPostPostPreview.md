@@ -8,6 +8,6 @@
 
 > **SearchPosts200ItemPostPostPreview** = `string` \| `null`
 
-Defined in: generated/models/searchPosts200ItemPostPostPreview.ts:18
+Defined in: src/generated/models/searchPosts200ItemPostPostPreview.ts:18
 
 Preview text of the post

@@ -8,4 +8,4 @@
 
 > **GetAuthSession200** = [`GetAuthSession200OneOf`](GetAuthSession200OneOf.md) \| [`GetAuthSession200OneOfThree`](GetAuthSession200OneOfThree.md) \| [`GetAuthSession200OneOfFive`](GetAuthSession200OneOfFive.md)
 
-Defined in: generated/models/getAuthSession200.ts:18
+Defined in: src/generated/models/getAuthSession200.ts:18

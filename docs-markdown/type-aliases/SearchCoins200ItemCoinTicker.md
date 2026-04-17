@@ -8,6 +8,6 @@
 
 > **SearchCoins200ItemCoinTicker** = `string` \| `null`
 
-Defined in: generated/models/searchCoins200ItemCoinTicker.ts:18
+Defined in: src/generated/models/searchCoins200ItemCoinTicker.ts:18
 
 Ticker symbol of the coin

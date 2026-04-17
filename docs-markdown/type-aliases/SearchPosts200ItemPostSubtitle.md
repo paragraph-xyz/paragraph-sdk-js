@@ -8,6 +8,6 @@
 
 > **SearchPosts200ItemPostSubtitle** = `string` \| `null`
 
-Defined in: generated/models/searchPosts200ItemPostSubtitle.ts:18
+Defined in: src/generated/models/searchPosts200ItemPostSubtitle.ts:18
 
 Subtitle of the post

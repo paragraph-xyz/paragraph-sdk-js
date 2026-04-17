@@ -8,7 +8,7 @@
 
 > **SearchCoins200ItemCoin** = `object`
 
-Defined in: generated/models/searchCoins200ItemCoin.ts:20
+Defined in: src/generated/models/searchCoins200ItemCoin.ts:20
 
 The matched coin
 
@@ -18,7 +18,7 @@ The matched coin
 
 > **blogId**: `string`
 
-Defined in: generated/models/searchCoins200ItemCoin.ts:28
+Defined in: src/generated/models/searchCoins200ItemCoin.ts:28
 
 ID of the associated publication
 
@@ -28,7 +28,7 @@ ID of the associated publication
 
 > **coinId**: `string`
 
-Defined in: generated/models/searchCoins200ItemCoin.ts:22
+Defined in: src/generated/models/searchCoins200ItemCoin.ts:22
 
 Unique identifier for the coin
 
@@ -38,7 +38,7 @@ Unique identifier for the coin
 
 > **contractAddress**: [`SearchCoins200ItemCoinContractAddress`](SearchCoins200ItemCoinContractAddress.md)
 
-Defined in: generated/models/searchCoins200ItemCoin.ts:26
+Defined in: src/generated/models/searchCoins200ItemCoin.ts:26
 
 Contract address of the coin
 
@@ -48,6 +48,6 @@ Contract address of the coin
 
 > **ticker**: [`SearchCoins200ItemCoinTicker`](SearchCoins200ItemCoinTicker.md)
 
-Defined in: generated/models/searchCoins200ItemCoin.ts:24
+Defined in: src/generated/models/searchCoins200ItemCoin.ts:24
 
 Ticker symbol of the coin

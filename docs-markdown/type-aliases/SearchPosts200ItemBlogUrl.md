@@ -8,6 +8,6 @@
 
 > **SearchPosts200ItemBlogUrl** = `string` \| `null`
 
-Defined in: generated/models/searchPosts200ItemBlogUrl.ts:18
+Defined in: src/generated/models/searchPosts200ItemBlogUrl.ts:18
 
 URL of the publication

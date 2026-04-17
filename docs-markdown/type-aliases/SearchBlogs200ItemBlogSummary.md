@@ -8,6 +8,6 @@
 
 > **SearchBlogs200ItemBlogSummary** = `string` \| `null`
 
-Defined in: generated/models/searchBlogs200ItemBlogSummary.ts:18
+Defined in: src/generated/models/searchBlogs200ItemBlogSummary.ts:18
 
 Brief description of the publication

@@ -8,6 +8,6 @@
 
 > **SearchPosts200ItemUserWalletAddress** = `string` \| `null`
 
-Defined in: generated/models/searchPosts200ItemUserWalletAddress.ts:18
+Defined in: src/generated/models/searchPosts200ItemUserWalletAddress.ts:18
 
 Wallet address of the author

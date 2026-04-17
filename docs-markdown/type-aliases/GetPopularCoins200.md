@@ -8,7 +8,7 @@
 
 > **GetPopularCoins200** = `object`
 
-Defined in: generated/models/getPopularCoins200.ts:16
+Defined in: src/generated/models/getPopularCoins200.ts:16
 
 ## Properties
 
@@ -16,4 +16,4 @@ Defined in: generated/models/getPopularCoins200.ts:16
 
 > **coins**: [`GetPopularCoins200CoinsItem`](GetPopularCoins200CoinsItem.md)[]
 
-Defined in: generated/models/getPopularCoins200.ts:17
+Defined in: src/generated/models/getPopularCoins200.ts:17

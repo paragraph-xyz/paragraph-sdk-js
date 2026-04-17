@@ -8,7 +8,7 @@
 
 > **UpdatePostBodyStatus**: `object`
 
-Defined in: generated/models/updatePostBodyStatus.ts:18
+Defined in: src/generated/models/updatePostBodyStatus.ts:18
 
 ## Type Declaration
 

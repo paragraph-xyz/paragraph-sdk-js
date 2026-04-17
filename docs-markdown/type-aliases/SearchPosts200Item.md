@@ -8,7 +8,7 @@
 
 > **SearchPosts200Item** = `object`
 
-Defined in: generated/models/searchPosts200Item.ts:18
+Defined in: src/generated/models/searchPosts200Item.ts:18
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: generated/models/searchPosts200Item.ts:18
 
 > **blog**: [`SearchPosts200ItemBlog`](SearchPosts200ItemBlog.md)
 
-Defined in: generated/models/searchPosts200Item.ts:22
+Defined in: src/generated/models/searchPosts200Item.ts:22
 
 The publication this post belongs to
 
@@ -26,7 +26,7 @@ The publication this post belongs to
 
 > **post**: [`SearchPosts200ItemPost`](SearchPosts200ItemPost.md)
 
-Defined in: generated/models/searchPosts200Item.ts:20
+Defined in: src/generated/models/searchPosts200Item.ts:20
 
 The matched post
 
@@ -36,6 +36,6 @@ The matched post
 
 > **user**: [`SearchPosts200ItemUser`](SearchPosts200ItemUser.md)
 
-Defined in: generated/models/searchPosts200Item.ts:24
+Defined in: src/generated/models/searchPosts200Item.ts:24
 
 The author of the post

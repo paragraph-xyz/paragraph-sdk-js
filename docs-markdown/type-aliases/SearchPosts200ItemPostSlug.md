@@ -8,6 +8,6 @@
 
 > **SearchPosts200ItemPostSlug** = `string` \| `null`
 
-Defined in: generated/models/searchPosts200ItemPostSlug.ts:18
+Defined in: src/generated/models/searchPosts200ItemPostSlug.ts:18
 
 URL-friendly identifier for the post

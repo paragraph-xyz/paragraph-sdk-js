@@ -8,7 +8,7 @@
 
 > **ListOwnPostsStatus**: `object`
 
-Defined in: generated/models/listOwnPostsStatus.ts:15
+Defined in: src/generated/models/listOwnPostsStatus.ts:15
 
 ## Type Declaration
 

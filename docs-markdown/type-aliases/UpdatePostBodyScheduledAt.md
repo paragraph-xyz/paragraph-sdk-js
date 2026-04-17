@@ -8,7 +8,7 @@
 
 > **UpdatePostBodyScheduledAt** = `number` \| `null`
 
-Defined in: generated/models/updatePostBodyScheduledAt.ts:19
+Defined in: src/generated/models/updatePostBodyScheduledAt.ts:19
 
 Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish.
 

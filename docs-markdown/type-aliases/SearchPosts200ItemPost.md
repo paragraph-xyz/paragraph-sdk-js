@@ -8,7 +8,7 @@
 
 > **SearchPosts200ItemPost** = `object`
 
-Defined in: generated/models/searchPosts200ItemPost.ts:25
+Defined in: src/generated/models/searchPosts200ItemPost.ts:25
 
 The matched post
 
@@ -18,7 +18,7 @@ The matched post
 
 > **blogId**: `string`
 
-Defined in: generated/models/searchPosts200ItemPost.ts:29
+Defined in: src/generated/models/searchPosts200ItemPost.ts:29
 
 ID of the publication this post belongs to
 
@@ -28,7 +28,7 @@ ID of the publication this post belongs to
 
 > **coinId**: [`SearchPosts200ItemPostCoinId`](SearchPosts200ItemPostCoinId.md)
 
-Defined in: generated/models/searchPosts200ItemPost.ts:45
+Defined in: src/generated/models/searchPosts200ItemPost.ts:45
 
 Associated coin ID, if any
 
@@ -38,7 +38,7 @@ Associated coin ID, if any
 
 > **coverImageUrl**: [`SearchPosts200ItemPostCoverImageUrl`](SearchPosts200ItemPostCoverImageUrl.md)
 
-Defined in: generated/models/searchPosts200ItemPost.ts:41
+Defined in: src/generated/models/searchPosts200ItemPost.ts:41
 
 URL to the post's cover image
 
@@ -48,7 +48,7 @@ URL to the post's cover image
 
 > **createdAt**: `string`
 
-Defined in: generated/models/searchPosts200ItemPost.ts:31
+Defined in: src/generated/models/searchPosts200ItemPost.ts:31
 
 Timestamp when the post was created
 
@@ -58,7 +58,7 @@ Timestamp when the post was created
 
 > **postId**: `string`
 
-Defined in: generated/models/searchPosts200ItemPost.ts:27
+Defined in: src/generated/models/searchPosts200ItemPost.ts:27
 
 Unique identifier for the post
 
@@ -68,7 +68,7 @@ Unique identifier for the post
 
 > **postPreview**: [`SearchPosts200ItemPostPostPreview`](SearchPosts200ItemPostPostPreview.md)
 
-Defined in: generated/models/searchPosts200ItemPost.ts:39
+Defined in: src/generated/models/searchPosts200ItemPost.ts:39
 
 Preview text of the post
 
@@ -78,7 +78,7 @@ Preview text of the post
 
 > **publishedAt**: [`SearchPosts200ItemPostPublishedAt`](SearchPosts200ItemPostPublishedAt.md)
 
-Defined in: generated/models/searchPosts200ItemPost.ts:33
+Defined in: src/generated/models/searchPosts200ItemPost.ts:33
 
 Timestamp when the post was published
 
@@ -88,7 +88,7 @@ Timestamp when the post was published
 
 > **slug**: [`SearchPosts200ItemPostSlug`](SearchPosts200ItemPostSlug.md)
 
-Defined in: generated/models/searchPosts200ItemPost.ts:43
+Defined in: src/generated/models/searchPosts200ItemPost.ts:43
 
 URL-friendly identifier for the post
 
@@ -98,7 +98,7 @@ URL-friendly identifier for the post
 
 > **subtitle**: [`SearchPosts200ItemPostSubtitle`](SearchPosts200ItemPostSubtitle.md)
 
-Defined in: generated/models/searchPosts200ItemPost.ts:37
+Defined in: src/generated/models/searchPosts200ItemPost.ts:37
 
 Subtitle of the post
 
@@ -108,6 +108,6 @@ Subtitle of the post
 
 > **title**: [`SearchPosts200ItemPostTitle`](SearchPosts200ItemPostTitle.md)
 
-Defined in: generated/models/searchPosts200ItemPost.ts:35
+Defined in: src/generated/models/searchPosts200ItemPost.ts:35
 
 Title of the post

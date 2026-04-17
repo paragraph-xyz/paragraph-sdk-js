@@ -8,7 +8,7 @@
 
 > **SearchCoins200ItemBlog** = `object`
 
-Defined in: generated/models/searchCoins200ItemBlog.ts:21
+Defined in: src/generated/models/searchCoins200ItemBlog.ts:21
 
 The associated publication
 
@@ -18,7 +18,7 @@ The associated publication
 
 > **blogId**: `string`
 
-Defined in: generated/models/searchCoins200ItemBlog.ts:23
+Defined in: src/generated/models/searchCoins200ItemBlog.ts:23
 
 Unique identifier for the publication
 
@@ -28,7 +28,7 @@ Unique identifier for the publication
 
 > **logoUrl**: [`SearchCoins200ItemBlogLogoUrl`](SearchCoins200ItemBlogLogoUrl.md)
 
-Defined in: generated/models/searchCoins200ItemBlog.ts:29
+Defined in: src/generated/models/searchCoins200ItemBlog.ts:29
 
 URL to the publication's logo
 
@@ -38,7 +38,7 @@ URL to the publication's logo
 
 > **name**: [`SearchCoins200ItemBlogName`](SearchCoins200ItemBlogName.md)
 
-Defined in: generated/models/searchCoins200ItemBlog.ts:25
+Defined in: src/generated/models/searchCoins200ItemBlog.ts:25
 
 Display name of the publication
 
@@ -48,6 +48,6 @@ Display name of the publication
 
 > **slug**: [`SearchCoins200ItemBlogSlug`](SearchCoins200ItemBlogSlug.md)
 
-Defined in: generated/models/searchCoins200ItemBlog.ts:27
+Defined in: src/generated/models/searchCoins200ItemBlog.ts:27
 
 URL-friendly slug of the publication

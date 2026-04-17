@@ -8,6 +8,6 @@
 
 > **SearchBlogs200ItemBlogSlug** = `string` \| `null`
 
-Defined in: generated/models/searchBlogs200ItemBlogSlug.ts:18
+Defined in: src/generated/models/searchBlogs200ItemBlogSlug.ts:18
 
 URL-friendly slug of the publication

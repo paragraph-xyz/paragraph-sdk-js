@@ -8,7 +8,7 @@
 
 > **SearchBlogs200ItemUser** = `object`
 
-Defined in: generated/models/searchBlogs200ItemUser.ts:22
+Defined in: src/generated/models/searchBlogs200ItemUser.ts:22
 
 The publication owner
 
@@ -18,7 +18,7 @@ The publication owner
 
 > `optional` **avatarUrl?**: [`SearchBlogs200ItemUserAvatarUrl`](SearchBlogs200ItemUserAvatarUrl.md)
 
-Defined in: generated/models/searchBlogs200ItemUser.ts:30
+Defined in: src/generated/models/searchBlogs200ItemUser.ts:30
 
 URL to the author's avatar
 
@@ -28,7 +28,7 @@ URL to the author's avatar
 
 > `optional` **bio?**: [`SearchBlogs200ItemUserBio`](SearchBlogs200ItemUserBio.md)
 
-Defined in: generated/models/searchBlogs200ItemUser.ts:28
+Defined in: src/generated/models/searchBlogs200ItemUser.ts:28
 
 Brief biography of the author
 
@@ -38,7 +38,7 @@ Brief biography of the author
 
 > **name**: [`SearchBlogs200ItemUserName`](SearchBlogs200ItemUserName.md)
 
-Defined in: generated/models/searchBlogs200ItemUser.ts:26
+Defined in: src/generated/models/searchBlogs200ItemUser.ts:26
 
 Display name of the author
 
@@ -48,7 +48,7 @@ Display name of the author
 
 > **userId**: `string`
 
-Defined in: generated/models/searchBlogs200ItemUser.ts:24
+Defined in: src/generated/models/searchBlogs200ItemUser.ts:24
 
 Unique identifier for the user
 
@@ -58,6 +58,6 @@ Unique identifier for the user
 
 > `optional` **walletAddress?**: [`SearchBlogs200ItemUserWalletAddress`](SearchBlogs200ItemUserWalletAddress.md)
 
-Defined in: generated/models/searchBlogs200ItemUser.ts:32
+Defined in: src/generated/models/searchBlogs200ItemUser.ts:32
 
 Wallet address of the author

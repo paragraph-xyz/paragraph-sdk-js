@@ -8,6 +8,6 @@
 
 > **SearchPosts200ItemPostTitle** = `string` \| `null`
 
-Defined in: generated/models/searchPosts200ItemPostTitle.ts:18
+Defined in: src/generated/models/searchPosts200ItemPostTitle.ts:18
 
 Title of the post

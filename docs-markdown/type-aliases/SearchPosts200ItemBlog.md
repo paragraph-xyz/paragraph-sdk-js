@@ -8,7 +8,7 @@
 
 > **SearchPosts200ItemBlog** = `object`
 
-Defined in: generated/models/searchPosts200ItemBlog.ts:25
+Defined in: src/generated/models/searchPosts200ItemBlog.ts:25
 
 The publication this post belongs to
 
@@ -18,7 +18,7 @@ The publication this post belongs to
 
 > **blogId**: `string`
 
-Defined in: generated/models/searchPosts200ItemBlog.ts:27
+Defined in: src/generated/models/searchPosts200ItemBlog.ts:27
 
 Unique identifier for the publication
 
@@ -28,7 +28,7 @@ Unique identifier for the publication
 
 > **coinId**: [`SearchPosts200ItemBlogCoinId`](SearchPosts200ItemBlogCoinId.md)
 
-Defined in: generated/models/searchPosts200ItemBlog.ts:39
+Defined in: src/generated/models/searchPosts200ItemBlog.ts:39
 
 Associated coin ID, if any
 
@@ -38,7 +38,7 @@ Associated coin ID, if any
 
 > `optional` **customDomain?**: [`SearchPosts200ItemBlogCustomDomain`](SearchPosts200ItemBlogCustomDomain.md)
 
-Defined in: generated/models/searchPosts200ItemBlog.ts:41
+Defined in: src/generated/models/searchPosts200ItemBlog.ts:41
 
 Custom domain for the publication
 
@@ -48,7 +48,7 @@ Custom domain for the publication
 
 > **logoUrl**: [`SearchPosts200ItemBlogLogoUrl`](SearchPosts200ItemBlogLogoUrl.md)
 
-Defined in: generated/models/searchPosts200ItemBlog.ts:37
+Defined in: src/generated/models/searchPosts200ItemBlog.ts:37
 
 URL to the publication's logo
 
@@ -58,7 +58,7 @@ URL to the publication's logo
 
 > **name**: [`SearchPosts200ItemBlogName`](SearchPosts200ItemBlogName.md)
 
-Defined in: generated/models/searchPosts200ItemBlog.ts:31
+Defined in: src/generated/models/searchPosts200ItemBlog.ts:31
 
 Display name of the publication
 
@@ -68,7 +68,7 @@ Display name of the publication
 
 > **slug**: [`SearchPosts200ItemBlogSlug`](SearchPosts200ItemBlogSlug.md)
 
-Defined in: generated/models/searchPosts200ItemBlog.ts:35
+Defined in: src/generated/models/searchPosts200ItemBlog.ts:35
 
 URL-friendly slug of the publication
 
@@ -78,7 +78,7 @@ URL-friendly slug of the publication
 
 > `optional` **summary?**: [`SearchPosts200ItemBlogSummary`](SearchPosts200ItemBlogSummary.md)
 
-Defined in: generated/models/searchPosts200ItemBlog.ts:43
+Defined in: src/generated/models/searchPosts200ItemBlog.ts:43
 
 Brief description of the publication
 
@@ -88,7 +88,7 @@ Brief description of the publication
 
 > **url**: [`SearchPosts200ItemBlogUrl`](SearchPosts200ItemBlogUrl.md)
 
-Defined in: generated/models/searchPosts200ItemBlog.ts:33
+Defined in: src/generated/models/searchPosts200ItemBlog.ts:33
 
 URL of the publication
 
@@ -98,6 +98,6 @@ URL of the publication
 
 > **userId**: `string`
 
-Defined in: generated/models/searchPosts200ItemBlog.ts:29
+Defined in: src/generated/models/searchPosts200ItemBlog.ts:29
 
 ID of the publication owner

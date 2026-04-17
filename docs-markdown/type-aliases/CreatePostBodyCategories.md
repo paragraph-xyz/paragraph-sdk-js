@@ -8,6 +8,6 @@
 
 > **CreatePostBodyCategories** = `string`[] \| `string`
 
-Defined in: generated/models/createPostBodyCategories.ts:18
+Defined in: src/generated/models/createPostBodyCategories.ts:18
 
 Optional array of category tags for the post. Can also be a comma-separated string.

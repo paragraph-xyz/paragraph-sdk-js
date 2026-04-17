@@ -8,7 +8,7 @@
 
 > **SearchBlogs200Item** = `object`
 
-Defined in: generated/models/searchBlogs200Item.ts:17
+Defined in: src/generated/models/searchBlogs200Item.ts:17
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: generated/models/searchBlogs200Item.ts:17
 
 > **activeSubscriberCount**: `number`
 
-Defined in: generated/models/searchBlogs200Item.ts:23
+Defined in: src/generated/models/searchBlogs200Item.ts:23
 
 Number of active subscribers to this publication
 
@@ -26,7 +26,7 @@ Number of active subscribers to this publication
 
 > **blog**: [`SearchBlogs200ItemBlog`](SearchBlogs200ItemBlog.md)
 
-Defined in: generated/models/searchBlogs200Item.ts:19
+Defined in: src/generated/models/searchBlogs200Item.ts:19
 
 The matched publication
 
@@ -36,6 +36,6 @@ The matched publication
 
 > **user**: [`SearchBlogs200ItemUser`](SearchBlogs200ItemUser.md)
 
-Defined in: generated/models/searchBlogs200Item.ts:21
+Defined in: src/generated/models/searchBlogs200Item.ts:21
 
 The publication owner

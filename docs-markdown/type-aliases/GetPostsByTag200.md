@@ -8,7 +8,7 @@
 
 > **GetPostsByTag200** = `object`
 
-Defined in: generated/models/getPostsByTag200.ts:17
+Defined in: src/generated/models/getPostsByTag200.ts:17
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: generated/models/getPostsByTag200.ts:17
 
 > **items**: [`GetPostsByTag200ItemsItem`](GetPostsByTag200ItemsItem.md)[]
 
-Defined in: generated/models/getPostsByTag200.ts:19
+Defined in: src/generated/models/getPostsByTag200.ts:19
 
 Array of items in this page
 
@@ -26,4 +26,4 @@ Array of items in this page
 
 > **pagination**: [`GetPostsByTag200Pagination`](GetPostsByTag200Pagination.md)
 
-Defined in: generated/models/getPostsByTag200.ts:20
+Defined in: src/generated/models/getPostsByTag200.ts:20

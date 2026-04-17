@@ -8,6 +8,6 @@
 
 > **UpdatePostBySlugBodyStatus** = *typeof* [`UpdatePostBySlugBodyStatus`](../variables/UpdatePostBySlugBodyStatus.md)\[keyof *typeof* [`UpdatePostBySlugBodyStatus`](../variables/UpdatePostBySlugBodyStatus.md)\]
 
-Defined in: generated/models/updatePostBySlugBodyStatus.ts:18
+Defined in: src/generated/models/updatePostBySlugBodyStatus.ts:18
 
 Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive

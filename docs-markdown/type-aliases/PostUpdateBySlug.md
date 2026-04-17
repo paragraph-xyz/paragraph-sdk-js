@@ -8,7 +8,7 @@
 
 > **PostUpdateBySlug** = `object`
 
-Defined in: [types.ts:142](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f49f6a3e800b3f0ba716e419a0e937fac972d9c6/src/types.ts#L142)
+Defined in: [src/types.ts:142](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/e15009bc89c1d201aa38ea9cccb188b784897166/src/types.ts#L142)
 
 Identifier for updating a post by slug.
 
@@ -18,4 +18,4 @@ Identifier for updating a post by slug.
 
 > **slug**: `string`
 
-Defined in: [types.ts:142](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/f49f6a3e800b3f0ba716e419a0e937fac972d9c6/src/types.ts#L142)
+Defined in: [src/types.ts:142](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/e15009bc89c1d201aa38ea9cccb188b784897166/src/types.ts#L142)

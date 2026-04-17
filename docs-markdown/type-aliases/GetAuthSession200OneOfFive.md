@@ -8,7 +8,7 @@
 
 > **GetAuthSession200OneOfFive** = `object`
 
-Defined in: generated/models/getAuthSession200OneOfFive.ts:16
+Defined in: src/generated/models/getAuthSession200OneOfFive.ts:16
 
 ## Properties
 
@@ -16,4 +16,4 @@ Defined in: generated/models/getAuthSession200OneOfFive.ts:16
 
 > **status**: [`GetAuthSession200OneOfFiveStatus`](GetAuthSession200OneOfFiveStatus.md)
 
-Defined in: generated/models/getAuthSession200OneOfFive.ts:17
+Defined in: src/generated/models/getAuthSession200OneOfFive.ts:17

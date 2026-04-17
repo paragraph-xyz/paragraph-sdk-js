@@ -8,6 +8,6 @@
 
 > **SearchPosts200ItemPostCoverImageUrl** = `string` \| `null`
 
-Defined in: generated/models/searchPosts200ItemPostCoverImageUrl.ts:18
+Defined in: src/generated/models/searchPosts200ItemPostCoverImageUrl.ts:18
 
 URL to the post's cover image

@@ -8,7 +8,7 @@
 
 > **GetAuthSession200OneOfFiveStatus**: `object`
 
-Defined in: generated/models/getAuthSession200OneOfFiveStatus.ts:15
+Defined in: src/generated/models/getAuthSession200OneOfFiveStatus.ts:15
 
 ## Type Declaration
 

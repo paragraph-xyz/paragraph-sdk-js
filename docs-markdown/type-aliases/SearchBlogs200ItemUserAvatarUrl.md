@@ -8,6 +8,6 @@
 
 > **SearchBlogs200ItemUserAvatarUrl** = `string` \| `null`
 
-Defined in: generated/models/searchBlogs200ItemUserAvatarUrl.ts:18
+Defined in: src/generated/models/searchBlogs200ItemUserAvatarUrl.ts:18
 
 URL to the author's avatar

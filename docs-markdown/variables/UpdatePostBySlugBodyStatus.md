@@ -8,7 +8,7 @@
 
 > **UpdatePostBySlugBodyStatus**: `object`
 
-Defined in: generated/models/updatePostBySlugBodyStatus.ts:18
+Defined in: src/generated/models/updatePostBySlugBodyStatus.ts:18
 
 ## Type Declaration
 

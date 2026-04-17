@@ -8,6 +8,6 @@
 
 > **CreatePostBodyStatus** = *typeof* [`CreatePostBodyStatus`](../variables/CreatePostBodyStatus.md)\[keyof *typeof* [`CreatePostBodyStatus`](../variables/CreatePostBodyStatus.md)\]
 
-Defined in: generated/models/createPostBodyStatus.ts:18
+Defined in: src/generated/models/createPostBodyStatus.ts:18
 
 Status of the post. Default: published

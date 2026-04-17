@@ -8,6 +8,6 @@
 
 > **SearchPosts200ItemUserBio** = `string` \| `null`
 
-Defined in: generated/models/searchPosts200ItemUserBio.ts:18
+Defined in: src/generated/models/searchPosts200ItemUserBio.ts:18
 
 Brief biography of the author

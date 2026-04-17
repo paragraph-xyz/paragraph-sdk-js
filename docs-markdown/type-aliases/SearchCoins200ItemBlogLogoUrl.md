@@ -8,6 +8,6 @@
 
 > **SearchCoins200ItemBlogLogoUrl** = `string` \| `null`
 
-Defined in: generated/models/searchCoins200ItemBlogLogoUrl.ts:18
+Defined in: src/generated/models/searchCoins200ItemBlogLogoUrl.ts:18
 
 URL to the publication's logo

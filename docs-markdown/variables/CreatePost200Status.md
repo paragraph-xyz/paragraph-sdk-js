@@ -8,7 +8,7 @@
 
 > **CreatePost200Status**: `object`
 
-Defined in: generated/models/createPost200Status.ts:18
+Defined in: src/generated/models/createPost200Status.ts:18
 
 ## Type Declaration
 

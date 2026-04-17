@@ -8,7 +8,7 @@
 
 > **GetPostsFeed200ItemsItemPost** = `object`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:19
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:20
 
 The post content
 
@@ -18,7 +18,7 @@ The post content
 
 > `optional` **authorIds?**: `string`[]
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:57
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:58
 
 IDs of the authors of this post
 
@@ -28,7 +28,7 @@ IDs of the authors of this post
 
 > `optional` **authors?**: [`GetPostsFeed200ItemsItemPostAuthorsItem`](GetPostsFeed200ItemsItemPostAuthorsItem.md)[]
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:55
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:56
 
 Authors of this post
 
@@ -38,7 +38,7 @@ Authors of this post
 
 > `optional` **categories?**: `string`[]
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:53
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:54
 
 Categories/tags associated with this post
 
@@ -48,7 +48,7 @@ Categories/tags associated with this post
 
 > `optional` **coinId?**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:51
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:52
 
 ID of the associated coin, if the post is coined
 
@@ -58,7 +58,7 @@ ID of the associated coin, if the post is coined
 
 > **id**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:21
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:22
 
 Unique identifier for the post
 
@@ -68,7 +68,7 @@ Unique identifier for the post
 
 > `optional` **imageUrl?**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:28
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:29
 
 Optional URL to the post's main image
 
@@ -78,7 +78,7 @@ Optional URL to the post's main image
 
 > `optional` **json?**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:47
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:48
 
 TipTap JSON representation of the post content structure. This is the source of truth that the staticHtml and markdown is generated from
 
@@ -88,7 +88,7 @@ TipTap JSON representation of the post content structure. This is the source of 
 
 > `optional` **markdown?**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:49
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:50
 
 Markdown source of the post content
 
@@ -98,7 +98,7 @@ Markdown source of the post content
 
 > `optional` **publishedAt?**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:30
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:31
 
 Epoch timestamp when the post was published
 
@@ -108,7 +108,7 @@ Epoch timestamp when the post was published
 
 > **slug**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:43
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:44
 
 URL-friendly identifier for the post; accessible at paragraph.com/@[publicationSlug]/[slug]
 
@@ -126,9 +126,19 @@ URL-friendly identifier for the post; accessible at paragraph.com/@[publicationS
 
 > `optional` **staticHtml?**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:45
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:46
 
 Rendered HTML content of the post
+
+***
+
+### status?
+
+> `optional` **status?**: [`GetPostsFeed200ItemsItemPostStatus`](GetPostsFeed200ItemsItemPostStatus.md)
+
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:62
+
+Current publish status. Only set on authenticated endpoints (listOwn, getById for your own post). Use this instead of publishedAt to determine publish state — publishedAt is preserved across unpublishing.
 
 ***
 
@@ -136,7 +146,7 @@ Rendered HTML content of the post
 
 > `optional` **subtitle?**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:37
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:38
 
 Optional subtitle or brief summary
 
@@ -150,7 +160,7 @@ Optional subtitle or brief summary
 
 > **title**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:26
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:27
 
 Title of the post
 
@@ -164,7 +174,7 @@ Title of the post
 
 > `optional` **updatedAt?**: `string`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:32
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:33
 
 Epoch timestamp when the post was last updated
 
@@ -174,6 +184,6 @@ Epoch timestamp when the post was last updated
 
 > `optional` **views?**: `number`
 
-Defined in: generated/models/getPostsFeed200ItemsItemPost.ts:59
+Defined in: src/generated/models/getPostsFeed200ItemsItemPost.ts:60
 
 Total page views. Only included when fetching your own posts via GET /v1/posts

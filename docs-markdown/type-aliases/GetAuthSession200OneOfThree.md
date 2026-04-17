@@ -8,7 +8,7 @@
 
 > **GetAuthSession200OneOfThree** = `object`
 
-Defined in: generated/models/getAuthSession200OneOfThree.ts:16
+Defined in: src/generated/models/getAuthSession200OneOfThree.ts:16
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: generated/models/getAuthSession200OneOfThree.ts:16
 
 > **apiKey**: `string`
 
-Defined in: generated/models/getAuthSession200OneOfThree.ts:18
+Defined in: src/generated/models/getAuthSession200OneOfThree.ts:18
 
 ***
 
@@ -24,4 +24,4 @@ Defined in: generated/models/getAuthSession200OneOfThree.ts:18
 
 > **status**: [`GetAuthSession200OneOfThreeStatus`](GetAuthSession200OneOfThreeStatus.md)
 
-Defined in: generated/models/getAuthSession200OneOfThree.ts:17
+Defined in: src/generated/models/getAuthSession200OneOfThree.ts:17

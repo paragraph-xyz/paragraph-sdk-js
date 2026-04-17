@@ -8,7 +8,7 @@
 
 > **ListOwnPostsParams** = `object`
 
-Defined in: generated/models/listOwnPostsParams.ts:16
+Defined in: src/generated/models/listOwnPostsParams.ts:16
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: generated/models/listOwnPostsParams.ts:16
 
 > `optional` **cursor?**: `string`
 
-Defined in: generated/models/listOwnPostsParams.ts:20
+Defined in: src/generated/models/listOwnPostsParams.ts:20
 
 Cursor for pagination
 
@@ -26,7 +26,7 @@ Cursor for pagination
 
 > `optional` **includeContent?**: `boolean` \| `string`
 
-Defined in: generated/models/listOwnPostsParams.ts:30
+Defined in: src/generated/models/listOwnPostsParams.ts:30
 
 Include full content fields (markdown, json, staticHtml). Default: false
 
@@ -36,7 +36,7 @@ Include full content fields (markdown, json, staticHtml). Default: false
 
 > `optional` **limit?**: `number`
 
-Defined in: generated/models/listOwnPostsParams.ts:26
+Defined in: src/generated/models/listOwnPostsParams.ts:26
 
 Maximum number of items to return (1-100, default: 10)
 
@@ -54,6 +54,6 @@ Maximum number of items to return (1-100, default: 10)
 
 > `optional` **status?**: [`ListOwnPostsStatus`](ListOwnPostsStatus.md)
 
-Defined in: generated/models/listOwnPostsParams.ts:34
+Defined in: src/generated/models/listOwnPostsParams.ts:34
 
 Filter by post status. Default: published
