@@ -758,7 +758,7 @@
                               },
                               "views": {
                                 "type": "number",
-                                "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                                "description": "Total views. Only included when fetching your own posts via GET /v1/posts"
                               },
                               "status": {
                                 "type": "string",
@@ -1195,7 +1195,7 @@
                           },
                           "views": {
                             "type": "number",
-                            "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                            "description": "Total views. Only included when fetching your own posts via GET /v1/posts"
                           },
                           "status": {
                             "type": "string",
@@ -1518,7 +1518,7 @@
                           },
                           "views": {
                             "type": "number",
-                            "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                            "description": "Total views. Only included when fetching your own posts via GET /v1/posts"
                           },
                           "status": {
                             "type": "string",
@@ -1817,7 +1817,7 @@
                     },
                     "views": {
                       "type": "number",
-                      "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                      "description": "Total views. Only included when fetching your own posts via GET /v1/posts"
                     },
                     "status": {
                       "type": "string",
@@ -2557,7 +2557,7 @@
                     },
                     "views": {
                       "type": "number",
-                      "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                      "description": "Total views. Only included when fetching your own posts via GET /v1/posts"
                     },
                     "status": {
                       "type": "string",
@@ -2841,7 +2841,7 @@
                     },
                     "views": {
                       "type": "number",
-                      "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                      "description": "Total views. Only included when fetching your own posts via GET /v1/posts"
                     },
                     "status": {
                       "type": "string",
@@ -3430,7 +3430,7 @@
                           },
                           "views": {
                             "type": "number",
-                            "description": "Total page views. Only included when fetching your own posts via GET /v1/posts"
+                            "description": "Total views. Only included when fetching your own posts via GET /v1/posts"
                           },
                           "status": {
                             "type": "string",
