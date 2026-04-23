@@ -7940,6 +7940,408 @@
         ]
       }
     },
+    "/v1/analytics/query": {
+      "post": {
+        "description": "Execute a read-only SQL query against the analytics schema, scoped to your publication.\n\n**Auth:** Requires an API key. Queries run as the publication that owns the API key; Row-Level Security guarantees that only that publication's rows are visible even if the SQL is unscoped.\n\n**SQL requirements:**\n- `SELECT` or `WITH` (CTE) statements only\n- Reference tables unprefixed (e.g. `FROM posts`) — the `analytics` schema is the default `search_path`\n- No semicolons, no writes, no DDL, no superuser functions\n- Hard limit of 10,000 rows; anything over is truncated and `truncated: true` is returned\n- 30-second statement timeout\n\n**Discovering the schema:** call `GET /v1/analytics/schema` for column metadata.\n\nCommon queries: open rate, subscriber count, top posts by views, engagement over time, click-through rate.",
+        "summary": "Run an analytics SQL query",
+        "tags": [
+          "analytics"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sql": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "A SELECT or WITH query against the analytics schema. The analytics.* prefix is implicit."
+                  }
+                },
+                "required": [
+                  "sql"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Query executed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": {}
+                      },
+                      "description": "Result rows. Each row is a column-name → value map."
+                    },
+                    "rowCount": {
+                      "type": "integer",
+                      "description": "Number of rows returned (after truncation if any)"
+                    },
+                    "fields": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "name"
+                        ]
+                      },
+                      "description": "Column names in row order"
+                    },
+                    "truncated": {
+                      "type": "boolean",
+                      "description": "True if the result was truncated at the 10,000 row limit"
+                    }
+                  },
+                  "required": [
+                    "rows",
+                    "rowCount",
+                    "fields",
+                    "truncated"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid SQL — check the validator message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Publication not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "408": {
+            "description": "Query timed out (30s). Try a more targeted query or a materialized view.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "analyticsQuery",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "analytics-query",
+            "description": "Run a SELECT query against your publication's analytics data (views, subscribers, open rate, etc.)"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Top posts by views in the last 30 days",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst { rows } = await api.analytics.query({\n  sql: `SELECT title, total_views\n        FROM post_analytics_summary\n        WHERE published_at > now() - interval '30 days'\n        ORDER BY total_views DESC\n        LIMIT 10`,\n})"
+          },
+          {
+            "lang": "bash",
+            "label": "Query via curl",
+            "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/analytics/query\" \\\n  -H \"Authorization: Bearer your-api-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"sql\": \"SELECT COUNT(*) FROM subscribers\"}'"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/analytics/schema": {
+      "get": {
+        "description": "Returns column metadata for every table and view in the analytics schema. Use this to discover available tables/columns before writing an analytics query.",
+        "summary": "Describe the analytics schema",
+        "tags": [
+          "analytics"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Schema metadata retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tables": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "table_name": {
+                            "type": "string"
+                          },
+                          "column_name": {
+                            "type": "string"
+                          },
+                          "data_type": {
+                            "type": "string"
+                          },
+                          "is_nullable": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "table_name",
+                          "column_name",
+                          "data_type",
+                          "is_nullable"
+                        ]
+                      },
+                      "description": "One row per column, grouped by table in ordinal order"
+                    }
+                  },
+                  "required": [
+                    "tables"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "analyticsSchema",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "analytics-schema",
+            "description": "List tables and columns available in your publication's analytics schema"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "List analytics tables",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst { tables } = await api.analytics.schema()"
+          },
+          {
+            "lang": "bash",
+            "label": "Fetch schema via curl",
+            "source": "curl -H \"Authorization: Bearer your-api-key\" \\\n  \"https://public.api.paragraph.com/api/v1/analytics/schema\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/v1/api/auth/sessions": {
       "post": {
         "description": "Creates a new browser-based auth session for CLI or other API clients. The returned verification URL should be opened in the user's browser to complete authentication.",
