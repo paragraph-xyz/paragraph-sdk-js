@@ -3,6 +3,7 @@ import { getParagraphAPI } from "./generated/api";
 import { setCurrentApiKey } from "./mutator/custom-axios";
 import { wrapAPIWithAuth } from "./utils";
 import {
+  AnalyticsResource,
   AuthResource,
   CoinsResource,
   FeedResource,
@@ -70,6 +71,12 @@ import type { ParagraphAPIOptions } from "./types";
  * const coins = await api.search.coins("test");
  * const blogs = await api.search.blogs("crypto");
  *
+ * // Analytics - SQL queries against your publication's analytics schema (requires API key)
+ * const { rows } = await apiWithAuth.analytics.query({
+ *   sql: "SELECT title, open_rate FROM post_analytics_summary ORDER BY total_views DESC LIMIT 5",
+ * });
+ * const { tables } = await apiWithAuth.analytics.schema();
+ *
  * // Auth - browser-based auth sessions for CLI/API clients
  * const session = await api.auth.createSession({ deviceName: "my-cli" });
  * console.log("Open this URL:", session.verificationUrl);
@@ -81,6 +88,9 @@ export class ParagraphAPI {
 
   /** The API key for this instance */
   private apiKey: string | undefined;
+
+  /** Analytics resource - SQL queries against your publication's analytics schema */
+  public readonly analytics: AnalyticsResource;
 
   /** Auth resource - browser-based auth sessions */
   public readonly auth: AuthResource;
@@ -122,6 +132,7 @@ export class ParagraphAPI {
     // Wrap the API to set the current API key context before each call
     this.api = wrapAPIWithAuth(getParagraphAPI(), this.apiKey, setCurrentApiKey);
 
+    this.analytics = new AnalyticsResource(this.api);
     this.auth = new AuthResource(this.api);
     this.publications = new PublicationsResource(this.api);
     this.subscribers = new SubscribersResource(this.api);
@@ -153,4 +164,3 @@ export { ParagraphApiError } from "./mutator/custom-axios";
 
 // Re-export generated types for consumers
 export * from "./generated/models";
-
