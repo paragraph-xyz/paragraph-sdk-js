@@ -184,4 +184,4 @@ Epoch timestamp when the post was last updated
 
 Defined in: src/generated/models/getPostByPublicationIdAndPostSlug200.ts:57
 
-Total page views. Only included when fetching your own posts via GET /v1/posts
+Total views. Only included when fetching your own posts via GET /v1/posts
