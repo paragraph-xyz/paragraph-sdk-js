@@ -241,6 +241,12 @@ export class PostsResource {
    *   id: "postId",
    *   scheduledAt: null,
    * });
+   *
+   * // Backdate a post — publishedAt sticks across re-publishes
+   * await api.posts.update({
+   *   id: "postId",
+   *   publishedAt: new Date("2024-01-01T00:00:00Z").getTime(),
+   * });
    * ```
    *
    * @param params - An object containing either `id` or `slug` to identify the post, plus the fields to update.

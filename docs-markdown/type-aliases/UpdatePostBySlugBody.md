@@ -46,6 +46,20 @@ Preview text for the post
 
 ***
 
+### publishedAt?
+
+> `optional` **publishedAt?**: `number`
+
+Defined in: src/generated/models/updatePostBySlugBody.ts:58
+
+Unix timestamp (milliseconds) to set as the post's publish date. Once set, the date is preserved across re-publishes.
+
+#### Minimum
+
+0
+
+***
+
 ### scheduledAt?
 
 > `optional` **scheduledAt?**: [`UpdatePostBySlugBodyScheduledAt`](UpdatePostBySlugBodyScheduledAt.md)

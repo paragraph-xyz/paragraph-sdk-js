@@ -1,5 +1,8 @@
 import { getParagraphAPI } from "../generated/api";
-import type { GetPublicationById200 } from "../generated/models";
+import type {
+  GetPublicationById200,
+  UpdatePublicationBody,
+} from "../generated/models";
 import type { PublicationIdentifier } from "../types";
 import { QueryResult, singleItemResult } from "../utils";
 
@@ -51,5 +54,45 @@ export class PublicationsResource {
     }
 
     throw new Error("Invalid identifier provided to get.");
+  }
+
+  /**
+   * Updates settings for the publication associated with the API key.
+   * Only provided fields are updated; omitted fields remain unchanged.
+   * Requires an API key, and `publicationId` must match the publication that owns the key.
+   *
+   * @example
+   * ```ts
+   * const api = new ParagraphAPI({ apiKey: "your-api-key" });
+   *
+   * // Update name and theme
+   * await api.publications.update("publicationId", {
+   *   name: "My Blog",
+   *   themeColor: "purple-600",
+   *   headerFont: "serif",
+   * });
+   *
+   * // Pin posts to the top of the homepage (replaces the existing pinned list, max 50)
+   * await api.publications.update("publicationId", {
+   *   pinnedPostIds: ["postId1", "postId2"],
+   * });
+   *
+   * // Set a featured post — use a post ID, "latest", "popular", or "disabled"
+   * await api.publications.update("publicationId", {
+   *   featuredPost: "latest",
+   * });
+   *
+   * // Email notifications are merged onto existing settings; only the toggles you send change
+   * await api.publications.update("publicationId", {
+   *   emailNotifications: { newSubscriber: true },
+   * });
+   * ```
+   *
+   * @param publicationId - The unique identifier of the publication to update.
+   * @param body - The fields to update. See {@link UpdatePublicationBody}.
+   * @returns A promise that resolves to the updated publication.
+   */
+  update(publicationId: string, body: UpdatePublicationBody) {
+    return this.api.updatePublication(publicationId, body);
   }
 }

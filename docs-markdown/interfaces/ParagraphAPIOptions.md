@@ -6,7 +6,7 @@
 
 # Interface: ParagraphAPIOptions
 
-Defined in: [src/types.ts:6](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/ea353856e30eeea324d589cf9d3dee88da4d4f47/src/types.ts#L6)
+Defined in: [src/types.ts:6](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7e712bc0791b41c54f277db087b57bff8eaccc5e/src/types.ts#L6)
 
 Configuration options for the Paragraph API client.
 
@@ -16,7 +16,7 @@ Configuration options for the Paragraph API client.
 
 > `optional` **apiKey?**: `string`
 
-Defined in: [src/types.ts:12](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/ea353856e30eeea324d589cf9d3dee88da4d4f47/src/types.ts#L12)
+Defined in: [src/types.ts:12](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7e712bc0791b41c54f277db087b57bff8eaccc5e/src/types.ts#L12)
 
 API key for authenticating protected endpoints.
 Required for creating posts, adding subscribers, and importing subscribers.

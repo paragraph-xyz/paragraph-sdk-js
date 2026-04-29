@@ -34,6 +34,14 @@ async function main() {
     status: "archived",
   });
   console.log("Post archived");
+
+  // Backdate a post by setting publishedAt explicitly.
+  // Once set, the date sticks across re-publishes.
+  await api.posts.update({
+    id: "postId",
+    publishedAt: new Date("2024-01-01T00:00:00Z").getTime(),
+  });
+  console.log("Post backdated");
 }
 
 main().catch(console.error);

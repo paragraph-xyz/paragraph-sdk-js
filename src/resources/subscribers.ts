@@ -91,6 +91,38 @@ export class SubscribersResource {
   }
 
   /**
+   * Removes a subscriber from the publication associated with the API key.
+   * The subscriber is identified by email, wallet, or both. If both are provided,
+   * they must resolve to the same user. This is a hard delete; consider calling
+   * `get()` first to confirm the subscriber exists. Requires an API key.
+   *
+   * @example
+   * ```ts
+   * const api = new ParagraphAPI({ apiKey: "your-api-key" });
+   *
+   * // Remove subscriber by email
+   * await api.subscribers.remove({ email: "user@example.com" });
+   *
+   * // Remove subscriber by wallet
+   * await api.subscribers.remove({ wallet: "0x1234..." });
+   *
+   * // Pass both — must resolve to the same user
+   * await api.subscribers.remove({
+   *   email: "user@example.com",
+   *   wallet: "0x1234...",
+   * });
+   * ```
+   *
+   * @param body - The subscriber to remove. At least one of email or wallet must be provided.
+   * @returns A promise that resolves to the result of the operation.
+   */
+  remove(
+    body: Parameters<ReturnType<typeof getParagraphAPI>["removeSubscriber"]>[0]
+  ) {
+    return this.api.removeSubscriber(body);
+  }
+
+  /**
    * Imports subscribers from a CSV file into the publication associated with the API key.
    * Requires an API key.
    *
