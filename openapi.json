@@ -9742,6 +9742,317 @@
         ]
       }
     },
+    "/v1/emails/send": {
+      "post": {
+        "description": "Send an email from your publication to a list of recipient addresses.\n\n**Eligibility:**\n- Publications must be approved by Paragraph before they can send custom emails. Ineligible publications receive a 403. Eligibility is managed by Paragraph and is not user-configurable.\n\n**Per-recipient filtering:**\n- Malformed addresses and known disposable domains are skipped.\n- Addresses that previously unsubscribed from this publication are skipped as `suppressed`.\n- Skipped recipients are returned in the response; nothing else is delivered to them.\n\n**Delivery:**\n- `body` is treated as Markdown and rendered to HTML server-side.\n- Each recipient receives the email individually (not as a BCC blast) with a mandatory unsubscribe footer.\n- Sends are queued asynchronously; a 200 response means recipients were accepted, not delivered.\n\n**Caps:**\n- Maximum of 10,000 addresses per call (request-level sanity check).",
+        "summary": "Send a custom email",
+        "tags": [
+          "emails"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "subject": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 998,
+                    "description": "Subject line of the email"
+                  },
+                  "body": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100000,
+                    "description": "Email body. Markdown; rendered to HTML server-side. Max 100KB."
+                  },
+                  "emails": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 3,
+                      "maxLength": 254
+                    },
+                    "minItems": 1,
+                    "maxItems": 10000,
+                    "description": "Recipient email addresses (max 10,000). Malformed addresses are returned in `skipped` with `reason: \"invalid\"` rather than rejecting the whole request."
+                  },
+                  "dryRun": {
+                    "type": "boolean",
+                    "description": "If true, run filtering and return the accepted/skipped split without scheduling delivery"
+                  }
+                },
+                "required": [
+                  "subject",
+                  "body",
+                  "emails"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Send request accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accepted": {
+                      "type": "integer",
+                      "description": "Number of recipients queued for delivery (or that would be queued when dryRun is true)"
+                    },
+                    "skipped": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "email": {
+                            "type": "string"
+                          },
+                          "reason": {
+                            "type": "string",
+                            "enum": [
+                              "suppressed",
+                              "invalid",
+                              "scheduling_failed"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "email",
+                          "reason"
+                        ]
+                      },
+                      "description": "Recipients that were rejected, with the reason each one was skipped. `scheduling_failed` means filtering passed but the delivery task could not be queued — retry these addresses."
+                    }
+                  },
+                  "required": [
+                    "accepted",
+                    "skipped"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Publication is not eligible to send custom emails",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Publication not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Publication temporarily can't send through this endpoint. Contact support.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    },
+                    "error": {
+                      "type": "string",
+                      "description": "Technical error details or error code"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "sendCustomEmail",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "send-custom-email",
+            "description": "Send a markdown email from your publication to a list of recipient addresses"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Send an email to a list of recipients",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst result = await api.emails.send({\n  subject: \"Hello from Paragraph\",\n  body: \"# Welcome\\n\\nThanks for reading.\",\n  emails: [\"reader@example.com\"],\n})"
+          },
+          {
+            "lang": "bash",
+            "label": "Send an email using curl",
+            "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/emails/send\" \\\n  -H \"Authorization: Bearer your-api-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"subject\":\"Hello\",\"body\":\"# Hi\",\"emails\":[\"reader@example.com\"]}'"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/v1/api/auth/sessions": {
       "post": {
         "description": "Creates a new browser-based auth session for CLI or other API clients. The returned verification URL should be opened in the user's browser to complete authentication.",
