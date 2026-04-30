@@ -1,6 +1,7 @@
 export { AnalyticsResource } from "./analytics";
 export { AuthResource } from "./auth";
 export { CoinsResource } from "./coins";
+export { EmailsResource } from "./emails";
 export { FeedResource } from "./feed";
 export { MeResource } from "./me";
 export { PostsResource } from "./posts";

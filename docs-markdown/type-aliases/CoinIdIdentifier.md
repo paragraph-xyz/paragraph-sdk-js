@@ -8,7 +8,7 @@
 
 > **CoinIdIdentifier** = `object`
 
-Defined in: [src/types.ts:107](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7e712bc0791b41c54f277db087b57bff8eaccc5e/src/types.ts#L107)
+Defined in: [src/types.ts:107](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d989030ad9d3ed49131b9e29152befc83c85808d/src/types.ts#L107)
 
 Identifier for getting a single coin by ID.
 
@@ -18,4 +18,4 @@ Identifier for getting a single coin by ID.
 
 > **id**: `string`
 
-Defined in: [src/types.ts:107](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7e712bc0791b41c54f277db087b57bff8eaccc5e/src/types.ts#L107)
+Defined in: [src/types.ts:107](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d989030ad9d3ed49131b9e29152befc83c85808d/src/types.ts#L107)

@@ -6,6 +6,7 @@ import {
   AnalyticsResource,
   AuthResource,
   CoinsResource,
+  EmailsResource,
   FeedResource,
   MeResource,
   PostsResource,
@@ -71,6 +72,13 @@ import type { ParagraphAPIOptions } from "./types";
  * const coins = await api.search.coins("test");
  * const blogs = await api.search.blogs("crypto");
  *
+ * // Emails - send a custom email to a list of recipients (requires API key)
+ * const { accepted, skipped } = await apiWithAuth.emails.send({
+ *   subject: "Hello from Paragraph",
+ *   body: "# Welcome\n\nThanks for reading.",
+ *   emails: ["reader@example.com"],
+ * });
+ *
  * // Analytics - SQL queries against your publication's analytics schema (requires API key)
  * const { rows } = await apiWithAuth.analytics.query({
  *   sql: "SELECT title, open_rate FROM post_analytics_summary ORDER BY total_views DESC LIMIT 5",
@@ -113,6 +121,9 @@ export class ParagraphAPI {
   /** Coins resource */
   public readonly coins: CoinsResource;
 
+  /** Emails resource - send custom emails to a list of recipients */
+  public readonly emails: EmailsResource;
+
   /** Search resource */
   public readonly search: SearchResource;
 
@@ -140,6 +151,7 @@ export class ParagraphAPI {
     this.feed = new FeedResource(this.api);
     this.users = new UsersResource(this.api);
     this.coins = new CoinsResource(this.api);
+    this.emails = new EmailsResource(this.api);
     this.search = new SearchResource(this.api);
     this.me = new MeResource(this.api);
   }

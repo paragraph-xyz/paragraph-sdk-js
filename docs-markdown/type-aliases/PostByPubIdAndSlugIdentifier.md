@@ -8,7 +8,7 @@
 
 > **PostByPubIdAndSlugIdentifier** = `object`
 
-Defined in: [src/types.ts:57](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7e712bc0791b41c54f277db087b57bff8eaccc5e/src/types.ts#L57)
+Defined in: [src/types.ts:57](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d989030ad9d3ed49131b9e29152befc83c85808d/src/types.ts#L57)
 
 Identifier for getting a single post by publication ID and post slug.
 
@@ -18,7 +18,7 @@ Identifier for getting a single post by publication ID and post slug.
 
 > **postSlug**: `string`
 
-Defined in: [src/types.ts:59](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7e712bc0791b41c54f277db087b57bff8eaccc5e/src/types.ts#L59)
+Defined in: [src/types.ts:59](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d989030ad9d3ed49131b9e29152befc83c85808d/src/types.ts#L59)
 
 ***
 
@@ -26,4 +26,4 @@ Defined in: [src/types.ts:59](https://github.com/paragraph-xyz/paragraph-sdk-js/
 
 > **publicationId**: `string`
 
-Defined in: [src/types.ts:58](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/7e712bc0791b41c54f277db087b57bff8eaccc5e/src/types.ts#L58)
+Defined in: [src/types.ts:58](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d989030ad9d3ed49131b9e29152befc83c85808d/src/types.ts#L58)
