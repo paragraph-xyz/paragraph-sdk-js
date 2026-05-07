@@ -217,10 +217,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -248,10 +244,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -649,10 +641,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -680,10 +668,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -711,10 +695,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -742,10 +722,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -773,10 +749,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -1038,10 +1010,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -1069,10 +1037,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -1317,10 +1281,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -1348,10 +1308,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -1435,10 +1391,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -1466,10 +1418,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -1994,10 +1942,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -2025,10 +1969,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -2318,10 +2258,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -2349,10 +2285,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -2641,10 +2573,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -2672,10 +2600,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -2912,10 +2836,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -2943,10 +2863,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -3047,13 +2963,12 @@
                     "description": "Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive"
                   },
                   "scheduledAt": {
+                    "description": "Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish. The value 0 is treated the same as omitting the field (no scheduling request); note that on an already-scheduled post, omitting `scheduledAt` while changing `status` cancels the schedule.",
                     "type": [
                       "integer",
                       "null"
                     ],
-                    "minimum": 0,
-                    "exclusiveMinimum": 0,
-                    "description": "Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish."
+                    "minimum": 0
                   },
                   "sendNewsletter": {
                     "oneOf": [
@@ -3123,10 +3038,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -3154,10 +3065,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -3185,10 +3092,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -3216,10 +3119,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -3335,10 +3234,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -3366,10 +3261,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -3397,10 +3288,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -3658,10 +3545,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -3689,10 +3572,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -3942,10 +3821,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -3973,10 +3848,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -4090,10 +3961,9 @@
                     "description": "Optional array of category tags for the post. Can also be a comma-separated string."
                   },
                   "scheduledAt": {
+                    "description": "Optional Unix timestamp (milliseconds) to schedule first-publish of the post at a future time. Must be in the future. Cannot be combined with status: 'draft'. When set, the post is created and queued to publish (and send newsletter, if requested) at the specified time. Pass 0 or omit the field for an unscheduled post.",
                     "type": "integer",
-                    "minimum": 0,
-                    "exclusiveMinimum": 0,
-                    "description": "Optional Unix timestamp (milliseconds) to schedule first-publish of the post at a future time. Must be in the future. Cannot be combined with status: 'draft'. When set, the post is created and queued to publish (and send newsletter, if requested) at the specified time."
+                    "minimum": 0
                   }
                 },
                 "required": [
@@ -4151,10 +4021,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -4182,10 +4048,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -4213,10 +4075,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -4244,10 +4102,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -4559,10 +4413,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -4590,10 +4440,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -4708,13 +4554,12 @@
                     "description": "Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive"
                   },
                   "scheduledAt": {
+                    "description": "Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish. The value 0 is treated the same as omitting the field (no scheduling request); note that on an already-scheduled post, omitting `scheduledAt` while changing `status` cancels the schedule.",
                     "type": [
                       "integer",
                       "null"
                     ],
-                    "minimum": 0,
-                    "exclusiveMinimum": 0,
-                    "description": "Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish."
+                    "minimum": 0
                   },
                   "sendNewsletter": {
                     "oneOf": [
@@ -4784,10 +4629,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -4815,10 +4656,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -4846,10 +4683,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -4877,10 +4710,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -4983,10 +4812,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5014,10 +4839,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5045,10 +4866,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5151,10 +4968,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5182,10 +4995,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5213,10 +5022,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5244,10 +5049,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5492,10 +5293,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5523,10 +5320,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5667,10 +5460,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5698,10 +5487,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5833,10 +5618,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -5864,10 +5645,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -6094,10 +5871,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -6125,10 +5898,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -6356,10 +6125,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -6387,10 +6152,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -6542,10 +6303,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -6573,10 +6330,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -6729,10 +6482,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -6760,10 +6509,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -6877,10 +6622,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -6908,10 +6649,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7019,10 +6756,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7050,10 +6783,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7160,10 +6889,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7191,10 +6916,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7302,10 +7023,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7333,10 +7050,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7423,10 +7136,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7454,10 +7163,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7551,10 +7256,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7582,10 +7283,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7813,10 +7510,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7844,10 +7537,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7939,10 +7628,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -7970,10 +7655,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8001,10 +7682,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8032,10 +7709,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8148,10 +7821,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8179,10 +7848,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8210,10 +7875,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8241,10 +7902,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8356,10 +8013,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8387,10 +8040,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8418,10 +8067,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8449,10 +8094,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8597,10 +8238,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8628,10 +8265,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -8926,10 +8559,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9136,10 +8765,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9303,10 +8928,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9435,10 +9056,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9466,10 +9083,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9497,10 +9110,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9528,10 +9137,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9559,10 +9164,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9669,10 +9270,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9700,10 +9297,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9856,10 +9449,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9887,10 +9476,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9918,10 +9503,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9949,10 +9530,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -9980,10 +9557,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -10011,10 +9584,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -10131,10 +9700,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -10267,10 +9832,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
@@ -10340,10 +9901,6 @@
                     "msg": {
                       "type": "string",
                       "description": "Human-readable error message"
-                    },
-                    "error": {
-                      "type": "string",
-                      "description": "Technical error details or error code"
                     }
                   },
                   "required": [
