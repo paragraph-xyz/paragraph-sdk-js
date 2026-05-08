@@ -22,6 +22,26 @@ Category tags for the post. Can also be a comma-separated string.
 
 ***
 
+### clearImage?
+
+> `optional` **clearImage?**: `boolean`
+
+Defined in: src/generated/models/updatePostBySlugBody.ts:62
+
+When true, removes the post's existing cover/hero image. Ignored if imageUrl is also provided.
+
+***
+
+### imageUrl?
+
+> `optional` **imageUrl?**: `string`
+
+Defined in: src/generated/models/updatePostBySlugBody.ts:60
+
+URL of an image to set as the post's cover/hero image. The image is fetched, re-hosted on Paragraph's CDN, and a placeholder is generated. Pass clearImage: true instead to remove the existing cover.
+
+***
+
 ### markdown?
 
 > `optional` **markdown?**: `string`
@@ -66,7 +86,7 @@ Unix timestamp (milliseconds) to set as the post's publish date. Once set, the d
 
 Defined in: src/generated/models/updatePostBySlugBody.ts:51
 
-Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish.
+Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish. The value 0 is treated the same as omitting the field (no scheduling request); note that on an already-scheduled post, omitting `scheduledAt` while changing `status` cancels the schedule.
 
 #### Minimum
 

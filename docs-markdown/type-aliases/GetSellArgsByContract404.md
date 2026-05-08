@@ -24,16 +24,6 @@ OpenAPI spec version: 1.0.0
 
 ## Properties
 
-### error?
-
-> `optional` **error?**: `string`
-
-Defined in: src/generated/models/getSellArgsByContract404.ts:21
-
-Technical error details or error code
-
-***
-
 ### msg
 
 > **msg**: `string`

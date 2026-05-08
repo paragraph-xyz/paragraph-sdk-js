@@ -24,16 +24,6 @@ OpenAPI spec version: 1.0.0
 
 ## Properties
 
-### error?
-
-> `optional` **error?**: `string`
-
-Defined in: src/generated/models/getMe401.ts:21
-
-Technical error details or error code
-
-***
-
 ### msg
 
 > **msg**: `string`

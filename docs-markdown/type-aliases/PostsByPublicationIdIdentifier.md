@@ -8,7 +8,7 @@
 
 > **PostsByPublicationIdIdentifier** = `object`
 
-Defined in: [src/types.ts:73](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d989030ad9d3ed49131b9e29152befc83c85808d/src/types.ts#L73)
+Defined in: [src/types.ts:73](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/db15d993366bd62616ed96be00bdac784280a436/src/types.ts#L73)
 
 Identifier for getting a list of posts from a publication.
 
@@ -18,4 +18,4 @@ Identifier for getting a list of posts from a publication.
 
 > **publicationId**: `string`
 
-Defined in: [src/types.ts:73](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/d989030ad9d3ed49131b9e29152befc83c85808d/src/types.ts#L73)
+Defined in: [src/types.ts:73](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/db15d993366bd62616ed96be00bdac784280a436/src/types.ts#L73)
