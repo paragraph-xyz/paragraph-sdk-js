@@ -3111,6 +3111,33 @@
               }
             }
           },
+          "409": {
+            "description": "Conflict - the post was edited in the writer's editor after the revision you based this edit on. Re-read the current version and re-apply your change.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
           "500": {
             "description": "Internal server error",
             "content": {
@@ -4686,6 +4713,33 @@
           },
           "404": {
             "description": "Post not found in your publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict - the post was edited in the writer's editor after the revision you based this edit on. Re-read the current version and re-apply your change.",
             "content": {
               "application/json": {
                 "schema": {
