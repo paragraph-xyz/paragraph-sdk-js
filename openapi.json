@@ -2916,7 +2916,11 @@
                 "properties": {
                   "markdown": {
                     "type": "string",
-                    "description": "Post content in Markdown format. Replaces full content — rich blocks created in the editor will be lost"
+                    "description": "Post content in Markdown format. Replaces the full body. Markdown cannot represent buttons or linked images — if the post has any, editing with `markdown` drops them. Use `bodyJson` instead for those posts. Provide `markdown` OR `bodyJson`, not both."
+                  },
+                  "bodyJson": {
+                    "type": "string",
+                    "description": "Post content as a Tiptap document, JSON-stringified (e.g. '{\"type\":\"doc\",\"content\":[...]}'). Use this instead of `markdown` when the body needs blocks markdown can't express — Subscribe/Share/custom buttons or linked images — so they are preserved. Replaces the full body and is validated server-side; an invalid document is rejected with a node-pathed error. Provide `markdown` OR `bodyJson`, not both."
                   },
                   "title": {
                     "type": "string",
@@ -3914,7 +3918,7 @@
     },
     "/v1/posts": {
       "post": {
-        "description": "Create a new post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Requirements:**\n- `markdown` field is required and will be converted to TipTap JSON format\n- `title` field is required\n\n**Behavior:**\n- The post will be created as published by default. Set `status` to `\"draft\"` to create a draft instead\n- If `sendNewsletter` is true, an email will be sent to all subscribers when the post publishes\n- Set `scheduledAt` (Unix timestamp in milliseconds) to schedule first-publish for a future time. Must be in the future and at most 30 days out. Scheduling cannot be combined with `status: \"draft\"`. When scheduled, the response `status` is `\"scheduled\"` and the post publishes (plus sends newsletter, if requested) at the scheduled time.",
+        "description": "Create a new post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Requirements:**\n- `title` field is required\n- Provide content as either `markdown` (converted to TipTap JSON) OR `bodyJson` (a Tiptap document for content with buttons/linked images) — exactly one is required, not both\n\n**Behavior:**\n- The post will be created as published by default. Set `status` to `\"draft\"` to create a draft instead\n- If `sendNewsletter` is true, an email will be sent to all subscribers when the post publishes\n- Set `scheduledAt` (Unix timestamp in milliseconds) to schedule first-publish for a future time. Must be in the future and at most 30 days out. Scheduling cannot be combined with `status: \"draft\"`. When scheduled, the response `status` is `\"scheduled\"` and the post publishes (plus sends newsletter, if requested) at the scheduled time.",
         "summary": "Create a new post",
         "tags": [
           "posts"
@@ -3929,7 +3933,11 @@
                 "properties": {
                   "markdown": {
                     "type": "string",
-                    "description": "Post content in Markdown format"
+                    "description": "Post content in Markdown format. Provide `markdown` OR `bodyJson`, not both. Markdown cannot represent buttons or linked images — use `bodyJson` for those."
+                  },
+                  "bodyJson": {
+                    "type": "string",
+                    "description": "Post content as a Tiptap document, JSON-stringified (e.g. '{\"type\":\"doc\",\"content\":[...]}'). Use instead of `markdown` when the body needs Subscribe/Share/custom buttons or linked images. Validated server-side; an invalid document is rejected. Provide `markdown` OR `bodyJson`, not both."
                   },
                   "title": {
                     "type": "string",
@@ -4003,7 +4011,6 @@
                   }
                 },
                 "required": [
-                  "markdown",
                   "title"
                 ]
               }
@@ -4543,7 +4550,11 @@
                 "properties": {
                   "markdown": {
                     "type": "string",
-                    "description": "Post content in Markdown format. Replaces full content — rich blocks created in the editor will be lost"
+                    "description": "Post content in Markdown format. Replaces the full body. Markdown cannot represent buttons or linked images — if the post has any, editing with `markdown` drops them. Use `bodyJson` instead for those posts. Provide `markdown` OR `bodyJson`, not both."
+                  },
+                  "bodyJson": {
+                    "type": "string",
+                    "description": "Post content as a Tiptap document, JSON-stringified (e.g. '{\"type\":\"doc\",\"content\":[...]}'). Use this instead of `markdown` when the body needs blocks markdown can't express — Subscribe/Share/custom buttons or linked images — so they are preserved. Replaces the full body and is validated server-side; an invalid document is rejected with a node-pathed error. Provide `markdown` OR `bodyJson`, not both."
                   },
                   "title": {
                     "type": "string",
