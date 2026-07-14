@@ -2916,11 +2916,11 @@
                 "properties": {
                   "markdown": {
                     "type": "string",
-                    "description": "Post content in Markdown format. Replaces the full body. Markdown cannot represent buttons or linked images — if the post has any, editing with `markdown` drops them. Use `bodyJson` instead for those posts. Provide `markdown` OR `bodyJson`, not both."
+                    "description": "Post content in Markdown format. Replaces the FULL body. Markdown cannot represent buttons, linked images, or embedded media (videos, tweets, link cards) — replacing a post that has any of those with `markdown` drops them. Use `bodyJson` (round-tripped from get-post) to edit an existing post so nothing is lost. Provide `markdown` OR `bodyJson`, not both."
                   },
                   "bodyJson": {
                     "type": "string",
-                    "description": "Post content as a Tiptap document, JSON-stringified (e.g. '{\"type\":\"doc\",\"content\":[...]}'). Use this instead of `markdown` when the body needs blocks markdown can't express — Subscribe/Share/custom buttons or linked images — so they are preserved. Replaces the full body and is validated server-side; an invalid document is rejected with a node-pathed error. Provide `markdown` OR `bodyJson`, not both."
+                    "description": "Post content as a Tiptap document, JSON-stringified (e.g. '{\"type\":\"doc\",\"content\":[...]}'). This accepts ANY Tiptap node the editor supports — including videos, tweets, link cards, callouts, and buttons — so editing a post by round-tripping the `json` returned by get-post preserves everything markdown would drop. Replaces the FULL body; node-type validity is checked by the renderer and an unusable document is rejected. Provide `markdown` OR `bodyJson`, not both."
                   },
                   "title": {
                     "type": "string",
@@ -3116,7 +3116,7 @@
             }
           },
           "409": {
-            "description": "Conflict - the post was edited in the writer's editor after the revision you based this edit on. Re-read the current version and re-apply your change.",
+            "description": "Conflict - the body change was refused because you weren't working from the post's current content: either you didn't call get-post before replacing the body, or the writer edited the post in the editor since you read it. Call get-post to read the current version, re-apply your change on it, and retry.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4550,11 +4550,11 @@
                 "properties": {
                   "markdown": {
                     "type": "string",
-                    "description": "Post content in Markdown format. Replaces the full body. Markdown cannot represent buttons or linked images — if the post has any, editing with `markdown` drops them. Use `bodyJson` instead for those posts. Provide `markdown` OR `bodyJson`, not both."
+                    "description": "Post content in Markdown format. Replaces the FULL body. Markdown cannot represent buttons, linked images, or embedded media (videos, tweets, link cards) — replacing a post that has any of those with `markdown` drops them. Use `bodyJson` (round-tripped from get-post) to edit an existing post so nothing is lost. Provide `markdown` OR `bodyJson`, not both."
                   },
                   "bodyJson": {
                     "type": "string",
-                    "description": "Post content as a Tiptap document, JSON-stringified (e.g. '{\"type\":\"doc\",\"content\":[...]}'). Use this instead of `markdown` when the body needs blocks markdown can't express — Subscribe/Share/custom buttons or linked images — so they are preserved. Replaces the full body and is validated server-side; an invalid document is rejected with a node-pathed error. Provide `markdown` OR `bodyJson`, not both."
+                    "description": "Post content as a Tiptap document, JSON-stringified (e.g. '{\"type\":\"doc\",\"content\":[...]}'). This accepts ANY Tiptap node the editor supports — including videos, tweets, link cards, callouts, and buttons — so editing a post by round-tripping the `json` returned by get-post preserves everything markdown would drop. Replaces the FULL body; node-type validity is checked by the renderer and an unusable document is rejected. Provide `markdown` OR `bodyJson`, not both."
                   },
                   "title": {
                     "type": "string",
@@ -4750,7 +4750,7 @@
             }
           },
           "409": {
-            "description": "Conflict - the post was edited in the writer's editor after the revision you based this edit on. Re-read the current version and re-apply your change.",
+            "description": "Conflict - the body change was refused because you weren't working from the post's current content: either you didn't call get-post before replacing the body, or the writer edited the post in the editor since you read it. Call get-post to read the current version, re-apply your change on it, and retry.",
             "content": {
               "application/json": {
                 "schema": {
