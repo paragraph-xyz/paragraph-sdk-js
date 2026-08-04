@@ -5374,6 +5374,16 @@
                         }
                       },
                       "description": "Owner-side email notification toggles"
+                    },
+                    "plan": {
+                      "type": "string",
+                      "enum": [
+                        "free",
+                        "starter",
+                        "growth",
+                        "scale"
+                      ],
+                      "description": "Subscription plan of the publication. Only returned on /v1/me."
                     }
                   },
                   "required": [
