@@ -131,18 +131,8 @@
                       "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                     },
                     "disableComments": {
-                      "oneOf": [
-                        {
-                          "type": "boolean"
-                        },
-                        {
-                          "type": "string",
-                          "enum": [
-                            "on-platform"
-                          ]
-                        }
-                      ],
-                      "description": "Comment visibility. true disables all comments, false enables them, 'on-platform' hides on-Paragraph comments while keeping Farcaster comments."
+                      "type": "boolean",
+                      "description": "Comment visibility. true disables comments and false enables them."
                     },
                     "disableHighlights": {
                       "type": "boolean",
@@ -377,18 +367,8 @@
                     "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                   },
                   "disableComments": {
-                    "oneOf": [
-                      {
-                        "type": "boolean"
-                      },
-                      {
-                        "type": "string",
-                        "enum": [
-                          "on-platform"
-                        ]
-                      }
-                    ],
-                    "description": "Comment visibility. true disables all comments, false enables them, 'on-platform' hides on-Paragraph comments while keeping Farcaster comments."
+                    "type": "boolean",
+                    "description": "Comment visibility. true disables comments and false enables them."
                   },
                   "disableHighlights": {
                     "type": "boolean",
@@ -555,18 +535,8 @@
                       "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                     },
                     "disableComments": {
-                      "oneOf": [
-                        {
-                          "type": "boolean"
-                        },
-                        {
-                          "type": "string",
-                          "enum": [
-                            "on-platform"
-                          ]
-                        }
-                      ],
-                      "description": "Comment visibility. true disables all comments, false enables them, 'on-platform' hides on-Paragraph comments while keeping Farcaster comments."
+                      "type": "boolean",
+                      "description": "Comment visibility. true disables comments and false enables them."
                     },
                     "disableHighlights": {
                       "type": "boolean",
@@ -924,18 +894,8 @@
                       "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                     },
                     "disableComments": {
-                      "oneOf": [
-                        {
-                          "type": "boolean"
-                        },
-                        {
-                          "type": "string",
-                          "enum": [
-                            "on-platform"
-                          ]
-                        }
-                      ],
-                      "description": "Comment visibility. true disables all comments, false enables them, 'on-platform' hides on-Paragraph comments while keeping Farcaster comments."
+                      "type": "boolean",
+                      "description": "Comment visibility. true disables comments and false enables them."
                     },
                     "disableHighlights": {
                       "type": "boolean",
@@ -1195,18 +1155,8 @@
                       "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                     },
                     "disableComments": {
-                      "oneOf": [
-                        {
-                          "type": "boolean"
-                        },
-                        {
-                          "type": "string",
-                          "enum": [
-                            "on-platform"
-                          ]
-                        }
-                      ],
-                      "description": "Comment visibility. true disables all comments, false enables them, 'on-platform' hides on-Paragraph comments while keeping Farcaster comments."
+                      "type": "boolean",
+                      "description": "Comment visibility. true disables comments and false enables them."
                     },
                     "disableHighlights": {
                       "type": "boolean",
@@ -1592,29 +1542,6 @@
                                       "type": "string",
                                       "maxLength": 500,
                                       "description": "Brief biography of the user (max 500 characters)"
-                                    },
-                                    "farcaster": {
-                                      "type": "object",
-                                      "properties": {
-                                        "username": {
-                                          "type": "string",
-                                          "description": "Farcaster username"
-                                        },
-                                        "displayName": {
-                                          "type": "string",
-                                          "description": "Farcaster display name"
-                                        },
-                                        "fid": {
-                                          "type": "number",
-                                          "description": "Farcaster fid"
-                                        }
-                                      },
-                                      "required": [
-                                        "username",
-                                        "displayName",
-                                        "fid"
-                                      ],
-                                      "description": "Farcaster profile information, if linked"
                                     }
                                   },
                                   "required": [
@@ -1760,18 +1687,8 @@
                                 "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                               },
                               "disableComments": {
-                                "oneOf": [
-                                  {
-                                    "type": "boolean"
-                                  },
-                                  {
-                                    "type": "string",
-                                    "enum": [
-                                      "on-platform"
-                                    ]
-                                  }
-                                ],
-                                "description": "Comment visibility. true disables all comments, false enables them, 'on-platform' hides on-Paragraph comments while keeping Farcaster comments."
+                                "type": "boolean",
+                                "description": "Comment visibility. true disables comments and false enables them."
                               },
                               "disableHighlights": {
                                 "type": "boolean",
@@ -1856,29 +1773,6 @@
                                 "type": "string",
                                 "maxLength": 500,
                                 "description": "Brief biography of the user (max 500 characters)"
-                              },
-                              "farcaster": {
-                                "type": "object",
-                                "properties": {
-                                  "username": {
-                                    "type": "string",
-                                    "description": "Farcaster username"
-                                  },
-                                  "displayName": {
-                                    "type": "string",
-                                    "description": "Farcaster display name"
-                                  },
-                                  "fid": {
-                                    "type": "number",
-                                    "description": "Farcaster fid"
-                                  }
-                                },
-                                "required": [
-                                  "username",
-                                  "displayName",
-                                  "fid"
-                                ],
-                                "description": "Farcaster profile information, if linked"
                               }
                             },
                             "required": [
@@ -2150,29 +2044,6 @@
                                   "type": "string",
                                   "maxLength": 500,
                                   "description": "Brief biography of the user (max 500 characters)"
-                                },
-                                "farcaster": {
-                                  "type": "object",
-                                  "properties": {
-                                    "username": {
-                                      "type": "string",
-                                      "description": "Farcaster username"
-                                    },
-                                    "displayName": {
-                                      "type": "string",
-                                      "description": "Farcaster display name"
-                                    },
-                                    "fid": {
-                                      "type": "number",
-                                      "description": "Farcaster fid"
-                                    }
-                                  },
-                                  "required": [
-                                    "username",
-                                    "displayName",
-                                    "fid"
-                                  ],
-                                  "description": "Farcaster profile information, if linked"
                                 }
                               },
                               "required": [
@@ -2465,29 +2336,6 @@
                                   "type": "string",
                                   "maxLength": 500,
                                   "description": "Brief biography of the user (max 500 characters)"
-                                },
-                                "farcaster": {
-                                  "type": "object",
-                                  "properties": {
-                                    "username": {
-                                      "type": "string",
-                                      "description": "Farcaster username"
-                                    },
-                                    "displayName": {
-                                      "type": "string",
-                                      "description": "Farcaster display name"
-                                    },
-                                    "fid": {
-                                      "type": "number",
-                                      "description": "Farcaster fid"
-                                    }
-                                  },
-                                  "required": [
-                                    "username",
-                                    "displayName",
-                                    "fid"
-                                  ],
-                                  "description": "Farcaster profile information, if linked"
                                 }
                               },
                               "required": [
@@ -2756,29 +2604,6 @@
                             "type": "string",
                             "maxLength": 500,
                             "description": "Brief biography of the user (max 500 characters)"
-                          },
-                          "farcaster": {
-                            "type": "object",
-                            "properties": {
-                              "username": {
-                                "type": "string",
-                                "description": "Farcaster username"
-                              },
-                              "displayName": {
-                                "type": "string",
-                                "description": "Farcaster display name"
-                              },
-                              "fid": {
-                                "type": "number",
-                                "description": "Farcaster fid"
-                              }
-                            },
-                            "required": [
-                              "username",
-                              "displayName",
-                              "fid"
-                            ],
-                            "description": "Farcaster profile information, if linked"
                           }
                         },
                         "required": [
@@ -3514,29 +3339,6 @@
                             "type": "string",
                             "maxLength": 500,
                             "description": "Brief biography of the user (max 500 characters)"
-                          },
-                          "farcaster": {
-                            "type": "object",
-                            "properties": {
-                              "username": {
-                                "type": "string",
-                                "description": "Farcaster username"
-                              },
-                              "displayName": {
-                                "type": "string",
-                                "description": "Farcaster display name"
-                              },
-                              "fid": {
-                                "type": "number",
-                                "description": "Farcaster fid"
-                              }
-                            },
-                            "required": [
-                              "username",
-                              "displayName",
-                              "fid"
-                            ],
-                            "description": "Farcaster profile information, if linked"
                           }
                         },
                         "required": [
@@ -3790,29 +3592,6 @@
                             "type": "string",
                             "maxLength": 500,
                             "description": "Brief biography of the user (max 500 characters)"
-                          },
-                          "farcaster": {
-                            "type": "object",
-                            "properties": {
-                              "username": {
-                                "type": "string",
-                                "description": "Farcaster username"
-                              },
-                              "displayName": {
-                                "type": "string",
-                                "description": "Farcaster display name"
-                              },
-                              "fid": {
-                                "type": "number",
-                                "description": "Farcaster fid"
-                              }
-                            },
-                            "required": [
-                              "username",
-                              "displayName",
-                              "fid"
-                            ],
-                            "description": "Farcaster profile information, if linked"
                           }
                         },
                         "required": [
@@ -4366,29 +4145,6 @@
                                   "type": "string",
                                   "maxLength": 500,
                                   "description": "Brief biography of the user (max 500 characters)"
-                                },
-                                "farcaster": {
-                                  "type": "object",
-                                  "properties": {
-                                    "username": {
-                                      "type": "string",
-                                      "description": "Farcaster username"
-                                    },
-                                    "displayName": {
-                                      "type": "string",
-                                      "description": "Farcaster display name"
-                                    },
-                                    "fid": {
-                                      "type": "number",
-                                      "description": "Farcaster fid"
-                                    }
-                                  },
-                                  "required": [
-                                    "username",
-                                    "displayName",
-                                    "fid"
-                                  ],
-                                  "description": "Farcaster profile information, if linked"
                                 }
                               },
                               "required": [
@@ -5317,18 +5073,8 @@
                       "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                     },
                     "disableComments": {
-                      "oneOf": [
-                        {
-                          "type": "boolean"
-                        },
-                        {
-                          "type": "string",
-                          "enum": [
-                            "on-platform"
-                          ]
-                        }
-                      ],
-                      "description": "Comment visibility. true disables all comments, false enables them, 'on-platform' hides on-Paragraph comments while keeping Farcaster comments."
+                      "type": "boolean",
+                      "description": "Comment visibility. true disables comments and false enables them."
                     },
                     "disableHighlights": {
                       "type": "boolean",
@@ -5530,29 +5276,6 @@
                       "type": "string",
                       "maxLength": 500,
                       "description": "Brief biography of the user (max 500 characters)"
-                    },
-                    "farcaster": {
-                      "type": "object",
-                      "properties": {
-                        "username": {
-                          "type": "string",
-                          "description": "Farcaster username"
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "description": "Farcaster display name"
-                        },
-                        "fid": {
-                          "type": "number",
-                          "description": "Farcaster fid"
-                        }
-                      },
-                      "required": [
-                        "username",
-                        "displayName",
-                        "fid"
-                      ],
-                      "description": "Farcaster profile information, if linked"
                     }
                   },
                   "required": [
@@ -5688,29 +5411,6 @@
                       "type": "string",
                       "maxLength": 500,
                       "description": "Brief biography of the user (max 500 characters)"
-                    },
-                    "farcaster": {
-                      "type": "object",
-                      "properties": {
-                        "username": {
-                          "type": "string",
-                          "description": "Farcaster username"
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "description": "Farcaster display name"
-                        },
-                        "fid": {
-                          "type": "number",
-                          "description": "Farcaster fid"
-                        }
-                      },
-                      "required": [
-                        "username",
-                        "displayName",
-                        "fid"
-                      ],
-                      "description": "Farcaster profile information, if linked"
                     }
                   },
                   "required": [
