@@ -4829,6 +4829,1603 @@
         ]
       }
     },
+    "/v1/content": {
+      "post": {
+        "description": "Save a finished piece of short-form content — an X post or thread, a LinkedIn post, a one-off email, or an X Article — to your publication's library.\n\n**What this does:**\n- The piece is saved as a draft and shows up in the Paragraph app under Content, where you can edit it and send it.\n- Nothing is posted, emailed, or scheduled. Sending happens in the app, so a draft you upload can't go out without you.\n- Long-form Paragraph posts are a different resource — use `POST /v1/posts` for those.\n\n**The body:**\n- `body` carries the artifact itself, in the shape its kind uses (see the field descriptions below).\n- It's validated the same way the Paragraph app validates it, so an X thread over 280 characters an entry, or an Article missing its headline, comes back with the same explanation you'd see in the app.\n- Drafts created here are text-only. Media has to be uploaded to X or LinkedIn first, which the API can't do yet.",
+        "summary": "Create a draft",
+        "tags": [
+          "content"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "tweet",
+                      "linkedin",
+                      "newsletter",
+                      "x_article"
+                    ],
+                    "description": "What kind of piece this is"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "description": "What this piece is called in your library. Sentence case, no trailing period. Not published anywhere — for an X Article headline, use `body.title`."
+                  },
+                  "body": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "The post's text. `tweet`: a single tweet, at most 280 characters — use `tweets` for a thread and never send both. `linkedin`: the post body."
+                      },
+                      "tweets": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "`tweet` only. One entry per tweet, in posting order, each at most 280 characters. Never concatenate a thread into one entry."
+                      },
+                      "subject": {
+                        "type": "string",
+                        "description": "`newsletter` only. Subject line."
+                      },
+                      "preheader": {
+                        "type": "string",
+                        "description": "`newsletter` only. Optional preview line shown after the subject."
+                      },
+                      "body": {
+                        "type": "string",
+                        "description": "`newsletter`: the email body. `x_article`: the article's full CommonMark markdown."
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "`x_article` only. The headline as published on X. Separate from the piece's `title`, which only names it in your library."
+                      },
+                      "canonicalUrl": {
+                        "type": "string",
+                        "description": "`x_article` only. The original post this Article is a version of. It must also appear as a markdown link inside `body`."
+                      },
+                      "media": {
+                        "readOnly": true,
+                        "description": "Not accepted. Media has to be uploaded to the destination platform first, which the API can't do yet; sending this field is rejected."
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "The artifact itself, in the shape this kind uses"
+                  }
+                },
+                "required": [
+                  "kind",
+                  "title",
+                  "body"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Draft created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for this piece of content"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "description": "What this piece is: `tweet`, `linkedin`, `newsletter`, or `x_article`"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "What this piece is called in your library"
+                    },
+                    "excerpt": {
+                      "type": "string",
+                      "description": "First readable line of the body, for listing views"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "draft",
+                        "published",
+                        "archived"
+                      ],
+                      "description": "Whether this piece has been delivered, is still a draft, or was archived"
+                    },
+                    "scheduled": {
+                      "type": "boolean",
+                      "description": "Whether a scheduled send is queued against this piece"
+                    },
+                    "lockedReason": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Why this piece can't be edited right now, or null when it can. A queued or in-flight send locks the words, because they go out exactly as written."
+                    },
+                    "publishedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "ISO 8601 timestamp of the first delivery, or null"
+                    },
+                    "archivedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "ISO 8601 timestamp of when this piece was archived, or null"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of creation"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of the last change"
+                    },
+                    "body": {
+                      "type": "object",
+                      "additionalProperties": {},
+                      "description": "The artifact itself, in the shape its kind uses"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "kind",
+                    "title",
+                    "excerpt",
+                    "status",
+                    "scheduled",
+                    "lockedReason",
+                    "publishedAt",
+                    "archivedAt",
+                    "createdAt",
+                    "updatedAt",
+                    "body"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The draft is missing content or doesn't match its kind",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Publication not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createContent",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "create-content",
+            "description": "Save an X post, LinkedIn post, newsletter, or X Article as a draft in a publication's library"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Draft an X thread",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst draft = await api.content.create({\n  kind: \"tweet\",\n  title: \"Thread on writing in public\",\n  body: { tweets: [\"Writing in public changes what you write.\", \"Here's what changed for me.\"] },\n})"
+          },
+          {
+            "lang": "typescript",
+            "label": "Draft a newsletter",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst draft = await api.content.create({\n  kind: \"newsletter\",\n  title: \"October update\",\n  body: { subject: \"What we shipped in October\", body: \"Hi everyone,\" },\n})"
+          },
+          {
+            "lang": "bash",
+            "label": "Draft a LinkedIn post using curl",
+            "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/content\" \\\n  -H \"Authorization: Bearer your-api-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"kind\":\"linkedin\",\"title\":\"Launch note\",\"body\":{\"text\":\"We shipped it.\"}}'"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieve a paginated list of the short-form content in your publication's library, newest activity first. The publication is identified by the API key.\n\nFilter with `kind` and `status`. `status` defaults to `all`, which is everything except the pieces you've archived — a piece that was delivered stays listed whether or not it was archived afterwards.\n\nBodies aren't included; fetch a single piece to read one.",
+        "summary": "List your drafted content",
+        "tags": [
+          "content"
+        ],
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Cursor for pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of items to return (1-50, default: 20)",
+            "schema": {
+              "default": 20,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "description": "Filter by content kind",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "tweet",
+                "linkedin",
+                "newsletter",
+                "x_article"
+              ]
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by lifecycle. `all` (default) is drafts plus delivered pieces; `archived` is the pieces you've put away and never delivered.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "draft",
+                "published",
+                "archived"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique identifier for this piece of content"
+                          },
+                          "kind": {
+                            "type": "string",
+                            "description": "What this piece is: `tweet`, `linkedin`, `newsletter`, or `x_article`"
+                          },
+                          "title": {
+                            "type": "string",
+                            "description": "What this piece is called in your library"
+                          },
+                          "excerpt": {
+                            "type": "string",
+                            "description": "First readable line of the body, for listing views"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "draft",
+                              "published",
+                              "archived"
+                            ],
+                            "description": "Whether this piece has been delivered, is still a draft, or was archived"
+                          },
+                          "scheduled": {
+                            "type": "boolean",
+                            "description": "Whether a scheduled send is queued against this piece"
+                          },
+                          "lockedReason": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Why this piece can't be edited right now, or null when it can. A queued or in-flight send locks the words, because they go out exactly as written."
+                          },
+                          "publishedAt": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "ISO 8601 timestamp of the first delivery, or null"
+                          },
+                          "archivedAt": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "ISO 8601 timestamp of when this piece was archived, or null"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "description": "ISO 8601 timestamp of creation"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "description": "ISO 8601 timestamp of the last change"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "kind",
+                          "title",
+                          "excerpt",
+                          "status",
+                          "scheduled",
+                          "lockedReason",
+                          "publishedAt",
+                          "archivedAt",
+                          "createdAt",
+                          "updatedAt"
+                        ]
+                      },
+                      "description": "Array of items in this page"
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "cursor": {
+                          "type": "string",
+                          "description": "Cursor for fetching the next page of results"
+                        },
+                        "hasMore": {
+                          "type": "boolean",
+                          "description": "Whether more results are available"
+                        },
+                        "total": {
+                          "type": "number",
+                          "description": "Total number of items available"
+                        }
+                      },
+                      "required": [
+                        "hasMore"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "items",
+                    "pagination"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Publication not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listContent",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "list-content",
+            "description": "List drafted content in a publication's library, filterable by kind and status"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "List drafted X posts",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst { items, pagination } = await api.content.list({ kind: \"tweet\", status: \"draft\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "List drafted X posts using curl",
+            "source": "curl \"https://public.api.paragraph.com/api/v1/content?kind=tweet&status=draft\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/content/{contentId}": {
+      "get": {
+        "description": "Retrieve one piece of drafted content with its body. Read it before editing so you rewrite what's actually saved — the draft may have changed in the app.",
+        "summary": "Get a piece of content",
+        "tags": [
+          "content"
+        ],
+        "parameters": [
+          {
+            "name": "contentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the content"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for this piece of content"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "description": "What this piece is: `tweet`, `linkedin`, `newsletter`, or `x_article`"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "What this piece is called in your library"
+                    },
+                    "excerpt": {
+                      "type": "string",
+                      "description": "First readable line of the body, for listing views"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "draft",
+                        "published",
+                        "archived"
+                      ],
+                      "description": "Whether this piece has been delivered, is still a draft, or was archived"
+                    },
+                    "scheduled": {
+                      "type": "boolean",
+                      "description": "Whether a scheduled send is queued against this piece"
+                    },
+                    "lockedReason": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Why this piece can't be edited right now, or null when it can. A queued or in-flight send locks the words, because they go out exactly as written."
+                    },
+                    "publishedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "ISO 8601 timestamp of the first delivery, or null"
+                    },
+                    "archivedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "ISO 8601 timestamp of when this piece was archived, or null"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of creation"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of the last change"
+                    },
+                    "body": {
+                      "type": "object",
+                      "additionalProperties": {},
+                      "description": "The artifact itself, in the shape its kind uses"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "kind",
+                    "title",
+                    "excerpt",
+                    "status",
+                    "scheduled",
+                    "lockedReason",
+                    "publishedAt",
+                    "archivedAt",
+                    "createdAt",
+                    "updatedAt",
+                    "body"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Content not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getContentById",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-content",
+            "description": "Get one piece of drafted content, with its body"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get a piece of content",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst draft = await api.content.get({ id: \"7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "Get a piece of content using curl",
+            "source": "curl \"https://public.api.paragraph.com/api/v1/content/7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "patch": {
+        "description": "Rename a piece of content, replace its body, or both.\n\n**Replacement, not a merge:** `body` replaces the artifact entirely, in the same shape the kind takes on create. Send the whole thing, not just the part that changed. Media already attached to the draft is the one exception — you can't send it back, so it's carried over rather than dropped.\n\n**Scheduled pieces are locked:** if a send is queued or already running for this piece, its words go out exactly as written, so an edit to `body` is refused with an explanation. Cancel the schedule in the app first. Renaming is always allowed — a title isn't published anywhere.",
+        "summary": "Edit a piece of content",
+        "tags": [
+          "content"
+        ],
+        "parameters": [
+          {
+            "name": "contentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the content"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "description": "New name for this piece in your library"
+                  },
+                  "body": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "The post's text. `tweet`: a single tweet, at most 280 characters — use `tweets` for a thread and never send both. `linkedin`: the post body."
+                      },
+                      "tweets": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "`tweet` only. One entry per tweet, in posting order, each at most 280 characters. Never concatenate a thread into one entry."
+                      },
+                      "subject": {
+                        "type": "string",
+                        "description": "`newsletter` only. Subject line."
+                      },
+                      "preheader": {
+                        "type": "string",
+                        "description": "`newsletter` only. Optional preview line shown after the subject."
+                      },
+                      "body": {
+                        "type": "string",
+                        "description": "`newsletter`: the email body. `x_article`: the article's full CommonMark markdown."
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "`x_article` only. The headline as published on X. Separate from the piece's `title`, which only names it in your library."
+                      },
+                      "canonicalUrl": {
+                        "type": "string",
+                        "description": "`x_article` only. The original post this Article is a version of. It must also appear as a markdown link inside `body`."
+                      },
+                      "media": {
+                        "readOnly": true,
+                        "description": "Not accepted. Media has to be uploaded to the destination platform first, which the API can't do yet; sending this field is rejected."
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "The replacement artifact, in the shape this piece's kind uses"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Content updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for this piece of content"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "description": "What this piece is: `tweet`, `linkedin`, `newsletter`, or `x_article`"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "What this piece is called in your library"
+                    },
+                    "excerpt": {
+                      "type": "string",
+                      "description": "First readable line of the body, for listing views"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "draft",
+                        "published",
+                        "archived"
+                      ],
+                      "description": "Whether this piece has been delivered, is still a draft, or was archived"
+                    },
+                    "scheduled": {
+                      "type": "boolean",
+                      "description": "Whether a scheduled send is queued against this piece"
+                    },
+                    "lockedReason": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Why this piece can't be edited right now, or null when it can. A queued or in-flight send locks the words, because they go out exactly as written."
+                    },
+                    "publishedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "ISO 8601 timestamp of the first delivery, or null"
+                    },
+                    "archivedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "ISO 8601 timestamp of when this piece was archived, or null"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of creation"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of the last change"
+                    },
+                    "body": {
+                      "type": "object",
+                      "additionalProperties": {},
+                      "description": "The artifact itself, in the shape its kind uses"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "kind",
+                    "title",
+                    "excerpt",
+                    "status",
+                    "scheduled",
+                    "lockedReason",
+                    "publishedAt",
+                    "archivedAt",
+                    "createdAt",
+                    "updatedAt",
+                    "body"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The draft doesn't match its kind, or a queued send has locked it",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Content not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "updateContent",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "update-content",
+            "description": "Edit a piece of drafted content in place, replacing its body or renaming it"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Rewrite a draft",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst draft = await api.content.update({\n  id: \"7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55\",\n  body: { text: \"Rewritten, and shorter.\" },\n})"
+          },
+          {
+            "lang": "bash",
+            "label": "Rename a draft using curl",
+            "source": "curl -X PATCH \"https://public.api.paragraph.com/api/v1/content/7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55\" \\\n  -H \"Authorization: Bearer your-api-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"title\": \"Launch note, second pass\"}'"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/content/{contentId}/archive": {
+      "post": {
+        "description": "Put a piece away without deleting it. Archived content drops out of the default list and out of the writer's Content surface, and `POST /v1/content/{contentId}/restore` brings it back.\n\nAny suggestion still proposing the piece is dismissed along with it, so nothing is left offering to send something you've filed away. A piece with a send already queued can't be archived — cancel the schedule first.",
+        "summary": "Archive a piece of content",
+        "tags": [
+          "content"
+        ],
+        "parameters": [
+          {
+            "name": "contentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the content"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Content archived successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for this piece of content"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "description": "What this piece is: `tweet`, `linkedin`, `newsletter`, or `x_article`"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "What this piece is called in your library"
+                    },
+                    "excerpt": {
+                      "type": "string",
+                      "description": "First readable line of the body, for listing views"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "draft",
+                        "published",
+                        "archived"
+                      ],
+                      "description": "Whether this piece has been delivered, is still a draft, or was archived"
+                    },
+                    "scheduled": {
+                      "type": "boolean",
+                      "description": "Whether a scheduled send is queued against this piece"
+                    },
+                    "lockedReason": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Why this piece can't be edited right now, or null when it can. A queued or in-flight send locks the words, because they go out exactly as written."
+                    },
+                    "publishedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "ISO 8601 timestamp of the first delivery, or null"
+                    },
+                    "archivedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "ISO 8601 timestamp of when this piece was archived, or null"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of creation"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of the last change"
+                    },
+                    "body": {
+                      "type": "object",
+                      "additionalProperties": {},
+                      "description": "The artifact itself, in the shape its kind uses"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "kind",
+                    "title",
+                    "excerpt",
+                    "status",
+                    "scheduled",
+                    "lockedReason",
+                    "publishedAt",
+                    "archivedAt",
+                    "createdAt",
+                    "updatedAt",
+                    "body"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A queued send is blocking this",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Content not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "archiveContent",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "archive-content",
+            "description": "Archive a piece of drafted content"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Archive a draft",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.content.archive({ id: \"7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "Archive a draft using curl",
+            "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/content/7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55/archive\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/content/{contentId}/restore": {
+      "post": {
+        "description": "Bring an archived piece back into your library. Suggestions dismissed when it was archived stay dismissed — you get the draft back, not the to-do items telling you to ship it.",
+        "summary": "Restore an archived piece",
+        "tags": [
+          "content"
+        ],
+        "parameters": [
+          {
+            "name": "contentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the content"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Content restored successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for this piece of content"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "description": "What this piece is: `tweet`, `linkedin`, `newsletter`, or `x_article`"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "What this piece is called in your library"
+                    },
+                    "excerpt": {
+                      "type": "string",
+                      "description": "First readable line of the body, for listing views"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "draft",
+                        "published",
+                        "archived"
+                      ],
+                      "description": "Whether this piece has been delivered, is still a draft, or was archived"
+                    },
+                    "scheduled": {
+                      "type": "boolean",
+                      "description": "Whether a scheduled send is queued against this piece"
+                    },
+                    "lockedReason": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Why this piece can't be edited right now, or null when it can. A queued or in-flight send locks the words, because they go out exactly as written."
+                    },
+                    "publishedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "ISO 8601 timestamp of the first delivery, or null"
+                    },
+                    "archivedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "ISO 8601 timestamp of when this piece was archived, or null"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of creation"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of the last change"
+                    },
+                    "body": {
+                      "type": "object",
+                      "additionalProperties": {},
+                      "description": "The artifact itself, in the shape its kind uses"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "kind",
+                    "title",
+                    "excerpt",
+                    "status",
+                    "scheduled",
+                    "lockedReason",
+                    "publishedAt",
+                    "archivedAt",
+                    "createdAt",
+                    "updatedAt",
+                    "body"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Content not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "restoreContent",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "restore-content",
+            "description": "Restore an archived piece of drafted content"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Restore an archived draft",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.content.restore({ id: \"7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "Restore an archived draft using curl",
+            "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/content/7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55/restore\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/v1/me": {
       "get": {
         "description": "Returns the publication associated with the API key used in the request. Useful for verifying your API key and retrieving your publication details.",
