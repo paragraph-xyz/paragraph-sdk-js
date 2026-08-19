@@ -134,10 +134,6 @@
                       "type": "boolean",
                       "description": "Comment visibility. true disables comments and false enables them."
                     },
-                    "disableHighlights": {
-                      "type": "boolean",
-                      "description": "Whether to disable highlights on this publication's posts"
-                    },
                     "enableTableOfContents": {
                       "type": "boolean",
                       "description": "Whether the table of contents is enabled on posts"
@@ -167,14 +163,6 @@
                         "newSubscriber": {
                           "type": "boolean",
                           "description": "Email the writer when a new free subscriber signs up"
-                        },
-                        "newPaidSubscriber": {
-                          "type": "boolean",
-                          "description": "Email the writer when a new paid subscriber signs up"
-                        },
-                        "newContentCollected": {
-                          "type": "boolean",
-                          "description": "Email the writer when someone collects their content"
                         }
                       },
                       "description": "Owner-side email notification toggles"
@@ -262,7 +250,7 @@
         ]
       },
       "patch": {
-        "description": "Update settings for a publication. The publication is identified by the API key provided in the Authorization header, and the path `:publicationId` must match the publication that owns the API key.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- Set `featuredPost` to `\"latest\"`, `\"popular\"`, `\"disabled\"`, or a specific post ID. The post must belong to this publication.\n- `pinnedPostIds` replaces the existing pinned list. Pinned posts are hidden from the regular feed (they show in their own section), and unpinned posts return to the feed.\n- `emailNotifications` is merged onto the current settings; only the toggles you send are changed.",
+        "description": "Update settings for a publication. The publication is identified by the API key provided in the Authorization header, and the path `:publicationId` must match the publication that owns the API key.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- Unknown or removed settings are rejected. The legacy `disableHighlights` setting is no longer supported and must be removed from requests.\n- Set `featuredPost` to `\"latest\"`, `\"popular\"`, `\"disabled\"`, or a specific post ID. The post must belong to this publication.\n- `pinnedPostIds` replaces the existing pinned list. Pinned posts are hidden from the regular feed (they show in their own section), and unpinned posts return to the feed.\n- `emailNotifications` is merged onto the current settings; only the toggles you send are changed.",
         "summary": "Update publication settings",
         "tags": [
           "publications"
@@ -370,10 +358,6 @@
                     "type": "boolean",
                     "description": "Comment visibility. true disables comments and false enables them."
                   },
-                  "disableHighlights": {
-                    "type": "boolean",
-                    "description": "Whether to disable highlights on posts"
-                  },
                   "enableTableOfContents": {
                     "type": "boolean",
                     "description": "Whether the table of contents is enabled on posts"
@@ -406,19 +390,12 @@
                       "newSubscriber": {
                         "type": "boolean",
                         "description": "Email the writer when a new free subscriber signs up"
-                      },
-                      "newPaidSubscriber": {
-                        "type": "boolean",
-                        "description": "Email the writer when a new paid subscriber signs up"
-                      },
-                      "newContentCollected": {
-                        "type": "boolean",
-                        "description": "Email the writer when someone collects their content"
                       }
                     },
                     "description": "Owner-side email notification toggles"
                   }
-                }
+                },
+                "additionalProperties": false
               }
             }
           }
@@ -538,10 +515,6 @@
                       "type": "boolean",
                       "description": "Comment visibility. true disables comments and false enables them."
                     },
-                    "disableHighlights": {
-                      "type": "boolean",
-                      "description": "Whether to disable highlights on this publication's posts"
-                    },
                     "enableTableOfContents": {
                       "type": "boolean",
                       "description": "Whether the table of contents is enabled on posts"
@@ -571,14 +544,6 @@
                         "newSubscriber": {
                           "type": "boolean",
                           "description": "Email the writer when a new free subscriber signs up"
-                        },
-                        "newPaidSubscriber": {
-                          "type": "boolean",
-                          "description": "Email the writer when a new paid subscriber signs up"
-                        },
-                        "newContentCollected": {
-                          "type": "boolean",
-                          "description": "Email the writer when someone collects their content"
                         }
                       },
                       "description": "Owner-side email notification toggles"
@@ -897,10 +862,6 @@
                       "type": "boolean",
                       "description": "Comment visibility. true disables comments and false enables them."
                     },
-                    "disableHighlights": {
-                      "type": "boolean",
-                      "description": "Whether to disable highlights on this publication's posts"
-                    },
                     "enableTableOfContents": {
                       "type": "boolean",
                       "description": "Whether the table of contents is enabled on posts"
@@ -930,14 +891,6 @@
                         "newSubscriber": {
                           "type": "boolean",
                           "description": "Email the writer when a new free subscriber signs up"
-                        },
-                        "newPaidSubscriber": {
-                          "type": "boolean",
-                          "description": "Email the writer when a new paid subscriber signs up"
-                        },
-                        "newContentCollected": {
-                          "type": "boolean",
-                          "description": "Email the writer when someone collects their content"
                         }
                       },
                       "description": "Owner-side email notification toggles"
@@ -1158,10 +1111,6 @@
                       "type": "boolean",
                       "description": "Comment visibility. true disables comments and false enables them."
                     },
-                    "disableHighlights": {
-                      "type": "boolean",
-                      "description": "Whether to disable highlights on this publication's posts"
-                    },
                     "enableTableOfContents": {
                       "type": "boolean",
                       "description": "Whether the table of contents is enabled on posts"
@@ -1191,14 +1140,6 @@
                         "newSubscriber": {
                           "type": "boolean",
                           "description": "Email the writer when a new free subscriber signs up"
-                        },
-                        "newPaidSubscriber": {
-                          "type": "boolean",
-                          "description": "Email the writer when a new paid subscriber signs up"
-                        },
-                        "newContentCollected": {
-                          "type": "boolean",
-                          "description": "Email the writer when someone collects their content"
                         }
                       },
                       "description": "Owner-side email notification toggles"
@@ -1690,10 +1631,6 @@
                                 "type": "boolean",
                                 "description": "Comment visibility. true disables comments and false enables them."
                               },
-                              "disableHighlights": {
-                                "type": "boolean",
-                                "description": "Whether to disable highlights on this publication's posts"
-                              },
                               "enableTableOfContents": {
                                 "type": "boolean",
                                 "description": "Whether the table of contents is enabled on posts"
@@ -1723,14 +1660,6 @@
                                   "newSubscriber": {
                                     "type": "boolean",
                                     "description": "Email the writer when a new free subscriber signs up"
-                                  },
-                                  "newPaidSubscriber": {
-                                    "type": "boolean",
-                                    "description": "Email the writer when a new paid subscriber signs up"
-                                  },
-                                  "newContentCollected": {
-                                    "type": "boolean",
-                                    "description": "Email the writer when someone collects their content"
                                   }
                                 },
                                 "description": "Owner-side email notification toggles"
@@ -5076,10 +5005,6 @@
                       "type": "boolean",
                       "description": "Comment visibility. true disables comments and false enables them."
                     },
-                    "disableHighlights": {
-                      "type": "boolean",
-                      "description": "Whether to disable highlights on this publication's posts"
-                    },
                     "enableTableOfContents": {
                       "type": "boolean",
                       "description": "Whether the table of contents is enabled on posts"
@@ -5109,14 +5034,6 @@
                         "newSubscriber": {
                           "type": "boolean",
                           "description": "Email the writer when a new free subscriber signs up"
-                        },
-                        "newPaidSubscriber": {
-                          "type": "boolean",
-                          "description": "Email the writer when a new paid subscriber signs up"
-                        },
-                        "newContentCollected": {
-                          "type": "boolean",
-                          "description": "Email the writer when someone collects their content"
                         }
                       },
                       "description": "Owner-side email notification toggles"
