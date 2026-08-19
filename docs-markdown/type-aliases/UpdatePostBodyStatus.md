@@ -10,4 +10,4 @@
 
 Defined in: src/generated/models/updatePostBodyStatus.ts:18
 
-Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive
+Set to 'published' to publish a draft or keep an already-live post published after edits, 'draft' to unpublish, or 'archived' to archive

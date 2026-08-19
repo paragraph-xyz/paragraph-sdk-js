@@ -8,7 +8,7 @@
 
 > **UpdatePublication200** = `object`
 
-Defined in: src/generated/models/updatePublication200.ts:21
+Defined in: src/generated/models/updatePublication200.ts:20
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: src/generated/models/updatePublication200.ts:21
 
 > `optional` **bodyFont?**: [`UpdatePublication200BodyFont`](UpdatePublication200BodyFont.md)
 
-Defined in: src/generated/models/updatePublication200.ts:50
+Defined in: src/generated/models/updatePublication200.ts:49
 
 Font family used for body text
 
@@ -26,29 +26,9 @@ Font family used for body text
 
 > `optional` **customDomain?**: `string`
 
-Defined in: src/generated/models/updatePublication200.ts:35
+Defined in: src/generated/models/updatePublication200.ts:34
 
 Custom domain configured for this publication
-
-***
-
-### disableComments?
-
-> `optional` **disableComments?**: [`UpdatePublication200DisableComments`](UpdatePublication200DisableComments.md)
-
-Defined in: src/generated/models/updatePublication200.ts:61
-
-Comment visibility. true disables all comments, false enables them, 'on-platform' hides on-Paragraph comments while keeping Farcaster comments.
-
-***
-
-### disableHighlights?
-
-> `optional` **disableHighlights?**: `boolean`
-
-Defined in: src/generated/models/updatePublication200.ts:63
-
-Whether to disable highlights on this publication's posts
 
 ***
 
@@ -56,7 +36,7 @@ Whether to disable highlights on this publication's posts
 
 > `optional` **emailNotifications?**: [`UpdatePublication200EmailNotifications`](UpdatePublication200EmailNotifications.md)
 
-Defined in: src/generated/models/updatePublication200.ts:73
+Defined in: src/generated/models/updatePublication200.ts:68
 
 Owner-side email notification toggles
 
@@ -66,7 +46,7 @@ Owner-side email notification toggles
 
 > `optional` **enableSubscribePopup?**: `boolean`
 
-Defined in: src/generated/models/updatePublication200.ts:67
+Defined in: src/generated/models/updatePublication200.ts:62
 
 Whether to show the subscribe popup to first-time visitors arriving from external links
 
@@ -76,7 +56,7 @@ Whether to show the subscribe popup to first-time visitors arriving from externa
 
 > `optional` **enableSubscribeScroll?**: `boolean`
 
-Defined in: src/generated/models/updatePublication200.ts:69
+Defined in: src/generated/models/updatePublication200.ts:64
 
 Whether to show the subscribe popup when first-time visitors scroll a post
 
@@ -86,7 +66,7 @@ Whether to show the subscribe popup when first-time visitors scroll a post
 
 > `optional` **enableTableOfContents?**: `boolean`
 
-Defined in: src/generated/models/updatePublication200.ts:65
+Defined in: src/generated/models/updatePublication200.ts:60
 
 Whether the table of contents is enabled on posts
 
@@ -96,7 +76,7 @@ Whether the table of contents is enabled on posts
 
 > `optional` **featuredPost?**: `string`
 
-Defined in: src/generated/models/updatePublication200.ts:59
+Defined in: src/generated/models/updatePublication200.ts:58
 
 Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication.
 
@@ -110,7 +90,7 @@ Featured post selector. Use 'latest' for the most recent post, 'popular' for the
 
 > `optional` **headerFont?**: [`UpdatePublication200HeaderFont`](UpdatePublication200HeaderFont.md)
 
-Defined in: src/generated/models/updatePublication200.ts:48
+Defined in: src/generated/models/updatePublication200.ts:47
 
 Font family used for headers
 
@@ -120,7 +100,7 @@ Font family used for headers
 
 > `optional` **hideStats?**: `boolean`
 
-Defined in: src/generated/models/updatePublication200.ts:54
+Defined in: src/generated/models/updatePublication200.ts:53
 
 Whether to hide stats like subscriber count, post count, and collects
 
@@ -130,7 +110,7 @@ Whether to hide stats like subscriber count, post count, and collects
 
 > **id**: `string`
 
-Defined in: src/generated/models/updatePublication200.ts:23
+Defined in: src/generated/models/updatePublication200.ts:22
 
 Unique identifier for the publication
 
@@ -140,7 +120,7 @@ Unique identifier for the publication
 
 > `optional` **logoUrl?**: `string`
 
-Defined in: src/generated/models/updatePublication200.ts:42
+Defined in: src/generated/models/updatePublication200.ts:41
 
 URL to the publication's logo image
 
@@ -150,7 +130,7 @@ URL to the publication's logo image
 
 > **name**: `string`
 
-Defined in: src/generated/models/updatePublication200.ts:25
+Defined in: src/generated/models/updatePublication200.ts:24
 
 Display name of the publication
 
@@ -160,7 +140,7 @@ Display name of the publication
 
 > **ownerUserId**: `string`
 
-Defined in: src/generated/models/updatePublication200.ts:27
+Defined in: src/generated/models/updatePublication200.ts:26
 
 ID of the user who owns this publication
 
@@ -170,7 +150,7 @@ ID of the user who owns this publication
 
 > `optional` **pinnedPostIds?**: `string`[]
 
-Defined in: src/generated/models/updatePublication200.ts:71
+Defined in: src/generated/models/updatePublication200.ts:66
 
 Ordered list of post IDs pinned to the top of the publication's homepage. Pinned posts render in their own section above the regular feed.
 
@@ -180,7 +160,7 @@ Ordered list of post IDs pinned to the top of the publication's homepage. Pinned
 
 > `optional` **postListType?**: [`UpdatePublication200PostListType`](UpdatePublication200PostListType.md)
 
-Defined in: src/generated/models/updatePublication200.ts:44
+Defined in: src/generated/models/updatePublication200.ts:43
 
 Homepage layout. 'feed' is a single-column list of cards, 'grid' is a 3-column grid, 'full-post' shows full posts in a single column.
 
@@ -190,7 +170,7 @@ Homepage layout. 'feed' is a single-column list of cards, 'grid' is a 3-column g
 
 > `optional` **showMostPopular?**: `boolean`
 
-Defined in: src/generated/models/updatePublication200.ts:52
+Defined in: src/generated/models/updatePublication200.ts:51
 
 Whether the 'most popular posts' widget is shown
 
@@ -200,7 +180,7 @@ Whether the 'most popular posts' widget is shown
 
 > **slug**: `string`
 
-Defined in: src/generated/models/updatePublication200.ts:33
+Defined in: src/generated/models/updatePublication200.ts:32
 
 URL-friendly identifier for the publication; accessible at paragraph.com/@[slug]
 
@@ -218,7 +198,7 @@ URL-friendly identifier for the publication; accessible at paragraph.com/@[slug]
 
 > `optional` **summary?**: `string`
 
-Defined in: src/generated/models/updatePublication200.ts:40
+Defined in: src/generated/models/updatePublication200.ts:39
 
 Brief description of the publication (max 500 characters)
 
@@ -232,6 +212,6 @@ Brief description of the publication (max 500 characters)
 
 > `optional` **themeColor?**: [`UpdatePublication200ThemeColor`](UpdatePublication200ThemeColor.md)
 
-Defined in: src/generated/models/updatePublication200.ts:46
+Defined in: src/generated/models/updatePublication200.ts:45
 
 Theme accent color for the publication

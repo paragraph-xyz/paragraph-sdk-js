@@ -8,7 +8,7 @@
 
 > **GetPostsFeed200ItemsItemPublication** = `object`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:24
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:23
 
 The publication this post belongs to
 
@@ -18,7 +18,7 @@ The publication this post belongs to
 
 > `optional` **bodyFont?**: [`GetPostsFeed200ItemsItemPublicationBodyFont`](GetPostsFeed200ItemsItemPublicationBodyFont.md)
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:53
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:52
 
 Font family used for body text
 
@@ -28,29 +28,9 @@ Font family used for body text
 
 > `optional` **customDomain?**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:38
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:37
 
 Custom domain configured for this publication
-
-***
-
-### disableComments?
-
-> `optional` **disableComments?**: [`GetPostsFeed200ItemsItemPublicationDisableComments`](GetPostsFeed200ItemsItemPublicationDisableComments.md)
-
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:64
-
-Comment visibility. true disables all comments, false enables them, 'on-platform' hides on-Paragraph comments while keeping Farcaster comments.
-
-***
-
-### disableHighlights?
-
-> `optional` **disableHighlights?**: `boolean`
-
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:66
-
-Whether to disable highlights on this publication's posts
 
 ***
 
@@ -58,7 +38,7 @@ Whether to disable highlights on this publication's posts
 
 > `optional` **emailNotifications?**: [`GetPostsFeed200ItemsItemPublicationEmailNotifications`](GetPostsFeed200ItemsItemPublicationEmailNotifications.md)
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:76
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:71
 
 Owner-side email notification toggles
 
@@ -68,7 +48,7 @@ Owner-side email notification toggles
 
 > `optional` **enableSubscribePopup?**: `boolean`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:70
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:65
 
 Whether to show the subscribe popup to first-time visitors arriving from external links
 
@@ -78,7 +58,7 @@ Whether to show the subscribe popup to first-time visitors arriving from externa
 
 > `optional` **enableSubscribeScroll?**: `boolean`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:72
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:67
 
 Whether to show the subscribe popup when first-time visitors scroll a post
 
@@ -88,7 +68,7 @@ Whether to show the subscribe popup when first-time visitors scroll a post
 
 > `optional` **enableTableOfContents?**: `boolean`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:68
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:63
 
 Whether the table of contents is enabled on posts
 
@@ -98,7 +78,7 @@ Whether the table of contents is enabled on posts
 
 > `optional` **featuredPost?**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:62
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:61
 
 Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication.
 
@@ -112,7 +92,7 @@ Featured post selector. Use 'latest' for the most recent post, 'popular' for the
 
 > `optional` **headerFont?**: [`GetPostsFeed200ItemsItemPublicationHeaderFont`](GetPostsFeed200ItemsItemPublicationHeaderFont.md)
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:51
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:50
 
 Font family used for headers
 
@@ -122,7 +102,7 @@ Font family used for headers
 
 > `optional` **hideStats?**: `boolean`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:57
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:56
 
 Whether to hide stats like subscriber count, post count, and collects
 
@@ -132,7 +112,7 @@ Whether to hide stats like subscriber count, post count, and collects
 
 > **id**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:26
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:25
 
 Unique identifier for the publication
 
@@ -142,7 +122,7 @@ Unique identifier for the publication
 
 > `optional` **logoUrl?**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:45
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:44
 
 URL to the publication's logo image
 
@@ -152,7 +132,7 @@ URL to the publication's logo image
 
 > **name**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:28
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:27
 
 Display name of the publication
 
@@ -162,7 +142,7 @@ Display name of the publication
 
 > **ownerUserId**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:30
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:29
 
 ID of the user who owns this publication
 
@@ -172,7 +152,7 @@ ID of the user who owns this publication
 
 > `optional` **pinnedPostIds?**: `string`[]
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:74
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:69
 
 Ordered list of post IDs pinned to the top of the publication's homepage. Pinned posts render in their own section above the regular feed.
 
@@ -182,7 +162,7 @@ Ordered list of post IDs pinned to the top of the publication's homepage. Pinned
 
 > `optional` **postListType?**: [`GetPostsFeed200ItemsItemPublicationPostListType`](GetPostsFeed200ItemsItemPublicationPostListType.md)
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:47
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:46
 
 Homepage layout. 'feed' is a single-column list of cards, 'grid' is a 3-column grid, 'full-post' shows full posts in a single column.
 
@@ -192,7 +172,7 @@ Homepage layout. 'feed' is a single-column list of cards, 'grid' is a 3-column g
 
 > `optional` **showMostPopular?**: `boolean`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:55
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:54
 
 Whether the 'most popular posts' widget is shown
 
@@ -202,7 +182,7 @@ Whether the 'most popular posts' widget is shown
 
 > **slug**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:36
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:35
 
 URL-friendly identifier for the publication; accessible at paragraph.com/@[slug]
 
@@ -220,7 +200,7 @@ URL-friendly identifier for the publication; accessible at paragraph.com/@[slug]
 
 > `optional` **summary?**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:43
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:42
 
 Brief description of the publication (max 500 characters)
 
@@ -234,6 +214,6 @@ Brief description of the publication (max 500 characters)
 
 > `optional` **themeColor?**: [`GetPostsFeed200ItemsItemPublicationThemeColor`](GetPostsFeed200ItemsItemPublicationThemeColor.md)
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:49
+Defined in: src/generated/models/getPostsFeed200ItemsItemPublication.ts:48
 
 Theme accent color for the publication

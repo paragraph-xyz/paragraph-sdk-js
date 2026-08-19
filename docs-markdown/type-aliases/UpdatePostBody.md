@@ -12,11 +12,39 @@ Defined in: src/generated/models/updatePostBody.ts:19
 
 ## Properties
 
+### authorIds?
+
+> `optional` **authorIds?**: `string`[]
+
+Defined in: src/generated/models/updatePostBody.ts:52
+
+User ids credited as the post's authors, in byline order. Replaces the full list, so include every author you want kept — read the post's current `authorIds` first and start from those. Each id must be the publication's owner or an active team member; ids from outside the publication are rejected. There is no endpoint that enumerates members, so an id has to come from a post you have read (`authorIds` on a single post, or `authors[].id` on a list) or from the writer.
+
+#### Min Items
+
+1
+
+#### Max Items
+
+20
+
+***
+
+### bodyJson?
+
+> `optional` **bodyJson?**: `string`
+
+Defined in: src/generated/models/updatePostBody.ts:23
+
+Post content as a Tiptap document, JSON-stringified (e.g. '{"type":"doc","content":[...]}'). This accepts ANY Tiptap node the editor supports — including videos, tweets, link cards, callouts, and buttons — so editing a post by round-tripping the `json` returned by get-post preserves everything markdown would drop. Replaces the FULL body; node-type validity is checked by the renderer and an unusable document is rejected. Provide `markdown` OR `bodyJson`, not both.
+
+***
+
 ### categories?
 
 > `optional` **categories?**: [`UpdatePostBodyCategories`](UpdatePostBodyCategories.md)
 
-Defined in: src/generated/models/updatePostBody.ts:44
+Defined in: src/generated/models/updatePostBody.ts:46
 
 Category tags for the post. Can also be a comma-separated string.
 
@@ -26,7 +54,7 @@ Category tags for the post. Can also be a comma-separated string.
 
 > `optional` **clearImage?**: `boolean`
 
-Defined in: src/generated/models/updatePostBody.ts:62
+Defined in: src/generated/models/updatePostBody.ts:70
 
 When true, removes the post's existing cover/hero image. Ignored if imageUrl is also provided.
 
@@ -36,7 +64,7 @@ When true, removes the post's existing cover/hero image. Ignored if imageUrl is 
 
 > `optional` **imageUrl?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:60
+Defined in: src/generated/models/updatePostBody.ts:68
 
 URL of an image to set as the post's cover/hero image. The image is fetched, re-hosted on Paragraph's CDN, and a placeholder is generated. Pass clearImage: true instead to remove the existing cover.
 
@@ -48,7 +76,7 @@ URL of an image to set as the post's cover/hero image. The image is fetched, re-
 
 Defined in: src/generated/models/updatePostBody.ts:21
 
-Post content in Markdown format. Replaces full content — rich blocks created in the editor will be lost
+Post content in Markdown format. Replaces the FULL body. Markdown cannot represent buttons, linked images, or embedded media (videos, tweets, link cards) — replacing a post that has any of those with `markdown` drops them. Use `bodyJson` (round-tripped from get-post) to edit an existing post so nothing is lost. Provide `markdown` OR `bodyJson`, not both.
 
 ***
 
@@ -56,7 +84,7 @@ Post content in Markdown format. Replaces full content — rich blocks created i
 
 > `optional` **postPreview?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:42
+Defined in: src/generated/models/updatePostBody.ts:44
 
 Preview text for the post
 
@@ -70,7 +98,7 @@ Preview text for the post
 
 > `optional` **publishedAt?**: `number`
 
-Defined in: src/generated/models/updatePostBody.ts:58
+Defined in: src/generated/models/updatePostBody.ts:66
 
 Unix timestamp (milliseconds) to set as the post's publish date. Once set, the date is preserved across re-publishes.
 
@@ -84,7 +112,7 @@ Unix timestamp (milliseconds) to set as the post's publish date. Once set, the d
 
 > `optional` **scheduledAt?**: [`UpdatePostBodyScheduledAt`](UpdatePostBodyScheduledAt.md)
 
-Defined in: src/generated/models/updatePostBody.ts:51
+Defined in: src/generated/models/updatePostBody.ts:59
 
 Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish. The value 0 is treated the same as omitting the field (no scheduling request); note that on an already-scheduled post, omitting `scheduledAt` while changing `status` cancels the schedule.
 
@@ -98,7 +126,7 @@ Unix timestamp (milliseconds) to schedule the post's first publish at a future t
 
 > `optional` **sendNewsletter?**: [`UpdatePostBodySendNewsletter`](UpdatePostBodySendNewsletter.md)
 
-Defined in: src/generated/models/updatePostBody.ts:53
+Defined in: src/generated/models/updatePostBody.ts:61
 
 Whether to send an email newsletter to subscribers when the post publishes. Only meaningful when publishing (status: 'published') or scheduling (scheduledAt set). Default: false
 
@@ -108,7 +136,7 @@ Whether to send an email newsletter to subscribers when the post publishes. Only
 
 > `optional` **slug?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:37
+Defined in: src/generated/models/updatePostBody.ts:39
 
 URL-friendly identifier for the post
 
@@ -126,9 +154,9 @@ URL-friendly identifier for the post
 
 > `optional` **status?**: [`UpdatePostBodyStatus`](UpdatePostBodyStatus.md)
 
-Defined in: src/generated/models/updatePostBody.ts:46
+Defined in: src/generated/models/updatePostBody.ts:54
 
-Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive
+Set to 'published' to publish a draft or keep an already-live post published after edits, 'draft' to unpublish, or 'archived' to archive
 
 ***
 
@@ -136,7 +164,7 @@ Set to 'published' to publish, 'draft' to unpublish, or 'archived' to archive
 
 > `optional` **subtitle?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:31
+Defined in: src/generated/models/updatePostBody.ts:33
 
 Optional subtitle or brief summary
 
@@ -150,7 +178,7 @@ Optional subtitle or brief summary
 
 > `optional` **title?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:26
+Defined in: src/generated/models/updatePostBody.ts:28
 
 Title of the post
 

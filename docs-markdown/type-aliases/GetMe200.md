@@ -32,31 +32,11 @@ Custom domain configured for this publication
 
 ***
 
-### disableComments?
-
-> `optional` **disableComments?**: [`GetMe200DisableComments`](GetMe200DisableComments.md)
-
-Defined in: src/generated/models/getMe200.ts:61
-
-Comment visibility. true disables all comments, false enables them, 'on-platform' hides on-Paragraph comments while keeping Farcaster comments.
-
-***
-
-### disableHighlights?
-
-> `optional` **disableHighlights?**: `boolean`
-
-Defined in: src/generated/models/getMe200.ts:63
-
-Whether to disable highlights on this publication's posts
-
-***
-
 ### emailNotifications?
 
 > `optional` **emailNotifications?**: [`GetMe200EmailNotifications`](GetMe200EmailNotifications.md)
 
-Defined in: src/generated/models/getMe200.ts:73
+Defined in: src/generated/models/getMe200.ts:69
 
 Owner-side email notification toggles
 
@@ -66,7 +46,7 @@ Owner-side email notification toggles
 
 > `optional` **enableSubscribePopup?**: `boolean`
 
-Defined in: src/generated/models/getMe200.ts:67
+Defined in: src/generated/models/getMe200.ts:63
 
 Whether to show the subscribe popup to first-time visitors arriving from external links
 
@@ -76,7 +56,7 @@ Whether to show the subscribe popup to first-time visitors arriving from externa
 
 > `optional` **enableSubscribeScroll?**: `boolean`
 
-Defined in: src/generated/models/getMe200.ts:69
+Defined in: src/generated/models/getMe200.ts:65
 
 Whether to show the subscribe popup when first-time visitors scroll a post
 
@@ -86,7 +66,7 @@ Whether to show the subscribe popup when first-time visitors scroll a post
 
 > `optional` **enableTableOfContents?**: `boolean`
 
-Defined in: src/generated/models/getMe200.ts:65
+Defined in: src/generated/models/getMe200.ts:61
 
 Whether the table of contents is enabled on posts
 
@@ -170,9 +150,19 @@ ID of the user who owns this publication
 
 > `optional` **pinnedPostIds?**: `string`[]
 
-Defined in: src/generated/models/getMe200.ts:71
+Defined in: src/generated/models/getMe200.ts:67
 
 Ordered list of post IDs pinned to the top of the publication's homepage. Pinned posts render in their own section above the regular feed.
+
+***
+
+### plan?
+
+> `optional` **plan?**: [`GetMe200Plan`](GetMe200Plan.md)
+
+Defined in: src/generated/models/getMe200.ts:71
+
+Subscription plan of the publication. Only returned on /v1/me.
 
 ***
 
