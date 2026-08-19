@@ -130,10 +130,6 @@
                       "minLength": 1,
                       "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                     },
-                    "disableComments": {
-                      "type": "boolean",
-                      "description": "Comment visibility. true disables comments and false enables them."
-                    },
                     "enableTableOfContents": {
                       "type": "boolean",
                       "description": "Whether the table of contents is enabled on posts"
@@ -156,10 +152,6 @@
                     "emailNotifications": {
                       "type": "object",
                       "properties": {
-                        "newComment": {
-                          "type": "boolean",
-                          "description": "Email the writer when someone comments on a post"
-                        },
                         "newSubscriber": {
                           "type": "boolean",
                           "description": "Email the writer when a new free subscriber signs up"
@@ -354,10 +346,6 @@
                     "minLength": 1,
                     "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                   },
-                  "disableComments": {
-                    "type": "boolean",
-                    "description": "Comment visibility. true disables comments and false enables them."
-                  },
                   "enableTableOfContents": {
                     "type": "boolean",
                     "description": "Whether the table of contents is enabled on posts"
@@ -383,10 +371,6 @@
                   "emailNotifications": {
                     "type": "object",
                     "properties": {
-                      "newComment": {
-                        "type": "boolean",
-                        "description": "Email the writer when someone comments on a post"
-                      },
                       "newSubscriber": {
                         "type": "boolean",
                         "description": "Email the writer when a new free subscriber signs up"
@@ -511,10 +495,6 @@
                       "minLength": 1,
                       "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                     },
-                    "disableComments": {
-                      "type": "boolean",
-                      "description": "Comment visibility. true disables comments and false enables them."
-                    },
                     "enableTableOfContents": {
                       "type": "boolean",
                       "description": "Whether the table of contents is enabled on posts"
@@ -537,10 +517,6 @@
                     "emailNotifications": {
                       "type": "object",
                       "properties": {
-                        "newComment": {
-                          "type": "boolean",
-                          "description": "Email the writer when someone comments on a post"
-                        },
                         "newSubscriber": {
                           "type": "boolean",
                           "description": "Email the writer when a new free subscriber signs up"
@@ -713,11 +689,6 @@
             "lang": "typescript",
             "label": "Update theme settings",
             "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nawait api.publications.update({\n  id: \"BMV6abfvCSUl51ErCVzd\",\n  themeColor: \"indigo-600\",\n  headerFont: \"serif\",\n  postListType: \"grid\",\n})"
-          },
-          {
-            "lang": "bash",
-            "label": "Disable comments using curl",
-            "source": "curl -X PATCH \"https://public.api.paragraph.com/api/v1/publications/BMV6abfvCSUl51ErCVzd\" \\\n  -H \"Authorization: Bearer your-api-key\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"disableComments\": true}'"
           }
         ],
         "security": [
@@ -858,10 +829,6 @@
                       "minLength": 1,
                       "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                     },
-                    "disableComments": {
-                      "type": "boolean",
-                      "description": "Comment visibility. true disables comments and false enables them."
-                    },
                     "enableTableOfContents": {
                       "type": "boolean",
                       "description": "Whether the table of contents is enabled on posts"
@@ -884,10 +851,6 @@
                     "emailNotifications": {
                       "type": "object",
                       "properties": {
-                        "newComment": {
-                          "type": "boolean",
-                          "description": "Email the writer when someone comments on a post"
-                        },
                         "newSubscriber": {
                           "type": "boolean",
                           "description": "Email the writer when a new free subscriber signs up"
@@ -1107,10 +1070,6 @@
                       "minLength": 1,
                       "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                     },
-                    "disableComments": {
-                      "type": "boolean",
-                      "description": "Comment visibility. true disables comments and false enables them."
-                    },
                     "enableTableOfContents": {
                       "type": "boolean",
                       "description": "Whether the table of contents is enabled on posts"
@@ -1133,10 +1092,6 @@
                     "emailNotifications": {
                       "type": "object",
                       "properties": {
-                        "newComment": {
-                          "type": "boolean",
-                          "description": "Email the writer when someone comments on a post"
-                        },
                         "newSubscriber": {
                           "type": "boolean",
                           "description": "Email the writer when a new free subscriber signs up"
@@ -1627,10 +1582,6 @@
                                 "minLength": 1,
                                 "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                               },
-                              "disableComments": {
-                                "type": "boolean",
-                                "description": "Comment visibility. true disables comments and false enables them."
-                              },
                               "enableTableOfContents": {
                                 "type": "boolean",
                                 "description": "Whether the table of contents is enabled on posts"
@@ -1653,10 +1604,6 @@
                               "emailNotifications": {
                                 "type": "object",
                                 "properties": {
-                                  "newComment": {
-                                    "type": "boolean",
-                                    "description": "Email the writer when someone comments on a post"
-                                  },
                                   "newSubscriber": {
                                     "type": "boolean",
                                     "description": "Email the writer when a new free subscriber signs up"
@@ -2970,7 +2917,7 @@
         ]
       },
       "delete": {
-        "description": "Permanently delete a post from your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Warning:** This action is irreversible. The post and all related data (comments, notifications, drafts) will be permanently deleted.",
+        "description": "Permanently delete a post from your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Warning:** This action is irreversible. The post and all related data (notifications and drafts) will be permanently deleted.",
         "summary": "Delete a post",
         "tags": [
           "posts"
@@ -4538,7 +4485,7 @@
         ]
       },
       "delete": {
-        "description": "Permanently delete a post using its URL slug. The publication is identified by the API key provided in the Authorization header.\n\n**Warning:** This action is irreversible. The post and all related data (comments, notifications, drafts) will be permanently deleted.",
+        "description": "Permanently delete a post using its URL slug. The publication is identified by the API key provided in the Authorization header.\n\n**Warning:** This action is irreversible. The post and all related data (notifications and drafts) will be permanently deleted.",
         "summary": "Delete a post by slug",
         "tags": [
           "posts"
@@ -5001,10 +4948,6 @@
                       "minLength": 1,
                       "description": "Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication."
                     },
-                    "disableComments": {
-                      "type": "boolean",
-                      "description": "Comment visibility. true disables comments and false enables them."
-                    },
                     "enableTableOfContents": {
                       "type": "boolean",
                       "description": "Whether the table of contents is enabled on posts"
@@ -5027,10 +4970,6 @@
                     "emailNotifications": {
                       "type": "object",
                       "properties": {
-                        "newComment": {
-                          "type": "boolean",
-                          "description": "Email the writer when someone comments on a post"
-                        },
                         "newSubscriber": {
                           "type": "boolean",
                           "description": "Email the writer when a new free subscriber signs up"
