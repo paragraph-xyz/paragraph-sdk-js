@@ -6,6 +6,7 @@ import {
   AnalyticsResource,
   AuthResource,
   CoinsResource,
+  ContentResource,
   EmailsResource,
   FeedResource,
   MeResource,
@@ -67,6 +68,18 @@ import type { ParagraphAPIOptions } from "./types";
  * const coin = await api.coins.get({ id: "coinId" }).single();
  * const { items: popular } = await api.coins.get({ sortBy: "popular" });
  *
+ * // Content - drafted X posts, LinkedIn posts, newsletters, and X Articles (requires API key)
+ * const draft = await apiWithAuth.content.create({
+ *   kind: "tweet",
+ *   title: "Thread on writing in public",
+ *   body: { tweets: ["Writing in public changes what you write."] },
+ * });
+ * const { items: drafts } = await apiWithAuth.content.list({ kind: "tweet", status: "draft" });
+ * const piece = await apiWithAuth.content.get({ id: draft.id });
+ * await apiWithAuth.content.update({ id: draft.id, title: "Second pass" });
+ * await apiWithAuth.content.archive({ id: draft.id });
+ * await apiWithAuth.content.restore({ id: draft.id });
+ *
  * // Search
  * const posts = await api.search.posts("ethereum");
  * const coins = await api.search.coins("test");
@@ -121,6 +134,9 @@ export class ParagraphAPI {
   /** Coins resource */
   public readonly coins: CoinsResource;
 
+  /** Content resource - drafted X posts, LinkedIn posts, newsletters, and X Articles */
+  public readonly content: ContentResource;
+
   /** Emails resource - send custom emails to a list of recipients */
   public readonly emails: EmailsResource;
 
@@ -151,6 +167,7 @@ export class ParagraphAPI {
     this.feed = new FeedResource(this.api);
     this.users = new UsersResource(this.api);
     this.coins = new CoinsResource(this.api);
+    this.content = new ContentResource(this.api);
     this.emails = new EmailsResource(this.api);
     this.search = new SearchResource(this.api);
     this.me = new MeResource(this.api);

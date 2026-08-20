@@ -94,6 +94,12 @@ export type PostIdentifier =
   | PostsByTagIdentifier;
 
 /**
+ * Identifier for a single piece of drafted content.
+ * Use `{ id: string }` — the ID returned when the piece was created or listed.
+ */
+export type ContentIdentifier = { id: string };
+
+/**
  * A discriminated union of identifiers for retrieving a single user.
  * Use one of the following shapes:
  * - `{ id: string }` to get a user by their unique ID.

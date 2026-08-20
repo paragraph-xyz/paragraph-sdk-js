@@ -8,7 +8,7 @@
 
 > **UpdatePublicationBody** = `object`
 
-Defined in: src/generated/models/updatePublicationBody.ts:21
+Defined in: src/generated/models/updatePublicationBody.ts:20
 
 ## Properties
 
@@ -16,29 +16,9 @@ Defined in: src/generated/models/updatePublicationBody.ts:21
 
 > `optional` **bodyFont?**: [`UpdatePublicationBodyBodyFont`](UpdatePublicationBodyBodyFont.md)
 
-Defined in: src/generated/models/updatePublicationBody.ts:40
+Defined in: src/generated/models/updatePublicationBody.ts:39
 
 Font family used for body text
-
-***
-
-### disableComments?
-
-> `optional` **disableComments?**: [`UpdatePublicationBodyDisableComments`](UpdatePublicationBodyDisableComments.md)
-
-Defined in: src/generated/models/updatePublicationBody.ts:51
-
-Comment visibility. true disables all comments, false enables them, 'on-platform' hides on-Paragraph comments while keeping Farcaster comments.
-
-***
-
-### disableHighlights?
-
-> `optional` **disableHighlights?**: `boolean`
-
-Defined in: src/generated/models/updatePublicationBody.ts:53
-
-Whether to disable highlights on posts
 
 ***
 
@@ -46,7 +26,7 @@ Whether to disable highlights on posts
 
 > `optional` **emailNotifications?**: [`UpdatePublicationBodyEmailNotifications`](UpdatePublicationBodyEmailNotifications.md)
 
-Defined in: src/generated/models/updatePublicationBody.ts:66
+Defined in: src/generated/models/updatePublicationBody.ts:61
 
 Owner-side email notification toggles
 
@@ -56,7 +36,7 @@ Owner-side email notification toggles
 
 > `optional` **enableSubscribePopup?**: `boolean`
 
-Defined in: src/generated/models/updatePublicationBody.ts:57
+Defined in: src/generated/models/updatePublicationBody.ts:52
 
 Whether to show the subscribe popup to first-time visitors arriving from external links
 
@@ -66,7 +46,7 @@ Whether to show the subscribe popup to first-time visitors arriving from externa
 
 > `optional` **enableSubscribeScroll?**: `boolean`
 
-Defined in: src/generated/models/updatePublicationBody.ts:59
+Defined in: src/generated/models/updatePublicationBody.ts:54
 
 Whether to show the subscribe popup when first-time visitors scroll a post
 
@@ -76,7 +56,7 @@ Whether to show the subscribe popup when first-time visitors scroll a post
 
 > `optional` **enableTableOfContents?**: `boolean`
 
-Defined in: src/generated/models/updatePublicationBody.ts:55
+Defined in: src/generated/models/updatePublicationBody.ts:50
 
 Whether the table of contents is enabled on posts
 
@@ -86,7 +66,7 @@ Whether the table of contents is enabled on posts
 
 > `optional` **featuredPost?**: `string`
 
-Defined in: src/generated/models/updatePublicationBody.ts:49
+Defined in: src/generated/models/updatePublicationBody.ts:48
 
 Featured post selector. Use 'latest' for the most recent post, 'popular' for the most-viewed post, 'disabled' to hide the featured slot, or the ID of a specific post in this publication.
 
@@ -100,7 +80,7 @@ Featured post selector. Use 'latest' for the most recent post, 'popular' for the
 
 > `optional` **headerFont?**: [`UpdatePublicationBodyHeaderFont`](UpdatePublicationBodyHeaderFont.md)
 
-Defined in: src/generated/models/updatePublicationBody.ts:38
+Defined in: src/generated/models/updatePublicationBody.ts:37
 
 Font family used for headers
 
@@ -110,7 +90,7 @@ Font family used for headers
 
 > `optional` **hideStats?**: `boolean`
 
-Defined in: src/generated/models/updatePublicationBody.ts:44
+Defined in: src/generated/models/updatePublicationBody.ts:43
 
 Whether to hide stats like subscriber count, post count, and collects
 
@@ -120,7 +100,7 @@ Whether to hide stats like subscriber count, post count, and collects
 
 > `optional` **name?**: `string`
 
-Defined in: src/generated/models/updatePublicationBody.ts:27
+Defined in: src/generated/models/updatePublicationBody.ts:26
 
 Display name of the publication
 
@@ -138,7 +118,7 @@ Display name of the publication
 
 > `optional` **pinnedPostIds?**: `string`[]
 
-Defined in: src/generated/models/updatePublicationBody.ts:64
+Defined in: src/generated/models/updatePublicationBody.ts:59
 
 Ordered list of post IDs to pin to the top of the homepage. Each ID must belong to this publication. Replaces the existing pinned list. Maximum 50 IDs.
 
@@ -152,7 +132,7 @@ Ordered list of post IDs to pin to the top of the homepage. Each ID must belong 
 
 > `optional` **postListType?**: [`UpdatePublicationBodyPostListType`](UpdatePublicationBodyPostListType.md)
 
-Defined in: src/generated/models/updatePublicationBody.ts:34
+Defined in: src/generated/models/updatePublicationBody.ts:33
 
 Homepage layout. 'feed' is a single-column list of cards, 'grid' is a 3-column grid, 'full-post' shows full posts in a single column.
 
@@ -162,7 +142,7 @@ Homepage layout. 'feed' is a single-column list of cards, 'grid' is a 3-column g
 
 > `optional` **showMostPopular?**: `boolean`
 
-Defined in: src/generated/models/updatePublicationBody.ts:42
+Defined in: src/generated/models/updatePublicationBody.ts:41
 
 Whether to show the 'most popular posts' widget
 
@@ -172,7 +152,7 @@ Whether to show the 'most popular posts' widget
 
 > `optional` **summary?**: `string`
 
-Defined in: src/generated/models/updatePublicationBody.ts:32
+Defined in: src/generated/models/updatePublicationBody.ts:31
 
 Brief description of the publication (max 500 characters)
 
@@ -186,6 +166,6 @@ Brief description of the publication (max 500 characters)
 
 > `optional` **themeColor?**: [`UpdatePublicationBodyThemeColor`](UpdatePublicationBodyThemeColor.md)
 
-Defined in: src/generated/models/updatePublicationBody.ts:36
+Defined in: src/generated/models/updatePublicationBody.ts:35
 
 Theme accent color for the publication

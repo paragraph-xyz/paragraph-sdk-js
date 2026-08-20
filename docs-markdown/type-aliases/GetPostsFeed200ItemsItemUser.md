@@ -8,7 +8,7 @@
 
 > **GetPostsFeed200ItemsItemUser** = `object`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:19
+Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:18
 
 The user who owns the publication this post belongs to
 
@@ -18,7 +18,7 @@ The user who owns the publication this post belongs to
 
 > `optional` **avatarUrl?**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:28
+Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:27
 
 URL to the user's avatar image
 
@@ -28,7 +28,7 @@ URL to the user's avatar image
 
 > `optional` **bio?**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:37
+Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:36
 
 Brief biography of the user (max 500 characters)
 
@@ -38,21 +38,11 @@ Brief biography of the user (max 500 characters)
 
 ***
 
-### farcaster?
-
-> `optional` **farcaster?**: [`GetPostsFeed200ItemsItemUserFarcaster`](GetPostsFeed200ItemsItemUserFarcaster.md)
-
-Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:39
-
-Farcaster profile information, if linked
-
-***
-
 ### id
 
 > **id**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:21
+Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:20
 
 Unique identifier for the user
 
@@ -62,7 +52,7 @@ Unique identifier for the user
 
 > `optional` **name?**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:32
+Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:31
 
 Display name of the user
 
@@ -72,7 +62,7 @@ Display name of the user
 
 > **publicationId**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:30
+Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:29
 
 ID of the publication this user belongs to
 
@@ -82,7 +72,7 @@ ID of the publication this user belongs to
 
 > `optional` **walletAddress?**: `string`
 
-Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:26
+Defined in: src/generated/models/getPostsFeed200ItemsItemUser.ts:25
 
 Wallet address of the user
 

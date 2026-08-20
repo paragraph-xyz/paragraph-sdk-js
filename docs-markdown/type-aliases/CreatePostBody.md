@@ -12,11 +12,39 @@ Defined in: src/generated/models/createPostBody.ts:18
 
 ## Properties
 
+### authorIds?
+
+> `optional` **authorIds?**: `string`[]
+
+Defined in: src/generated/models/createPostBody.ts:57
+
+Optional user ids to credit as the post's authors, in byline order. Each id must be the publication's owner or an active team member — ids from outside the publication are rejected. Defaults to the API key's own user.
+
+#### Min Items
+
+1
+
+#### Max Items
+
+20
+
+***
+
+### bodyJson?
+
+> `optional` **bodyJson?**: `string`
+
+Defined in: src/generated/models/createPostBody.ts:22
+
+Post content as a Tiptap document, JSON-stringified (e.g. '{"type":"doc","content":[...]}'). Use instead of `markdown` when the body needs Subscribe/Share/custom buttons or linked images. Validated server-side; an invalid document is rejected. Provide `markdown` OR `bodyJson`, not both.
+
+***
+
 ### categories?
 
 > `optional` **categories?**: [`CreatePostBodyCategories`](CreatePostBodyCategories.md)
 
-Defined in: src/generated/models/createPostBody.ts:49
+Defined in: src/generated/models/createPostBody.ts:51
 
 Optional array of category tags for the post. Can also be a comma-separated string.
 
@@ -26,19 +54,19 @@ Optional array of category tags for the post. Can also be a comma-separated stri
 
 > `optional` **imageUrl?**: `string`
 
-Defined in: src/generated/models/createPostBody.ts:32
+Defined in: src/generated/models/createPostBody.ts:34
 
 Optional URL to the post's cover image
 
 ***
 
-### markdown
+### markdown?
 
-> **markdown**: `string`
+> `optional` **markdown?**: `string`
 
 Defined in: src/generated/models/createPostBody.ts:20
 
-Post content in Markdown format
+Post content in Markdown format. Provide `markdown` OR `bodyJson`, not both. Markdown cannot represent buttons or linked images — use `bodyJson` for those.
 
 ***
 
@@ -46,7 +74,7 @@ Post content in Markdown format
 
 > `optional` **postPreview?**: `string`
 
-Defined in: src/generated/models/createPostBody.ts:47
+Defined in: src/generated/models/createPostBody.ts:49
 
 Optional preview text for the post. If not provided, will be generated from content
 
@@ -60,7 +88,7 @@ Optional preview text for the post. If not provided, will be generated from cont
 
 > `optional` **scheduledAt?**: `number`
 
-Defined in: src/generated/models/createPostBody.ts:54
+Defined in: src/generated/models/createPostBody.ts:62
 
 Optional Unix timestamp (milliseconds) to schedule first-publish of the post at a future time. Must be in the future. Cannot be combined with status: 'draft'. When set, the post is created and queued to publish (and send newsletter, if requested) at the specified time. Pass 0 or omit the field for an unscheduled post.
 
@@ -74,7 +102,7 @@ Optional Unix timestamp (milliseconds) to schedule first-publish of the post at 
 
 > `optional` **sendNewsletter?**: [`CreatePostBodySendNewsletter`](CreatePostBodySendNewsletter.md)
 
-Defined in: src/generated/models/createPostBody.ts:34
+Defined in: src/generated/models/createPostBody.ts:36
 
 Whether to send an email newsletter to subscribers. Default: false
 
@@ -84,7 +112,7 @@ Whether to send an email newsletter to subscribers. Default: false
 
 > `optional` **slug?**: `string`
 
-Defined in: src/generated/models/createPostBody.ts:42
+Defined in: src/generated/models/createPostBody.ts:44
 
 Optional URL-friendly identifier for the post. If not provided, will be generated from title
 
@@ -102,7 +130,7 @@ Optional URL-friendly identifier for the post. If not provided, will be generate
 
 > `optional` **status?**: [`CreatePostBodyStatus`](CreatePostBodyStatus.md)
 
-Defined in: src/generated/models/createPostBody.ts:36
+Defined in: src/generated/models/createPostBody.ts:38
 
 Status of the post. Default: published
 
@@ -112,7 +140,7 @@ Status of the post. Default: published
 
 > `optional` **subtitle?**: `string`
 
-Defined in: src/generated/models/createPostBody.ts:30
+Defined in: src/generated/models/createPostBody.ts:32
 
 Optional subtitle or brief summary
 
@@ -126,7 +154,7 @@ Optional subtitle or brief summary
 
 > **title**: `string`
 
-Defined in: src/generated/models/createPostBody.ts:25
+Defined in: src/generated/models/createPostBody.ts:27
 
 Title of the post
 
