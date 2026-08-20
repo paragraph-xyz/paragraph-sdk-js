@@ -4963,6 +4963,13 @@
                       ],
                       "description": "ISO 8601 timestamp of the first delivery, or null"
                     },
+                    "url": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Where this piece went live, from the same delivery `publishedAt` came from. Null when it hasn't been delivered, and null by design for a channel that publishes no page: a custom email renders into the message itself, so there is no address to link to. Never guessed — a delivery whose id isn't shaped like its channel reports null rather than a link that would 404."
+                    },
                     "archivedAt": {
                       "type": [
                         "string",
@@ -4993,6 +5000,7 @@
                     "scheduled",
                     "lockedReason",
                     "publishedAt",
+                    "url",
                     "archivedAt",
                     "createdAt",
                     "updatedAt",
@@ -5253,6 +5261,13 @@
                             ],
                             "description": "ISO 8601 timestamp of the first delivery, or null"
                           },
+                          "url": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Where this piece went live, from the same delivery `publishedAt` came from. Null when it hasn't been delivered, and null by design for a channel that publishes no page: a custom email renders into the message itself, so there is no address to link to. Never guessed — a delivery whose id isn't shaped like its channel reports null rather than a link that would 404."
+                          },
                           "archivedAt": {
                             "type": [
                               "string",
@@ -5278,6 +5293,7 @@
                           "scheduled",
                           "lockedReason",
                           "publishedAt",
+                          "url",
                           "archivedAt",
                           "createdAt",
                           "updatedAt"
@@ -5492,6 +5508,13 @@
                       ],
                       "description": "ISO 8601 timestamp of the first delivery, or null"
                     },
+                    "url": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Where this piece went live, from the same delivery `publishedAt` came from. Null when it hasn't been delivered, and null by design for a channel that publishes no page: a custom email renders into the message itself, so there is no address to link to. Never guessed — a delivery whose id isn't shaped like its channel reports null rather than a link that would 404."
+                    },
                     "archivedAt": {
                       "type": [
                         "string",
@@ -5522,6 +5545,7 @@
                     "scheduled",
                     "lockedReason",
                     "publishedAt",
+                    "url",
                     "archivedAt",
                     "createdAt",
                     "updatedAt",
@@ -5768,6 +5792,13 @@
                       ],
                       "description": "ISO 8601 timestamp of the first delivery, or null"
                     },
+                    "url": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Where this piece went live, from the same delivery `publishedAt` came from. Null when it hasn't been delivered, and null by design for a channel that publishes no page: a custom email renders into the message itself, so there is no address to link to. Never guessed — a delivery whose id isn't shaped like its channel reports null rather than a link that would 404."
+                    },
                     "archivedAt": {
                       "type": [
                         "string",
@@ -5798,6 +5829,7 @@
                     "scheduled",
                     "lockedReason",
                     "publishedAt",
+                    "url",
                     "archivedAt",
                     "createdAt",
                     "updatedAt",
@@ -6023,6 +6055,13 @@
                       ],
                       "description": "ISO 8601 timestamp of the first delivery, or null"
                     },
+                    "url": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Where this piece went live, from the same delivery `publishedAt` came from. Null when it hasn't been delivered, and null by design for a channel that publishes no page: a custom email renders into the message itself, so there is no address to link to. Never guessed — a delivery whose id isn't shaped like its channel reports null rather than a link that would 404."
+                    },
                     "archivedAt": {
                       "type": [
                         "string",
@@ -6053,6 +6092,7 @@
                     "scheduled",
                     "lockedReason",
                     "publishedAt",
+                    "url",
                     "archivedAt",
                     "createdAt",
                     "updatedAt",
@@ -6278,6 +6318,13 @@
                       ],
                       "description": "ISO 8601 timestamp of the first delivery, or null"
                     },
+                    "url": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Where this piece went live, from the same delivery `publishedAt` came from. Null when it hasn't been delivered, and null by design for a channel that publishes no page: a custom email renders into the message itself, so there is no address to link to. Never guessed — a delivery whose id isn't shaped like its channel reports null rather than a link that would 404."
+                    },
                     "archivedAt": {
                       "type": [
                         "string",
@@ -6308,6 +6355,7 @@
                     "scheduled",
                     "lockedReason",
                     "publishedAt",
+                    "url",
                     "archivedAt",
                     "createdAt",
                     "updatedAt",
