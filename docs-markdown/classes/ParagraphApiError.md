@@ -6,7 +6,7 @@
 
 # Class: ParagraphApiError
 
-Defined in: [src/mutator/custom-axios.ts:30](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/8df5e78514d368a2c54d5d6662d5540168415d4a/src/mutator/custom-axios.ts#L30)
+Defined in: [src/mutator/custom-axios.ts:30](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/9af51a10ecc9b27c229e13a34e1b2fed4c13405d/src/mutator/custom-axios.ts#L30)
 
 ## Extends
 
@@ -18,7 +18,7 @@ Defined in: [src/mutator/custom-axios.ts:30](https://github.com/paragraph-xyz/pa
 
 > **new ParagraphApiError**(`status`, `statusText`, `data`): `ParagraphApiError`
 
-Defined in: [src/mutator/custom-axios.ts:31](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/8df5e78514d368a2c54d5d6662d5540168415d4a/src/mutator/custom-axios.ts#L31)
+Defined in: [src/mutator/custom-axios.ts:31](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/9af51a10ecc9b27c229e13a34e1b2fed4c13405d/src/mutator/custom-axios.ts#L31)
 
 #### Parameters
 
@@ -48,7 +48,7 @@ Defined in: [src/mutator/custom-axios.ts:31](https://github.com/paragraph-xyz/pa
 
 > `readonly` **data**: `unknown`
 
-Defined in: [src/mutator/custom-axios.ts:34](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/8df5e78514d368a2c54d5d6662d5540168415d4a/src/mutator/custom-axios.ts#L34)
+Defined in: [src/mutator/custom-axios.ts:34](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/9af51a10ecc9b27c229e13a34e1b2fed4c13405d/src/mutator/custom-axios.ts#L34)
 
 ***
 
@@ -92,7 +92,7 @@ Defined in: node\_modules/typescript/lib/lib.es5.d.ts:1078
 
 > `readonly` **status**: `number`
 
-Defined in: [src/mutator/custom-axios.ts:32](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/8df5e78514d368a2c54d5d6662d5540168415d4a/src/mutator/custom-axios.ts#L32)
+Defined in: [src/mutator/custom-axios.ts:32](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/9af51a10ecc9b27c229e13a34e1b2fed4c13405d/src/mutator/custom-axios.ts#L32)
 
 ***
 
@@ -100,7 +100,7 @@ Defined in: [src/mutator/custom-axios.ts:32](https://github.com/paragraph-xyz/pa
 
 > `readonly` **statusText**: `string`
 
-Defined in: [src/mutator/custom-axios.ts:33](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/8df5e78514d368a2c54d5d6662d5540168415d4a/src/mutator/custom-axios.ts#L33)
+Defined in: [src/mutator/custom-axios.ts:33](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/9af51a10ecc9b27c229e13a34e1b2fed4c13405d/src/mutator/custom-axios.ts#L33)
 
 ***
 
