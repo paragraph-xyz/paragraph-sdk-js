@@ -1365,6 +1365,10 @@
                                 "format": "uri",
                                 "description": "Optional URL to the post's main image"
                               },
+                              "imageAlt": {
+                                "type": "string",
+                                "description": "Alternative text describing the cover image, shown to screen readers and when the image fails to load"
+                              },
                               "publishedAt": {
                                 "type": "string",
                                 "description": "Epoch timestamp when the post was published"
@@ -1847,6 +1851,10 @@
                             "format": "uri",
                             "description": "Optional URL to the post's main image"
                           },
+                          "imageAlt": {
+                            "type": "string",
+                            "description": "Alternative text describing the cover image, shown to screen readers and when the image fails to load"
+                          },
                           "publishedAt": {
                             "type": "string",
                             "description": "Epoch timestamp when the post was published"
@@ -2139,6 +2147,10 @@
                             "format": "uri",
                             "description": "Optional URL to the post's main image"
                           },
+                          "imageAlt": {
+                            "type": "string",
+                            "description": "Alternative text describing the cover image, shown to screen readers and when the image fails to load"
+                          },
                           "publishedAt": {
                             "type": "string",
                             "description": "Epoch timestamp when the post was published"
@@ -2407,6 +2419,10 @@
                       "format": "uri",
                       "description": "Optional URL to the post's main image"
                     },
+                    "imageAlt": {
+                      "type": "string",
+                      "description": "Alternative text describing the cover image, shown to screen readers and when the image fails to load"
+                    },
                     "publishedAt": {
                       "type": "string",
                       "description": "Epoch timestamp when the post was published"
@@ -2592,7 +2608,7 @@
         ]
       },
       "put": {
-        "description": "Update an existing post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- When `markdown` is provided, it replaces the full content. Rich blocks (embeds, buttons, callouts) created in the editor will be lost — the markdown to editor conversion is lossy for blocks without a markdown equivalent\n- Set `status` to `\"published\"` to publish a draft, `\"draft\"` to unpublish, or `\"archived\"` to archive\n- When editing an already-live post that should remain live, include `status: \"published\"` in the update and verify the returned post status before telling the writer it is live\n- Set `scheduledAt` (Unix timestamp in milliseconds) to schedule a draft's first-publish for a future time. Must be in the future and at most 30 days out. Only valid for posts that haven't been published or already scheduled. Pass `scheduledAt: null` to cancel a previously scheduled publish (or to reschedule: cancel first, then schedule again with the new time). Set `sendNewsletter: true` alongside `scheduledAt` to email subscribers when the post publishes.\n- Set `imageUrl` to update the post's cover/hero image; the URL is fetched, re-hosted, and a placeholder is generated. Pass `clearImage: true` to remove the existing cover.",
+        "description": "Update an existing post in your publication. The publication is identified by the API key provided in the Authorization header.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- When `markdown` is provided, it replaces the full content. Rich blocks (embeds, buttons, callouts) created in the editor will be lost — the markdown to editor conversion is lossy for blocks without a markdown equivalent\n- Set `status` to `\"published\"` to publish a draft, `\"draft\"` to unpublish, or `\"archived\"` to archive\n- When editing an already-live post that should remain live, include `status: \"published\"` in the update and verify the returned post status before telling the writer it is live\n- Set `scheduledAt` (Unix timestamp in milliseconds) to schedule a draft's first-publish for a future time. Must be in the future and at most 30 days out. Only valid for posts that haven't been published or already scheduled. Pass `scheduledAt: null` to cancel a previously scheduled publish (or to reschedule: cancel first, then schedule again with the new time). Set `sendNewsletter: true` alongside `scheduledAt` to email subscribers when the post publishes.\n- Set `imageUrl` to update the post's cover/hero image; the URL is fetched, re-hosted, and a placeholder is generated. Pass `clearImage: true` to remove the existing cover.\n- Set `imageAlt` to describe the cover image for screen readers. It renders everywhere the cover appears, so set it whenever you set `imageUrl`.",
         "summary": "Update a post by ID",
         "tags": [
           "posts"
@@ -2715,6 +2731,14 @@
                   "clearImage": {
                     "type": "boolean",
                     "description": "When true, removes the post's existing cover/hero image. Ignored if imageUrl is also provided."
+                  },
+                  "imageAlt": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "maxLength": 1000,
+                    "description": "Alternative text describing the cover image. Set it alongside imageUrl when replacing the image; on its own it re-describes the existing cover. Pass null or an empty string to clear it. Ignored when the post has no cover."
                   }
                 }
               }
@@ -3142,6 +3166,10 @@
                       "format": "uri",
                       "description": "Optional URL to the post's main image"
                     },
+                    "imageAlt": {
+                      "type": "string",
+                      "description": "Alternative text describing the cover image, shown to screen readers and when the image fails to load"
+                    },
                     "publishedAt": {
                       "type": "string",
                       "description": "Epoch timestamp when the post was published"
@@ -3395,6 +3423,10 @@
                       "format": "uri",
                       "description": "Optional URL to the post's main image"
                     },
+                    "imageAlt": {
+                      "type": "string",
+                      "description": "Alternative text describing the cover image, shown to screen readers and when the image fails to load"
+                    },
                     "publishedAt": {
                       "type": "string",
                       "description": "Epoch timestamp when the post was published"
@@ -3617,6 +3649,11 @@
                     "type": "string",
                     "format": "uri",
                     "description": "Optional URL to the post's cover image"
+                  },
+                  "imageAlt": {
+                    "type": "string",
+                    "maxLength": 1000,
+                    "description": "Alternative text describing the cover image. Only used when imageUrl is provided."
                   },
                   "sendNewsletter": {
                     "oneOf": [
@@ -3948,6 +3985,10 @@
                             "format": "uri",
                             "description": "Optional URL to the post's main image"
                           },
+                          "imageAlt": {
+                            "type": "string",
+                            "description": "Alternative text describing the cover image, shown to screen readers and when the image fails to load"
+                          },
                           "publishedAt": {
                             "type": "string",
                             "description": "Epoch timestamp when the post was published"
@@ -4173,7 +4214,7 @@
     },
     "/v1/posts/slug/{slug}": {
       "put": {
-        "description": "Update an existing post using its URL slug. The publication is identified by the API key provided in the Authorization header.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- When `markdown` is provided, it replaces the full content. Rich blocks (embeds, buttons, callouts) created in the editor will be lost\n- Set `status` to `\"published\"` to publish a draft, `\"draft\"` to unpublish, or `\"archived\"` to archive\n- When editing an already-live post that should remain live, include `status: \"published\"` in the update and verify the returned post status before telling the writer it is live\n- Set `scheduledAt` (Unix timestamp in milliseconds) to schedule a draft's first-publish for a future time. Must be in the future and at most 30 days out. Only valid for posts that haven't been published or already scheduled. Pass `scheduledAt: null` to cancel a previously scheduled publish (or to reschedule: cancel first, then schedule again with the new time). Set `sendNewsletter: true` alongside `scheduledAt` to email subscribers when the post publishes.\n- Set `imageUrl` to update the post's cover/hero image; the URL is fetched, re-hosted, and a placeholder is generated. Pass `clearImage: true` to remove the existing cover.",
+        "description": "Update an existing post using its URL slug. The publication is identified by the API key provided in the Authorization header.\n\n**Behavior:**\n- Only provided fields are updated; omitted fields remain unchanged\n- When `markdown` is provided, it replaces the full content. Rich blocks (embeds, buttons, callouts) created in the editor will be lost\n- Set `status` to `\"published\"` to publish a draft, `\"draft\"` to unpublish, or `\"archived\"` to archive\n- When editing an already-live post that should remain live, include `status: \"published\"` in the update and verify the returned post status before telling the writer it is live\n- Set `scheduledAt` (Unix timestamp in milliseconds) to schedule a draft's first-publish for a future time. Must be in the future and at most 30 days out. Only valid for posts that haven't been published or already scheduled. Pass `scheduledAt: null` to cancel a previously scheduled publish (or to reschedule: cancel first, then schedule again with the new time). Set `sendNewsletter: true` alongside `scheduledAt` to email subscribers when the post publishes.\n- Set `imageUrl` to update the post's cover/hero image; the URL is fetched, re-hosted, and a placeholder is generated. Pass `clearImage: true` to remove the existing cover.\n- Set `imageAlt` to describe the cover image for screen readers. It renders everywhere the cover appears, so set it whenever you set `imageUrl`.",
         "summary": "Update a post by slug",
         "tags": [
           "posts"
@@ -4298,6 +4339,14 @@
                   "clearImage": {
                     "type": "boolean",
                     "description": "When true, removes the post's existing cover/hero image. Ignored if imageUrl is also provided."
+                  },
+                  "imageAlt": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "maxLength": 1000,
+                    "description": "Alternative text describing the cover image. Set it alongside imageUrl when replacing the image; on its own it re-describes the existing cover. Pass null or an empty string to clear it. Ignored when the post has no cover."
                   }
                 }
               }
