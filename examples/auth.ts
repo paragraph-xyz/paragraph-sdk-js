@@ -6,7 +6,10 @@ const api = new ParagraphAPI();
 async function main() {
   // Create a browser-based auth session
   // The user opens the verification URL in their browser to approve access
-  const session = await api.auth.createSession({ deviceName: "my-app" });
+  const session = await api.auth.createSession({
+    deviceName: "my-app",
+    supportsDeliveryAcknowledgement: true,
+  });
   console.log("Session ID:", session.sessionId);
   console.log("Open this URL to approve:", session.verificationUrl);
   console.log("Expires at:", session.expiresAt);
@@ -17,7 +20,6 @@ async function main() {
       const status = await api.auth.getSession(session.sessionId);
 
       if (status.status === "completed" && status.apiKey) {
-        console.log("Authenticated! API key:", status.apiKey);
         return status.apiKey;
       }
 
@@ -36,15 +38,21 @@ async function main() {
   const apiKey = await poll();
 
   if (apiKey) {
-    // Use the returned API key for authenticated requests
+    // Validate and store the API key securely before acknowledging delivery.
     const authedApi = new ParagraphAPI({ apiKey });
     const me = await authedApi.me.get();
+    await saveApiKeySecurely(apiKey);
+    await api.auth.deleteSession(session.sessionId);
     console.log("Logged in as:", me.name);
   } else {
     // Clean up the pending session if the user never approved
     await api.auth.deleteSession(session.sessionId);
     console.log("Session cancelled");
   }
+}
+
+async function saveApiKeySecurely(_apiKey: string): Promise<void> {
+  // Store the key in your platform's credential store.
 }
 
 main().catch(console.error);

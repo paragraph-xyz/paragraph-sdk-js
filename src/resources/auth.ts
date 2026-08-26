@@ -20,7 +20,10 @@ export class AuthResource {
    * @example
    * ```ts
    * const api = new ParagraphAPI();
-   * const session = await api.auth.createSession({ deviceName: "my-cli" });
+   * const session = await api.auth.createSession({
+   *   deviceName: "my-cli",
+   *   supportsDeliveryAcknowledgement: true,
+   * });
    * console.log("Open this URL to authenticate:", session.verificationUrl);
    * ```
    *
@@ -33,7 +36,7 @@ export class AuthResource {
 
   /**
    * Polls the status of an auth session.
-   * Returns the API key once the session has been approved in the browser.
+   * Acknowledgement-capable clients can retry delivery briefly after approval.
    *
    * @example
    * ```ts
@@ -52,7 +55,7 @@ export class AuthResource {
   }
 
   /**
-   * Cancels a pending auth session. Only pending sessions can be denied.
+   * Cancels a pending session or acknowledges secure credential storage.
    *
    * @example
    * ```ts
@@ -60,7 +63,7 @@ export class AuthResource {
    * await api.auth.deleteSession("sessionId");
    * ```
    *
-   * @param sessionId - The session ID to deny.
+   * @param sessionId - The session ID to settle.
    * @returns A promise that resolves to `{ success: true }` on success.
    */
   deleteSession(sessionId: string): Promise<DeleteAuthSession200> {
