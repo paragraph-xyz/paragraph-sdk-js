@@ -51,8 +51,10 @@ async function main() {
   }
 }
 
-async function saveApiKeySecurely(_apiKey: string): Promise<void> {
-  // Store the key in your platform's credential store.
+async function saveApiKeySecurely(_apiKey: string): Promise<never> {
+  throw new Error(
+    "Implement secure credential storage before acknowledging delivery",
+  );
 }
 
 main().catch(console.error);
