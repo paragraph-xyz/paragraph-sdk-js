@@ -11017,6 +11017,10 @@
                     "format": "uri",
                     "maxLength": 2048,
                     "description": "HTTPS callback URL to redirect the user to after approving the session"
+                  },
+                  "supportsDeliveryAcknowledgement": {
+                    "type": "boolean",
+                    "description": "Whether the client acknowledges secure credential storage with DELETE"
                   }
                 }
               }
@@ -11086,7 +11090,7 @@
     },
     "/v1/api/auth/sessions/{sessionId}": {
       "get": {
-        "description": "Poll the status of an auth session. Returns the API key once the session has been approved in the browser.",
+        "description": "Poll the status of an auth session. After approval, retries return the API key briefly until the client acknowledges delivery.",
         "summary": "Poll an API auth session",
         "tags": [
           "auth"
@@ -11216,8 +11220,8 @@
         "operationId": "getAuthSession"
       },
       "delete": {
-        "description": "Cancels a pending auth session. Only pending sessions can be denied.",
-        "summary": "Deny an API auth session",
+        "description": "Cancels a pending session or acknowledges that an approved credential was stored.",
+        "summary": "Settle an API auth session",
         "tags": [
           "auth"
         ],
@@ -11229,12 +11233,12 @@
             "schema": {
               "type": "string"
             },
-            "description": "Session ID to deny"
+            "description": "Session ID to settle"
           }
         ],
         "responses": {
           "200": {
-            "description": "Session denied successfully",
+            "description": "Session settled successfully",
             "content": {
               "application/json": {
                 "schema": {
