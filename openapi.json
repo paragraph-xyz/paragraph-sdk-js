@@ -1411,6 +1411,19 @@
                                 },
                                 "description": "Categories/tags associated with this post"
                               },
+                              "canonicalUrl": {
+                                "type": "string",
+                                "format": "uri",
+                                "description": "Canonical URL used in rendered metadata. This does not change the Paragraph permalink."
+                              },
+                              "publishOnline": {
+                                "type": "boolean",
+                                "description": "Whether the published post is visible on the public website"
+                              },
+                              "communityId": {
+                                "type": "string",
+                                "description": "Subscriber segment id selected for newsletter delivery"
+                              },
                               "authors": {
                                 "type": "array",
                                 "items": {
@@ -1897,6 +1910,19 @@
                             },
                             "description": "Categories/tags associated with this post"
                           },
+                          "canonicalUrl": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "Canonical URL used in rendered metadata. This does not change the Paragraph permalink."
+                          },
+                          "publishOnline": {
+                            "type": "boolean",
+                            "description": "Whether the published post is visible on the public website"
+                          },
+                          "communityId": {
+                            "type": "string",
+                            "description": "Subscriber segment id selected for newsletter delivery"
+                          },
                           "authors": {
                             "type": "array",
                             "items": {
@@ -2193,6 +2219,19 @@
                             },
                             "description": "Categories/tags associated with this post"
                           },
+                          "canonicalUrl": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "Canonical URL used in rendered metadata. This does not change the Paragraph permalink."
+                          },
+                          "publishOnline": {
+                            "type": "boolean",
+                            "description": "Whether the published post is visible on the public website"
+                          },
+                          "communityId": {
+                            "type": "string",
+                            "description": "Subscriber segment id selected for newsletter delivery"
+                          },
                           "authors": {
                             "type": "array",
                             "items": {
@@ -2465,6 +2504,19 @@
                       },
                       "description": "Categories/tags associated with this post"
                     },
+                    "canonicalUrl": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "Canonical URL used in rendered metadata. This does not change the Paragraph permalink."
+                    },
+                    "publishOnline": {
+                      "type": "boolean",
+                      "description": "Whether the published post is visible on the public website"
+                    },
+                    "communityId": {
+                      "type": "string",
+                      "description": "Subscriber segment id selected for newsletter delivery"
+                    },
                     "authors": {
                       "type": "array",
                       "items": {
@@ -2716,6 +2768,28 @@
                       }
                     ],
                     "description": "Whether to send an email newsletter to subscribers when the post publishes. Only meaningful when publishing (status: 'published') or scheduling (scheduledAt set). Default: false"
+                  },
+                  "canonicalUrl": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "uri",
+                    "maxLength": 2048,
+                    "description": "Canonical URL used in rendered metadata. Pass null to clear it. This does not change the post's Paragraph permalink."
+                  },
+                  "publishOnline": {
+                    "type": "boolean",
+                    "description": "Whether the post should be publicly visible online when published. Set false for newsletter-only delivery."
+                  },
+                  "communityId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "description": "Subscriber segment id for newsletter delivery. Pass null for the general audience. Unavailable or cross-publication segments are rejected rather than broadened."
                   },
                   "publishedAt": {
                     "type": "integer",
@@ -3212,6 +3286,19 @@
                       },
                       "description": "Categories/tags associated with this post"
                     },
+                    "canonicalUrl": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "Canonical URL used in rendered metadata. This does not change the Paragraph permalink."
+                    },
+                    "publishOnline": {
+                      "type": "boolean",
+                      "description": "Whether the published post is visible on the public website"
+                    },
+                    "communityId": {
+                      "type": "string",
+                      "description": "Subscriber segment id selected for newsletter delivery"
+                    },
                     "authors": {
                       "type": "array",
                       "items": {
@@ -3468,6 +3555,19 @@
                         "type": "string"
                       },
                       "description": "Categories/tags associated with this post"
+                    },
+                    "canonicalUrl": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "Canonical URL used in rendered metadata. This does not change the Paragraph permalink."
+                    },
+                    "publishOnline": {
+                      "type": "boolean",
+                      "description": "Whether the published post is visible on the public website"
+                    },
+                    "communityId": {
+                      "type": "string",
+                      "description": "Subscriber segment id selected for newsletter delivery"
                     },
                     "authors": {
                       "type": "array",
@@ -4031,6 +4131,19 @@
                             },
                             "description": "Categories/tags associated with this post"
                           },
+                          "canonicalUrl": {
+                            "type": "string",
+                            "format": "uri",
+                            "description": "Canonical URL used in rendered metadata. This does not change the Paragraph permalink."
+                          },
+                          "publishOnline": {
+                            "type": "boolean",
+                            "description": "Whether the published post is visible on the public website"
+                          },
+                          "communityId": {
+                            "type": "string",
+                            "description": "Subscriber segment id selected for newsletter delivery"
+                          },
                           "authors": {
                             "type": "array",
                             "items": {
@@ -4324,6 +4437,28 @@
                       }
                     ],
                     "description": "Whether to send an email newsletter to subscribers when the post publishes. Only meaningful when publishing (status: 'published') or scheduling (scheduledAt set). Default: false"
+                  },
+                  "canonicalUrl": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "uri",
+                    "maxLength": 2048,
+                    "description": "Canonical URL used in rendered metadata. Pass null to clear it. This does not change the post's Paragraph permalink."
+                  },
+                  "publishOnline": {
+                    "type": "boolean",
+                    "description": "Whether the post should be publicly visible online when published. Set false for newsletter-only delivery."
+                  },
+                  "communityId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 128,
+                    "description": "Subscriber segment id for newsletter delivery. Pass null for the general audience. Unavailable or cross-publication segments are rejected rather than broadened."
                   },
                   "publishedAt": {
                     "type": "integer",
