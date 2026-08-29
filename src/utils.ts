@@ -1,5 +1,7 @@
 import type { PaginatedResult } from "./types";
 
+import type { RequestConfig } from "./mutator/custom-axios";
+
 /**
  * A wrapper class for query results that provides a consistent interface
  * for both single-item and multi-item queries.
@@ -62,23 +64,40 @@ export function singleItemResult<T>(item: T): PaginatedResult<T> {
 }
 
 /**
- * Wraps an API object to set the current API key context before each method call.
- * This ensures instance isolation when multiple ParagraphAPI instances exist.
+ * Wraps an API object so each generated request receives instance-local options.
+ *
+ * Orval passes the final argument to the custom mutator as its request options.
+ * Appending a fresh options object to each method call keeps credentials and
+ * custom endpoints isolated when multiple ParagraphAPI instances coexist.
  */
 export function wrapAPIWithAuth<T>(
   api: T,
   apiKey: string | undefined,
-  setCurrentApiKey: (apiKey: string | undefined) => void
+  baseURL: string | undefined,
 ): T {
-  const wrapped: Record<string, unknown> = {};
+  const wrapped: Record<string, unknown> = {
+    ...(api as Record<string, unknown>),
+  };
+
   for (const [key, method] of Object.entries(api as Record<string, unknown>)) {
-    if (typeof method === "function") {
-      wrapped[key] = (...args: unknown[]) => {
-        setCurrentApiKey(apiKey);
-        return (method as Function)(...args);
-      };
-    }
+    if (typeof method !== "function") continue;
+
+    wrapped[key] = (...args: unknown[]) => {
+      const requestOptions: RequestConfig = {};
+      if (apiKey) {
+        requestOptions.headers = { Authorization: `Bearer ${apiKey}` };
+      }
+      if (baseURL) {
+        requestOptions.baseURL = baseURL;
+      }
+
+      return (method as (...methodArgs: unknown[]) => unknown)(
+        ...args,
+        requestOptions,
+      );
+    };
   }
+
   return wrapped as T;
 }
 
