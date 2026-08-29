@@ -1,23 +1,5 @@
 const BASE_URL = "https://public.api.paragraph.com/api";
 
-// Instance-based API key storage using a context pattern
-let currentApiKey: string | undefined;
-
-/**
- * Sets the current API key context for the next API call.
- * This is used internally by ParagraphAPI to ensure instance isolation.
- * @internal
- */
-export const setCurrentApiKey = (apiKey: string | undefined) => {
-  currentApiKey = apiKey;
-};
-
-/**
- * Gets the current API key context.
- * @internal
- */
-export const getCurrentApiKey = () => currentApiKey;
-
 export interface RequestConfig {
   url: string;
   method: string;
@@ -25,6 +7,7 @@ export interface RequestConfig {
   data?: unknown;
   headers?: Record<string, string>;
   signal?: AbortSignal;
+  baseURL?: string;
 }
 
 export class ParagraphApiError extends Error {
@@ -61,6 +44,19 @@ function serializeParams(params: Record<string, unknown>): string {
   return parts.join("&");
 }
 
+function toRecord(value: unknown): Record<string, unknown> {
+  return typeof value === "object" && value !== null
+    ? (value as Record<string, unknown>)
+    : {};
+}
+
+function toStringHeaders(value: unknown): Record<string, string> {
+  const record = toRecord(value);
+  return Object.fromEntries(
+    Object.entries(record).filter(([, headerValue]) => typeof headerValue === "string"),
+  ) as Record<string, string>;
+}
+
 function isBinaryBody(data: unknown): boolean {
   return (
     typeof data === "string" ||
@@ -72,24 +68,44 @@ function isBinaryBody(data: unknown): boolean {
   );
 }
 
-export const customAxios = async <T>(config: RequestConfig): Promise<T> => {
-  const headers: Record<string, string> = { ...(config.headers ?? {}) };
-  if (currentApiKey) {
-    headers.Authorization = `Bearer ${currentApiKey}`;
-  }
+/**
+ * Executes one generated API request.
+ *
+ * The optional request options are supplied by the owning ParagraphAPI instance.
+ * Keeping credentials in this request-local object prevents concurrent clients
+ * from overwriting one another's authentication state.
+ */
+export const customAxios = async <T>(
+  config: RequestConfig,
+  options?: unknown,
+): Promise<T> => {
+  const optionsRecord = toRecord(options);
+  const requestConfig: RequestConfig = {
+    ...config,
+    baseURL:
+      typeof optionsRecord.baseURL === "string"
+        ? optionsRecord.baseURL
+        : config.baseURL,
+    headers: {
+      ...(config.headers ?? {}),
+      ...toStringHeaders(optionsRecord.headers),
+    },
+  };
+  const headers: Record<string, string> = { ...(requestConfig.headers ?? {}) };
 
-  let url = `${BASE_URL}${config.url}`;
-  if (config.params) {
-    const qs = serializeParams(config.params);
+  const baseURL = (requestConfig.baseURL ?? BASE_URL).replace(/\/+$/, "");
+  let url = `${baseURL}${requestConfig.url}`;
+  if (requestConfig.params) {
+    const qs = serializeParams(requestConfig.params);
     if (qs) url += (url.includes("?") ? "&" : "?") + qs;
   }
 
   let body: unknown = undefined;
-  if (config.data !== undefined && config.data !== null) {
-    if (isBinaryBody(config.data)) {
-      body = config.data;
+  if (requestConfig.data !== undefined && requestConfig.data !== null) {
+    if (isBinaryBody(requestConfig.data)) {
+      body = requestConfig.data;
     } else {
-      body = JSON.stringify(config.data);
+      body = JSON.stringify(requestConfig.data);
       if (!headers["Content-Type"] && !headers["content-type"]) {
         headers["Content-Type"] = "application/json";
       }
@@ -97,10 +113,10 @@ export const customAxios = async <T>(config: RequestConfig): Promise<T> => {
   }
 
   const response = await fetch(url, {
-    method: config.method.toUpperCase(),
+    method: requestConfig.method.toUpperCase(),
     headers,
     body: body as never,
-    signal: config.signal,
+    signal: requestConfig.signal,
   });
 
   const contentType = response.headers.get("content-type") ?? "";

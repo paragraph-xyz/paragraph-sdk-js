@@ -10,6 +10,10 @@ export interface ParagraphAPIOptions {
    * Obtain an API key from your Paragraph publication settings.
    */
   apiKey?: string;
+  /**
+   * Optional API base URL, useful for local development and test environments.
+   */
+  baseURL?: string;
 }
 
 /**

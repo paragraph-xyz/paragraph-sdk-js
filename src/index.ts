@@ -1,6 +1,5 @@
 // src/index.ts - public entry
 import { getParagraphAPI } from "./generated/api";
-import { setCurrentApiKey } from "./mutator/custom-axios";
 import { wrapAPIWithAuth } from "./utils";
 import {
   AnalyticsResource,
@@ -107,9 +106,6 @@ import type { ParagraphAPIOptions } from "./types";
 export class ParagraphAPI {
   private api: ReturnType<typeof getParagraphAPI>;
 
-  /** The API key for this instance */
-  private apiKey: string | undefined;
-
   /** Analytics resource - SQL queries against your publication's analytics schema */
   public readonly analytics: AnalyticsResource;
 
@@ -153,11 +149,15 @@ export class ParagraphAPI {
    *
    * @param options - Optional configuration options.
    * @param options.apiKey - API key for authenticating protected endpoints.
+   * @param options.baseURL - Optional API base URL, useful for local or test environments.
    */
   constructor(options?: ParagraphAPIOptions) {
-    this.apiKey = options?.apiKey;
-    // Wrap the API to set the current API key context before each call
-    this.api = wrapAPIWithAuth(getParagraphAPI(), this.apiKey, setCurrentApiKey);
+    // Bind configuration to this client so concurrent instances never share request state.
+    this.api = wrapAPIWithAuth(
+      getParagraphAPI(),
+      options?.apiKey,
+      options?.baseURL,
+    );
 
     this.analytics = new AnalyticsResource(this.api);
     this.auth = new AuthResource(this.api);
