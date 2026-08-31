@@ -100,6 +100,19 @@ export type PostIdentifier =
 export type ContentIdentifier = { id: string };
 
 /**
+ * Identifier for a single content group ("bucket").
+ * Use `{ id: string }` — the ID returned by `api.buckets.createForPost()`, or
+ * the `bucketId` on any piece of content.
+ */
+export type ContentBucketIdentifier = { id: string };
+
+/**
+ * Identifier for the content group belonging to a post.
+ * Use `{ postId: string }` — the ID of the post the group was seeded from.
+ */
+export type PostBucketIdentifier = { postId: string };
+
+/**
  * A discriminated union of identifiers for retrieving a single user.
  * Use one of the following shapes:
  * - `{ id: string }` to get a user by their unique ID.
