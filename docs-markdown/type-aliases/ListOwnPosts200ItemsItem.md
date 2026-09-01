@@ -16,7 +16,7 @@ Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:17
 
 > `optional` **authorIds?**: `string`[]
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:55
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:63
 
 IDs of the authors of this post
 
@@ -26,9 +26,19 @@ IDs of the authors of this post
 
 > `optional` **authors?**: [`ListOwnPosts200ItemsItemAuthorsItem`](ListOwnPosts200ItemsItemAuthorsItem.md)[]
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:53
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:61
 
 Authors of this post
+
+***
+
+### canonicalUrl?
+
+> `optional` **canonicalUrl?**: `string`
+
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:55
+
+Canonical URL used in rendered metadata. This does not change the Paragraph permalink.
 
 ***
 
@@ -36,7 +46,7 @@ Authors of this post
 
 > `optional` **categories?**: `string`[]
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:51
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:53
 
 Categories/tags associated with this post
 
@@ -46,9 +56,19 @@ Categories/tags associated with this post
 
 > `optional` **coinId?**: `string`
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:49
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:51
 
 ID of the associated coin, if the post is coined
+
+***
+
+### communityId?
+
+> `optional` **communityId?**: `string`
+
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:59
+
+Subscriber segment id selected for newsletter delivery
 
 ***
 
@@ -59,6 +79,16 @@ ID of the associated coin, if the post is coined
 Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:19
 
 Unique identifier for the post
+
+***
+
+### imageAlt?
+
+> `optional` **imageAlt?**: `string`
+
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:28
+
+Alternative text describing the cover image, shown to screen readers and when the image fails to load
 
 ***
 
@@ -76,7 +106,7 @@ Optional URL to the post's main image
 
 > `optional` **json?**: `string`
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:45
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:47
 
 TipTap JSON representation of the post content structure. This is the source of truth that the staticHtml and markdown is generated from
 
@@ -86,7 +116,7 @@ TipTap JSON representation of the post content structure. This is the source of 
 
 > `optional` **markdown?**: `string`
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:47
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:49
 
 Markdown source of the post content
 
@@ -96,9 +126,19 @@ Markdown source of the post content
 
 > `optional` **publishedAt?**: `string`
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:28
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:30
 
 Epoch timestamp when the post was published
+
+***
+
+### publishOnline?
+
+> `optional` **publishOnline?**: `boolean`
+
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:57
+
+Whether the published post is visible on the public website
 
 ***
 
@@ -106,7 +146,7 @@ Epoch timestamp when the post was published
 
 > **slug**: `string`
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:41
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:43
 
 URL-friendly identifier for the post; accessible at paragraph.com/@[publicationSlug]/[slug]
 
@@ -124,7 +164,7 @@ URL-friendly identifier for the post; accessible at paragraph.com/@[publicationS
 
 > `optional` **staticHtml?**: `string`
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:43
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:45
 
 Rendered HTML content of the post
 
@@ -134,7 +174,7 @@ Rendered HTML content of the post
 
 > `optional` **status?**: [`ListOwnPosts200ItemsItemStatus`](ListOwnPosts200ItemsItemStatus.md)
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:59
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:67
 
 Current publish status. Only set on authenticated endpoints (listOwn, getById for your own post). Use this instead of publishedAt to determine publish state — publishedAt is preserved across unpublishing.
 
@@ -144,7 +184,7 @@ Current publish status. Only set on authenticated endpoints (listOwn, getById fo
 
 > `optional` **subtitle?**: `string`
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:35
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:37
 
 Optional subtitle or brief summary
 
@@ -172,7 +212,7 @@ Title of the post
 
 > `optional` **updatedAt?**: `string`
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:30
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:32
 
 Epoch timestamp when the post was last updated
 
@@ -182,6 +222,6 @@ Epoch timestamp when the post was last updated
 
 > `optional` **views?**: `number`
 
-Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:57
+Defined in: src/generated/models/listOwnPosts200ItemsItem.ts:65
 
 Total views. Only included when fetching your own posts via GET /v1/posts

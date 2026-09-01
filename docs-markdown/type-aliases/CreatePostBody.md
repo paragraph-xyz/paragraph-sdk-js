@@ -16,7 +16,7 @@ Defined in: src/generated/models/createPostBody.ts:18
 
 > `optional` **authorIds?**: `string`[]
 
-Defined in: src/generated/models/createPostBody.ts:57
+Defined in: src/generated/models/createPostBody.ts:62
 
 Optional user ids to credit as the post's authors, in byline order. Each id must be the publication's owner or an active team member — ids from outside the publication are rejected. Defaults to the API key's own user.
 
@@ -44,9 +44,23 @@ Post content as a Tiptap document, JSON-stringified (e.g. '{"type":"doc","conten
 
 > `optional` **categories?**: [`CreatePostBodyCategories`](CreatePostBodyCategories.md)
 
-Defined in: src/generated/models/createPostBody.ts:51
+Defined in: src/generated/models/createPostBody.ts:56
 
 Optional array of category tags for the post. Can also be a comma-separated string.
+
+***
+
+### imageAlt?
+
+> `optional` **imageAlt?**: `string`
+
+Defined in: src/generated/models/createPostBody.ts:39
+
+Alternative text describing the cover image. Only used when imageUrl is provided.
+
+#### Max Length
+
+1000
 
 ***
 
@@ -74,7 +88,7 @@ Post content in Markdown format. Provide `markdown` OR `bodyJson`, not both. Mar
 
 > `optional` **postPreview?**: `string`
 
-Defined in: src/generated/models/createPostBody.ts:49
+Defined in: src/generated/models/createPostBody.ts:54
 
 Optional preview text for the post. If not provided, will be generated from content
 
@@ -88,7 +102,7 @@ Optional preview text for the post. If not provided, will be generated from cont
 
 > `optional` **scheduledAt?**: `number`
 
-Defined in: src/generated/models/createPostBody.ts:62
+Defined in: src/generated/models/createPostBody.ts:67
 
 Optional Unix timestamp (milliseconds) to schedule first-publish of the post at a future time. Must be in the future. Cannot be combined with status: 'draft'. When set, the post is created and queued to publish (and send newsletter, if requested) at the specified time. Pass 0 or omit the field for an unscheduled post.
 
@@ -102,7 +116,7 @@ Optional Unix timestamp (milliseconds) to schedule first-publish of the post at 
 
 > `optional` **sendNewsletter?**: [`CreatePostBodySendNewsletter`](CreatePostBodySendNewsletter.md)
 
-Defined in: src/generated/models/createPostBody.ts:36
+Defined in: src/generated/models/createPostBody.ts:41
 
 Whether to send an email newsletter to subscribers. Default: false
 
@@ -112,7 +126,7 @@ Whether to send an email newsletter to subscribers. Default: false
 
 > `optional` **slug?**: `string`
 
-Defined in: src/generated/models/createPostBody.ts:44
+Defined in: src/generated/models/createPostBody.ts:49
 
 Optional URL-friendly identifier for the post. If not provided, will be generated from title
 
@@ -130,7 +144,7 @@ Optional URL-friendly identifier for the post. If not provided, will be generate
 
 > `optional` **status?**: [`CreatePostBodyStatus`](CreatePostBodyStatus.md)
 
-Defined in: src/generated/models/createPostBody.ts:38
+Defined in: src/generated/models/createPostBody.ts:43
 
 Status of the post. Default: published
 

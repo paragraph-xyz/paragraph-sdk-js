@@ -5015,7 +5015,7 @@
     },
     "/v1/content": {
       "post": {
-        "description": "Save a finished piece of short-form content — an X post or thread, a LinkedIn post, a one-off email, or an X Article — to your publication's library.\n\n**What this does:**\n- The piece is saved as a draft and shows up in the Paragraph app under Content, where you can edit it and send it.\n- Nothing is posted, emailed, or scheduled. Sending happens in the app, so a draft you upload can't go out without you.\n- Long-form Paragraph posts are a different resource — use `POST /v1/posts` for those.\n\n**The body:**\n- `body` carries the artifact itself, in the shape its kind uses (see the field descriptions below).\n- It's validated the same way the Paragraph app validates it, so an X thread over 280 characters an entry, or an Article missing its headline, comes back with the same explanation you'd see in the app.\n- Drafts created here are text-only. Media has to be uploaded to X or LinkedIn first, which the API can't do yet.",
+        "description": "Save a finished piece of short-form content — an X post or thread, a LinkedIn post, a one-off email, or an X Article — to your publication's library.\n\n**What this does:**\n- The piece is saved as a draft and shows up in the Paragraph app under Content, where you can edit it and send it.\n- Nothing is posted, emailed, or scheduled. Sending happens in the app, so a draft you upload can't go out without you.\n- Long-form Paragraph posts are a different resource — use `POST /v1/posts` for those.\n\n**The body:**\n- `body` carries the artifact itself, in the shape its kind uses (see the field descriptions below).\n- It's validated the same way the Paragraph app validates it, so an X thread over 280 characters an entry, or an Article missing its headline, comes back with the same explanation you'd see in the app.\n- Drafts created here are text-only. Media has to be uploaded to X or LinkedIn first, which the API can't do yet.\n\n**Grouping:**\n- Pass `bucketId` to group this piece with the post it was made from, so the writer sees them together as one row under Content. Get the id with `POST /v1/posts/{postId}/bucket`.\n- Unknown fields are rejected rather than ignored, so a misspelled key comes back as a 400 instead of a draft that quietly isn't grouped.",
         "summary": "Create a draft",
         "tags": [
           "content"
@@ -5085,13 +5085,19 @@
                     },
                     "additionalProperties": false,
                     "description": "The artifact itself, in the shape this kind uses"
+                  },
+                  "bucketId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Group this piece with the post it was made from, so the writer sees them together in Content. Get the id from `POST /v1/posts/{postId}/bucket`. Omit for standalone work that isn't derived from anything."
                   }
                 },
                 "required": [
                   "kind",
                   "title",
                   "body"
-                ]
+                ],
+                "additionalProperties": false
               }
             }
           }
@@ -5161,6 +5167,13 @@
                       ],
                       "description": "ISO 8601 timestamp of when this piece was archived, or null"
                     },
+                    "bucketId": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "The bucket grouping this piece with the post it was made from, or null when it stands alone. Read it back with `GET /v1/buckets/{bucketId}`."
+                    },
                     "createdAt": {
                       "type": "string",
                       "description": "ISO 8601 timestamp of creation"
@@ -5186,6 +5199,7 @@
                     "publishedAt",
                     "url",
                     "archivedAt",
+                    "bucketId",
                     "createdAt",
                     "updatedAt",
                     "body"
@@ -5459,6 +5473,13 @@
                             ],
                             "description": "ISO 8601 timestamp of when this piece was archived, or null"
                           },
+                          "bucketId": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "The bucket grouping this piece with the post it was made from, or null when it stands alone. Read it back with `GET /v1/buckets/{bucketId}`."
+                          },
                           "createdAt": {
                             "type": "string",
                             "description": "ISO 8601 timestamp of creation"
@@ -5479,6 +5500,7 @@
                           "publishedAt",
                           "url",
                           "archivedAt",
+                          "bucketId",
                           "createdAt",
                           "updatedAt"
                         ]
@@ -5706,6 +5728,13 @@
                       ],
                       "description": "ISO 8601 timestamp of when this piece was archived, or null"
                     },
+                    "bucketId": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "The bucket grouping this piece with the post it was made from, or null when it stands alone. Read it back with `GET /v1/buckets/{bucketId}`."
+                    },
                     "createdAt": {
                       "type": "string",
                       "description": "ISO 8601 timestamp of creation"
@@ -5731,6 +5760,7 @@
                     "publishedAt",
                     "url",
                     "archivedAt",
+                    "bucketId",
                     "createdAt",
                     "updatedAt",
                     "body"
@@ -5848,7 +5878,7 @@
         ]
       },
       "patch": {
-        "description": "Rename a piece of content, replace its body, or both.\n\n**Replacement, not a merge:** `body` replaces the artifact entirely, in the same shape the kind takes on create. Send the whole thing, not just the part that changed. Media already attached to the draft is the one exception — you can't send it back, so it's carried over rather than dropped.\n\n**Scheduled pieces are locked:** if a send is queued or already running for this piece, its words go out exactly as written, so an edit to `body` is refused with an explanation. Cancel the schedule in the app first. Renaming is always allowed — a title isn't published anywhere.",
+        "description": "Rename a piece of content, replace its body, or both.\n\n**Replacement, not a merge:** `body` replaces the artifact entirely, in the same shape the kind takes on create. Send the whole thing, not just the part that changed. Media already attached to the draft is the one exception — you can't send it back, so it's carried over rather than dropped.\n\n**Scheduled pieces are locked:** if a send is queued or already running for this piece, its words go out exactly as written, so an edit to `body` is refused with an explanation. Cancel the schedule in the app first. Renaming is always allowed — a title isn't published anywhere.\n\n**Grouping:** `bucketId` files this piece with the post it was made from. A piece already grouped somewhere else is refused with a 409 rather than moved — ungroup it in the app first.",
         "summary": "Edit a piece of content",
         "tags": [
           "content"
@@ -5918,6 +5948,11 @@
                     },
                     "additionalProperties": false,
                     "description": "The replacement artifact, in the shape this piece's kind uses"
+                  },
+                  "bucketId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Group this piece with the post it was made from, so the writer sees them together in Content. Get the id from `POST /v1/posts/{postId}/bucket`. Omit for standalone work that isn't derived from anything."
                   }
                 },
                 "additionalProperties": false
@@ -5990,6 +6025,13 @@
                       ],
                       "description": "ISO 8601 timestamp of when this piece was archived, or null"
                     },
+                    "bucketId": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "The bucket grouping this piece with the post it was made from, or null when it stands alone. Read it back with `GET /v1/buckets/{bucketId}`."
+                    },
                     "createdAt": {
                       "type": "string",
                       "description": "ISO 8601 timestamp of creation"
@@ -6015,6 +6057,7 @@
                     "publishedAt",
                     "url",
                     "archivedAt",
+                    "bucketId",
                     "createdAt",
                     "updatedAt",
                     "body"
@@ -6253,6 +6296,13 @@
                       ],
                       "description": "ISO 8601 timestamp of when this piece was archived, or null"
                     },
+                    "bucketId": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "The bucket grouping this piece with the post it was made from, or null when it stands alone. Read it back with `GET /v1/buckets/{bucketId}`."
+                    },
                     "createdAt": {
                       "type": "string",
                       "description": "ISO 8601 timestamp of creation"
@@ -6278,6 +6328,7 @@
                     "publishedAt",
                     "url",
                     "archivedAt",
+                    "bucketId",
                     "createdAt",
                     "updatedAt",
                     "body"
@@ -6516,6 +6567,13 @@
                       ],
                       "description": "ISO 8601 timestamp of when this piece was archived, or null"
                     },
+                    "bucketId": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "The bucket grouping this piece with the post it was made from, or null when it stands alone. Read it back with `GET /v1/buckets/{bucketId}`."
+                    },
                     "createdAt": {
                       "type": "string",
                       "description": "ISO 8601 timestamp of creation"
@@ -6541,6 +6599,7 @@
                     "publishedAt",
                     "url",
                     "archivedAt",
+                    "bucketId",
                     "createdAt",
                     "updatedAt",
                     "body"
@@ -6649,6 +6708,864 @@
             "lang": "bash",
             "label": "Restore an archived draft using curl",
             "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/content/7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55/restore\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/buckets": {
+      "get": {
+        "description": "Retrieve the content groups in your publication, most recently active first. The publication is identified by the API key.\n\nA group (\"bucket\") is one identity for a post and everything made out of it — the post, the X thread drawn from it, the LinkedIn version, the newsletter. It's what the writer sees as a single stacked row under Content.\n\nEach group lists its members in display order, with the post it was seeded from first. Bodies aren't included; fetch the member with `GET /v1/content/{id}` or `GET /v1/posts/{id}` to read one.",
+        "summary": "List content groups",
+        "tags": [
+          "buckets"
+        ],
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "description": "Cursor for pagination",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of items to return (1-50, default: 20)",
+            "schema": {
+              "default": 20,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content groups retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique identifier for this bucket"
+                          },
+                          "title": {
+                            "type": "string",
+                            "description": "What the group is called, taken from the post that seeded it"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "description": "ISO 8601 timestamp of creation"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "description": "ISO 8601 timestamp of the last change to the group"
+                          },
+                          "members": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "kind": {
+                                  "type": "string",
+                                  "enum": [
+                                    "post",
+                                    "content",
+                                    "other"
+                                  ],
+                                  "description": "What `id` addresses: `post` reads with `GET /v1/posts/{id}`, `content` with `GET /v1/content/{id}`, and `other` can't be read through this API"
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "description": "Identifier of the piece itself"
+                                },
+                                "channel": {
+                                  "type": "string",
+                                  "description": "Where this piece is meant to go: `post`, `tweet`, `linkedin`, `newsletter`, `x_article`, or `other`"
+                                },
+                                "title": {
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
+                                  "description": "What the piece is called, or null when it has no name yet"
+                                },
+                                "status": {
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
+                                  "enum": [
+                                    "draft",
+                                    "published",
+                                    "archived"
+                                  ],
+                                  "description": "Whether the piece has been delivered, is still a draft, or was archived. Null for a member this API can't read."
+                                },
+                                "scheduled": {
+                                  "type": "boolean",
+                                  "description": "Whether a scheduled send is queued against this piece"
+                                },
+                                "url": {
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
+                                  "description": "Where this piece went live, or null when it hasn't been delivered. Also null by design for a channel that publishes no page."
+                                },
+                                "publishedAt": {
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
+                                  "description": "ISO 8601 timestamp of the first delivery, or null"
+                                },
+                                "archivedAt": {
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
+                                  "description": "ISO 8601 timestamp of when this piece was archived, or null"
+                                },
+                                "position": {
+                                  "type": "integer",
+                                  "description": "Display order inside the bucket. The post the group was seeded from is always 0."
+                                },
+                                "updatedAt": {
+                                  "type": "string",
+                                  "description": "ISO 8601 timestamp of the last change to the piece itself, not to its grouping"
+                                }
+                              },
+                              "required": [
+                                "kind",
+                                "id",
+                                "channel",
+                                "title",
+                                "status",
+                                "scheduled",
+                                "url",
+                                "publishedAt",
+                                "archivedAt",
+                                "position",
+                                "updatedAt"
+                              ]
+                            },
+                            "description": "The pieces in this group, in display order — the post it was seeded from first"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "title",
+                          "createdAt",
+                          "updatedAt",
+                          "members"
+                        ]
+                      },
+                      "description": "Array of items in this page"
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "cursor": {
+                          "type": "string",
+                          "description": "Cursor for fetching the next page of results"
+                        },
+                        "hasMore": {
+                          "type": "boolean",
+                          "description": "Whether more results are available"
+                        },
+                        "total": {
+                          "type": "number",
+                          "description": "Total number of items available"
+                        }
+                      },
+                      "required": [
+                        "hasMore"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "items",
+                    "pagination"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Publication not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listContentBuckets",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "list-content-buckets",
+            "description": "List the content groups in a publication — each post with everything made out of it"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "List content groups",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst { items, pagination } = await api.buckets.list({ limit: 20 })"
+          },
+          {
+            "lang": "bash",
+            "label": "List content groups using curl",
+            "source": "curl \"https://public.api.paragraph.com/api/v1/buckets?limit=20\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/buckets/{bucketId}": {
+      "get": {
+        "description": "Retrieve one content group with its members. Read it before adding to it, so you don't draft a version that already exists.",
+        "summary": "Get a content group",
+        "tags": [
+          "buckets"
+        ],
+        "parameters": [
+          {
+            "name": "bucketId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the content group"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content group retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "Unique identifier for this bucket"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "What the group is called, taken from the post that seeded it"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of creation"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "description": "ISO 8601 timestamp of the last change to the group"
+                    },
+                    "members": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "kind": {
+                            "type": "string",
+                            "enum": [
+                              "post",
+                              "content",
+                              "other"
+                            ],
+                            "description": "What `id` addresses: `post` reads with `GET /v1/posts/{id}`, `content` with `GET /v1/content/{id}`, and `other` can't be read through this API"
+                          },
+                          "id": {
+                            "type": "string",
+                            "description": "Identifier of the piece itself"
+                          },
+                          "channel": {
+                            "type": "string",
+                            "description": "Where this piece is meant to go: `post`, `tweet`, `linkedin`, `newsletter`, `x_article`, or `other`"
+                          },
+                          "title": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "What the piece is called, or null when it has no name yet"
+                          },
+                          "status": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "enum": [
+                              "draft",
+                              "published",
+                              "archived"
+                            ],
+                            "description": "Whether the piece has been delivered, is still a draft, or was archived. Null for a member this API can't read."
+                          },
+                          "scheduled": {
+                            "type": "boolean",
+                            "description": "Whether a scheduled send is queued against this piece"
+                          },
+                          "url": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Where this piece went live, or null when it hasn't been delivered. Also null by design for a channel that publishes no page."
+                          },
+                          "publishedAt": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "ISO 8601 timestamp of the first delivery, or null"
+                          },
+                          "archivedAt": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "ISO 8601 timestamp of when this piece was archived, or null"
+                          },
+                          "position": {
+                            "type": "integer",
+                            "description": "Display order inside the bucket. The post the group was seeded from is always 0."
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "description": "ISO 8601 timestamp of the last change to the piece itself, not to its grouping"
+                          }
+                        },
+                        "required": [
+                          "kind",
+                          "id",
+                          "channel",
+                          "title",
+                          "status",
+                          "scheduled",
+                          "url",
+                          "publishedAt",
+                          "archivedAt",
+                          "position",
+                          "updatedAt"
+                        ]
+                      },
+                      "description": "The pieces in this group, in display order — the post it was seeded from first"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "title",
+                    "createdAt",
+                    "updatedAt",
+                    "members"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Content group not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getContentBucketById",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-content-bucket",
+            "description": "Get one content group and everything already made from its post"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Get a content group",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst bucket = await api.buckets.get({ id: \"c4e1a9d2-30b7-4f68-8a15-2d9c6b0e7f43\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "Get a content group using curl",
+            "source": "curl \"https://public.api.paragraph.com/api/v1/buckets/c4e1a9d2-30b7-4f68-8a15-2d9c6b0e7f43\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/posts/{postId}/bucket": {
+      "get": {
+        "description": "Find the group a post belongs to, without creating one.\n\nAnswers `null` when nothing has been made from the post yet. To attach something, call `POST /v1/posts/{postId}/bucket` instead, which creates the group on first use.\n\nA post you've reopened for editing resolves to the live post's group, so a draft id and its published id give the same answer.",
+        "summary": "Get a post's content group",
+        "tags": [
+          "buckets"
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the post"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content group retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "bucketId": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "The bucket this post is grouped in, or null when nothing has been made from it yet"
+                    }
+                  },
+                  "required": [
+                    "bucketId"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found in your publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getPostContentBucket",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "get-post-content-bucket",
+            "description": "Find the content group a post belongs to, or null if nothing has been made from it yet"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Find a post's group",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst { bucketId } = await api.buckets.forPost({ postId: \"3T2PQZlsdQtigUp4fhlb\" })"
+          },
+          {
+            "lang": "bash",
+            "label": "Find a post's group using curl",
+            "source": "curl \"https://public.api.paragraph.com/api/v1/posts/3T2PQZlsdQtigUp4fhlb/bucket\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Get the group a post belongs to, creating it if this is the first thing made from that post.\n\nThis is the first call in a repurposing pipeline: seed the group from the post, then pass the id as `bucketId` on every `POST /v1/content` derived from it. The writer then sees the post and its versions as one row under Content instead of unrelated drafts.\n\nSafe to call repeatedly — a post that already has a group gets the same id back, and nothing is written.",
+        "summary": "Create a post's content group",
+        "tags": [
+          "buckets"
+        ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier of the post"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Content group ready",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "bucketId": {
+                      "type": "string",
+                      "description": "The bucket this post is grouped in. Pass it as `bucketId`."
+                    }
+                  },
+                  "required": [
+                    "bucketId"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found in your publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createPostContentBucket",
+        "x-mint": {
+          "mcp": {
+            "enabled": true,
+            "name": "create-post-content-bucket",
+            "description": "Get or create the content group for a post, so drafts made from it can be grouped with it"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Group a thread with the post it came from",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: \"your-api-key\" })\nconst { bucketId } = await api.buckets.createForPost({ postId: \"3T2PQZlsdQtigUp4fhlb\" })\n\nawait api.content.create({\n  kind: \"tweet\",\n  title: \"Thread on writing in public\",\n  body: { tweets: [\"Writing in public changes what you write.\", \"Here's what changed for me.\"] },\n  bucketId,\n})"
+          },
+          {
+            "lang": "bash",
+            "label": "Create a post's group using curl",
+            "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/posts/3T2PQZlsdQtigUp4fhlb/bucket\" \\\n  -H \"Authorization: Bearer your-api-key\""
           }
         ],
         "security": [

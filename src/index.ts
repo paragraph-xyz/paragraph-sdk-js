@@ -5,6 +5,7 @@ import { wrapAPIWithAuth } from "./utils";
 import {
   AnalyticsResource,
   AuthResource,
+  BucketsResource,
   CoinsResource,
   ContentResource,
   EmailsResource,
@@ -80,6 +81,17 @@ import type { ParagraphAPIOptions } from "./types";
  * await apiWithAuth.content.archive({ id: draft.id });
  * await apiWithAuth.content.restore({ id: draft.id });
  *
+ * // Content groups - one identity for a post and everything made out of it (requires API key)
+ * const { bucketId } = await apiWithAuth.buckets.createForPost({ postId: "postId" });
+ * await apiWithAuth.content.create({
+ *   kind: "tweet",
+ *   title: "Thread on writing in public",
+ *   body: { tweets: ["Writing in public changes what you write."] },
+ *   bucketId,
+ * });
+ * const group = await apiWithAuth.buckets.get({ id: bucketId });
+ * const { items: groups } = await apiWithAuth.buckets.list();
+ *
  * // Search
  * const posts = await api.search.posts("ethereum");
  * const coins = await api.search.coins("test");
@@ -136,6 +148,7 @@ export class ParagraphAPI {
 
   /** Content resource - drafted X posts, LinkedIn posts, newsletters, and X Articles */
   public readonly content: ContentResource;
+  public readonly buckets: BucketsResource;
 
   /** Emails resource - send custom emails to a list of recipients */
   public readonly emails: EmailsResource;
@@ -168,6 +181,7 @@ export class ParagraphAPI {
     this.users = new UsersResource(this.api);
     this.coins = new CoinsResource(this.api);
     this.content = new ContentResource(this.api);
+    this.buckets = new BucketsResource(this.api);
     this.emails = new EmailsResource(this.api);
     this.search = new SearchResource(this.api);
     this.me = new MeResource(this.api);

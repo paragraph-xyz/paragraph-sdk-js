@@ -1,5 +1,6 @@
 export { AnalyticsResource } from "./analytics";
 export { AuthResource } from "./auth";
+export { BucketsResource } from "./buckets";
 export { CoinsResource } from "./coins";
 export { ContentResource } from "./content";
 export { EmailsResource } from "./emails";

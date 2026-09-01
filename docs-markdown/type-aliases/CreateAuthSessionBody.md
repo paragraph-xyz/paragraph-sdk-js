@@ -49,3 +49,13 @@ Name of the device requesting access (e.g. user@MacBook-Pro.local)
 #### Max Length
 
 100
+
+***
+
+### supportsDeliveryAcknowledgement?
+
+> `optional` **supportsDeliveryAcknowledgement?**: `boolean`
+
+Defined in: src/generated/models/createAuthSessionBody.ts:27
+
+Whether the client acknowledges secure credential storage with DELETE

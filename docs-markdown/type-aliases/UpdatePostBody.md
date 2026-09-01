@@ -8,7 +8,7 @@
 
 > **UpdatePostBody** = `object`
 
-Defined in: src/generated/models/updatePostBody.ts:19
+Defined in: src/generated/models/updatePostBody.ts:22
 
 ## Properties
 
@@ -16,7 +16,7 @@ Defined in: src/generated/models/updatePostBody.ts:19
 
 > `optional` **authorIds?**: `string`[]
 
-Defined in: src/generated/models/updatePostBody.ts:52
+Defined in: src/generated/models/updatePostBody.ts:55
 
 User ids credited as the post's authors, in byline order. Replaces the full list, so include every author you want kept — read the post's current `authorIds` first and start from those. Each id must be the publication's owner or an active team member; ids from outside the publication are rejected. There is no endpoint that enumerates members, so an id has to come from a post you have read (`authorIds` on a single post, or `authors[].id` on a list) or from the writer.
 
@@ -34,9 +34,23 @@ User ids credited as the post's authors, in byline order. Replaces the full list
 
 > `optional` **bodyJson?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:23
+Defined in: src/generated/models/updatePostBody.ts:26
 
 Post content as a Tiptap document, JSON-stringified (e.g. '{"type":"doc","content":[...]}'). This accepts ANY Tiptap node the editor supports — including videos, tweets, link cards, callouts, and buttons — so editing a post by round-tripping the `json` returned by get-post preserves everything markdown would drop. Replaces the FULL body; node-type validity is checked by the renderer and an unusable document is rejected. Provide `markdown` OR `bodyJson`, not both.
+
+***
+
+### canonicalUrl?
+
+> `optional` **canonicalUrl?**: [`UpdatePostBodyCanonicalUrl`](UpdatePostBodyCanonicalUrl.md)
+
+Defined in: src/generated/models/updatePostBody.ts:69
+
+Canonical URL used in rendered metadata. Pass null to clear it. This does not change the post's Paragraph permalink.
+
+#### Max Length
+
+2048
 
 ***
 
@@ -44,7 +58,7 @@ Post content as a Tiptap document, JSON-stringified (e.g. '{"type":"doc","conten
 
 > `optional` **categories?**: [`UpdatePostBodyCategories`](UpdatePostBodyCategories.md)
 
-Defined in: src/generated/models/updatePostBody.ts:46
+Defined in: src/generated/models/updatePostBody.ts:49
 
 Category tags for the post. Can also be a comma-separated string.
 
@@ -54,9 +68,41 @@ Category tags for the post. Can also be a comma-separated string.
 
 > `optional` **clearImage?**: `boolean`
 
-Defined in: src/generated/models/updatePostBody.ts:70
+Defined in: src/generated/models/updatePostBody.ts:86
 
 When true, removes the post's existing cover/hero image. Ignored if imageUrl is also provided.
+
+***
+
+### communityId?
+
+> `optional` **communityId?**: [`UpdatePostBodyCommunityId`](UpdatePostBodyCommunityId.md)
+
+Defined in: src/generated/models/updatePostBody.ts:77
+
+Subscriber segment id for newsletter delivery. Pass null for the general audience. Unavailable or cross-publication segments are rejected rather than broadened.
+
+#### Min Length
+
+1
+
+#### Max Length
+
+128
+
+***
+
+### imageAlt?
+
+> `optional` **imageAlt?**: [`UpdatePostBodyImageAlt`](UpdatePostBodyImageAlt.md)
+
+Defined in: src/generated/models/updatePostBody.ts:91
+
+Alternative text describing the cover image. Set it alongside imageUrl when replacing the image; on its own it re-describes the existing cover. Pass null or an empty string to clear it. Ignored when the post has no cover.
+
+#### Max Length
+
+1000
 
 ***
 
@@ -64,7 +110,7 @@ When true, removes the post's existing cover/hero image. Ignored if imageUrl is 
 
 > `optional` **imageUrl?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:68
+Defined in: src/generated/models/updatePostBody.ts:84
 
 URL of an image to set as the post's cover/hero image. The image is fetched, re-hosted on Paragraph's CDN, and a placeholder is generated. Pass clearImage: true instead to remove the existing cover.
 
@@ -74,7 +120,7 @@ URL of an image to set as the post's cover/hero image. The image is fetched, re-
 
 > `optional` **markdown?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:21
+Defined in: src/generated/models/updatePostBody.ts:24
 
 Post content in Markdown format. Replaces the FULL body. Markdown cannot represent buttons, linked images, or embedded media (videos, tweets, link cards) — replacing a post that has any of those with `markdown` drops them. Use `bodyJson` (round-tripped from get-post) to edit an existing post so nothing is lost. Provide `markdown` OR `bodyJson`, not both.
 
@@ -84,7 +130,7 @@ Post content in Markdown format. Replaces the FULL body. Markdown cannot represe
 
 > `optional` **postPreview?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:44
+Defined in: src/generated/models/updatePostBody.ts:47
 
 Preview text for the post
 
@@ -98,7 +144,7 @@ Preview text for the post
 
 > `optional` **publishedAt?**: `number`
 
-Defined in: src/generated/models/updatePostBody.ts:66
+Defined in: src/generated/models/updatePostBody.ts:82
 
 Unix timestamp (milliseconds) to set as the post's publish date. Once set, the date is preserved across re-publishes.
 
@@ -108,11 +154,21 @@ Unix timestamp (milliseconds) to set as the post's publish date. Once set, the d
 
 ***
 
+### publishOnline?
+
+> `optional` **publishOnline?**: `boolean`
+
+Defined in: src/generated/models/updatePostBody.ts:71
+
+Whether the post should be publicly visible online when published. Set false for newsletter-only delivery.
+
+***
+
 ### scheduledAt?
 
 > `optional` **scheduledAt?**: [`UpdatePostBodyScheduledAt`](UpdatePostBodyScheduledAt.md)
 
-Defined in: src/generated/models/updatePostBody.ts:59
+Defined in: src/generated/models/updatePostBody.ts:62
 
 Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish. The value 0 is treated the same as omitting the field (no scheduling request); note that on an already-scheduled post, omitting `scheduledAt` while changing `status` cancels the schedule.
 
@@ -126,7 +182,7 @@ Unix timestamp (milliseconds) to schedule the post's first publish at a future t
 
 > `optional` **sendNewsletter?**: [`UpdatePostBodySendNewsletter`](UpdatePostBodySendNewsletter.md)
 
-Defined in: src/generated/models/updatePostBody.ts:61
+Defined in: src/generated/models/updatePostBody.ts:64
 
 Whether to send an email newsletter to subscribers when the post publishes. Only meaningful when publishing (status: 'published') or scheduling (scheduledAt set). Default: false
 
@@ -136,7 +192,7 @@ Whether to send an email newsletter to subscribers when the post publishes. Only
 
 > `optional` **slug?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:39
+Defined in: src/generated/models/updatePostBody.ts:42
 
 URL-friendly identifier for the post
 
@@ -154,7 +210,7 @@ URL-friendly identifier for the post
 
 > `optional` **status?**: [`UpdatePostBodyStatus`](UpdatePostBodyStatus.md)
 
-Defined in: src/generated/models/updatePostBody.ts:54
+Defined in: src/generated/models/updatePostBody.ts:57
 
 Set to 'published' to publish a draft or keep an already-live post published after edits, 'draft' to unpublish, or 'archived' to archive
 
@@ -164,7 +220,7 @@ Set to 'published' to publish a draft or keep an already-live post published aft
 
 > `optional` **subtitle?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:33
+Defined in: src/generated/models/updatePostBody.ts:36
 
 Optional subtitle or brief summary
 
@@ -178,7 +234,7 @@ Optional subtitle or brief summary
 
 > `optional` **title?**: `string`
 
-Defined in: src/generated/models/updatePostBody.ts:28
+Defined in: src/generated/models/updatePostBody.ts:31
 
 Title of the post
 
