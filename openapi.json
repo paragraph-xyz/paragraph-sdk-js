@@ -5263,7 +5263,7 @@
             }
           },
           "404": {
-            "description": "Publication not found",
+            "description": "Publication not found, or no such content group in this publication",
             "content": {
               "application/json": {
                 "schema": {
@@ -6121,7 +6121,34 @@
             }
           },
           "404": {
-            "description": "Content not found",
+            "description": "Content not found, or no such content group in this publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "This piece is already grouped with another post. Ungroup it in the Paragraph app first — grouping never moves a piece.",
             "content": {
               "application/json": {
                 "schema": {

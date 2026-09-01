@@ -8,7 +8,7 @@
 
 > **PostQueryOptions** = `Parameters`\<`ReturnType`\<*typeof* `getParagraphAPI`\>\[`"getPostById"`\]\>\[`1`\]
 
-Defined in: [src/types.ts:171](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/55b58ecdf1963fab4be76a1b97a1c839e1d4c4fd/src/types.ts#L171)
+Defined in: [src/types.ts:184](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/20c84da6aee1f1da0d1372c0f38f7978db085761/src/types.ts#L184)
 
 Type helper to extract the query options for getting a post.
 It correctly infers the type from the generated API client's method signature,
