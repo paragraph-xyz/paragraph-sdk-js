@@ -8,7 +8,7 @@
 
 > **PostUpdateIdentifier** = [`PostUpdateById`](PostUpdateById.md) \| [`PostUpdateBySlug`](PostUpdateBySlug.md)
 
-Defined in: [src/types.ts:169](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/56c2fd279cfad810dab400236773406e41080d65/src/types.ts#L169)
+Defined in: [src/types.ts:183](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/446db9a3237991e0c10dd3ec5377be553fb49407/src/types.ts#L183)
 
 A discriminated union of identifiers for updating a post.
 Use one of the following shapes:

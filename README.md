@@ -50,6 +50,29 @@ await api.posts.update({
 await api.posts.delete({ id: "postId" });
 ```
 
+## Playbooks
+
+A Playbook drafts a package of content (an article, social posts, and more) from a source like a GitHub repository. Set one up and run it from your own code, for example when a release ships:
+
+```typescript
+const api = new ParagraphAPI({ apiKey: "your-api-key" });
+
+await api.playbooks.configure({
+  key: "changelog",
+  repository: "acme/widget",
+  values: { audience: "Developers evaluating the SDK" },
+});
+
+const { runId } = await api.playbooks.startRun({
+  key: "changelog",
+  idempotencyKey: "release-2.4.0",
+});
+
+const run = await api.playbooks.getRun({ key: "changelog", runId });
+```
+
+A run creates drafts. Nothing is published until someone approves it in the Paragraph app. See [`examples/runPlaybook.ts`](examples/runPlaybook.ts) for polling a run to completion.
+
 ## Documentation
 
 See the [API reference](https://paragraph.com/docs/api-reference/) for detailed documentation & a playground.

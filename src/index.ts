@@ -11,6 +11,7 @@ import {
   EmailsResource,
   FeedResource,
   MeResource,
+  PlaybooksResource,
   PostsResource,
   PublicationsResource,
   SearchResource,
@@ -92,6 +93,18 @@ import type { ParagraphAPIOptions } from "./types";
  * const group = await apiWithAuth.buckets.get({ id: bucketId });
  * const { items: groups } = await apiWithAuth.buckets.list();
  *
+ * // Playbooks - set up and run a Playbook, then poll the run for its drafts (requires API key)
+ * await apiWithAuth.playbooks.configure({
+ *   key: "changelog",
+ *   repository: "acme/widget",
+ *   values: { audience: "Developers evaluating the SDK" },
+ * });
+ * const { runId } = await apiWithAuth.playbooks.startRun({
+ *   key: "changelog",
+ *   idempotencyKey: "release-2.4.0",
+ * });
+ * const run = await apiWithAuth.playbooks.getRun({ key: "changelog", runId });
+ *
  * // Search
  * const posts = await api.search.posts("ethereum");
  * const coins = await api.search.coins("test");
@@ -150,6 +163,9 @@ export class ParagraphAPI {
   public readonly content: ContentResource;
   public readonly buckets: BucketsResource;
 
+  /** Playbooks resource - set up and run Playbooks that draft content */
+  public readonly playbooks: PlaybooksResource;
+
   /** Emails resource - send custom emails to a list of recipients */
   public readonly emails: EmailsResource;
 
@@ -182,6 +198,7 @@ export class ParagraphAPI {
     this.coins = new CoinsResource(this.api);
     this.content = new ContentResource(this.api);
     this.buckets = new BucketsResource(this.api);
+    this.playbooks = new PlaybooksResource(this.api);
     this.emails = new EmailsResource(this.api);
     this.search = new SearchResource(this.api);
     this.me = new MeResource(this.api);
