@@ -8,7 +8,7 @@
 
 > **PostUpdateById** = `object`
 
-Defined in: [src/types.ts:170](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/446db9a3237991e0c10dd3ec5377be553fb49407/src/types.ts#L170)
+Defined in: [src/types.ts:156](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/56c2fd279cfad810dab400236773406e41080d65/src/types.ts#L156)
 
 Identifier for updating a post by ID.
 
@@ -18,4 +18,4 @@ Identifier for updating a post by ID.
 
 > **id**: `string`
 
-Defined in: [src/types.ts:170](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/446db9a3237991e0c10dd3ec5377be553fb49407/src/types.ts#L170)
+Defined in: [src/types.ts:156](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/56c2fd279cfad810dab400236773406e41080d65/src/types.ts#L156)

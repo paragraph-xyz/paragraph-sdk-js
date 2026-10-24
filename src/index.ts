@@ -93,18 +93,6 @@ import type { ParagraphAPIOptions } from "./types";
  * const group = await apiWithAuth.buckets.get({ id: bucketId });
  * const { items: groups } = await apiWithAuth.buckets.list();
  *
- * // Playbooks - set up and run a Playbook, then poll the run for its drafts (requires API key)
- * await apiWithAuth.playbooks.configure({
- *   key: "changelog",
- *   repository: "acme/widget",
- *   values: { audience: "Developers evaluating the SDK" },
- * });
- * const { runId } = await apiWithAuth.playbooks.startRun({
- *   key: "changelog",
- *   idempotencyKey: "release-2.4.0",
- * });
- * const run = await apiWithAuth.playbooks.getRun({ key: "changelog", runId });
- *
  * // Search
  * const posts = await api.search.posts("ethereum");
  * const coins = await api.search.coins("test");

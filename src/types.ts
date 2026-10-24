@@ -113,20 +113,6 @@ export type ContentBucketIdentifier = { id: string };
 export type PostBucketIdentifier = { postId: string };
 
 /**
- * Identifier for a Playbook.
- * Use `{ key: string }`, the Playbook's `key` from `api.playbooks.list()`,
- * for example `"changelog"`.
- */
-export type PlaybookIdentifier = { key: string };
-
-/**
- * Identifier for one run of a Playbook.
- * Use `{ key: string, runId: string }`, where `runId` is the id returned by
- * `api.playbooks.startRun()`.
- */
-export type PlaybookRunIdentifier = { key: string; runId: string };
-
-/**
  * A discriminated union of identifiers for retrieving a single user.
  * Use one of the following shapes:
  * - `{ id: string }` to get a user by their unique ID.
