@@ -38,7 +38,8 @@ export class ContentResource {
    * - `tweet` — `text` for a single post, or `tweets` for a thread (never
    *   both), each entry at most 280 characters.
    * - `linkedin` — `text`.
-   * - `newsletter` — `subject`, `body`, and an optional `preheader`.
+   * - `newsletter` — `subject`, either Markdown `body` or a complete rich
+   *   `bodyJson` document, and an optional `preheader`. Never send both body formats.
    * - `x_article` — `title` (the headline X publishes), `body` as CommonMark
    *   markdown, and an optional `canonicalUrl`.
    *
@@ -46,8 +47,8 @@ export class ContentResource {
    * over 280 characters an entry, or an Article missing its headline, comes
    * back with the same explanation you'd see in the app.
    *
-   * **Text only:** media has to be uploaded to X or LinkedIn first, which the
-   * API can't do yet. Add images to the draft in the app.
+   * **Social media:** X and LinkedIn attachments still need the app. Rich
+   * newsletters use the same validated document format as the email editor.
    *
    * @example
    * ```ts
@@ -164,7 +165,9 @@ export class ContentResource {
    * the same shape the kind takes on create. Send the whole thing, not just
    * the part that changed. Media already attached to the draft is the one
    * exception — you can't send it back, so it's carried over rather than
-   * dropped.
+   * dropped. For a rich newsletter, preserve the complete `bodyJson` document
+   * returned by `get()`; converting it to Markdown can lose formatting/media.
+   * Send either `body` or `bodyJson`, never both. Creation/editing is not approval.
    *
    * **Scheduled pieces are locked:** if a send is queued or already running
    * for this piece, its words go out exactly as written, so an edit to `body`
@@ -193,7 +196,7 @@ export class ContentResource {
    * @returns A promise that resolves to the updated piece, with its body.
    */
   update(
-    params: ContentIdentifier & UpdateContentBody
+    params: ContentIdentifier & UpdateContentBody,
   ): Promise<UpdateContent200> {
     const { id, ...body } = params;
     return this.api.updateContent(id, body);

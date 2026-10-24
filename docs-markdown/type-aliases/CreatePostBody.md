@@ -40,6 +40,20 @@ Post content as a Tiptap document, JSON-stringified (e.g. '{"type":"doc","conten
 
 ***
 
+### canonicalUrl?
+
+> `optional` **canonicalUrl?**: `string`
+
+Defined in: src/generated/models/createPostBody.ts:72
+
+Optional canonical URL used in rendered metadata, for a post whose original lives elsewhere. When the publication has its own website set up, a canonical on that site is also where the Paragraph link redirects. This does not change the post's Paragraph permalink.
+
+#### Max Length
+
+2048
+
+***
+
 ### categories?
 
 > `optional` **categories?**: [`CreatePostBodyCategories`](CreatePostBodyCategories.md)

@@ -1805,7 +1805,7 @@
           {
             "name": "cursor",
             "in": "query",
-            "description": "Cursor for pagination",
+            "description": "Cursor from the previous page's pagination.cursor. A cursor that isn't from this list returns 400.",
             "schema": {
               "type": "string"
             }
@@ -2114,7 +2114,7 @@
           {
             "name": "cursor",
             "in": "query",
-            "description": "Cursor for pagination",
+            "description": "Cursor from the previous page's pagination.cursor. A cursor that isn't from this list returns 400.",
             "schema": {
               "type": "string"
             }
@@ -2745,7 +2745,7 @@
                     "description": "Set to 'published' to publish a draft or keep an already-live post published after edits, 'draft' to unpublish, or 'archived' to archive"
                   },
                   "scheduledAt": {
-                    "description": "Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish. The value 0 is treated the same as omitting the field (no scheduling request); note that on an already-scheduled post, omitting `scheduledAt` while changing `status` cancels the schedule.",
+                    "description": "Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish. The value 0 is treated the same as omitting the field (no scheduling request); note that on an already-scheduled post, omitting `scheduledAt` while setting `status` to 'published' or 'archived' cancels the schedule, and 'draft' keeps it.",
                     "type": [
                       "integer",
                       "null"
@@ -3818,6 +3818,12 @@
                     "description": "Optional Unix timestamp (milliseconds) to schedule first-publish of the post at a future time. Must be in the future. Cannot be combined with status: 'draft'. When set, the post is created and queued to publish (and send newsletter, if requested) at the specified time. Pass 0 or omit the field for an unscheduled post.",
                     "type": "integer",
                     "minimum": 0
+                  },
+                  "canonicalUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "maxLength": 2048,
+                    "description": "Optional canonical URL used in rendered metadata, for a post whose original lives elsewhere. When the publication has its own website set up, a canonical on that site is also where the Paragraph link redirects. This does not change the post's Paragraph permalink."
                   }
                 },
                 "required": [
@@ -4012,7 +4018,7 @@
           {
             "name": "cursor",
             "in": "query",
-            "description": "Cursor for pagination",
+            "description": "Cursor from the previous page's pagination.cursor. A cursor that isn't from this list returns 400.",
             "schema": {
               "type": "string"
             }
@@ -4414,7 +4420,7 @@
                     "description": "Set to 'published' to publish a draft or keep an already-live post published after edits, 'draft' to unpublish, or 'archived' to archive"
                   },
                   "scheduledAt": {
-                    "description": "Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish. The value 0 is treated the same as omitting the field (no scheduling request); note that on an already-scheduled post, omitting `scheduledAt` while changing `status` cancels the schedule.",
+                    "description": "Unix timestamp (milliseconds) to schedule the post's first publish at a future time. Must be in the future and at most 30 days out. Only valid for draft posts that haven't been published or already scheduled. Cannot be combined with status: 'draft' or 'archived'. Pass null to cancel a previously scheduled publish. The value 0 is treated the same as omitting the field (no scheduling request); note that on an already-scheduled post, omitting `scheduledAt` while setting `status` to 'published' or 'archived' cancels the schedule, and 'draft' keeps it.",
                     "type": [
                       "integer",
                       "null"
@@ -5069,6 +5075,31 @@
                       "body": {
                         "type": "string",
                         "description": "`newsletter`: the email body. `x_article`: the article's full CommonMark markdown."
+                      },
+                      "bodyJson": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "doc"
+                            ]
+                          },
+                          "attrs": {
+                            "type": "object",
+                            "additionalProperties": {}
+                          },
+                          "content": {
+                            "type": "array",
+                            "items": {}
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "content"
+                        ],
+                        "additionalProperties": false,
+                        "description": "`newsletter` only. The complete authoritative Tiptap document. Provide either Markdown body or bodyJson, never both; preserve this format when editing a saved rich newsletter."
                       },
                       "title": {
                         "type": "string",
@@ -5932,6 +5963,31 @@
                       "body": {
                         "type": "string",
                         "description": "`newsletter`: the email body. `x_article`: the article's full CommonMark markdown."
+                      },
+                      "bodyJson": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "enum": [
+                              "doc"
+                            ]
+                          },
+                          "attrs": {
+                            "type": "object",
+                            "additionalProperties": {}
+                          },
+                          "content": {
+                            "type": "array",
+                            "items": {}
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "content"
+                        ],
+                        "additionalProperties": false,
+                        "description": "`newsletter` only. The complete authoritative Tiptap document. Provide either Markdown body or bodyJson, never both; preserve this format when editing a saved rich newsletter."
                       },
                       "title": {
                         "type": "string",
@@ -7593,6 +7649,1445 @@
             "lang": "bash",
             "label": "Create a post's group using curl",
             "source": "curl -X POST \"https://public.api.paragraph.com/api/v1/posts/3T2PQZlsdQtigUp4fhlb/bucket\" \\\n  -H \"Authorization: Bearer your-api-key\""
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/playbooks": {
+      "get": {
+        "description": "Every Playbook available to your publication, what it can be configured with, and how yours is set up. Read this rather than hard-coding field keys: a Playbook describes its own settings, so a client built from this response keeps working as Playbooks change.",
+        "summary": "List Playbooks",
+        "tags": [
+          "playbooks"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Playbooks and their setup",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "playbooks": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "summary": {
+                            "type": "string"
+                          },
+                          "fields": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "key": {
+                                  "type": "string",
+                                  "description": "Send this key under `values` when configuring"
+                                },
+                                "label": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "`string` for text, `video` for video options"
+                                },
+                                "required": {
+                                  "type": "boolean"
+                                },
+                                "helperText": {
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "key",
+                                "label",
+                                "type",
+                                "required",
+                                "helperText"
+                              ]
+                            },
+                            "description": "What this Playbook can be configured with"
+                          },
+                          "deliverables": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "key": {
+                                  "type": "string",
+                                  "description": "Send this key under `deliverables`"
+                                },
+                                "label": {
+                                  "type": "string"
+                                },
+                                "required": {
+                                  "type": "boolean",
+                                  "description": "A required deliverable cannot be left out"
+                                }
+                              },
+                              "required": [
+                                "key",
+                                "label",
+                                "required"
+                              ]
+                            }
+                          },
+                          "installed": {
+                            "type": "boolean"
+                          },
+                          "setup": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "repository": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "description": "The GitHub repository it reads, as `owner/name`"
+                              },
+                              "values": {
+                                "type": "object",
+                                "additionalProperties": {},
+                                "description": "Keyed by field key"
+                              },
+                              "deliverables": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "Which deliverables are on"
+                              }
+                            },
+                            "required": [
+                              "repository",
+                              "values",
+                              "deliverables"
+                            ],
+                            "description": "Null until it is set up"
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "name",
+                          "summary",
+                          "fields",
+                          "deliverables",
+                          "installed",
+                          "setup"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "playbooks"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listPlaybooks",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "List Playbooks",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nconst { playbooks } = await api.playbooks.list()"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/playbooks/{playbookKey}": {
+      "get": {
+        "description": "One Playbook, what it can be configured with, and how yours is set up.",
+        "summary": "Get a Playbook",
+        "tags": [
+          "playbooks"
+        ],
+        "parameters": [
+          {
+            "name": "playbookKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Which Playbook, such as `changelog`"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Playbook and its setup",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "summary": {
+                      "type": "string"
+                    },
+                    "fields": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "description": "Send this key under `values` when configuring"
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "`string` for text, `video` for video options"
+                          },
+                          "required": {
+                            "type": "boolean"
+                          },
+                          "helperText": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "label",
+                          "type",
+                          "required",
+                          "helperText"
+                        ]
+                      },
+                      "description": "What this Playbook can be configured with"
+                    },
+                    "deliverables": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "description": "Send this key under `deliverables`"
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "required": {
+                            "type": "boolean",
+                            "description": "A required deliverable cannot be left out"
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "label",
+                          "required"
+                        ]
+                      }
+                    },
+                    "installed": {
+                      "type": "boolean"
+                    },
+                    "setup": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "repository": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "The GitHub repository it reads, as `owner/name`"
+                        },
+                        "values": {
+                          "type": "object",
+                          "additionalProperties": {},
+                          "description": "Keyed by field key"
+                        },
+                        "deliverables": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "Which deliverables are on"
+                        }
+                      },
+                      "required": [
+                        "repository",
+                        "values",
+                        "deliverables"
+                      ],
+                      "description": "Null until it is set up"
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "name",
+                    "summary",
+                    "fields",
+                    "deliverables",
+                    "installed",
+                    "setup"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such Playbook",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getPlaybook",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "put": {
+        "description": "Creates the Playbook's setup, or replaces it. This is a full replacement rather than a merge, so send every field you want kept. It changes the setup your team sees in the app, and the next run uses it.",
+        "summary": "Set a Playbook up",
+        "tags": [
+          "playbooks"
+        ],
+        "parameters": [
+          {
+            "name": "playbookKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Which Playbook, such as `changelog`"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "repository": {
+                    "type": "string",
+                    "pattern": "^[\\w.-]+\\/[\\w.-]+$",
+                    "description": "A public GitHub repository as `owner/name`. A public one needs no connection."
+                  },
+                  "values": {
+                    "type": "object",
+                    "additionalProperties": {},
+                    "description": "Settings keyed by the field keys from `GET /v1/playbooks`"
+                  },
+                  "deliverables": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Which deliverables to make. A required one is always included."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Playbook as it now stands",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "summary": {
+                      "type": "string"
+                    },
+                    "fields": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "description": "Send this key under `values` when configuring"
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "`string` for text, `video` for video options"
+                          },
+                          "required": {
+                            "type": "boolean"
+                          },
+                          "helperText": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "label",
+                          "type",
+                          "required",
+                          "helperText"
+                        ]
+                      },
+                      "description": "What this Playbook can be configured with"
+                    },
+                    "deliverables": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "description": "Send this key under `deliverables`"
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "required": {
+                            "type": "boolean",
+                            "description": "A required deliverable cannot be left out"
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "label",
+                          "required"
+                        ]
+                      }
+                    },
+                    "installed": {
+                      "type": "boolean"
+                    },
+                    "setup": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "repository": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "The GitHub repository it reads, as `owner/name`"
+                        },
+                        "values": {
+                          "type": "object",
+                          "additionalProperties": {},
+                          "description": "Keyed by field key"
+                        },
+                        "deliverables": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "Which deliverables are on"
+                        }
+                      },
+                      "required": [
+                        "repository",
+                        "values",
+                        "deliverables"
+                      ],
+                      "description": "Null until it is set up"
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "name",
+                    "summary",
+                    "fields",
+                    "deliverables",
+                    "installed",
+                    "setup"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A setting was refused",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such Playbook",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The setup changed while saving",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "configurePlaybook",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Set up a Changelog",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nawait api.playbooks.configure({\n  playbookKey: \"changelog\",\n  repository: \"acme/widget\",\n  values: { audience: \"Developers evaluating the SDK\" },\n  deliverables: [\"article\", \"x_post\", \"linkedin_post\"],\n})"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/playbooks/{playbookKey}/runs": {
+      "get": {
+        "description": "This Playbook's runs, newest first.",
+        "summary": "List recent runs",
+        "tags": [
+          "playbooks"
+        ],
+        "parameters": [
+          {
+            "name": "playbookKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Which Playbook, such as `changelog`"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many to return, up to 50. Defaults to 10.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recent runs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "runs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "runId": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "queued",
+                              "running",
+                              "succeeded",
+                              "completed_with_warnings",
+                              "failed",
+                              "blocked",
+                              "canceled"
+                            ],
+                            "description": "Where the run has got to"
+                          },
+                          "startedAt": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "When the run began, ISO 8601"
+                          },
+                          "finishedAt": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "When it ended, ISO 8601"
+                          },
+                          "deliverables": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "export": {
+                                  "type": "string",
+                                  "description": "What it is, such as `article` or `x_post`"
+                                },
+                                "item": {
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
+                                  "description": "Which one, when a run makes several"
+                                },
+                                "status": {
+                                  "type": "string",
+                                  "description": "Where that piece has got to"
+                                }
+                              },
+                              "required": [
+                                "export",
+                                "item",
+                                "status"
+                              ]
+                            },
+                            "description": "The drafts this run has produced so far"
+                          }
+                        },
+                        "required": [
+                          "runId",
+                          "status",
+                          "startedAt",
+                          "finishedAt",
+                          "deliverables"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "runs"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such Playbook set up on this publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listPlaybookRuns",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Starts a run of a Playbook your publication has already set up, and returns straight away. A run takes several minutes, so poll `GET /v1/playbooks/{playbookKey}/runs/{runId}` for the drafts. Nothing publishes: a run produces drafts for someone to review in the app.",
+        "summary": "Start a Playbook run",
+        "tags": [
+          "playbooks"
+        ],
+        "parameters": [
+          {
+            "name": "playbookKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Which Playbook, such as `changelog`"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idempotencyKey": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "description": "Your own key for this request. Sending it again returns the same run instead of starting a second one."
+                  },
+                  "instructions": {
+                    "type": "string",
+                    "maxLength": 2000,
+                    "description": "A note to steer this one run"
+                  }
+                },
+                "required": [
+                  "idempotencyKey"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Run started",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "runId": {
+                      "type": "string",
+                      "description": "Identifier for the run you just started"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "queued",
+                        "running",
+                        "succeeded",
+                        "completed_with_warnings",
+                        "failed",
+                        "blocked",
+                        "canceled"
+                      ],
+                      "description": "Where the run has got to"
+                    }
+                  },
+                  "required": [
+                    "runId",
+                    "status"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The run was refused",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Your plan has no Changelog runs left",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such Playbook set up on this publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The Playbook cannot run in its current state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "startPlaybookRun",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Start a Changelog run",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nconst run = await api.playbooks.startRun({\n  playbookKey: \"changelog\",\n  idempotencyKey: crypto.randomUUID(),\n})"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/playbooks/{playbookKey}/runs/{runId}": {
+      "get": {
+        "description": "Reports where a run has got to, and the drafts it has produced.",
+        "summary": "Get a Playbook run",
+        "tags": [
+          "playbooks"
+        ],
+        "parameters": [
+          {
+            "name": "playbookKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Which Playbook, such as `changelog`"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The run to read"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Run details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "runId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "queued",
+                        "running",
+                        "succeeded",
+                        "completed_with_warnings",
+                        "failed",
+                        "blocked",
+                        "canceled"
+                      ],
+                      "description": "Where the run has got to"
+                    },
+                    "startedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "When the run began, ISO 8601"
+                    },
+                    "finishedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "When it ended, ISO 8601"
+                    },
+                    "deliverables": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "export": {
+                            "type": "string",
+                            "description": "What it is, such as `article` or `x_post`"
+                          },
+                          "item": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Which one, when a run makes several"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "Where that piece has got to"
+                          }
+                        },
+                        "required": [
+                          "export",
+                          "item",
+                          "status"
+                        ]
+                      },
+                      "description": "The drafts this run has produced so far"
+                    }
+                  },
+                  "required": [
+                    "runId",
+                    "status",
+                    "startedAt",
+                    "finishedAt",
+                    "deliverables"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Run not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getPlaybookRun",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Check a run",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nconst run = await api.playbooks.getRun({\n  playbookKey: \"changelog\",\n  runId: \"7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55\",\n})"
           }
         ],
         "security": [
@@ -12372,7 +13867,7 @@
   "info": {
     "title": "Paragraph API",
     "version": "1.0.0",
-    "description": "Public API for interacting with Paragraph publications, posts, users, and coined writing.\n\n## Rate Limiting\nAPI requests are rate-limited to ensure fair usage. Contact support@paragraph.com for higher limits.\n\n## Pagination\nList endpoints support cursor-based pagination using `cursor` and `limit` parameters.",
+    "description": "Public API for Paragraph publications, posts, drafted content, and subscribers.\n\n## Rate Limiting\nAPI requests are rate-limited to ensure fair usage. Contact support@paragraph.com for higher limits.\n\n## Pagination\nList endpoints support cursor-based pagination using `cursor` and `limit` parameters.",
     "contact": {
       "name": "Paragraph Support",
       "email": "support@paragraph.com",
