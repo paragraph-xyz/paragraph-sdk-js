@@ -18,7 +18,7 @@ Defined in: src/generated/models/listOwnPostsParams.ts:16
 
 Defined in: src/generated/models/listOwnPostsParams.ts:20
 
-Cursor for pagination
+Cursor from the previous page's pagination.cursor. A cursor that isn't from this list returns 400.
 
 ***
 
