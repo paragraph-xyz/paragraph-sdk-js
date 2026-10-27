@@ -8,7 +8,7 @@
 
 > **SingleCoinIdentifier** = [`CoinIdIdentifier`](CoinIdIdentifier.md) \| [`CoinByContractIdentifier`](CoinByContractIdentifier.md)
 
-Defined in: [src/types.ts:142](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/56c2fd279cfad810dab400236773406e41080d65/src/types.ts#L142)
+Defined in: [src/types.ts:142](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/c72bfbd131cd8639dbf793ac45295da0007840ba/src/types.ts#L142)
 
 Identifier for a single coin (by ID or contract address).
 Used for operations that require a specific coin.

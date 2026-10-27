@@ -6,6 +6,7 @@ export { ContentResource } from "./content";
 export { EmailsResource } from "./emails";
 export { FeedResource } from "./feed";
 export { MeResource } from "./me";
+export { PlaybooksResource } from "./playbooks";
 export { PostsResource } from "./posts";
 export { PublicationsResource } from "./publications";
 export { SearchResource } from "./search";

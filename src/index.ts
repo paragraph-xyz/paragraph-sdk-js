@@ -11,6 +11,7 @@ import {
   EmailsResource,
   FeedResource,
   MeResource,
+  PlaybooksResource,
   PostsResource,
   PublicationsResource,
   SearchResource,
@@ -150,6 +151,9 @@ export class ParagraphAPI {
   public readonly content: ContentResource;
   public readonly buckets: BucketsResource;
 
+  /** Playbooks resource - set up and run Playbooks that draft content */
+  public readonly playbooks: PlaybooksResource;
+
   /** Emails resource - send custom emails to a list of recipients */
   public readonly emails: EmailsResource;
 
@@ -182,6 +186,7 @@ export class ParagraphAPI {
     this.coins = new CoinsResource(this.api);
     this.content = new ContentResource(this.api);
     this.buckets = new BucketsResource(this.api);
+    this.playbooks = new PlaybooksResource(this.api);
     this.emails = new EmailsResource(this.api);
     this.search = new SearchResource(this.api);
     this.me = new MeResource(this.api);
