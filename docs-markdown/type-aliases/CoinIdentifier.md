@@ -8,7 +8,7 @@
 
 > **CoinIdentifier** = [`SingleCoinIdentifier`](SingleCoinIdentifier.md) \| [`CoinPopularIdentifier`](CoinPopularIdentifier.md)
 
-Defined in: [src/types.ts:151](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/c72bfbd131cd8639dbf793ac45295da0007840ba/src/types.ts#L151)
+Defined in: [src/types.ts:151](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/8cc21ba1222dac3f2789e3ca1fd182ea53b383a8/src/types.ts#L151)
 
 A discriminated union of identifiers for retrieving coins.
 Use one of the following shapes:

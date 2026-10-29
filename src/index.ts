@@ -14,7 +14,6 @@ import {
   PlaybooksResource,
   PostsResource,
   PublicationsResource,
-  SearchResource,
   SubscribersResource,
   UsersResource,
 } from "./resources";
@@ -93,11 +92,6 @@ import type { ParagraphAPIOptions } from "./types";
  * const group = await apiWithAuth.buckets.get({ id: bucketId });
  * const { items: groups } = await apiWithAuth.buckets.list();
  *
- * // Search
- * const posts = await api.search.posts("ethereum");
- * const coins = await api.search.coins("test");
- * const blogs = await api.search.blogs("crypto");
- *
  * // Emails - send a custom email to a list of recipients (requires API key)
  * const { accepted, skipped } = await apiWithAuth.emails.send({
  *   subject: "Hello from Paragraph",
@@ -157,9 +151,6 @@ export class ParagraphAPI {
   /** Emails resource - send custom emails to a list of recipients */
   public readonly emails: EmailsResource;
 
-  /** Search resource */
-  public readonly search: SearchResource;
-
   /** Me resource - authenticated publication info */
   public readonly me: MeResource;
 
@@ -188,7 +179,6 @@ export class ParagraphAPI {
     this.buckets = new BucketsResource(this.api);
     this.playbooks = new PlaybooksResource(this.api);
     this.emails = new EmailsResource(this.api);
-    this.search = new SearchResource(this.api);
     this.me = new MeResource(this.api);
   }
 }
