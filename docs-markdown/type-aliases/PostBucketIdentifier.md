@@ -8,7 +8,7 @@
 
 > **PostBucketIdentifier** = `object`
 
-Defined in: [src/types.ts:113](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/c72bfbd131cd8639dbf793ac45295da0007840ba/src/types.ts#L113)
+Defined in: [src/types.ts:113](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/8cc21ba1222dac3f2789e3ca1fd182ea53b383a8/src/types.ts#L113)
 
 Identifier for the content group belonging to a post.
 Use `{ postId: string }` — the ID of the post the group was seeded from.
@@ -19,4 +19,4 @@ Use `{ postId: string }` — the ID of the post the group was seeded from.
 
 > **postId**: `string`
 
-Defined in: [src/types.ts:113](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/c72bfbd131cd8639dbf793ac45295da0007840ba/src/types.ts#L113)
+Defined in: [src/types.ts:113](https://github.com/paragraph-xyz/paragraph-sdk-js/blob/8cc21ba1222dac3f2789e3ca1fd182ea53b383a8/src/types.ts#L113)
