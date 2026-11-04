@@ -1,0 +1,71 @@
+[**@paragraph-com/sdk**](../README.md)
+
+***
+
+[@paragraph-com/sdk](../README.md) / GetAgent200
+
+# Type Alias: GetAgent200
+
+> **GetAgent200** = `object`
+
+Defined in: src/generated/models/getAgent200.ts:18
+
+## Properties
+
+### deliverables
+
+> **deliverables**: [`GetAgent200DeliverablesItem`](GetAgent200DeliverablesItem.md)[]
+
+Defined in: src/generated/models/getAgent200.ts:24
+
+***
+
+### fields
+
+> **fields**: [`GetAgent200FieldsItem`](GetAgent200FieldsItem.md)[]
+
+Defined in: src/generated/models/getAgent200.ts:23
+
+What this agent can be configured with
+
+***
+
+### installed
+
+> **installed**: `boolean`
+
+Defined in: src/generated/models/getAgent200.ts:25
+
+***
+
+### key
+
+> **key**: `string`
+
+Defined in: src/generated/models/getAgent200.ts:19
+
+***
+
+### name
+
+> **name**: `string`
+
+Defined in: src/generated/models/getAgent200.ts:20
+
+***
+
+### setup
+
+> **setup**: [`GetAgent200Setup`](GetAgent200Setup.md)
+
+Defined in: src/generated/models/getAgent200.ts:27
+
+Null until it is set up
+
+***
+
+### summary
+
+> **summary**: `string`
+
+Defined in: src/generated/models/getAgent200.ts:21

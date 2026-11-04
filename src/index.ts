@@ -11,6 +11,7 @@ import {
   EmailsResource,
   FeedResource,
   MeResource,
+  AgentsResource,
   PlaybooksResource,
   PostsResource,
   PublicationsResource,
@@ -145,7 +146,14 @@ export class ParagraphAPI {
   public readonly content: ContentResource;
   public readonly buckets: BucketsResource;
 
-  /** Playbooks resource - set up and run Playbooks that draft content */
+  /** Agents resource - set up and run agents, like the Changelog, that draft content */
+  public readonly agents: AgentsResource;
+
+  /**
+   * Playbooks resource - the same as `agents`, under the name agents had
+   * when the API launched.
+   * @deprecated Use `agents`. `/v1/playbooks` will be removed in a future major version.
+   */
   public readonly playbooks: PlaybooksResource;
 
   /** Emails resource - send custom emails to a list of recipients */
@@ -177,6 +185,7 @@ export class ParagraphAPI {
     this.coins = new CoinsResource(this.api);
     this.content = new ContentResource(this.api);
     this.buckets = new BucketsResource(this.api);
+    this.agents = new AgentsResource(this.api);
     this.playbooks = new PlaybooksResource(this.api);
     this.emails = new EmailsResource(this.api);
     this.me = new MeResource(this.api);

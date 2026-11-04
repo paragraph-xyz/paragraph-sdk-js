@@ -1,3 +1,4 @@
+export { AgentsResource } from "./agents";
 export { AnalyticsResource } from "./analytics";
 export { AuthResource } from "./auth";
 export { BucketsResource } from "./buckets";
