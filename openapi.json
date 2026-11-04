@@ -7658,10 +7658,1450 @@
         ]
       }
     },
+    "/v1/agents": {
+      "get": {
+        "description": "Every agent available to your publication, what it can be configured with, and how yours is set up. Read this rather than hard-coding field keys: an agent describes its own settings, so a client built from this response keeps working as agents change.",
+        "summary": "List agents",
+        "tags": [
+          "agents"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Agents and their setup",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "agents": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "summary": {
+                            "type": "string"
+                          },
+                          "fields": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "key": {
+                                  "type": "string",
+                                  "description": "Send this key under `values` when configuring"
+                                },
+                                "label": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "`string` for text, `video` for video options"
+                                },
+                                "required": {
+                                  "type": "boolean"
+                                },
+                                "helperText": {
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "key",
+                                "label",
+                                "type",
+                                "required",
+                                "helperText"
+                              ]
+                            },
+                            "description": "What this agent can be configured with"
+                          },
+                          "deliverables": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "key": {
+                                  "type": "string",
+                                  "description": "Send this key under `deliverables`"
+                                },
+                                "label": {
+                                  "type": "string"
+                                },
+                                "required": {
+                                  "type": "boolean",
+                                  "description": "A required deliverable cannot be left out"
+                                }
+                              },
+                              "required": [
+                                "key",
+                                "label",
+                                "required"
+                              ]
+                            }
+                          },
+                          "installed": {
+                            "type": "boolean"
+                          },
+                          "setup": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "repository": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "description": "The GitHub repository it reads, as `owner/name`"
+                              },
+                              "values": {
+                                "type": "object",
+                                "additionalProperties": {},
+                                "description": "Keyed by field key"
+                              },
+                              "deliverables": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "Which deliverables are on"
+                              }
+                            },
+                            "required": [
+                              "repository",
+                              "values",
+                              "deliverables"
+                            ],
+                            "description": "Null until it is set up"
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "name",
+                          "summary",
+                          "fields",
+                          "deliverables",
+                          "installed",
+                          "setup"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "agents"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listAgents",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "List agents",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nconst { agents } = await api.agents.list()"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/agents/{agentKey}": {
+      "get": {
+        "description": "One agent, what it can be configured with, and how yours is set up.",
+        "summary": "Get an agent",
+        "tags": [
+          "agents"
+        ],
+        "parameters": [
+          {
+            "name": "agentKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Which agent, such as `changelog`"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The agent and its setup",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "summary": {
+                      "type": "string"
+                    },
+                    "fields": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "description": "Send this key under `values` when configuring"
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "`string` for text, `video` for video options"
+                          },
+                          "required": {
+                            "type": "boolean"
+                          },
+                          "helperText": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "label",
+                          "type",
+                          "required",
+                          "helperText"
+                        ]
+                      },
+                      "description": "What this agent can be configured with"
+                    },
+                    "deliverables": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "description": "Send this key under `deliverables`"
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "required": {
+                            "type": "boolean",
+                            "description": "A required deliverable cannot be left out"
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "label",
+                          "required"
+                        ]
+                      }
+                    },
+                    "installed": {
+                      "type": "boolean"
+                    },
+                    "setup": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "repository": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "The GitHub repository it reads, as `owner/name`"
+                        },
+                        "values": {
+                          "type": "object",
+                          "additionalProperties": {},
+                          "description": "Keyed by field key"
+                        },
+                        "deliverables": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "Which deliverables are on"
+                        }
+                      },
+                      "required": [
+                        "repository",
+                        "values",
+                        "deliverables"
+                      ],
+                      "description": "Null until it is set up"
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "name",
+                    "summary",
+                    "fields",
+                    "deliverables",
+                    "installed",
+                    "setup"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such agent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getAgent",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "put": {
+        "description": "Creates the agent's setup, or replaces it. This is a full replacement rather than a merge, so send every field you want kept. It changes the setup your team sees in the app, and the next run uses it.",
+        "summary": "Set an agent up",
+        "tags": [
+          "agents"
+        ],
+        "parameters": [
+          {
+            "name": "agentKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Which agent, such as `changelog`"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "repository": {
+                    "type": "string",
+                    "pattern": "^[\\w.-]+\\/[\\w.-]+$",
+                    "description": "A public GitHub repository as `owner/name`. A public one needs no connection."
+                  },
+                  "values": {
+                    "type": "object",
+                    "additionalProperties": {},
+                    "description": "Settings keyed by the field keys from `GET /v1/agents`"
+                  },
+                  "deliverables": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Which deliverables to make. A required one is always included."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The agent as it now stands",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "summary": {
+                      "type": "string"
+                    },
+                    "fields": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "description": "Send this key under `values` when configuring"
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "`string` for text, `video` for video options"
+                          },
+                          "required": {
+                            "type": "boolean"
+                          },
+                          "helperText": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "label",
+                          "type",
+                          "required",
+                          "helperText"
+                        ]
+                      },
+                      "description": "What this agent can be configured with"
+                    },
+                    "deliverables": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string",
+                            "description": "Send this key under `deliverables`"
+                          },
+                          "label": {
+                            "type": "string"
+                          },
+                          "required": {
+                            "type": "boolean",
+                            "description": "A required deliverable cannot be left out"
+                          }
+                        },
+                        "required": [
+                          "key",
+                          "label",
+                          "required"
+                        ]
+                      }
+                    },
+                    "installed": {
+                      "type": "boolean"
+                    },
+                    "setup": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "repository": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "The GitHub repository it reads, as `owner/name`"
+                        },
+                        "values": {
+                          "type": "object",
+                          "additionalProperties": {},
+                          "description": "Keyed by field key"
+                        },
+                        "deliverables": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "Which deliverables are on"
+                        }
+                      },
+                      "required": [
+                        "repository",
+                        "values",
+                        "deliverables"
+                      ],
+                      "description": "Null until it is set up"
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "name",
+                    "summary",
+                    "fields",
+                    "deliverables",
+                    "installed",
+                    "setup"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A setting was refused",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such agent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The setup changed while saving",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "configureAgent",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Set up a Changelog",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nawait api.agents.configure({\n  key: \"changelog\",\n  repository: \"acme/widget\",\n  values: { audience: \"Developers evaluating the SDK\" },\n  deliverables: [\"article\", \"x_post\", \"linkedin_post\"],\n})"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/agents/{agentKey}/runs": {
+      "get": {
+        "description": "This agent's runs, newest first.",
+        "summary": "List recent runs",
+        "tags": [
+          "agents"
+        ],
+        "parameters": [
+          {
+            "name": "agentKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Which agent, such as `changelog`"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many to return, up to 50. Defaults to 10.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Recent runs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "runs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "runId": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string",
+                            "enum": [
+                              "queued",
+                              "running",
+                              "succeeded",
+                              "completed_with_warnings",
+                              "failed",
+                              "blocked",
+                              "canceled"
+                            ],
+                            "description": "Where the run has got to"
+                          },
+                          "startedAt": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "When the run began, ISO 8601"
+                          },
+                          "finishedAt": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "When it ended, ISO 8601"
+                          },
+                          "deliverables": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "export": {
+                                  "type": "string",
+                                  "description": "What it is, such as `article` or `x_post`"
+                                },
+                                "item": {
+                                  "type": [
+                                    "string",
+                                    "null"
+                                  ],
+                                  "description": "Which one, when a run makes several"
+                                },
+                                "status": {
+                                  "type": "string",
+                                  "description": "Where that piece has got to"
+                                }
+                              },
+                              "required": [
+                                "export",
+                                "item",
+                                "status"
+                              ]
+                            },
+                            "description": "The drafts this run has produced so far"
+                          }
+                        },
+                        "required": [
+                          "runId",
+                          "status",
+                          "startedAt",
+                          "finishedAt",
+                          "deliverables"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "runs"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such agent set up on this publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listAgentRuns",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      },
+      "post": {
+        "description": "Starts a run of an agent your publication has already set up, and returns straight away. A run takes several minutes, so poll `GET /v1/agents/{agentKey}/runs/{runId}` for the drafts. Nothing publishes: a run produces drafts for someone to review in the app.",
+        "summary": "Start an agent run",
+        "tags": [
+          "agents"
+        ],
+        "parameters": [
+          {
+            "name": "agentKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Which agent, such as `changelog`"
+          }
+        ],
+        "requestBody": {
+          "description": "Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "idempotencyKey": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200,
+                    "description": "Your own key for this request. Sending it again returns the same run instead of starting a second one."
+                  },
+                  "instructions": {
+                    "type": "string",
+                    "maxLength": 2000,
+                    "description": "A note to steer this one run"
+                  }
+                },
+                "required": [
+                  "idempotencyKey"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Run started",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "runId": {
+                      "type": "string",
+                      "description": "Identifier for the run you just started"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "queued",
+                        "running",
+                        "succeeded",
+                        "completed_with_warnings",
+                        "failed",
+                        "blocked",
+                        "canceled"
+                      ],
+                      "description": "Where the run has got to"
+                    }
+                  },
+                  "required": [
+                    "runId",
+                    "status"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The run was refused",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Your plan has no Changelog runs left",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such agent set up on this publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The agent cannot run in its current state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "startAgentRun",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Start a Changelog run",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nconst run = await api.agents.startRun({\n  key: \"changelog\",\n  idempotencyKey: crypto.randomUUID(),\n})"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
+    "/v1/agents/{agentKey}/runs/{runId}": {
+      "get": {
+        "description": "Reports where a run has got to, and the drafts it has produced.",
+        "summary": "Get an agent run",
+        "tags": [
+          "agents"
+        ],
+        "parameters": [
+          {
+            "name": "agentKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Which agent, such as `changelog`"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The run to read"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Run details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "runId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "queued",
+                        "running",
+                        "succeeded",
+                        "completed_with_warnings",
+                        "failed",
+                        "blocked",
+                        "canceled"
+                      ],
+                      "description": "Where the run has got to"
+                    },
+                    "startedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "When the run began, ISO 8601"
+                    },
+                    "finishedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "When it ended, ISO 8601"
+                    },
+                    "deliverables": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "export": {
+                            "type": "string",
+                            "description": "What it is, such as `article` or `x_post`"
+                          },
+                          "item": {
+                            "type": [
+                              "string",
+                              "null"
+                            ],
+                            "description": "Which one, when a run makes several"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "Where that piece has got to"
+                          }
+                        },
+                        "required": [
+                          "export",
+                          "item",
+                          "status"
+                        ]
+                      },
+                      "description": "The drafts this run has produced so far"
+                    }
+                  },
+                  "required": [
+                    "runId",
+                    "status",
+                    "startedAt",
+                    "finishedAt",
+                    "deliverables"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Run not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ],
+                      "description": "Always false for error responses"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Human-readable error message"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "msg"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getAgentRun",
+        "x-codeSamples": [
+          {
+            "lang": "typescript",
+            "label": "Check a run",
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nconst run = await api.agents.getRun({\n  key: \"changelog\",\n  runId: \"7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55\",\n})"
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          }
+        ]
+      }
+    },
     "/v1/playbooks": {
       "get": {
-        "description": "Every Playbook available to your publication, what it can be configured with, and how yours is set up. Read this rather than hard-coding field keys: a Playbook describes its own settings, so a client built from this response keeps working as Playbooks change.",
+        "description": "Deprecated: use the same endpoint under `/v1/agents`. Every Playbook available to your publication, what it can be configured with, and how yours is set up. Read this rather than hard-coding field keys: a Playbook describes its own settings, so a client built from this response keeps working as Playbooks change.",
         "summary": "List Playbooks",
+        "deprecated": true,
         "tags": [
           "playbooks"
         ],
@@ -7722,7 +9162,7 @@
                                 "helperText"
                               ]
                             },
-                            "description": "What this Playbook can be configured with"
+                            "description": "What this agent can be configured with"
                           },
                           "deliverables": {
                             "type": "array",
@@ -7876,8 +9316,9 @@
     },
     "/v1/playbooks/{playbookKey}": {
       "get": {
-        "description": "One Playbook, what it can be configured with, and how yours is set up.",
+        "description": "Deprecated: use the same endpoint under `/v1/agents`. One Playbook, what it can be configured with, and how yours is set up.",
         "summary": "Get a Playbook",
+        "deprecated": true,
         "tags": [
           "playbooks"
         ],
@@ -7943,7 +9384,7 @@
                           "helperText"
                         ]
                       },
-                      "description": "What this Playbook can be configured with"
+                      "description": "What this agent can be configured with"
                     },
                     "deliverables": {
                       "type": "array",
@@ -8109,8 +9550,9 @@
         ]
       },
       "put": {
-        "description": "Creates the Playbook's setup, or replaces it. This is a full replacement rather than a merge, so send every field you want kept. It changes the setup your team sees in the app, and the next run uses it.",
+        "description": "Deprecated: use the same endpoint under `/v1/agents`. Creates the Playbook's setup, or replaces it. This is a full replacement rather than a merge, so send every field you want kept. It changes the setup your team sees in the app, and the next run uses it.",
         "summary": "Set a Playbook up",
+        "deprecated": true,
         "tags": [
           "playbooks"
         ],
@@ -8205,7 +9647,7 @@
                           "helperText"
                         ]
                       },
-                      "description": "What this Playbook can be configured with"
+                      "description": "What this agent can be configured with"
                     },
                     "deliverables": {
                       "type": "array",
@@ -8422,7 +9864,7 @@
           {
             "lang": "typescript",
             "label": "Set up a Changelog",
-            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nawait api.playbooks.configure({\n  playbookKey: \"changelog\",\n  repository: \"acme/widget\",\n  values: { audience: \"Developers evaluating the SDK\" },\n  deliverables: [\"article\", \"x_post\", \"linkedin_post\"],\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nawait api.playbooks.configure({\n  key: \"changelog\",\n  repository: \"acme/widget\",\n  values: { audience: \"Developers evaluating the SDK\" },\n  deliverables: [\"article\", \"x_post\", \"linkedin_post\"],\n})"
           }
         ],
         "security": [
@@ -8434,8 +9876,9 @@
     },
     "/v1/playbooks/{playbookKey}/runs": {
       "get": {
-        "description": "This Playbook's runs, newest first.",
+        "description": "Deprecated: use the same endpoint under `/v1/agents`. This Playbook's runs, newest first.",
         "summary": "List recent runs",
+        "deprecated": true,
         "tags": [
           "playbooks"
         ],
@@ -8640,8 +10083,9 @@
         ]
       },
       "post": {
-        "description": "Starts a run of a Playbook your publication has already set up, and returns straight away. A run takes several minutes, so poll `GET /v1/playbooks/{playbookKey}/runs/{runId}` for the drafts. Nothing publishes: a run produces drafts for someone to review in the app.",
+        "description": "Deprecated: use the same endpoint under `/v1/agents`. Starts a run of a Playbook your publication has already set up, and returns straight away. A run takes several minutes, so poll `GET /v1/playbooks/{playbookKey}/runs/{runId}` for the drafts. Nothing publishes: a run produces drafts for someone to review in the app.",
         "summary": "Start a Playbook run",
+        "deprecated": true,
         "tags": [
           "playbooks"
         ],
@@ -8884,7 +10328,7 @@
           {
             "lang": "typescript",
             "label": "Start a Changelog run",
-            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nconst run = await api.playbooks.startRun({\n  playbookKey: \"changelog\",\n  idempotencyKey: crypto.randomUUID(),\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nconst run = await api.playbooks.startRun({\n  key: \"changelog\",\n  idempotencyKey: crypto.randomUUID(),\n})"
           }
         ],
         "security": [
@@ -8896,8 +10340,9 @@
     },
     "/v1/playbooks/{playbookKey}/runs/{runId}": {
       "get": {
-        "description": "Reports where a run has got to, and the drafts it has produced.",
+        "description": "Deprecated: use the same endpoint under `/v1/agents`. Reports where a run has got to, and the drafts it has produced.",
         "summary": "Get a Playbook run",
+        "deprecated": true,
         "tags": [
           "playbooks"
         ],
@@ -9087,7 +10532,7 @@
           {
             "lang": "typescript",
             "label": "Check a run",
-            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nconst run = await api.playbooks.getRun({\n  playbookKey: \"changelog\",\n  runId: \"7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55\",\n})"
+            "source": "import { ParagraphAPI } from \"@paragraph-com/sdk\"\n\nconst api = new ParagraphAPI({ apiKey: process.env.PARAGRAPH_API_KEY })\nconst run = await api.playbooks.getRun({\n  key: \"changelog\",\n  runId: \"7f3a2c18-5b9e-4c21-9a0d-8e6b1f4d2a55\",\n})"
           }
         ],
         "security": [
@@ -11709,6 +13154,7 @@
                   "email": {
                     "type": "string",
                     "format": "email",
+                    "maxLength": 254,
                     "description": "Email address of the subscriber"
                   },
                   "wallet": {
@@ -11905,6 +13351,7 @@
                   "email": {
                     "type": "string",
                     "format": "email",
+                    "maxLength": 254,
                     "description": "Email address of the subscriber to remove"
                   },
                   "wallet": {

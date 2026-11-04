@@ -17,6 +17,9 @@ import type {
  *
  * Set up and run Playbooks. A run creates drafts that are only published once
  * someone approves them in the Paragraph app. Requires an API key.
+ *
+ * @deprecated Use `api.agents`, the same endpoints under the name the app
+ * uses. `/v1/playbooks` will be removed in a future major version.
  */
 export class PlaybooksResource {
   constructor(private api: ReturnType<typeof getParagraphAPI>) {}

@@ -28,7 +28,7 @@ OpenAPI spec version: 1.0.0
 
 > `optional` **createdAt?**: `number`
 
-Defined in: src/generated/models/addSubscriberBody.ts:24
+Defined in: src/generated/models/addSubscriberBody.ts:27
 
 Timestamp (in milliseconds) when the subscription was created. Defaults to current time.
 
@@ -38,9 +38,13 @@ Timestamp (in milliseconds) when the subscription was created. Defaults to curre
 
 > `optional` **email?**: `string`
 
-Defined in: src/generated/models/addSubscriberBody.ts:17
+Defined in: src/generated/models/addSubscriberBody.ts:20
 
 Email address of the subscriber
+
+#### Max Length
+
+254
 
 ***
 
@@ -48,7 +52,7 @@ Email address of the subscriber
 
 > `optional` **wallet?**: `string`
 
-Defined in: src/generated/models/addSubscriberBody.ts:22
+Defined in: src/generated/models/addSubscriberBody.ts:25
 
 Wallet address of the subscriber (0x format)
 

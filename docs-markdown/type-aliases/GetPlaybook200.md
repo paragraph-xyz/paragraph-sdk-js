@@ -26,7 +26,7 @@ Defined in: src/generated/models/getPlaybook200.ts:24
 
 Defined in: src/generated/models/getPlaybook200.ts:23
 
-What this Playbook can be configured with
+What this agent can be configured with
 
 ***
 

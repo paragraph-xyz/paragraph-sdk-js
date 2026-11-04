@@ -28,9 +28,13 @@ OpenAPI spec version: 1.0.0
 
 > `optional` **email?**: `string`
 
-Defined in: src/generated/models/removeSubscriberBody.ts:17
+Defined in: src/generated/models/removeSubscriberBody.ts:20
 
 Email address of the subscriber to remove
+
+#### Max Length
+
+254
 
 ***
 
@@ -38,7 +42,7 @@ Email address of the subscriber to remove
 
 > `optional` **wallet?**: `string`
 
-Defined in: src/generated/models/removeSubscriberBody.ts:22
+Defined in: src/generated/models/removeSubscriberBody.ts:25
 
 Wallet address of the subscriber to remove (0x format)
 
